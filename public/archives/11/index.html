@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/archives/11/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/home-bg-2-dark.png') 
+            /*config*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>Huli&#39;s blog</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">Learning by sharing</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2015/07/29/android-fresco-facebook-open-source-photo-library/">
+        <h2 class="post-title">
+            [Android] Fresco, Facebook開源的圖片library
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            最近在找一些Android上面有關圖片處理的Library，原本是用 Picasso這一套，但今天突然又找到一套今年三月底Facebook開源的Library，叫做Fresco，github連結
+這邊有Facebook官方部落格的介紹：Introducing Fresco: A new image library for Android
+這邊有中文翻譯：FaceBook推出的Android图......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2015-07-29
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Android" title="Android">Android</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2015/07/28/android-failed-to-complete-gradle-execution-cause-is/">
+        <h2 class="post-title">
+            [Android] failed to complete gradle execution, cause is ""
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            今天碰到了這個問題
+Android Studio: failed to complete gradle execution, cause is empty
+找了一下解法原本以為是因為這個
+Building Apps with Over 65K Methods
+加了以後發現不是，找到這篇
+用gradlew assembleDebug --stacktrace自己下去build，就可以看到錯誤在......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2015-07-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Android" title="Android">Android</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2015/07/20/android-filterable-adapter-could-not-be-updated/">
+        <h2 class="post-title">
+            [Android] Filterable的adapter無法更新
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            今天實做一個功能的時候碰到問題，我現在有一個listview是顯示一些資料，例如說通訊錄好了
+會不定時從server拿新資料回來，所以listview可能會有變動，變動的話就是把新的資料add進list裡面
+接著adapter.notifyDataSetChanged()，這很稀鬆平常，也確定可以跑
+然後我想加入一個新功能，那就是有個editText，上面輸入文字可以同步篩選listview......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2015-07-20
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Android" title="Android">Android</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2015/07/20/android-searchview-notes/">
+        <h2 class="post-title">
+            [Android] searchView筆記
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            searchView就是出現在actionBar上面的那個東西
+原本只是個搜尋的icon，點下去之後就會變出editText讓你輸入文字，實在是太神啦
+要使用其實就是在menu的layout裡面加一個item
+123456&lt;item        android:id="@+id/action_search"        android:icon="@drawable/ic_sear......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2015-07-20
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Android" title="Android">Android</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2015/07/16/android-greendao-notes/">
+        <h2 class="post-title">
+            [Android] greenDAO 筆記
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            之前在找一套在android上面好用的db library，最後找到greenDAO這一套
+看了看文件跟使用方法覺得還不錯，滿喜歡的
+但是真正開始以後才知道原來前置作業有點麻煩…
+首先要把官方的project clone下來，然後用eclipse引入幾個project
+但是我在這邊就碰到問題了，因為eclipse跟我說沒有project可以引入…
+最後幸好找到這套 GreenDaoForAn......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2015-07-16
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Android" title="Android">Android</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2015/07/14/iterm2-fish-with-command-line-shortcuts/">
+        <h2 class="post-title">
+            iTerm2 + fish 與 command line快捷鍵
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            用iTerm2有一段時間了，雖然我還不是很會用，但光是介面比原本的好看就值得換掉
+最近開始用一套之前看很久的commnad line shell，名字很可愛，叫做fish
+於是就把原生的shell換成fish
+基本上是參考這一篇
+
+sudo nano /etc/shells
+add /usr/local/bin/fish to your list of shells
+chsh -s /usr......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2015-07-14
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#tool" title="tool">tool</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2015/07/13/nodejs-aws-amazon-s3-api/">
+        <h2 class="post-title">
+            [Node.js] 串接 Amazon S3 API
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            最近剛好要串S3，S3是Amazon提供的一個服務，就是一個讓你存取檔案的地方
+官方新手教學其實寫得很清楚，而且用法超級簡單
+Document裡面有詳細的說明
+下面附上一段上傳檔案的code
+12345678910111213141516171819202122232425262728var AWS = require('aws-sdk');function upload(data) &#1......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2015-07-13
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#backend" title="backend">backend</a>
+            
+              <a href="/tags/#nodejs" title="nodejs">nodejs</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2015/07/12/experience-zenwatch-three-months-experience/">
+        <h2 class="post-title">
+            [心得] ZenWatch 三個月使用心得
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+其實我之前就一直很想寫心得，只是人比較懶所以一直拖
+這次趁著跟雷射組合一起，而且又差不多使用滿三個月，比較多心得可以講
+當初購買這隻的背景是這樣的
+那時剛退伍，在軍中有戴手錶的習慣，然後又跟一個朋友剛好聊到要推出的Apple Watch
+我就想到：咦 ASUS是不是也有出智慧型手錶
+於是就跑去查一下，發現有貨，而且價錢不貴（6000元），功能介紹又都很不錯，於是就直接手滑買下去了
+先講結論......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2015-07-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#hardware" title="hardware">hardware</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2015/07/12/experience-serafim-odin-laser-mouse-experience/">
+        <h2 class="post-title">
+            [心得] Serafim ODiN 雷射滑鼠使用心得
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            之前看到這滑鼠的時候嚇一跳，想說為什麼我之前沒在kickstarter上面看到
+稍微了解一下之後覺得驚為天人，為什麼呢？因為價錢
+糗了，剛剛去查價錢才發現我記錯了
+我一直以為這滑鼠不到1000元，所以覺得超便宜
+剛查了一下我買的時候是1590 XDDD
+不過我當初也是覺得這價錢很便宜才會買的，這樣才能湊齊雷射鍵盤組合
+
+先來三張圖
+
+
+
+優點的話跟鍵盤一樣，就是潮，就是帥
+鍵盤滑鼠雷射組合有......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2015-07-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#hardware" title="hardware">hardware</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2015/07/12/experience-serafim-vk200-laser-keyboard-experience/">
+        <h2 class="post-title">
+            [心得] Serafim VK200 雷射鍵盤使用心得
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            其實我買這個鍵盤已經有一段時間了，只是最近剛好雷射滑鼠也送到了，所以才打算動筆寫下心得文
+第一次看到這個鍵盤大約是一兩年前的時候，那時這個鍵盤還沒有真正推出，預購得價格是2990
+當初心動了一下，想說挖靠這東西也太帥，而且這根本是我小時候的夢想！！！
+雷射鍵盤這東西以前只有看一些未來科技的可能圖片時看的到耶！沒想到真的可以具現化
+但後來因為我那時沒錢，所以就沒買了
+接著好像是過年的時候，又看......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2015-07-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#hardware" title="hardware">hardware</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/archives/10/">&larr; Newer Posts</a>
+        </li>
+    
+    
+        <li class="next">
+            <a href="/archives/12/">Older Posts &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+        
+            
+            <a href="/tags/#frontend" title="frontend" rel="25">frontend</a>
+            
+        
+            
+            <a href="/tags/#ALPHACamp" title="ALPHACamp" rel="23">ALPHACamp</a>
+            
+        
+            
+            <a href="/tags/#story" title="story" rel="19">story</a>
+            
+        
+            
+            <a href="/tags/#other" title="other" rel="21">other</a>
+            
+        
+            
+            <a href="/tags/#Android" title="Android" rel="20">Android</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#javascript" title="javascript" rel="16">javascript</a>
+            
+        
+            
+            <a href="/tags/#travel" title="travel" rel="19">travel</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#corona" title="corona" rel="12">corona</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#backend" title="backend" rel="19">backend</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#japan" title="japan" rel="12">japan</a>
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/huli_logo.jpg" />
+        
+
+        
+            <p>Hi, i&#39;m Huli</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/aszx87410">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2017/08/27/review-the-classical-sort-algorithm-with-javascript/">一起用 JavaScript 來複習經典排序法吧！</a>
+        </li>
+      
+        <li>
+          <a href="/2017/08/27/dom-event-capture-and-propagation/">DOM 的事件傳遞機制：捕獲與冒泡</a>
+        </li>
+      
+        <li>
+          <a href="/2017/08/27/http-cache/">循序漸進理解 HTTP Cache 機制</a>
+        </li>
+      
+        <li>
+          <a href="/2017/08/27/ajax-and-cors/">輕鬆理解 Ajax 與跨來源請求</a>
+        </li>
+      
+        <li>
+          <a href="/2017/08/27/the-javascripts-prototype-chain/">該來理解 JavaScript 的原型鍊了</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+    
+</ul>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

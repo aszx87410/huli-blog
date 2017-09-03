@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          程式新手常見問題：解惑篇 - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2017/04/23/novice-program-frequently-asked-questions-faq-articles/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#tutorial" title="tutorial">tutorial</a>
+                            
+                        </div>
+                        <h1>程式新手常見問題：解惑篇</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2017-04-23
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>自從寫了<a href="http://huli.logdown.com/posts/703835-experience-ten-year-programming-of-self-study-road" target="_blank" rel="external">[心得] 十年程式自學之路</a>之後，大概每隔幾天就會收到有新留言的通知信，剛剛去看了一下，所有的留言（包含我自己的回覆）一共是 70 則。回答了這麼多問題，我也得出了一些心得，為了不要讓我之後一直花時間在回答重複的問題，就決定來寫這一篇。</p>
+<a id="more"></a>
+<p>在開始之前，我希望先幫大家建立幾個重要的基本觀念：</p>
+<h1><span id="我講的不一定是對的">我講的不一定是對的</span></h1>
+<p>沒錯，最重要的絕對是這一點。</p>
+<p>不要以為我在上一篇把自己寫的感覺學程式很久（雖然是真的有段時間啦），就覺得我一定很厲害什麼都會，講的就全部都是對的，照我說的做就可以變成程式達人。</p>
+<p>不要有這種想法，千萬不要，你要對任何事情都抱持著一顆懷疑的心。</p>
+<p>如果你覺得某個人講的話很值得參考，不應該是因為那是「他講的話」，就像我上面舉例的那樣，不應該因為我是一個資深的程式自學者，只憑著這個「身份」就覺得我講的一定是對的。而是應該要以「理由」來支持。換句話說，你覺得某個人的話很值得參考，是因為他這段話「背後的理由」可以說服你。</p>
+<p>思考，思考，再思考。</p>
+<p>就連這篇也是一樣，你也可以懷疑任何我寫到的點，但你只要記住一件事：無論是支持跟反對，重點都是那個「背後的理由」。</p>
+<h1><span id="每個人有每個人的學習方法">每個人有每個人的學習方法</span></h1>
+<p>我的方法不一定適合你，你的方法也不一定適合我。當我覺得某個方法很有效的時候，你可以嘗試看看，但你不應該認為「我找到全世界最厲害的學習方法了！」。也許你用了我的方法之後覺得沒有效，那你可以繼續去參考別人的方法，或是繼續探索對自己有用的方法。</p>
+<h1><span id="just-do-it">Just do it</span></h1>
+<p>這是一件說起來容易做起來靠杯難的事。而且會像我這樣講的人通常就是不會去做的人，為什麼？因為會做的人現在就已經在做了，哪還需要跟自己說這種勵志的話。</p>
+<p>當你還在猶豫要選哪個程式語言怕選錯的時候，已經有人開始看第一章慢慢看慢慢寫作業了。當你上網開始找相關資料一直問問題的同時，他已經完成第一章作業寫出第一個程式了。</p>
+<p>不過我要強調，「害怕選錯」這件事情我可以同理，這很正常，大家當然都希望一開始選擇的路「就是對的」。但如果你真的要去探究什麼是對的什麼是錯的，就又是一個困難的問題了，在此先不管這個。</p>
+<p>我希望強調的是坐而言不如起而行，與其一直在猶豫「如何開始」，不如「馬上開始」。反正如果你選的真的不適合自己，你學一些時間之後也會自己知道怪怪的。</p>
+<p>這就像是有時候程式發生 bug，有些人可能會一行行去看程式碼出錯在哪邊，然後一直在腦袋裡面思考哪個環節出了問題。但除了思考，你其實還可以動手做。你可以在程式裡面插入 log，藉由不斷 trial and error 的過程找出錯誤在哪邊。</p>
+<p>好了，講完上面那些我覺得至關重要的基本觀念之後，可以來回答一些程式新手會碰到的常見問題了。</p>
+<h1><span id="學程式有未來嗎">學程式有未來嗎？</span></h1>
+<p>像是這種提到「未來」的問題，我都覺得超級難回答，因為未來本來就很難測嘛！但我覺得就算預測失敗也沒差，反正一大堆財經專家政治專家也是天天都在預測失敗，這就說明了要預測未來真的是非常困難的一件事。</p>
+<p>但重點其實也不在「未來到底會怎樣」這件事情，因為這個就是不可知。重點在於你提出這個預測背後的理由是什麼？根據是什麼？如果這個理由是值得接受的，那我們就有一個好理由相信「未來可能是這樣」。</p>
+<p>不瞞大家說，我小時候也問過類似的問題，我問了：</p>
+<blockquote>
+<p>程式設計師這職業以後會沒落還是興起？</p>
+</blockquote>
+<p>那是我國一時候問的問題，完整的問題跟回答請看這裡：<a href="http://www.programmer-club.com.tw/ShowSameTitleN/newuser/4737.html" target="_blank" rel="external">只學VB的話,可以走上程式設計師這條路嘛？ </a></p>
+<p>所以我可以理解那些剛學程式或是正在猶豫要不要學程式的人，為什麼會問這種問題。因為我就很想知道嘛，我就怕選錯啊，就想得到一點答案才能安心。</p>
+<p>而現在，十年後的自己可以來好好回答十年前的我的問題了。</p>
+<p>首先，你學程式不應該只學到程式的語法。如果你只學到程式的語法，假設你學 VB 好了，那 VB 死掉以後你的技能也差不多廢了，因為你只懂得那一套語法嘛。所以你要學的是程式的內涵，什麼是程式的內涵？剛開始學的時候可能不會感覺到，但慢慢就會察覺到有些概念其實是可以抽出來的。</p>
+<p>例如說你在寫一個小程式，你發現這邊的程式碼跟那邊的程式碼有 80% 是重複的，是在做差不多的事情但只有些微的不一樣，這時候你就會想把這段抽出來變成一個 function，呼叫完 function 之後再做彼此之間不同的部分。</p>
+<p>或者是 Debug 的時候你會試著在程式裡面的某幾行加 log，每次都只改變一個因素，去測測看到底是哪一個部分出了問題。</p>
+<p>像這些都是程式的內涵，其實學的就是「如何解決問題」的方法，這個是無論哪一個程式語言都適用的。無論你現在是寫 C++, C, VB, python 等等，這些概念都是一模一樣的，因為這才是你應該要學到的，而不是去背說 C++ 的語法長怎樣，那些都只是表面而已。</p>
+<p>現在你知道你應該學的是什麼了，是藉由寫程式去鍛鍊自己解決問題的能力，藉由寫程式去把一段抽象化的過程用具體的程式碼描繪出來，去告訴電腦說你應該怎樣去解決這個問題。如果你學會了這個，假設以後程式設計師這個職業真的沒落了，全部都被機器人取代掉好了，你覺得有差嗎？</p>
+<p>沒有嘛，因為你解決問題的能力還是在，那個才是你的核心價值。就算你今天不寫程式了，你還是可以把這一套解決問題的方法帶到其他領域去，應用在其他地方嘛。</p>
+<p>最後我們回到原命題：學程式有未來嗎？</p>
+<p>我的回答是：不要問有沒有未來，未來的事情無法預測，你應該問的是「學程式對自己有沒有幫助？」。我的答案是：「有」，學程式可以培養你解決問題的能力，也可以寫一些小程式解決自己生活中的問題。</p>
+<p>例如說我對比特幣價格走勢很有興趣，就寫了一個 slack 的簡單機器人，只要跟他講話他就會回我現在的比特幣價格。</p>
+<p>或者是我有一些朋友會需要一些統計資料或是圖表，就可以利用專門的程式語言例如說 SAS, R 去跑資料直接匯出成圖表，多方便！</p>
+<p>只要學程式是對自己有幫助的，那就值得學。而我認為學程式對大多數人都是有幫助的，因為可以鍛鍊解決問題的方法跟站在程式的角度去思考一個問題。</p>
+<h1><span id="我沒接觸過程式應該要先學哪一個程式語言呢">我沒接觸過程式，應該要先學哪一個程式語言呢？</span></h1>
+<p>這個問題我之前有特別寫一篇來回答，請參考：<a href="http://huli.logdown.com/posts/772671-why-you-should-start-from-scratch-to-learning-program" target="_blank" rel="external">為什麼你應該從 Scratch 開始學程式</a></p>
+<p>無論你想走哪一塊，我都強烈建議以 Scratch 作為你入門程式的首選。如果你從 Java/C/C++ 開始，那你大概只會覺得程式是個艱澀難懂的東西，會覺得自己好像不適合寫程式。但相信我，Scratch 會讓你改觀的。</p>
+<p>再來的話就可以根據自己想做的事情去選擇程式語言了。可以參考我之前簡單畫的這張圖：</p>
+<p><img src="https://i.imgur.com/QJOzWsi.png" alt=""></p>
+<p>上面有很多關鍵字可以去搜尋，可以從上面大概知道自己接下來應該往哪個方向走。</p>
+<p>不過這張圖有一點遺漏，那就是如果你只是閒暇之餘想寫寫程式或只是寫一些小工具，沒有特別要往哪一塊的話，那 Python 絕對是你的最佳選擇。</p>
+<p>或者就算你要往上那些方向走，但你學了某一個程式語言之後發現「靠，怎麼那麼難」，那你也可以先去學個 python，學好之後再來接觸原本那個覺得很難的程式語言，應該會覺得沒那麼難了。</p>
+<h1><span id="我對-xxx-很有興趣想要學習-xxx請問有推薦的書嗎">我對 XXX 很有興趣，想要學習 XXX，請問有推薦的書嗎？</span></h1>
+<p>XXX 可用任何的程式語言名稱帶入。</p>
+<p>這個問題出現的機率很高，但我的回答基本上應該都是差不多的。</p>
+<blockquote>
+<p>去實體書店逛一圈，把每一本 XXX 程式語言的入門書籍都拿起來翻翻看，選一本你覺得你最能理解，最看得懂的</p>
+</blockquote>
+<p>這個回答不是我自己想出來的，但我忘記在哪邊看到的，看到之後覺得說得實在是頗有道理。就如同我開頭講的，每個人適用的方法都不一樣，適合自己的書當然也不盡相同。</p>
+<p>入門書的內容其實都大同小異，去書店直接比較直接試試看是最實際的做法，花一個下午就能找到最適合你的書籍。</p>
+<p>但我也知道，很多人還是會想知道一般大眾會推薦哪些書，因為至少是前人經驗的累積嘛！那我的建議是你同樣可以去書店，先翻翻看大家推薦的那本書，再去翻翻看其他的入門書籍。選你覺得你比較能理解的那一本。</p>
+<p>如果你不知道哪邊有那麼多實體電腦書，去<a href="https://www.tenlong.com.tw/" target="_blank" rel="external">天瓏</a>就對了！</p>
+<p>若是你還是很想知道我個人推薦什麼書的話，我會推薦歐萊禮的「深入淺出」系列，英文原名是 Head First<br>
+這一系列的目錄可以在這邊找到：<a href="http://www.oreilly.com.tw/product_headfirst.php?id=index_headfirst" target="_blank" rel="external">http://www.oreilly.com.tw/product_headfirst.php?id=index_headfirst</a></p>
+<p>與其花 80% 的時間挑一堂完美的課程，不如花 20% 的時間挑一堂還不錯的課程，就能把剩下的 80% 時間拿來上課了。</p>
+<h1><span id="我已經學了-xxx請問之後應該要學什麼呢">我已經學了 XXX，請問之後應該要學什麼呢？</span></h1>
+<p>看你對哪個比較有興趣就去學什麼。</p>
+<p>但通常會問這個問題的，應該都是針對求職來問的，把問題轉一下就變成：「我已經學了 XXX，請問我還要再學什麼才能去工作」</p>
+<p>針對這個問題，我也獨立寫了一篇：<a href="http://huli.logdown.com/posts/1550464-guide-for-getting-frontend-engineer-job" target="_blank" rel="external">該如何知道就業所需技能？以前端工程師為例</a>。照著上面的方法做一遍，找出這個職位普遍的工作內容，你就有一大堆關鍵字讓你去學習了。</p>
+<p>但如果你不是針對工作，而是真的對成為一名軟體工程師有強烈的興趣又不知道學什麼，以下幾個關鍵字給你參考：</p>
+<ol>
+<li>系統程式設計</li>
+<li>作業系統</li>
+<li>網路相關協議（TCP/IP）</li>
+<li>資料結構</li>
+<li>演算法</li>
+</ol>
+<h1><span id="總結">總結</span></h1>
+<p>這篇大概把我目前能想到大家最常問的問題都回答完了，以後如果有人問極為雷同的問題，我就可以直接貼這篇給他看了。</p>
+<p>話說，大家有沒有發現這其實就是程式中 function 的概念？我原本是在不同的地方每次都回答大同小異的內容，就像重複的程式碼散落在各地一樣。但現在我寫了這篇文章把內容都集合起來，以後假設我想法改變了，只要改這篇文章就好，不用再去每一則留言補充。沒錯，當你把程式概念內化在生活中，就會發現處處都是程式。</p>
+<p>最後，每個人的情況都不同，碰到的問題可能也不太一樣，如果你發現你的問題在上面找不到，還是很歡迎在底下的留言區提問。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/04/23/big-company-or-startup/" data-toggle="tooltip" data-placement="top" title="該進大公司還是新創？">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/03/30/front-end-engineer-where-is-the-value/" data-toggle="tooltip" data-placement="top" title="前端工程師的價值在哪？">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">我講的不一定是對的</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">每個人有每個人的學習方法</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Just do it</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">學程式有未來嗎？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">我沒接觸過程式，應該要先學哪一個程式語言呢？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">我對 XXX 很有興趣，想要學習 XXX，請問有推薦的書嗎？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">我已經學了 XXX，請問之後應該要學什麼呢？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">總結</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#tutorial" title="tutorial">tutorial</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2017/04/23/novice-program-frequently-asked-questions-faq-articles/";
+    var disqus_url = "https://blog.huli.tw/2017/04/23/novice-program-frequently-asked-questions-faq-articles/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

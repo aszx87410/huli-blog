@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          [Android] 自訂ListView - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2015/06/12/android-custom-listview/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                            
+                        </div>
+                        <h1>[Android] 自訂ListView</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2015-06-12
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>在android裡面最常用的功能自訂ListView絕對榜上有名<br>
+在一個app裡面看不到任何ListView絕對是非常稀有的事情<br>
+所以怎麼快速的打造一個custom listview是很重要的<br>
+最近要做一個app，大概要五六個自訂ListView，幸好依靠著我之前自己寫的文章找回記憶<br>
+順利的完成</p>
+<p>在這邊直接轉貼一下我之前寫的兩篇文章<br>
+<a href="https://www.ptt.cc/bbs/AndroidDev/M.1356579180.A.F98.html" target="_blank" rel="external">簡單易學 自訂ListView</a></p>
+<a id="more"></a>
+<p>程式截圖:<a href="http://ppt.cc/YaGO" target="_blank" rel="external">http://ppt.cc/YaGO</a></p>
+<p>首先，有一個重點知道以後自訂ListView就不再那麼神秘<br>
+那就是List的每一列可以看成都是一個view<br>
+所以第一步就是就是決定每一列到底要長什麼樣子<br>
+以我想要達成的效果來說<br>
+我的item需要有兩個TextView<br>
+一個放電影名稱或是電影台的名稱<br>
+另外一個則放時間<br>
+所以建立一個 list_item.xml 來達成這個layout</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> &gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/title"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_alignParentLeft</span>=<span class="string">"true"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_alignParentTop</span>=<span class="string">"true"</span>  /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/time"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_alignParentLeft</span>=<span class="string">"true"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_below</span>=<span class="string">"@+id/title"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上面的id叫做title 下面的則叫做time</p>
+<p>接著，你要決定你的每一個item需要哪些資料<br>
+為了以後的方便，我們要自己建一個class來放這些資料<br>
+以這篇為例子<br>
+我要傳入的資料有:電影台名稱 電影標題 電影時間<br>
+其實我的case比較特殊啦<br>
+因為可以很明顯看到每個list item長的並不是很相同<br>
+所以我加了一個type的參數</p>
+<p>type 0 = 這個item是電影 顏色是白色<br>
+type 1 = 這個item是電影台<br>
+type 2 = 這個item是電影 顏色是黃色</p>
+<p>所以我的參數有 type , title(電影or電影台名稱),time(電影時間)<br>
+class叫做Movie.class 內容很簡單的長這樣</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Movie</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> type;</div><div class="line">        <span class="keyword">private</span> String name;</div><div class="line">        <span class="keyword">private</span> String time;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Movie</span><span class="params">(<span class="keyword">int</span> type,String name,String time)</span> </span>&#123;</div><div class="line">                <span class="keyword">this</span>.type = type;</div><div class="line">                <span class="keyword">this</span>.name = name;</div><div class="line">                <span class="keyword">this</span>.time = time;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getType</span><span class="params">()</span></span>&#123;</div><div class="line">                <span class="keyword">return</span> type;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setType</span><span class="params">(<span class="keyword">int</span> type)</span></span>&#123;</div><div class="line">                <span class="keyword">this</span>.type = type;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</div><div class="line">                <span class="keyword">return</span> name;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>&#123;</div><div class="line">                <span class="keyword">this</span>.name = name;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getTime</span><span class="params">()</span></span>&#123;</div><div class="line">                <span class="keyword">return</span> time;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTime</span><span class="params">(String time)</span></span>&#123;</div><div class="line">                <span class="keyword">this</span>.time = time;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再來先回到需要ListView的地方<br>
+假設ListView的id叫做ListView01好了<br>
+我們先宣告三個東西</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> ListView listV;</div><div class="line">List&lt;Movie&gt; movie_list = <span class="keyword">new</span> ArrayList&lt;Movie&gt;();</div><div class="line"><span class="keyword">private</span> MyAdapter adapter;</div></pre></td></tr></table></figure>
+<p>MyAdapter是什麼呢? 是我們等一下會講到的東西</p>
+<p>接著</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">listV=(ListView)findViewById(R.id.ListView01);</div></pre></td></tr></table></figure>
+<p>movie_list就是你要傳入的東西</p>
+<p>以本篇為例 就是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">movie_list.add(<span class="keyword">new</span> Movie(<span class="number">1</span>,<span class="string">"HBO電影台"</span>,<span class="string">""</span>));</div><div class="line">movie_list.add(<span class="keyword">new</span> Movie(<span class="number">0</span>,<span class="string">"綠光戰警"</span>,<span class="string">"7:00"</span>));</div><div class="line">movie_list.add(<span class="keyword">new</span> Movie(<span class="number">2</span>,<span class="string">"鋼鐵人"</span>,<span class="string">"9:00"</span>));</div><div class="line">movie_list.add(<span class="keyword">new</span> Movie(<span class="number">0</span>,<span class="string">"蝙蝠俠:開戰時刻"</span>,<span class="string">"11:00"</span>));</div><div class="line"></div><div class="line">movie_list.add(<span class="keyword">new</span> Movie(<span class="number">1</span>,<span class="string">"衛視電影台"</span>,<span class="string">""</span>));</div><div class="line">movie_list.add(<span class="keyword">new</span> Movie(<span class="number">0</span>,<span class="string">"海角七號"</span>,<span class="string">"7:00"</span>));</div><div class="line">movie_list.add(<span class="keyword">new</span> Movie(<span class="number">2</span>,<span class="string">"陣頭"</span>,<span class="string">"9:00"</span>));</div><div class="line">movie_list.add(<span class="keyword">new</span> Movie(<span class="number">0</span>,<span class="string">"星空"</span>,<span class="string">"11:00"</span>));</div></pre></td></tr></table></figure>
+<p>這樣movie_list就是你想要的資料了</p>
+<p>而且因為是把自訂的class放進去<br>
+所以很適合重複利用<br>
+例如說你今天想呈現的是一組聯絡人資料(姓名 手機 地址…)<br>
+你就依照上面的步驟自訂一個class Userinfo<br>
+然後改成 user_list.add(new Userinfo(…));就好了</p>
+<p>接著設定一下adapter</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">adapter = <span class="keyword">new</span> MyAdapter(Main.<span class="keyword">this</span>,movie_list);</div><div class="line">                        ^^^^你的activity的<span class="class"><span class="keyword">class</span></span></div><div class="line"><span class="class"></span></div><div class="line"><span class="class"><span class="title">listV</span>.<span class="title">setAdapter</span>(<span class="title">adapter</span>)</span>;</div></pre></td></tr></table></figure>
+<p>這樣就只剩下最後一個部份了<br>
+那就是MyAdapter這個class<br>
+最一開始長這樣</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span></span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下來我們一步一步加進幾個必要的東西進來</p>
+<p>首先我們需要</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> LayoutInflater myInflater;</div><div class="line"><span class="keyword">private</span> List&lt;Movie&gt; movies;</div></pre></td></tr></table></figure>
+<p>然後我們在MyAdapter建立的時候順便傳入兩個東西</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">MyAdapter</span><span class="params">(Context context,List&lt;Movie&gt; movie)</span></span>&#123;</div><div class="line">        myInflater = LayoutInflater.from(context);</div><div class="line">        <span class="keyword">this</span>.movies = movie;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>movies就是你傳入的整個list</p>
+<p>也就是你想要建立的東西</p>
+<p>接著我們再加入幾個method 程式碼應該不難理解我就不多做說明</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> movies.size();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> movies.get(arg0);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> movies.indexOf(getItem(position));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最後重點就是getView了</p>
+<p>在這之前我們先宣告一下inner class</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> </span>&#123;</div><div class="line">    TextView txtTitle;</div><div class="line">    TextView txtTime;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ViewHolder</span><span class="params">(TextView txtTitle, TextView txtTime)</span></span>&#123;</div><div class="line">            <span class="keyword">this</span>.txtTitle = txtTitle;</div><div class="line">            <span class="keyword">this</span>.txtTime = txtTime;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>方便我們之後設定每一列的資料</p>
+<p>getView一開始長這樣</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接著我們一步一步添加東西</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ViewHolder holder = <span class="keyword">null</span>;</div><div class="line"><span class="keyword">if</span>(convertView==<span class="keyword">null</span>)&#123;</div><div class="line">        convertView = myInflater.inflate(R.layout.list_item, <span class="keyword">null</span>);</div><div class="line">        holder = <span class="keyword">new</span> ViewHolder(</div><div class="line">                (TextView) convertView.findViewById(R.id.title),</div><div class="line">                (TextView) convertView.findViewById(R.id.time)</div><div class="line">                );</div><div class="line">        convertView.setTag(holder);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">        holder = (ViewHolder) convertView.getTag();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有關tag的功用 請參考這篇</p>
+<p><a href="http://www.cnblogs.com/qingblog/archive/2012/07/03/2575145.html" target="_blank" rel="external">http://www.cnblogs.com/qingblog/archive/2012/07/03/2575145.html</a></p>
+<p>接著先取得現在要做的的資料</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Movie movie = (Movie)getItem(position);</div></pre></td></tr></table></figure>
+<p>然後開始設定</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//標題的顏色</span></div><div class="line"><span class="keyword">int</span> color_title[] = &#123;Color.WHITE,Color.WHITE,Color.YELLOW&#125;;</div><div class="line"><span class="comment">//時間的顏色</span></div><div class="line"><span class="keyword">int</span> color_time[] = &#123;Color.WHITE,Color.WHITE,Color.YELLOW&#125;;</div><div class="line"><span class="comment">//背景的顏色</span></div><div class="line"><span class="keyword">int</span> color_back[] = &#123;Color.BLACK,Color.BLUE,Color.BLACK&#125;;</div><div class="line"><span class="comment">//時間是否顯示</span></div><div class="line"><span class="keyword">int</span> time_vis[] = &#123;View.VISIBLE,View.GONE,View.VISIBLE&#125;;</div><div class="line"></div><div class="line"><span class="keyword">int</span> type_num = movie.getType();</div><div class="line">holder.txtTitle.setText(movie.getName());</div><div class="line">holder.txtTitle.setTextColor(color_title[type_num]);</div><div class="line">holder.txtTitle.setBackgroundColor(color_back[type_num]);</div><div class="line">holder.txtTime.setText(movie.getTime());</div><div class="line">holder.txtTime.setTextColor(color_time[type_num]);</div><div class="line">holder.txtTime.setVisibility(time_vis[type_num]);</div></pre></td></tr></table></figure>
+<p>因為我的list並不是每一個item都長一樣所以才需要這樣設定<br>
+像是如果type是1 代表只需要顯示一個電影台名稱而已<br>
+就要把背景設成藍色 時間也不需要顯示所以設成View.GONE<br>
+如果你的每個item都長一樣就不需要那麼大費周章了</p>
+<p>最後記得 <code>return convertView;</code></p>
+<p>完整程式碼在這裡: MyAdapter.java <a href="http://pastebin.com/GxBfpdCB" target="_blank" rel="external">http://pastebin.com/GxBfpdCB</a></p>
+<p>如此一來就大功告成了 順利顯示出我們想要的結果<br>
+使用自訂class的好處就是當我們以後有不同需求的時候<br>
+就像一個範本可以自己隨意修改<br>
+這篇也提供了一個固定的建立自訂ListView的流程</p>
+<p>1.建一個list_item.xml 在res/layout下 看你每一列想要長怎樣<br>
+2.寫一個[   ].java 裡面說明你的資料結構為何<br>
+(例:Movie.java <a href="http://pastebin.com/DWDx3EqW" target="_blank" rel="external">http://pastebin.com/DWDx3EqW</a> )<br>
+3.寫一個MyAdapter.java</p>
+<p>其實程式的結構無須修改<br>
+只要一些細節需要調整而已</p>
+<p>這篇的作法基本上是參考 <a href="http://tinyurl.com/clen3tn" target="_blank" rel="external">http://tinyurl.com/clen3tn</a><br>
+步驟清晰易懂也有附上完整的code</p>
+<p>ListView有個很方便的功能叫做setTextFilterEnabled<br>
+可以很方便的做到搜尋的功能<br>
+但是自從我們自訂ListView的內容以後<br>
+顯然這個方法不能直接套用 所以要自己override一些東西<br>
+下一篇將延續這一篇的作法，說明如何針對自訂的ListView做搜尋</p>
+<p>第二篇：<br>
+<a href="https://www.ptt.cc/bbs/AndroidDev/M.1356581041.A.242.html" target="_blank" rel="external">自訂ListView的搜尋功能</a><br>
+像是內建的通訊錄那樣<br>
+有一個editText可以輸入,當你輸入a的時候<br>
+底下的list就自動跑出a開頭的聯絡人名單</p>
+<p>對於普通的ArrayAdapter來說 這件事情非常簡單可以達成<br>
+最近研究了一下自訂的ListView如何達成這件事<br>
+跟大家分享一下心得<br>
+建議先看過普通的ListView如何做出這樣的東西再來看這篇文章<br>
+<a href="http://tinyurl.com/borkabs" target="_blank" rel="external">http://tinyurl.com/borkabs</a></p>
+<p>由於這篇直接從上一篇的code拿來修改 所以建議先看過上一篇<br>
+首先先在你的activity加入一個editText</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">EditText edt;</div><div class="line">edt = (EditText) findViewById(R.id.EditText01);</div></pre></td></tr></table></figure>
+<p>然後記得設定ListView</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">listV.setTextFilterEnabled(<span class="keyword">true</span>);</div></pre></td></tr></table></figure>
+<p>接著就像普通的搜尋那樣 建立一個TextWatcher</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">edt.addTextChangedListener(<span class="keyword">new</span> TextWatcher()&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTextChanged</span><span class="params">( CharSequence arg0, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2, <span class="keyword">int</span></span></span></div><div class="line"><span class="function"><span class="params">arg3)</span></span>&#123;&#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeTextChanged</span><span class="params">(CharSequence arg0, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2, <span class="keyword">int</span></span></span></div><div class="line"><span class="function"><span class="params">arg3)</span></span>&#123;&#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterTextChanged</span><span class="params">(Editable arg0)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        Main.<span class="keyword">this</span>.adapter.getFilter().filter(arg0);</div><div class="line">    &#125;</div><div class="line"> &#125;);</div></pre></td></tr></table></figure>
+<p>接著我們只要修改上一篇中寫得MyAdapter.java就可以了<br>
+原本是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span></span></div></pre></td></tr></table></figure>
+<p>由於我們要做filter的功能 所以需要</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> <span class="keyword">implements</span> <span class="title">Filterable</span></span></div></pre></td></tr></table></figure>
+<p>接著宣告</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> List&lt;Movie&gt; mOriginalValues;</div><div class="line"><span class="keyword">private</span> MyFilter filter;</div></pre></td></tr></table></figure>
+<p>mOriginalValues是拿來保存你最原本傳進來的list<br>
+MyFilter這之後會講到<br>
+然後加入一個method</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Filter <span class="title">getFilter</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (filter == <span class="keyword">null</span>)&#123;</div><div class="line">                filter  = <span class="keyword">new</span> MyFilter();</div><div class="line">        &#125;</div><div class="line">                <span class="keyword">return</span> filter;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接著就是開始本篇文章的重點了<br>
+就是MyFilter的部份</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFilter</span> <span class="keyword">extends</span> <span class="title">Filter</span></span>&#123;</div></pre></td></tr></table></figure>
+<p>有兩個方法需要繼承</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> FilterResults <span class="title">performFiltering</span><span class="params">(CharSequence constraint)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">publishResults</span><span class="params">(CharSequence constraint, FilterResults results)</span></span></div></pre></td></tr></table></figure>
+<p>performFiltering是實際需要做篩選的code 好像是在不同的thread進行<br>
+publishResults則是用來把篩選結果publish出去的函式<br>
+先來看後者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">publishResults</span><span class="params">(CharSequence constraint, FilterResults results)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    movies = (ArrayList&lt;Movie&gt;)results.values;</div><div class="line">    <span class="keyword">if</span>(results.count&gt;<span class="number">0</span>)&#123;</div><div class="line">        notifyDataSetChanged();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        notifyDataSetInvalidated();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>記得嗎? movies是我們存放資料的List<br>
+而results.values就是篩選過後的結果<br>
+我們讓movies = results.values<br>
+notifyDataSetChanged之後會自動更新List</p>
+<p>再來是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> FilterResults <span class="title">performFiltering</span><span class="params">(CharSequence constraint)</span> </span>&#123;</div><div class="line"></div><div class="line">constraint = constraint.toString();</div><div class="line">FilterResults result = <span class="keyword">new</span> FilterResults();</div><div class="line"><span class="keyword">if</span> (mOriginalValues == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">                mOriginalValues = <span class="keyword">new</span> ArrayList&lt;Movie&gt;(movies);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>先判斷mOriginalValues是不是null<br>
+如果是的話把movies的值整個複製過去<br>
+第一次執行的話一定是null 所以mOriginalValues就會是一開始的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(constraint != <span class="keyword">null</span> &amp;&amp; constraint.toString().length() &gt; <span class="number">0</span>)&#123;</div><div class="line">        ArrayList&lt;Movie&gt; filteredItems = <span class="keyword">new</span> ArrayList&lt;Movie&gt;();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, l = mOriginalValues.size(); i &lt; l; i++)&#123;</div><div class="line">                Movie m = mOriginalValues.get(i);</div><div class="line">                <span class="keyword">if</span>(m.getName().contains(constraint))&#123;</div><div class="line">                        filteredItems.add(m);</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line">        result.count = filteredItems.size();</div><div class="line">        result.values = filteredItems;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</div><div class="line">        ArrayList&lt;Movie&gt; list = <span class="keyword">new</span> ArrayList&lt;Movie&gt;(mOriginalValues);</div><div class="line">                result.values = list;</div><div class="line">                result.count = list.size();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> result;</div></pre></td></tr></table></figure>
+<p>先看else的部份<br>
+會執行到這邊就表示傳進來的參數(要搜尋的字串)是不合格的<br>
+所以就直接把一開始的mOriginalValues return回去<br>
+至於另一個部份就是搜尋整個mOriginalValues<br>
+看看是否包含要搜尋的字串<br>
+最值得注意的是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Movie m = mOriginalValues.get(i);</div><div class="line"><span class="keyword">if</span>(m.getName().contains(constraint))&#123;</div><div class="line">        filteredItems.add(m);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這邊換成你自己的自訂class<br>
+比如說我有一個class叫做Userinfo 要搜尋聯絡人<br>
+那就</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Userinfo u = mOriginalValues.get(i)</div><div class="line"><span class="keyword">if</span>(u.getName().contains(constraint))&#123;</div><div class="line">        filteredItems.add(u)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>總之filteredItems就是你最後要顯示的資料<br>
+完整的code在這邊 <a href="http://pastebin.com/pdPeAC7K" target="_blank" rel="external">http://pastebin.com/pdPeAC7K</a><br>
+好處就是你剛剛寫得有關自訂的ListView的code完全不需要修改<br>
+只需要加入一些東西就可以達成搜尋的功能</p>
+<p>參考資料:<br>
+<a href="http://blog.csdn.net/jiahui524/article/details/7802033" target="_blank" rel="external">http://blog.csdn.net/jiahui524/article/details/7802033</a><br>
+<a href="http://tinyurl.com/cu3pst4" target="_blank" rel="external">http://tinyurl.com/cu3pst4</a></p>
+<p>可伸縮ListView:<br>
+<a href="http://www.javacodegeeks.com/2013/06/android-expandablelistview-with-custom-adapter-baseexpandablelistadapter.html" target="_blank" rel="external">http://www.javacodegeeks.com/2013/06/android-expandablelistview-with-custom-adapter-baseexpandablelistadapter.html</a><br>
+<a href="http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/" target="_blank" rel="external">http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/</a></p>
+<p>聊天視窗：<br>
+<a href="http://blog.csdn.net/ryantang03/article/details/8001599" target="_blank" rel="external">http://blog.csdn.net/ryantang03/article/details/8001599</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2015/06/12/android-aapt-appears-cannot-execute-binary-file/" data-toggle="tooltip" data-placement="top" title="[Android] aapt出現 cannot execute binary file">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2015/06/08/nodejs-upload-files/" data-toggle="tooltip" data-placement="top" title="[Node.js] 上傳檔案">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="nav">none</ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2015/06/12/android-custom-listview/";
+    var disqus_url = "https://blog.huli.tw/2015/06/12/android-custom-listview/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

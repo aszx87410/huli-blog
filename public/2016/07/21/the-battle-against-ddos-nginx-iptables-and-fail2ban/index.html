@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          [心得] 與 DDoS 奮戰：nginx, iptables 與 fail2ban - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2016/07/21/the-battle-against-ddos-nginx-iptables-and-fail2ban/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#story" title="story">story</a>
+                            
+                              <a class="tag" href="/tags/#server" title="server">server</a>
+                            
+                              <a class="tag" href="/tags/#ddos" title="ddos">ddos</a>
+                            
+                        </div>
+                        <h1>[心得] 與 DDoS 奮戰：nginx, iptables 與 fail2ban</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2016-07-21
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>最近發生主機被大量 request 攻擊的事件，而且慘的是這台主機放的是論壇服務<br>
+假設攻擊的點是論壇首頁，每次 request 都會去 query DB，而且有一堆 join<br>
+其中還有些是 POST 的指令會讓 db update<br>
+就這樣一直瘋狂又 select 又 update 導致 DB lock，cpu 飆高掛掉</p>
+<p>如果論壇是自己寫的，還可以在 DB 跟 application 之間加上 redis 之類的快取<br>
+但偏偏這個論壇系統是別人的，沒有辦法動</p>
+<p>先簡單講一下架構，為了分散流量<br>
+前面有一台 AWS ELB 做 load balancing，後面有兩台機器<br>
+所有 request 都會先到 ELB，再自動到後面兩台其中一台</p>
+<p>被攻擊之後怎麼辦呢？第一個想到的就是從 aws 提供的服務：WAF 來擋<br>
+<a href="https://aws.amazon.com/tw/waf/" target="_blank" rel="external">https://aws.amazon.com/tw/waf/</a></p>
+<p>可是發現 WAF 跟原本想的不一樣，他沒有辦法設定像是：「擋掉 10 秒鐘內發超過 100 個 request 的 IP」這種規則<br>
+只能繼續在網路上找解法，找到從 nginx 來擋的解法：</p>
+<p><a href="https://www.52os.net/articles/nginx-anti-ddos-setting.html" target="_blank" rel="external">nginx防止DDOS攻击配置</a><br>
+<a href="http://www.infoq.com/cn/news/2016/01/Nginx-AntiDDoS" target="_blank" rel="external">通过Nginx和Nginx Plus阻止DDoS攻击</a><br>
+<a href="http://nginx.org/en/docs/http/ngx_http_limit_req_module.html" target="_blank" rel="external">Module ngx_http_limit_req_module</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">http &#123;</div><div class="line"></div><div class="line">  //觸發條件，限制 ip 每秒 10 個 request</div><div class="line">  limit_req_zone $binary_remote_addr zone=one:10m rate=10r/s; </div><div class="line">  </div><div class="line">  server &#123;</div><div class="line">    location  ~ \.php$ &#123;</div><div class="line"></div><div class="line">      //執行的動作</div><div class="line">      limit_req zone=one burst=5 nodelay;   </div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>總之就是利用 <code>limit_req_zone</code>，這個 nginx 提供的東西<br>
+宣告一個 10mb 的 zone 叫做 <code>one</code> 來儲存狀態，這裡的 <code>10r/s</code> 指的就是一秒 10 個 request</p>
+<p>接著在你想擋的地方加上：<code>limit_req zone=one burst=5 nodelay;</code>，就可以擋掉了<br>
+nginx 會把處理 request 的數量調整成「最多 1 秒 10 個」，如果那個 ip 在同一時間有超過 5 個 request 還沒處理的話，就會傳回 <code>503 service temporarily unavailable</code>，這邊的 5 就是 <code>burst</code> 設定的值<br>
+傳回去的 status code 也可以自己指定，例如說：<code>limit_req_status 505;</code></p>
+<p>儘管這個解法看起來很棒，但不知道為什麼，加了之後好像沒有用似的<br>
+伺服器的警報還是一直在響，DB 還是持續飆高</p>
+<p>在請教過其他同事之後，得知 iptabls 也可以擋，而且還是直接從 tcp 層擋<br>
+找到下面兩篇資料：</p>
+<p><a href="http://blog.eztable.com/2011/05/17/how-to-prevent-ddos/" target="_blank" rel="external">淺談DDoS攻擊防護</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-A INPUT -p tcp –dports 80 -j WEB_SRV_DOS</div><div class="line">-A WEB_SRV_DOS -p tcp –syn –dports 80 -m recent –rcheck –second 30 –hitcount 200 -j LOG –log-prefix &quot;[Possible DOS Attack]&quot;</div><div class="line">-A WEB_SRV_DOS -p tcp –syn –dports 80 -m recent –rcheck –second 30 –hitcount 200 -j REJECT  </div><div class="line">-A WEB_SRV_DOS -p tcp –syn –dports 80 -m recent –set  </div><div class="line">-A WEB_SRV_DOS -p tcp –dports 80 -j ACCEPT</div></pre></td></tr></table></figure>
+<p><a href="http://ishm.idv.tw/?p=188" target="_blank" rel="external">運用 iptables 限制同一IP單位時間連線數</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-A INPUT -p tcp --dport 80 -m recent --rcheck --seconds 1 --hitcount 5 --name HTTP_LOG --rsource -j DROP</div><div class="line">-A INPUT -p tcp --dport 80 -m recent --set --name HTTP_LOG --rsource</div><div class="line">-A INPUT -p tcp --dport 80 -j ACCEPT</div></pre></td></tr></table></figure>
+<p>兩個的原理都一樣，是透過<code>-m recent –rcheck –second 30 –hitcount 200</code> 這段敘述，描述說你要擋住幾秒內發送幾次的 request，把這個連線 reject 或是 drop。</p>
+<p>直接從 iptables 去擋聽起來是個更好的解法，這樣 request 連 nginx 都不會進去就被擋住了<br>
+可是天不從人願，用了之後發現還是不行！怎麼會這樣呢</p>
+<p>心灰意冷之下，同事又推薦一個好東西叫做：fail2ban<br>
+查了一下之後發現用法非常簡單，而且原理很好懂<br>
+決定用別台機器來測測看，測試成功之後再套用到正式環境的機器<br>
+<a href="http://www.vixual.net/blog/archives/252" target="_blank" rel="external">用 Fail2Ban 防範暴力破解 (SSH、vsftp、dovecot、sendmail)</a><br>
+<a href="http://blog.vic.mh4u.org/2011/272" target="_blank" rel="external">fail2ban教學</a><br>
+<a href="http://chuhw.pixnet.net/blog/post/167657289-ubuntu-%E4%B8%AD%E4%BD%BF%E7%94%A8-fail2ban-%E9%87%9D%E5%B0%8D%E5%A4%A7%E9%87%8F-access-%E5%81%9A%E5%88%A4%E6%96%B7%E5%8F%8A" target="_blank" rel="external">Ubuntu 中使用 fail2ban 針對大量 access 做判斷及阻擋</a></p>
+<p>綜合其中幾篇的敘述，可以得出以下流程</p>
+<p>1.修改<code>vim /etc/fail2ban/jail.local</code><br>
+2.寫入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[http-get-dos]</div><div class="line">enabled = true</div><div class="line">port = http</div><div class="line">filter = http-get-dos</div><div class="line">logpath = /var/log/nginx/access.log # 要判斷的log</div><div class="line">maxretry = 100 # 最多幾次</div><div class="line">findtime = 5 # 時間區間</div><div class="line">bantime = 600 # 要 ban 多久</div><div class="line">action = iptables[name=HTTP, port=http, protocol=tcp]</div></pre></td></tr></table></figure>
+<p>上面的規則就是：5 秒內嘗試 100 次失敗之後就 ban 600 秒</p>
+<p>3.新增<code>/etc/fail2ban/filter.d/http-get-dos.conf</code><br>
+這邊的檔名就是對應到剛剛 <code>jail.local</code> 設定的名稱</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[Definition]</div><div class="line">failregex = ^&lt;HOST&gt;- - .*\&quot;(GET|POST).*</div><div class="line">ignoreregex =</div></pre></td></tr></table></figure>
+<p>這裡的<code>failregex</code>要根據你的 log 去寫<br>
+像是 nginx 的 access log 長這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">106.184.3.122 - - [21/Jul/2016:11:38:29 +0000] &quot;GET / HTTP/1.1&quot; 200 396 &quot;-&quot; &quot;Go-http-client/1.1&quot;</div></pre></td></tr></table></figure>
+<p>你就寫一個可以抓到<code>&lt;HOST&gt;</code>，也就是 ip 的 regular expression</p>
+<p>都設定好之後，重開一下應該就有效了<br>
+就會發現一直發 request 之後自己順利的被 ban 掉<br>
+可以用 <code>iptables --list</code> 看一下自己是不是真的有被 ban</p>
+<p>fail2ban 的原理應該就是去看你指定的 log 檔跟規則，用這個檔案去判斷是不是超出設定的規則，超出的話就把 ip 抓出來，加規則到 iptables 裡面去擋掉，時間到了之後再把規則移除掉</p>
+<p>試到這邊，終於成功了！可是既然原理也是 iptables，為什麼剛剛不行呢？<br>
+還記得一開始我提過伺服器架構嗎？前面一台 ELB，後面兩台 web server<br>
+因為 ELB 是 AWS 提供的服務，所以客製化程度很低，甚至連 ssh 進去都不行<br>
+因此上面嘗試的方案都是個別套用到那兩台 web server</p>
+<p>這時候問題就來了</p>
+<blockquote>
+<p>咦？那這樣子 web server 的 request 的來源，不就都是 ELB 的 ip 了嗎？</p>
+</blockquote>
+<p>沒錯，你突破盲點了！之前沒有用就是卡在這邊<br>
+你用 iptables 來檔，因為來源都是 ELB 的 ip，所以會擋掉的只有 ELB，而不是真正的攻擊來源<br>
+所以會造成 ELB 被擋掉，整個服務就因為一個攻擊者被搞的超級慢</p>
+<p>所以在這個網路環境底下，iptables 是行不通的！<br>
+那 nginx 呢？還記得我們的規則嗎？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">limit_req_zone $binary_remote_addr zone=one:10m rate=10r/s;</div></pre></td></tr></table></figure>
+<p><code>$binary_remote_addr</code>抓到的也都會是 ELB 的 ip</p>
+<p>這時候靈機一動突然想到，那能不能根據<code>X-Forwarded-For</code>這個 header 來設定呢？就會是真的 IP 了<br>
+找到這一篇：<a href="http://serverfault.com/questions/487463/nginx-rate-limiting-with-x-forwarded-for-header" target="_blank" rel="external">nginx rate limiting with X-Forwarded-For header</a></p>
+<p>把<code>$binary_remote_addr</code>換成<code>$http_x_forwarded_for</code></p>
+<p>搞定！大功告成<br>
+經歷一番千辛萬苦，最後終於在 nginx 把攻擊流量擋掉<br>
+用 <a href="http://jmeter.apache.org/" target="_blank" rel="external">JMeter</a> 測試之後也發現確實成功了，多的 request 會直接回傳 503<br>
+真是可喜可賀</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/08/01/little-big-angry-1-unable-to-cancel-your-subscription-to-the-newsletter/" data-toggle="tooltip" data-placement="top" title="小地方大生氣 #1：無法取消訂閱的電子報">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/07/17/alphacamp-startup-rookies-summary/" data-toggle="tooltip" data-placement="top" title="[心得] ALPHACamp Startup Rookies 總結">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="nav">none</ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#story" title="story">story</a>
+                        
+                          <a class="tag" href="/tags/#server" title="server">server</a>
+                        
+                          <a class="tag" href="/tags/#ddos" title="ddos">ddos</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2016/07/21/the-battle-against-ddos-nginx-iptables-and-fail2ban/";
+    var disqus_url = "https://blog.huli.tw/2016/07/21/the-battle-against-ddos-nginx-iptables-and-fail2ban/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

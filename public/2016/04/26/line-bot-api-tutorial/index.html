@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          [教學] Line BOT API - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2016/04/26/line-bot-api-tutorial/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#backend" title="backend">backend</a>
+                            
+                              <a class="tag" href="/tags/#bot" title="bot">bot</a>
+                            
+                        </div>
+                        <h1>[教學] Line BOT API</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2016-04-26
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>繼上一篇 Facebook 的教學之後，這一次輪到 Line 了<br>
+可以先參考<a href="https://developers.line.me/bot-api/getting-started-with-bot-api-trial" target="_blank" rel="external">官方文件</a><br>
+基本上你必須先申請一個試用帳號，試用帳號有名額限制，沒申請的要趕快喔！<br>
+相關消息可參考：<a href="http://technews.tw/2016/04/07/line-begins-providing-10000-bot-api-trial-accounts-prior-to-opening-up-access-to-messaging-api/" target="_blank" rel="external">開放平台資源，LINE 提供 1 萬個免費「BOT API 試用」帳號申請</a></p>
+<h1><span id="前置作業">前置作業</span></h1>
+<ol>
+<li>跟臉書一樣，你要有一個 https 的 server，或許你可以考慮用 <a href="https://heroku.com/" target="_blank" rel="external">heroku</a></li>
+<li>Channel ID</li>
+<li>Channel Secret</li>
+<li>MID</li>
+</ol>
+<p>後三個的值你可以在開發者後台找到：<br>
+<img src="http://user-image.logdown.io/user/7013/blog/6977/post/726082/rjbtYj9DTxKCzyYj7VSP_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-26%20%E4%B8%8B%E5%8D%889.11.33.jpg" alt="螢幕快照 2016-04-26 下午9.11.33.jpg"></p>
+<p>接著，就是開始串 API 的時間了</p>
+<h1><span id="接收訊息">接收訊息</span></h1>
+<p>其實接收訊息很簡單，line 發過來的內容會長這樣<br>
+result 是個陣列，裡面每一個 object 代表一則訊息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="attr">result</span>: </div><div class="line">   [ &#123; <span class="attr">content</span>: [<span class="built_in">Object</span>],</div><div class="line">       createdTime: <span class="number">1461674869099</span>,</div><div class="line">       eventType: <span class="string">'138311609000106303'</span>,</div><div class="line">       <span class="keyword">from</span>: <span class="string">'u206d25c2ea6bd87c17655609a1c37cb8'</span>,</div><div class="line">       fromChannel: <span class="number">1341301815</span>,</div><div class="line">       id: <span class="string">'WB1519-3390674233'</span>,</div><div class="line">       to: [<span class="built_in">Object</span>],</div><div class="line">       toChannel: <span class="number">1462591242</span> &#125; ] &#125;</div></pre></td></tr></table></figure>
+<p>這邊值得注意的是，你以為<code>from</code>就是發送訊息的人的id嗎？錯！<br>
+有沒有注意到這邊有個 <code>content</code> 的 key？<br>
+print 出來之後，你會發現內容是這樣：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123; </div><div class="line">  toType: <span class="number">1</span>,</div><div class="line">  createdTime: <span class="number">1461675694090</span>,</div><div class="line">  <span class="keyword">from</span>: <span class="string">'uccec910deec23d175d03272cf7887599'</span>,</div><div class="line">  location: <span class="literal">null</span>,</div><div class="line">  id: <span class="string">'4229056802695'</span>,</div><div class="line">  to: [ <span class="string">'ud0bbc01bd7b10902d371f0865cf68505'</span> ],</div><div class="line">  text: <span class="string">'安安'</span>,</div><div class="line">  contentMetadata: &#123; <span class="attr">AT_RECV_MODE</span>: <span class="string">'2'</span>, <span class="attr">SKIP_BADGE_COUNT</span>: <span class="string">'true'</span> &#125;,</div><div class="line">  deliveredTime: <span class="number">0</span>,</div><div class="line">  contentType: <span class="number">1</span>,</div><div class="line">  seq: <span class="literal">null</span> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這邊的 <code>from</code> 才是你要的那個，而不是上面那個<br>
+務必注意這一點，因為就是這一點花了我半天 debug QQ</p>
+<p>綜合以上兩點，可以寫出一段簡單的程式碼：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">app.post(<span class="string">'/callback'</span>, (req, res) =&gt; &#123;</div><div class="line">  <span class="keyword">const</span> result = req.body.result;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;result.length; i++)&#123;</div><div class="line">    <span class="keyword">const</span> data = result[i][<span class="string">'content'</span>];</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'receive: '</span>, data);</div><div class="line">    sendTextMessage(data.from, data.text);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>這邊其實是簡略版，我只在意它發過來的訊息跟是誰發過來的<br>
+照官方文件，其實你應該要處理 1. 驗證 跟 2. 事件類型<br>
+例如說你被加好友的時候，其實也會收到一個 request<br>
+但這邊只是簡易教學，有興趣的話可以自己參考官方文件</p>
+<h1><span id="發送訊息">發送訊息</span></h1>
+<p>承上，我們寫了個 <code>sendTextMessage(data.from, data.text);</code> 的函式<br>
+這邊就要來實作它</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendTextMessage</span>(<span class="params">sender, text</span>) </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = &#123;</div><div class="line">    to: [sender],</div><div class="line">    toChannel: <span class="number">1383378250</span>,</div><div class="line">    eventType: <span class="string">'138311608800106203'</span>,</div><div class="line">    content: &#123;</div><div class="line">      contentType: <span class="number">1</span>,</div><div class="line">      toType: <span class="number">1</span>,</div><div class="line">      text: text</div><div class="line">    &#125;</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'send: '</span>, data);</div><div class="line"></div><div class="line">  request(&#123;</div><div class="line">    url: LINE_API,</div><div class="line">    headers: &#123;</div><div class="line">      <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=UTF-8'</span>,</div><div class="line">      <span class="string">'X-Line-ChannelID'</span>: CHANNEL_ID,</div><div class="line">      <span class="string">'X-Line-ChannelSecret'</span>: CHANNEL_SERECT,</div><div class="line">      <span class="string">'X-Line-Trusted-User-With-ACL'</span>: MID</div><div class="line">    &#125;,</div><div class="line">    method: <span class="string">'POST'</span>,</div><div class="line">    body: <span class="built_in">JSON</span>.stringify(data) </div><div class="line">  &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error, response, body</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (error) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'Error sending message: '</span>, error);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (response.body.error) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'Error: '</span>, response.body.error);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'send response: '</span>, body);</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其實也沒什麼難度，就一樣發個 request 而已<br>
+值得注意的點大概是：</p>
+<ol>
+<li>header 的 content type 要設</li>
+<li>header 的那三個值記得設</li>
+<li>toChannel 跟 eventType 寫死就好</li>
+</ol>
+<p>就這樣，就可以發送訊息了</p>
+<h1><span id="結論">結論</span></h1>
+<p>綜合以上兩點，其實就完成一個簡單的「echo 機器人」了<br>
+你講什麼它就講什麼<br>
+最後照例附上完整範例程式碼：<a href="https://github.com/aszx87410/line-bot" target="_blank" rel="external">https://github.com/aszx87410/line-bot</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/05/01/cs50-week0-guide/" data-toggle="tooltip" data-placement="top" title="[心得] cs50 week0 導讀">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/04/13/teaching-facebook-messenger-api/" data-toggle="tooltip" data-placement="top" title="[教學] Facebook Messenger API">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前置作業</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">接收訊息</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">發送訊息</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">結論</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#backend" title="backend">backend</a>
+                        
+                          <a class="tag" href="/tags/#bot" title="bot">bot</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2016/04/26/line-bot-api-tutorial/";
+    var disqus_url = "https://blog.huli.tw/2016/04/26/line-bot-api-tutorial/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

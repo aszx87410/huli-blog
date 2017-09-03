@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          快速取得 apk 相關資訊 - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2016/09/29/fast-way-to-get-apk-information/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#android" title="android">android</a>
+                            
+                              <a class="tag" href="/tags/#apk" title="apk">apk</a>
+                            
+                              <a class="tag" href="/tags/#aapt" title="aapt">aapt</a>
+                            
+                        </div>
+                        <h1>快速取得 apk 相關資訊</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2016-09-29
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>（原文發表於：<a href="http://blog.techbridge.cc/2016/05/20/fast-way-to-get-apk-information/%EF%BC%89" target="_blank" rel="external">http://blog.techbridge.cc/2016/05/20/fast-way-to-get-apk-information/）</a></p>
+<h2><span id="前言">前言</span></h2>
+<p>在 <a href="http://blog.techbridge.cc/2016/03/24/android-decompile-introduction/" target="_blank" rel="external">之前</a>，我們曾經介紹過如何反編譯 Android Apk。而藉由反編譯，我們可以知道許多跟 apk 有關的資訊，例如說 <code>AndroidManifest.xml</code>，只要這個檔案就可以看出 apk 的一些基本資訊，還可以看到整個 apk 的程式碼跟使用到的資源（圖檔、影片、聲音等等）。</p>
+<p>但若是今天我們只想要知道基本資訊，完全不想知道 apk 是怎麼寫的，也根本不關心它用到哪些資源，那該怎麼辦呢？反編譯需要一點時間，愈大的 apk 需要愈久，有沒有更好的方法呢？</p>
+<h2><span id="需要哪些資訊">需要哪些資訊？</span></h2>
+<p>首先我們先來定義一下「基本資訊」指的是哪些。以我來說，我想取得的基本資訊有以下六點：</p>
+<ol>
+<li>package name</li>
+<li>version code</li>
+<li>version name</li>
+<li>launch activity</li>
+<li>Google SHA1 Fingerprint</li>
+<li>Facebook Keyhash</li>
+</ol>
+<p>前四個的用途在於，假設你今天做了一個公司內部的 apk 上架系統，如果有了前四項資訊，就可以做跟 Google Play 相似的驗證，例如說驗證 package name 跟上次上傳的是否一樣、版本號是否比上一次的高等等。</p>
+<p>至於後兩個呢？有串接過 Google 跟 Facebook 登入的讀者就會知道，這兩個是串登入時必備的東西。你要在設定裡面新增這兩組 key，才能夠使用登入功能，否則會出現驗證錯誤之類的字眼。</p>
+<p>知道我們需要哪些以後，就來動手做吧！</p>
+<h2><span id="好用的-keytool">好用的 keytool</span></h2>
+<p><code>keytool</code> 是系統內建，與認證相關的指令。<br>
+我們可以用 <code>keytool -list -printcert -jarfile NAME.apk</code> 提取出一些資訊：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">簽署者 #1:</div><div class="line"></div><div class="line">簽章:</div><div class="line"></div><div class="line">擁有者: CN=Android Debug, O=Android, C=US</div><div class="line">發出者: CN=Android Debug, O=Android, C=US</div><div class="line">序號: 4b52355e</div><div class="line">有效期自: Sun Jan 17 05:53:34 CST 2010 到: Mon Jan 17 05:53:34 CST 2011</div><div class="line">憑證指紋:</div><div class="line">   MD5:  14:99:01:12:7A:69:CD:75:4F:31:75:8C:59:F6:71:63</div><div class="line">   SHA1: 24:69:FD:17:6B:C3:43:FC:3A:85:EC:4B:C5:D7:9F:09:4A:71:60:80</div><div class="line">   SHA256: 57:EB:73:81:D7:08:E6:45:FE:26:99:FB:3C:1F:37:1E:EE:38:39:20:E0:2D:C6:76:0E:84:2B:DD:1C:5C:C9:70</div><div class="line">   簽章演算法名稱: SHA1withRSA</div><div class="line">   版本: 3</div></pre></td></tr></table></figure>
+<p>以這個 apk 來說，列出了：擁有者、發出者、有效期限、憑證指紋等等的資訊，而其中的 <code>SHA1</code> 就是 Google 登入會用到的資訊。</p>
+<p>那 Facebook Keyhash 呢？從 <a href="https://developers.facebook.com/docs/android/getting-started#release-key-hash" target="_blank" rel="external">官方文件</a> 可以知道，其實就只是把 sha1 先變成 binary 然後再做 base64 而已。</p>
+<p>只要有了 sha1，搭配一些指令，就可以很簡單的生成 Facebook Keyhash。</p>
+<h2><span id="萬能的-aapt">萬能的 aapt</span></h2>
+<p>aapt 的全名是：Android Asset Packaging Tool，超級好用！<br>
+可以先來看看 aapt 到底可以做哪些事情<br>
+由於我們需要的是取出資訊，因此直接看 dump 的部份：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">aapt d[ump] [--values] WHAT file.&#123;apk&#125; [asset [asset ...]]</div><div class="line">  badging          Print the label and icon for the app declared in APK.</div><div class="line">  permissions      Print the permissions from the APK.</div><div class="line">  resources        Print the resource table from the APK.</div><div class="line">  configurations   Print the configurations in the APK.</div><div class="line">  xmltree          Print the compiled xmls in the given assets.</div><div class="line">  xmlstrings       Print the strings of the given compiled xml assets.</div></pre></td></tr></table></figure>
+<p>有興趣的讀者可以每一個都試試看，看會出現什麼結果。以我們的需求來講，badging 是最符合的</p>
+<p><code>aapt dump badging NAME.apk</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">package: name=&apos;com.gmail.aszx87410.movie_to_nine&apos; versionCode=&apos;1&apos; versionName=&apos;1.0&apos;</div><div class="line">sdkVersion:&apos;8&apos;</div><div class="line">targetSdkVersion:&apos;16&apos;</div><div class="line">uses-permission:&apos;android.permission.INTERNET&apos;</div><div class="line">uses-gl-es:&apos;0x20000&apos;</div><div class="line">uses-feature-not-required:&apos;android.hardware.telephony&apos;</div><div class="line">uses-feature:&apos;android.hardware.screen.portrait&apos;</div><div class="line">uses-feature-not-required:&apos;android.hardware.screen.landscape&apos;</div><div class="line">application-label:&apos;今晚九點電影2.0&apos;</div><div class="line">application-label-he:&apos;今晚九點電影2.0&apos;</div><div class="line">application-label-es:&apos;今晚九點電影2.0&apos;</div><div class="line">application-label-iw:&apos;今晚九點電影2.0&apos;</div><div class="line">application-icon-120:&apos;res/drawable-ldpi/icon.png&apos;</div><div class="line">application-icon-160:&apos;res/drawable-mdpi/icon.png&apos;</div><div class="line">application-icon-240:&apos;res/drawable-hdpi/icon.png&apos;</div><div class="line">application-icon-320:&apos;res/drawable-xhdpi/icon.png&apos;</div><div class="line">application-icon-480:&apos;res/drawable-xxhdpi/icon.png&apos;</div><div class="line">application: label=&apos;今晚九點電影2.0&apos; icon=&apos;res/drawable-mdpi/icon.png&apos;</div><div class="line">launchable-activity: name=&apos;com.ansca.corona.CoronaActivity&apos;  label=&apos;今晚九點電影2.0&apos; icon=&apos;&apos;</div><div class="line">uses-feature:&apos;android.hardware.touchscreen&apos;</div><div class="line">uses-implied-feature:&apos;android.hardware.touchscreen&apos;,&apos;assumed you require a touch screen unless explicitly made optional&apos;</div><div class="line">main</div><div class="line">other-activities</div><div class="line">other-receivers</div><div class="line">other-services</div><div class="line">supports-screens: &apos;small&apos; &apos;normal&apos; &apos;large&apos; &apos;xlarge&apos;</div><div class="line">supports-any-density: &apos;true&apos;</div><div class="line">locales: &apos;--_--&apos; &apos;he&apos; &apos;es&apos; &apos;iw&apos;</div><div class="line">densities: &apos;120&apos; &apos;160&apos; &apos;240&apos; &apos;320&apos; &apos;480&apos;</div><div class="line">native-code: &apos;&apos; &apos;armeabi-v7a&apos;</div></pre></td></tr></table></figure>
+<p>將將將將～<br>
+我們所需要的資訊全部出現在這裡了，還附帶權限列表、app logo、app 名稱等等的資訊<br>
+做到這邊，全部需要的東西都有了，剩下就只是切出字串與整合而已</p>
+<h2><span id="總結">總結</span></h2>
+<p>今天這篇文章簡單介紹了 <code>keytool</code> 跟 <code>aapt</code> 的使用，主要是想要不靠 <code>apktool</code>，利用其他工具取出我們想要的資訊，既省時又省力。</p>
+<p>如果你有興趣知道最後做出來的成品長怎樣，<a href="https://github.com/aszx87410/apkinfo.sh" target="_blank" rel="external">apkinfo.sh</a> 是我放在 github 上面的一個小專案，用途就跟這篇文章所教的一樣，就是取出 apk 的相關資訊。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/09/29/redis-introduction/" data-toggle="tooltip" data-placement="top" title="資料庫的好夥伴：Redis">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/09/29/fast-restful-nodejs-api-backend/" data-toggle="tooltip" data-placement="top" title="用 Node.js 快速打造 RESTful API">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">需要哪些資訊？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">好用的 keytool</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">萬能的 aapt</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">總結</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#android" title="android">android</a>
+                        
+                          <a class="tag" href="/tags/#apk" title="apk">apk</a>
+                        
+                          <a class="tag" href="/tags/#aapt" title="aapt">aapt</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2016/09/29/fast-way-to-get-apk-information/";
+    var disqus_url = "https://blog.huli.tw/2016/09/29/fast-way-to-get-apk-information/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

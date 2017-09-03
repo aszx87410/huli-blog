@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/archives/2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/home-bg-2-dark.png') 
+            /*config*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>Huli&#39;s blog</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">Learning by sharing</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2017/06/17/my-programming-experience-1/">
+        <h2 class="post-title">
+            自學、哲學、講學：我的程式之路（上）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            前言
+無意間看到一篇文章在分享自己學網頁的歷程與心得，而這類型的文章其實我也曾經想要寫過。
+在我寫十年程式自學之路的時候，其實我原本想寫的是像剛才提到的那樣，有許多篇幅在講述自己學程式的經歷以及做過的事。可是我寫一寫發現那時候徵文的主題其實是自學的一些心得，所以才改成後來大家看到的那樣，著重在十年裡面學習到的經驗。
+這一篇其實算是個人傳記，在動筆之前想到了以前看過的經典文章：追求神乎其技的程......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2017-06-17
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#story" title="story">story</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/06/03/frontend-tutorial-experiment/">
+        <h2 class="post-title">
+            一場三十人的免費程式教學實驗：成果與檢討
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            緣起
+在三個月前，我在 ptt 上 po 文（[分享] 免費程式教學(前端)），說我願意提供一系列的免費程式前端教學。只要是有網頁基礎的都能夠報名，歡迎大家寫信給我，並且附上幾個提問的回答，最後我會挑 5~10 個人進行培訓。
+上面所指的提問如下：
+
+自我介紹（例如說背景、怎麼學程式的、程式能力到哪）
+學程式多久了，當初為什麼會想學程式
+現在在工作嗎？是的話工作內容大概是什麼？
+最近碰到過的......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2017-06-03
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#story" title="story">story</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/05/28/experience-of-seeing-doctor-in-singapore/">
+        <h2 class="post-title">
+            [心得] 新加坡看病初體驗
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            事情的開端
+事情是這個樣子的，原本我眉毛左邊有長一小粒東西，我想說可能是青春痘所以就沒去管
+就在上禮拜日晚上（5/21）覺得那邊有一點腫腫的，想說會不會其實是撞到什麼腫起來
+晚上睡覺的時候就想說那我揉一下好了，不是腫起來都要揉一揉嗎
+接著我就進入夢鄉了
+好戲登場
+隔天早上起床，就是見證奇蹟的時候了
+
+
+沒錯，我早上去照鏡子的時候完全被自己嚇到，想說靠杯這是三小
+如果被路人撞見，八七成會覺得我......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2017-05-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#story" title="story">story</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/05/27/the-benefits-of-writing-blog/">
+        <h2 class="post-title">
+            [心得] 寫 blog 的好處
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            前言
+這篇我原本是回在 ptt 上面的，整理一下之後轉到 blog 來
+其實對於這個主題，91 哥的這篇：我為什麼鼓勵工程師寫 blog已經講得很好了，建議大家先看一下這篇文
+而我這篇心得文呢，主要是因為看了上面貼的那篇之後滿有感觸的
+所以提出幾個自己很有共鳴的點來做延伸
+幫助自己
+我寫 blog 的最大收穫之一就是幫助自己
+很多人都以為寫了技術文章就是要給別人看的，但卻忘記自己也是文章的受......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2017-05-27
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#story" title="story">story</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/23/big-company-or-startup/">
+        <h2 class="post-title">
+            該進大公司還是新創？
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            標題來自於 Rabbie Kao 的個人臉書的這則貼文，建議大家可以先去看一下原文再回來看這一篇。
+身為一個比較早出社會的人，最近也剛好有朋友問到我這一題，想說也來發一篇我自己的看法。
+你想成為怎樣的人？
+首先，我十分認同這個是非常重要的一個問題，是人生中的核心問題。你的重大決定應該都會跟這個核心問題有關，所以這也是為什麼這一題這麼困難，因為它太重要了。
+但我認為如果得不出這個答案也是很正常......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2017-04-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#other" title="other">other</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/23/novice-program-frequently-asked-questions-faq-articles/">
+        <h2 class="post-title">
+            程式新手常見問題：解惑篇
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            自從寫了[心得] 十年程式自學之路之後，大概每隔幾天就會收到有新留言的通知信，剛剛去看了一下，所有的留言（包含我自己的回覆）一共是 70 則。回答了這麼多問題，我也得出了一些心得，為了不要讓我之後一直花時間在回答重複的問題，就決定來寫這一篇。
+
+在開始之前，我希望先幫大家建立幾個重要的基本觀念：
+我講的不一定是對的
+沒錯，最重要的絕對是這一點。
+不要以為我在上一篇把自己寫的感覺學程式很久（雖......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2017-04-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#tutorial" title="tutorial">tutorial</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/30/front-end-engineer-where-is-the-value/">
+        <h2 class="post-title">
+            前端工程師的價值在哪？
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            起頭
+標題來自於我一位朋友在Front-End Developers Taiwan裡面所提出的問題，完整問題如下：
+
+誠心請問：前端工程師的價值在哪？
+我是很想走前端、視覺、美感的人。但是一邊在路上，一邊卻不自主的質疑著這些東西的價值在哪？
+比方說前端就是一些畫面、表單，boostrap套一下或是用Material UI套一下，就變成RWD。不夠的東西再自己用CSS手刻一下。
+但大都時候不就......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2017-03-30
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#frontend" title="frontend">frontend</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/27/buy-taobao-from-singapore/">
+        <h2 class="post-title">
+            [心得] 在新加坡買淘寶
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            其實在新加坡買淘寶跟在台灣買淘寶流程是一樣的
+都是先集中運到某一家集貨倉庫，再從倉庫統一出貨到新加坡來
+紀錄一下日程：
+3/14 下單購買
+3/16 送達四方集運
+3/17 從四方集運出貨
+3/19 到達新加坡
+3/21 從新加坡送貨
+也就是說大概一個禮拜左右就可以從中國寄到台灣了，我覺得這速度不錯欸
+我記得我從台灣買也是要差不多一個禮拜左右
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2017-03-27
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#other" title="other">other</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/12/guide-for-getting-frontend-engineer-job/">
+        <h2 class="post-title">
+            該如何知道就業所需技能？以前端工程師為例
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+我想成為一個前端工程師，現在有在學一些基本的 HTML, CSS，可是我不知道要到什麼程度才能找到工作，該怎麼辦？
+
+這種類似的問題有一大堆人問過我，我想說乾脆就寫成一篇文章，以後有人問同樣問題的時候我就丟這篇給他看，就不用一直重複回答相同的問題了。
+有一種東西你一定看過，就是在徵才說明上面會寫的工作敘述跟需求，前者大概是你進去公司以後會負責一些什麼事情，後者則是這間公司所需要的人才應該要......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2017-03-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#frontend" title="frontend">frontend</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/12/csrf-introduction/">
+        <h2 class="post-title">
+            讓我們來談談 CSRF
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            前言
+最近剛好碰到一些 CSRF 的案例，趁著這次機會好好研究了一下。深入研究之後才發現這個攻擊其實滿可怕的，因為很容易忽略它。但幸好現在有些 Framework 都有內建防禦 CSRF 的功能，可以很簡單的開啟。
+但儘管如此，我認為還是有必要瞭解一下 CSRF 到底在幹嘛，是透過怎樣的手段攻擊，以及該如何防禦。就讓我們先來簡單的介紹一下它吧！
+CSRF 是一種 Web 上的攻擊手法，全稱是......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2017-03-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#frontend" title="frontend">frontend</a>
+            
+              <a href="/tags/#backend" title="backend">backend</a>
+            
+              <a href="/tags/#csrf" title="csrf">csrf</a>
+            
+              <a href="/tags/#security" title="security">security</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/">&larr; Newer Posts</a>
+        </li>
+    
+    
+        <li class="next">
+            <a href="/archives/3/">Older Posts &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+        
+            
+            <a href="/tags/#frontend" title="frontend" rel="25">frontend</a>
+            
+        
+            
+            <a href="/tags/#ALPHACamp" title="ALPHACamp" rel="23">ALPHACamp</a>
+            
+        
+            
+            <a href="/tags/#story" title="story" rel="19">story</a>
+            
+        
+            
+            <a href="/tags/#other" title="other" rel="21">other</a>
+            
+        
+            
+            <a href="/tags/#Android" title="Android" rel="20">Android</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#javascript" title="javascript" rel="16">javascript</a>
+            
+        
+            
+            <a href="/tags/#travel" title="travel" rel="19">travel</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#corona" title="corona" rel="12">corona</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#backend" title="backend" rel="19">backend</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#japan" title="japan" rel="12">japan</a>
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/huli_logo.jpg" />
+        
+
+        
+            <p>Hi, i&#39;m Huli</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/aszx87410">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2017/08/27/review-the-classical-sort-algorithm-with-javascript/">一起用 JavaScript 來複習經典排序法吧！</a>
+        </li>
+      
+        <li>
+          <a href="/2017/08/27/dom-event-capture-and-propagation/">DOM 的事件傳遞機制：捕獲與冒泡</a>
+        </li>
+      
+        <li>
+          <a href="/2017/08/27/http-cache/">循序漸進理解 HTTP Cache 機制</a>
+        </li>
+      
+        <li>
+          <a href="/2017/08/27/ajax-and-cors/">輕鬆理解 Ajax 與跨來源請求</a>
+        </li>
+      
+        <li>
+          <a href="/2017/08/27/the-javascripts-prototype-chain/">該來理解 JavaScript 的原型鍊了</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+    
+</ul>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

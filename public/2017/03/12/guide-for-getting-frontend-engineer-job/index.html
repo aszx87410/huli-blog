@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          該如何知道就業所需技能？以前端工程師為例 - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2017/03/12/guide-for-getting-frontend-engineer-job/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#frontend" title="frontend">frontend</a>
+                            
+                        </div>
+                        <h1>該如何知道就業所需技能？以前端工程師為例</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2017-03-12
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>我想成為一個前端工程師，現在有在學一些基本的 HTML, CSS，可是我不知道要到什麼程度才能找到工作，該怎麼辦？</p>
+</blockquote>
+<p>這種類似的問題有一大堆人問過我，我想說乾脆就寫成一篇文章，以後有人問同樣問題的時候我就丟這篇給他看，就不用一直重複回答相同的問題了。</p>
+<p>有一種東西你一定看過，就是在徵才說明上面會寫的工作敘述跟需求，前者大概是你進去公司以後會負責一些什麼事情，後者則是這間公司所需要的人才應該要有哪些技能。這個就是很好的切入點，你只要多研究幾份，很快就可以歸納出各個公司幾乎都必備的技能是哪些，你再拿這一個個的關鍵字去查就好了。</p>
+<p>來，我示範給你看！</p>
+<a id="more"></a>
+<p>第一個先來找 ptt Soft_Job 版，我用「徵才」跟「前端」兩個關鍵字下去搜尋，挑了最新的前三篇：</p>
+<h2><span id="第一間">第一間</span></h2>
+<p><a href="https://www.ptt.cc/bbs/Soft_Job/M.1487743978.A.09A.html" target="_blank" rel="external">https://www.ptt.cc/bbs/Soft_Job/M.1487743978.A.09A.html</a></p>
+<p>工作技能需求：</p>
+<ol>
+<li>熟悉 HTML5、CSS3、jQuery、Javascript</li>
+<li>熟悉 Bootstrap 或其它 CSS Framework</li>
+</ol>
+<p>加分項目：</p>
+<ol>
+<li>運用 Ajax 串接第三方 API</li>
+<li>Git 使用經驗</li>
+<li>Wordpress 建置經驗</li>
+<li>Sass / SCSS / Less</li>
+<li>Grunt / Gulp</li>
+<li>AngularJS / Node.js</li>
+</ol>
+<h2><span id="第二間">第二間</span></h2>
+<p><a href="https://www.ptt.cc/bbs/Soft_Job/M.1487297666.A.720.html" target="_blank" rel="external">https://www.ptt.cc/bbs/Soft_Job/M.1487297666.A.720.html</a></p>
+<p>工作技能需求：</p>
+<ol>
+<li>熟悉Javascript/jQuery網站程式開發</li>
+<li>熟悉HTML 5、CSS 3語法</li>
+<li>具團隊合作能力，分工合作完成交付之程式開發及維護</li>
+<li>良好溝通能力，團隊配合度高</li>
+</ol>
+<p>加分項目：</p>
+<ol>
+<li>有React.js,Node.js開發經驗</li>
+<li>有Web遊戲開發經驗</li>
+<li>熟悉cocos2d、Three.js、Phaser、createJS、melonJS、egretJS等任意一款引擎者優先；</li>
+<li>具備物件導向、MVC的軟體開發概念</li>
+<li>版本控管觀念(SVN or Git)</li>
+</ol>
+<h2><span id="第三間">第三間</span></h2>
+<p><a href="https://www.ptt.cc/bbs/Soft_Job/M.1482919984.A.927.html" target="_blank" rel="external">https://www.ptt.cc/bbs/Soft_Job/M.1482919984.A.927.html</a></p>
+<p>工作技能需求：</p>
+<ol>
+<li>需與後端開發人員共同開發 (後端使用PHP)</li>
+<li>至少精通一種Anguar.js、React.js、Vue.js或其他前端框架</li>
+<li>熟悉響應式設計，並有前端優化經驗</li>
+<li>熟悉Git操作</li>
+<li>有良好溝通能力與異於常人的抗壓能力 ^.&lt;</li>
+</ol>
+<p>加分項目：</p>
+<ol>
+<li>具備 SEO 知識</li>
+<li>接觸過Artificial Neural Network, Natural Language Processing, Big Data, FinTech, BOT 機器人</li>
+</ol>
+<p>看了這三篇，你有沒有一些感覺了？就算你今天根本不懂那些英文單字是什麼，你大概也可以歸納出幾個一直見到的關鍵字，就代表這些關鍵字是每一個前端工程師的職缺都需要的。</p>
+<p>如果你還沒感覺，我們從 mit.jobs 再找兩個職缺給大家看看</p>
+<h2><span id="第四間">第四間</span></h2>
+<p><a href="https://mit.jobs/jobs/2071" target="_blank" rel="external">https://mit.jobs/jobs/2071</a></p>
+<p>工作技能需求：</p>
+<ol>
+<li>HTLM/CSS/JAVA Script/ajax前後台資料串接</li>
+</ol>
+<p>加分項目：</p>
+<ol>
+<li>對前端框架Vue Js.有概念/有設計UI,UX概念</li>
+</ol>
+<p>題外話，你應該看到工作技能需求的部分會覺得有點怪怪的<br>
+「JAVA Script」，嗯…是我的話看到這個就把這間公司淘汰掉了</p>
+<h2><span id="第五間">第五間</span></h2>
+<p><a href="https://mit.jobs/jobs/2019" target="_blank" rel="external">https://mit.jobs/jobs/2019</a></p>
+<p>工作技能需求：</p>
+<ol>
+<li>基本使用 Git 能力</li>
+<li>熟悉 HTML5 、CSS3、ES6+ 語法</li>
+<li>使用過 React.js</li>
+<li>Flux/Redux or 任何與React搭配的state management</li>
+<li>SASS or postCSS</li>
+<li>不依賴css framework切版的能力</li>
+<li>Responsive Web Design 網站製作經驗</li>
+<li>jQuery 使用經驗</li>
+</ol>
+<p>加分項目：</p>
+<ol>
+<li>Webpack使用/設定經驗</li>
+<li>熟悉前端測試</li>
+<li>對後端有一定了解，Ruby on Rails尤佳</li>
+<li>瞭解scrum流程</li>
+<li>具備 RESTful API 介接經驗</li>
+</ol>
+<p>如果這樣還不夠，我們再去新創徵人平台 yourator 找兩間</p>
+<h2><span id="第六間">第六間</span></h2>
+<p><a href="https://www.yourator.co/companies/meepShop/jobs/513" target="_blank" rel="external">https://www.yourator.co/companies/meepShop/jobs/513</a></p>
+<p>工作技能需求：</p>
+<ol>
+<li>專精 JavaScript、HTML、CSS。</li>
+<li>熟悉 Mac os 或 Linux 系統尤佳。</li>
+<li>解決跨瀏覽器兼容性問題，客戶端性能方面的考量。</li>
+<li>能呈現出 design 和 UX 的敏感性。</li>
+<li>重視程式品質，不讓 bug 隨意出現。</li>
+</ol>
+<p>加分項目：<br>
+無</p>
+<p>題外話，找 junior 工程師要找「專精」，好像有哪裡怪怪的…</p>
+<h2><span id="第七間">第七間</span></h2>
+<p><a href="https://www.yourator.co/companies/Kyper/jobs/1596" target="_blank" rel="external">https://www.yourator.co/companies/Kyper/jobs/1596</a></p>
+<p>工作技能需求：</p>
+<ol>
+<li>Computer Science相關科系畢業</li>
+<li>想專職走前端開發者</li>
+<li>具備一定前端技術背景者(Javascript/HTML5/CSS),且有自己寫過網站的經驗。</li>
+<li>投遞履歷時請一併附上網站作品集及英文CV</li>
+</ol>
+<p>加分項目：<br>
+無</p>
+<p>題外話，其實看了這麼多徵才文以後，還有一點很不錯的就是你會發現徵才文也有寫得好的跟寫得爛的，寫得好的會盡量把他們所需要的技能、進來以後會負責的工作內容以及加分項目都寫得清清楚楚，讓你知道你該往哪個方向去努力。</p>
+<p>寫得爛的就只會寫一些範疇很大的技能需求，讓你根本不知道他要的是什麼，或者是連技術名詞都拼錯<br>
+怕傷感情，就不放我覺得寫得很爛的了，讓大家看看一篇我心目中的徵才文 No.1</p>
+<h2><span id="第八間徵才文範本">第八間，徵才文範本</span></h2>
+<p><a href="https://www.facebook.com/photo.php?fbid=10206519640549181&amp;set=a.2104140142503.90823.1815507975&amp;type=3&amp;theater" target="_blank" rel="external">https://www.facebook.com/photo.php?fbid=10206519640549181&amp;set=a.2104140142503.90823.1815507975&amp;type=3&amp;theater</a></p>
+<p>工作技能需求：</p>
+<ol>
+<li>具備鍵盤盲打之技能。</li>
+<li>工作環境使用並熟悉 Linux 或 macOS 作業系統。</li>
+<li>熟悉 command line (命令列) 操作。</li>
+<li>對新技術有熱情及渴望，有信心可獨立完成專案。</li>
+<li>良好的邏輯及溝通能力，當責不卸責。</li>
+<li>瞭解 HTML / CSS，懂得快速實現 Mockup / RWD / SPA。</li>
+<li>瞭解 JavaScript / ES6 特性及語法，懂得善用 JavaScript 框架或函式庫 (如 Angular.js / React.js / Vue.JS 等)</li>
+<li>熟悉 Git / GitHub，包括但不限於分支操作、衝突解決及 Pull Requests。</li>
+</ol>
+<p>加分項目：</p>
+<ol>
+<li>英文打字至少每分鐘 30 字，中文打字至少每分鐘 40 字。</li>
+<li>熟悉前端開發流程，懂得程式檢查、精簡化、模組化。</li>
+<li>懂得編寫清晰易懂且容易維護的程式碼。</li>
+<li>熟悉各瀏覽器的特性與限制，懂得跨瀏覽器的解決方案。</li>
+<li>熟悉前端自動部署、測試及除錯。</li>
+<li>熟悉高效前端元件操作與控制，如高效 DOM 元件處理。</li>
+<li>熟悉前端資訊安全設計。</li>
+<li>擁有組織大型專案結構的技巧及經驗。</li>
+</ol>
+<p>但這篇值得推薦的除了把工作技能需求寫的很清楚以外，工作環境、面試流程、薪資範圍都寫得一清二楚，這資訊揭露的程度根本海放其他公司。</p>
+<h2><span id="開始歸納囉">開始歸納囉</span></h2>
+<p>你可以先試試看把上面那八間的工作技能需求跟加分項目歸納一下，看你會歸納出什麼樣的結果。</p>
+<p>這邊有一點要注意的是工作技能需求有時候會跟行業有關，例如上面有個遊戲業的就可能會要求遊戲開發相關經歷，像是這種跟產業有直接相關的都可以先刪掉，我們只要找出「大部份公司都要求」的項目就好。</p>
+<p>下面的列表是這八間的內容全部都合在一起的結果，仔細看，你一定能看出什麼！</p>
+<h3><span id="工作技能需求">工作技能需求</span></h3>
+<ol>
+<li>熟悉 HTML5、CSS3、jQuery、Javascript</li>
+<li>熟悉 Bootstrap 或其它 CSS Framework</li>
+<li>熟悉Javascript/jQuery網站程式開發</li>
+<li>熟悉HTML 5、CSS 3語法</li>
+<li>具團隊合作能力，分工合作完成交付之程式開發及維護</li>
+<li>良好溝通能力，團隊配合度高</li>
+<li>需與後端開發人員共同開發 (後端使用PHP)</li>
+<li>至少精通一種Anguar.js、React.js、Vue.js或其他前端框架</li>
+<li>熟悉響應式設計，並有前端優化經驗</li>
+<li>熟悉Git操作</li>
+<li>有良好溝通能力與異於常人的抗壓能力 ^.&lt;</li>
+<li>HTLM/CSS/JAVA Script/ajax前後台資料串接</li>
+<li>基本使用 Git 能力</li>
+<li>熟悉 HTML5 、CSS3、ES6+ 語法</li>
+<li>使用過 React.js</li>
+<li>Flux/Redux or 任何與React搭配的state management</li>
+<li>SASS or postCSS</li>
+<li>不依賴css framework切版的能力</li>
+<li>Responsive Web Design 網站製作經驗</li>
+<li>jQuery 使用經驗</li>
+<li>專精 JavaScript、HTML、CSS。</li>
+<li>熟悉 Mac os 或 Linux 系統尤佳。</li>
+<li>解決跨瀏覽器兼容性問題，客戶端性能方面的考量。</li>
+<li>能呈現出 design 和 UX 的敏感性。</li>
+<li>重視程式品質，不讓 bug 隨意出現。</li>
+<li>Computer Science相關科系畢業</li>
+<li>想專職走前端開發者</li>
+<li>具備一定前端技術背景者(Javascript/HTML5/CSS),且有自己寫過網站的經驗。</li>
+<li>投遞履歷時請一併附上網站作品集及英文CV</li>
+<li>具備鍵盤盲打之技能。</li>
+<li>工作環境使用並熟悉 Linux 或 macOS 作業系統。</li>
+<li>熟悉 command line (命令列) 操作。</li>
+<li>對新技術有熱情及渴望，有信心可獨立完成專案。</li>
+<li>良好的邏輯及溝通能力，當責不卸責。</li>
+<li>瞭解 HTML / CSS，懂得快速實現 Mockup / RWD / SPA。</li>
+<li>瞭解 JavaScript / ES6 特性及語法，懂得善用 JavaScript 框架或函式庫 (如 Angular.js / React.js / Vue.JS 等)</li>
+<li>熟悉 Git / GitHub，包括但不限於分支操作、衝突解決及 Pull Requests。</li>
+</ol>
+<h3><span id="加分項目">加分項目</span></h3>
+<ol>
+<li>運用 Ajax 串接第三方 API</li>
+<li>Git 使用經驗</li>
+<li>Wordpress 建置經驗</li>
+<li>Sass / SCSS / Less</li>
+<li>Grunt / Gulp</li>
+<li>AngularJS / Node.js</li>
+<li>有React.js,Node.js開發經驗</li>
+<li>有Web遊戲開發經驗</li>
+<li>熟悉cocos2d、Three.js、Phaser、createJS、melonJS、egretJS等任意一款引擎者優先；</li>
+<li>具備物件導向、MVC的軟體開發概念</li>
+<li>版本控管觀念(SVN or Git)</li>
+<li>具備 SEO 知識</li>
+<li>接觸過Artificial Neural Network, Natural Language Processing, Big Data, FinTech, BOT 機器人</li>
+<li>對前端框架Vue Js.有概念/有設計UI,UX概念</li>
+<li>Webpack使用/設定經驗</li>
+<li>熟悉前端測試</li>
+<li>對後端有一定了解，Ruby on Rails尤佳</li>
+<li>瞭解scrum流程</li>
+<li>具備 RESTful API 介接經驗</li>
+<li>英文打字至少每分鐘 30 字，中文打字至少每分鐘 40 字。</li>
+<li>熟悉前端開發流程，懂得程式檢查、精簡化、模組化。</li>
+<li>懂得編寫清晰易懂且容易維護的程式碼。</li>
+<li>熟悉各瀏覽器的特性與限制，懂得跨瀏覽器的解決方案。</li>
+<li>熟悉前端自動部署、測試及除錯。</li>
+<li>熟悉高效前端元件操作與控制，如高效 DOM 元件處理。</li>
+<li>熟悉前端資訊安全設計。</li>
+<li>擁有組織大型專案結構的技巧及經驗。</li>
+</ol>
+<p>當你把那些幾乎只有出現過一次的關鍵字剔除掉以後，大概會長這樣（我把相似的關鍵字排在一起並稍微分類）：</p>
+<h2><span id="工作技能需求">工作技能需求</span></h2>
+<h3><span id="html-css-javascript-jquery">HTML, CSS, JavaScript, jQuery</span></h3>
+<ol>
+<li>熟悉 HTML5、CSS3、jQuery、Javascript</li>
+<li>熟悉HTML 5、CSS 3語法</li>
+<li>熟悉 HTML5 、CSS3、ES6+ 語法</li>
+<li>HTLM/CSS/JAVA Script/ajax前後台資料串接</li>
+<li>熟悉Javascript/jQuery網站程式開發</li>
+<li>專精 JavaScript、HTML、CSS。</li>
+<li>具備一定前端技術背景者(Javascript/HTML5/CSS),且有自己寫過網站的經驗。</li>
+<li>瞭解 HTML / CSS，懂得快速實現 Mockup / RWD / SPA。</li>
+<li>jQuery 使用經驗</li>
+</ol>
+<h3><span id="git">Git</span></h3>
+<ol>
+<li>基本使用 Git 能力</li>
+<li>熟悉Git操作</li>
+<li>熟悉 Git / GitHub，包括但不限於分支操作、衝突解決及 Pull Requests。</li>
+</ol>
+<h3><span id="css-相關">CSS 相關</span></h3>
+<ol start="2">
+<li>熟悉 Bootstrap 或其它 CSS Framework</li>
+<li>SASS or postCSS</li>
+</ol>
+<h3><span id="rwd">RWD</span></h3>
+<ol start="7">
+<li>Responsive Web Design 網站製作經驗</li>
+<li>熟悉響應式設計，並有前端優化經驗</li>
+</ol>
+<h3><span id="javascript-framework">JavaScript Framework</span></h3>
+<ol start="2">
+<li>至少精通一種Anguar.js、React.js、Vue.js或其他前端框架</li>
+<li>使用過 React.js</li>
+<li>瞭解 JavaScript / ES6 特性及語法，懂得善用 JavaScript 框架或函式庫 (如 Angular.js / React.js / Vue.JS 等)</li>
+</ol>
+<h3><span id="熟悉作業系統">熟悉作業系統</span></h3>
+<ol start="2">
+<li>熟悉 Mac os 或 Linux 系統尤佳。</li>
+<li>工作環境使用並熟悉 Linux 或 macOS 作業系統。</li>
+</ol>
+<h3><span id="溝通能力">溝通能力</span></h3>
+<ol start="3">
+<li>具團隊合作能力，分工合作完成交付之程式開發及維護</li>
+<li>良好溝通能力，團隊配合度高</li>
+<li>有良好溝通能力與異於常人的抗壓能力 ^.&lt;</li>
+<li>良好的邏輯及溝通能力，當責不卸責。</li>
+</ol>
+<h2><span id="加分項目">加分項目</span></h2>
+<h3><span id="串接-api">串接 API</span></h3>
+<ol>
+<li>運用 Ajax 串接第三方 API</li>
+<li>具備 RESTful API 介接經驗</li>
+</ol>
+<h3><span id="git">Git</span></h3>
+<ol start="2">
+<li>Git 使用經驗</li>
+<li>版本控管觀念(SVN or Git)</li>
+</ol>
+<h3><span id="javascript-framework">JavaScript Framework</span></h3>
+<ol start="6">
+<li>AngularJS / Node.js</li>
+<li>有React.js,Node.js開發經驗</li>
+</ol>
+<h3><span id="測試">測試</span></h3>
+<ol start="2">
+<li>熟悉前端測試</li>
+<li>熟悉前端自動部署、測試及除錯。</li>
+</ol>
+<p>首先你會發現加分項目跟基本需求有兩項是重複的：Git 跟 JavaScript Framework，像是這種你就可以把它列入比較後期再來點的技能，先把大家都認為「必備」的技能點一點比較實在。但儘管這兩項被一些公司認為是 Nice to have, 還是有很多公司認為是 Must have，所以可以列入必點技能之一。</p>
+<h2><span id="最終統整">最終統整</span></h2>
+<p>你把上面重新再整理一下，按照出現的次數來排序，並且把加分項目刪掉，就會長這樣：</p>
+<ol>
+<li>熟悉 HTML5、CSS3、jQuery、Javascript</li>
+<li>基本使用 Git 能力</li>
+<li>良好溝通能力，團隊配合度高</li>
+<li>懂得善用 JavaScript 框架或函式庫 (如 Angular.js / React.js / Vue.JS 等)</li>
+<li>熟悉響應式設計</li>
+<li>熟悉 Mac os 或 Linux 系統</li>
+</ol>
+<p>好了，你現在可以把上面的清單變成你努力的目標了<br>
+上面那八間的工作職缺告訴你說：只要你有上面這些技能，基本上就符合專業需求囉。</p>
+<h2><span id="關鍵字是有了但怎樣叫做熟悉">關鍵字是有了，但怎樣叫做「熟悉」？</span></h2>
+<p>沒錯，這個問題問得很好<br>
+大家只說要「熟悉 HTML5、CSS3、jQuery、Javascript」，但是怎樣算熟悉？<br>
+我做事的理念之一是：先求有，再求好<br>
+先來試試看不要到熟悉的程度，我們有「基本」的程度就好</p>
+<p>那要怎樣才能有基本的程度？就考驗你 Google 的能力了！<br>
+「html 入門」、「css 入門教學」、「javascript 基礎」…<br>
+這種類似的關鍵字你就可以找到一大堆資料了，你把那些東西看一看學一學，你就有基礎了</p>
+<p>接下來就是從基礎到熟悉了，怎樣算熟悉？如果面試官問你的問題你都答得出來，這夠熟悉了吧！<br>
+沒錯，就是這麼簡單，又是考驗你 Google 能力的時刻<br>
+「html 面試題」、「前端 面試」、「frontend interview」…</p>
+<h2><span id="總結">總結</span></h2>
+<p>今天講的方法可以歸納成四個步驟：</p>
+<ol>
+<li>從一堆徵才文裡面找出必備技能跟加分技能，全部放在兩個列表裡面</li>
+<li>從上述列表裡面找出重複次數特別高的，其他都刪掉</li>
+<li>稍微分類一下，就有一份完美的必備技能清單了</li>
+<li>開始學各項基礎</li>
+<li>網路上找面試題，把自己的該項技能練到「熟悉」</li>
+</ol>
+<p>所以，不要再說什麼不知道要學什麼了<br>
+你只要 Google 一下徵才文，很快就能統整出這個職缺的必備技能</p>
+<p>也不要再說不知道怎樣的程度才能踏入這個行業了<br>
+你 Google 一下面試題，看自己答不答的出來就知道了</p>
+<p>最後，祝大家都能找到自己想要的工作</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/03/27/buy-taobao-from-singapore/" data-toggle="tooltip" data-placement="top" title="[心得] 在新加坡買淘寶">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/03/12/csrf-introduction/" data-toggle="tooltip" data-placement="top" title="讓我們來談談 CSRF">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">第一間</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">第二間</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">第三間</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">第四間</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">第五間</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">第六間</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">第七間</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">第八間，徵才文範本</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">開始歸納囉</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">9.1.</span> <span class="toc-nav-text">工作技能需求</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">9.2.</span> <span class="toc-nav-text">加分項目</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">工作技能需求</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.1.</span> <span class="toc-nav-text">HTML, CSS, JavaScript, jQuery</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.2.</span> <span class="toc-nav-text">Git</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.3.</span> <span class="toc-nav-text">CSS 相關</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.4.</span> <span class="toc-nav-text">RWD</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.5.</span> <span class="toc-nav-text">JavaScript Framework</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.6.</span> <span class="toc-nav-text">熟悉作業系統</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.7.</span> <span class="toc-nav-text">溝通能力</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">加分項目</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.1.</span> <span class="toc-nav-text">串接 API</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.2.</span> <span class="toc-nav-text">Git</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.3.</span> <span class="toc-nav-text">JavaScript Framework</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.4.</span> <span class="toc-nav-text">測試</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">12.</span> <span class="toc-nav-text">最終統整</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.</span> <span class="toc-nav-text">關鍵字是有了，但怎樣叫做「熟悉」？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.</span> <span class="toc-nav-text">總結</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#frontend" title="frontend">frontend</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2017/03/12/guide-for-getting-frontend-engineer-job/";
+    var disqus_url = "https://blog.huli.tw/2017/03/12/guide-for-getting-frontend-engineer-job/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          ALPHACamp Startup Rookies 作業一：市場研究報告 - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2016/06/26/alphacamp-startup-rookies-hw1/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#ALPHACamp" title="ALPHACamp">ALPHACamp</a>
+                            
+                        </div>
+                        <h1>ALPHACamp Startup Rookies 作業一：市場研究報告</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2016-06-26
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>第一次的作業要回答四個問題：</p>
+<ol>
+<li>ALPHA Camp 是否為新創公司？</li>
+<li>試著闡述一下ALPHA Camp 的商業策略為何</li>
+<li>在市面上是否有競爭產業？</li>
+<li>ALPHA Camp 的優勢為何？</li>
+</ol>
+<p>ALPHA camp 提供的交作業後台有點陽春，而且有說繳交作業格式不限，於是我就直接來 blog 寫這篇作業了</p>
+<h1><span id="alpha-camp-是否為新創公司">ALPHA Camp 是否為新創公司？</span></h1>
+<p>是，是新創公司。</p>
+<p>在第一堂 bernard 的課之中，曾經有一段提到 Steve Blank 對新創公司的定義：</p>
+<blockquote>
+<p>Partnership or temporary organisation designed to search for repeatable and scalable business model</p>
+</blockquote>
+<p>要知道 ALPHA camp 創辦的初衷跟理念，可以參考<a href="https://blog.alphacamp.co/2016/03/11/alphacamp-year-in-review/" target="_blank" rel="external">放膽做教育該做的事－ ALPHA Camp 兩週年回顧</a>這篇文章，從這篇可以看出，ALPHA camp 的目的就是：「提供最專業的教育服務，用最有效率的方式幫助人們成為新創公司的即戰力」</p>
+<p>創辦人覺得這是一個值得解決的問題，於是為了驗證這個想法，創辦了 ALPHA camp。</p>
+<p>就這樣過了兩年，學生人數愈來愈多，班級種類也愈來愈多，證明這是一個可以重複的模式，也試著到新加坡以相同的模式（但或許有做一些調整）嘗試看看，看是否能在新加坡也闖出一片天地。</p>
+<p>以 ALPHA camp 的成立目的以及發展歷程來說，符合了 1.<code>organisation</code> 跟 2.<code>designed to search for repeatable and scalable business model</code>，所以我認為可以稱作是新創公司。</p>
+<h1><span id="試著闡述一下alpha-camp-的商業策略為何">試著闡述一下ALPHA Camp 的商業策略為何</span></h1>
+<p>我認為商業模式圖很適合回答這個問題<br>
+但其實不用畫圖，也可以完成商業模式圖，因為商業模式圖其實就是九個問題</p>
+<h2><span id="第一個問題alpha-camp-可以提供什麼價值">第一個問題：ALPHA camp 可以提供什麼價值？</span></h2>
+<p>官網上面的 slogan 是：「培育全球 Startup 渴求的人才」，這就是 ALPHA camp 的核心價值<br>
+那至於實際上提供了什麼「產品跟服務」，可以參考以下條列：</p>
+<ol>
+<li>專業技能培養（網站開發、程式設計、UI/UX、產品設計等等）</li>
+<li>新創公司相關課程（讓學員對新創公司有一定的瞭解程度）</li>
+<li>專案實戰開發（每屆都會有 demo day，展示自己小組的成果）</li>
+<li>新創公司媒合</li>
+<li>履歷修改指導</li>
+<li>面試教學</li>
+</ol>
+<h2><span id="第二個問題那這些服務要提供給誰誰是-alpha-camp-的-ta對誰有價值">第二個問題：那這些服務要提供給誰？誰是 ALPHA camp 的 TA？對誰有價值？</span></h2>
+<ol>
+<li>對新創公司有興趣的人</li>
+<li>對網站、iOS、網路行銷、產品設計有興趣的人</li>
+</ol>
+<h2><span id="第三個問題要透過什麼方式才能把價值傳遞給顧客">第三個問題：要透過什麼方式，才能把價值傳遞給顧客？</span></h2>
+<p>開設課程<br>
+ALPHA camp 的主力課程是：十週新創事業實戰營，包括</p>
+<ol>
+<li>網站開發工程師實戰營</li>
+<li>iOS APP 開發實戰營</li>
+<li>網路行銷與流量成長實戰營</li>
+<li>產品 UI/UX 設計實戰營</li>
+</ol>
+<p>藉由開設實體課程，讓這些顧客成為「全球 Startup 渴求的人才」</p>
+<h2><span id="第四個問題怎麼培養跟顧客之間的關係讓顧客不是消費一次之後就離開">第四個問題：怎麼培養跟顧客之間的關係？讓顧客不是消費一次之後就離開？</span></h2>
+<p>校友專屬資源跟部落格</p>
+<p>ALPHA camp 會舉辦校友限定的講座、聚會等等，讓不同屆的學員能夠聚在一起<br>
+那又因為會來的學員大都符合「對新創公司有興趣」這個特色，可以聊一些對新創的感想<br>
+或者是自己創業的歷程，或是直接在學弟妹之中徵才等等的</p>
+<p>除此之外，ALPHA camp 也經營自己的部落格，寫跟新創產業有關的文章<br>
+透過這些文章，可以吸引到對新創產業有興趣的人<br>
+若是文章寫的好，也可以傳達出「ALPHA camp 在新創產業是具有專業的」這個形象</p>
+<h2><span id="第五個問題收入從哪裡來">第五個問題：收入從哪裡來？</span></h2>
+<p>最主要的收入一定是學員上課時繳的學費<br>
+那有沒有除了學費以外的收入呢？可能有，也可能沒有，我只能猜測。</p>
+<p>像是 ALPHA camp 會提供的媒合服務，不知道之中會不會抽佣金？<br>
+例如說媒合成功一個人就給多少錢之類的</p>
+<h2><span id="第六個問題有哪些資源是重要的-關鍵的若是沒有就很難把這間公司做起來">第六個問題：有哪些資源是重要的、關鍵的，若是沒有就很難把這間公司做起來</span></h2>
+<ol>
+<li>新創企業的人脈，如果沒有這些人脈，就找不到講師、找不到願意配合的公司</li>
+<li>新創企業的經驗，假如創辦人今天沒有相關經驗，要怎麼讓學員相信你可以培養出「全球 Startup 渴求的人才」</li>
+<li>教室，沒有教室就沒有實體課程</li>
+</ol>
+<h2><span id="第七個問題需要做哪些重要的事情才能發揮你的價值">第七個問題：需要做哪些重要的事情，才能發揮你的價值？</span></h2>
+<ol>
+<li>推廣課程，招收更多學生</li>
+<li>設計課程，設計出能夠讓學員成為「全球 Startup 渴求的人才」的課程</li>
+<li>學員管理，追蹤學員學習情況並改善課程</li>
+</ol>
+<h2><span id="第八個問題有哪些重要的夥伴沒有這些夥伴就很難完成這個商業模式">第八個問題：有哪些重要的夥伴？沒有這些夥伴就很難完成這個商業模式？</span></h2>
+<ol>
+<li>專業講師</li>
+<li>新創公司</li>
+</ol>
+<h2><span id="第九個問題成本有哪些">第九個問題：成本有哪些？</span></h2>
+<ol>
+<li>教室租金</li>
+<li>人事費用</li>
+<li>講師費用</li>
+<li>廣告費用</li>
+</ol>
+<p>回答完這九個問題以後，可以來總結一下 ALPHA camp 的商業策略，我想應該就是：</p>
+<blockquote>
+<p>提供與新創產業相關的資源與專業課程，讓學員們能夠成為 Startup 想要的人才。也透過校友資源形成生態圈，讓學員結業之後仍然待在圈子裡。並且與新創公司合作，提供結業後的就業媒合服務，讓學員可以學到專業技能、新創相關知識，並且找到工作。</p>
+</blockquote>
+<h1><span id="在市面上是否有競爭產業">在市面上是否有競爭產業？</span></h1>
+<p>廣義上來說，只要提供類似課程的，都可以稱作是競爭對手<br>
+像是：</p>
+<ol>
+<li><a href="http://www.bplan.com.tw/chunfeng/front/bin/home.phtml" target="_blank" rel="external">創新未來學校</a>：提供企業、專案管理、行銷課程</li>
+<li><a href="https://www.uxabc.net/" target="_blank" rel="external">uxabc</a>：提供 UI/UX 相關課程</li>
+<li><a href="http://www.growthschool.com/" target="_blank" rel="external">Growth School</a>：提供 Ruby on Rails 與 Growth Hack 課程</li>
+<li><a href="http://www.tibame.com/q?pg=home_welcome&amp;cp=20000" target="_blank" rel="external">TiBaMe</a>：提供程式、行銷類型的課程</li>
+<li><a href="http://www.iiiedu.org.tw/taipei/" target="_blank" rel="external">資策會</a>：提供程式、UI/UX 課程</li>
+<li>各家電腦補習班</li>
+</ol>
+<p>但以上這幾個其實只有提供「課程」，不像 ALPHA camp 還有提供其他東西（下一題會講）<br>
+放在壓軸的這個競爭對手是：<a href="http://appworks.tw/appworks-school-ios-class-2/" target="_blank" rel="external">AppWorks School</a></p>
+<p>AppWorks 是台灣最大的新創育成機構，近期自己跳下來做人才培育<br>
+當初這個消息剛出來時，還引發了一點小風波，像是<br>
+<a href="http://tesa.today/article/780" target="_blank" rel="external">JAMIE 先生，請做您擅長的事就好，矽谷不是一家公司撐起來的（上）</a><br>
+<a href="http://www.inside.com.tw/2016/03/17/httpwww-inside-com-tw20151210appworks-alpha-camp-engineer-human-capacity-building" target="_blank" rel="external">自己的人才自己教！AppWorks School 新創教育該不該向學員收費？</a></p>
+<p>比起以上那些，AppWorks School 與 ALPHA camp 的性質相近許多，看看 AppWorks School 的介紹就知道了</p>
+<blockquote>
+<p>AppWorks School 則專注於培養網路產業所需的一流「i 人才」，學習開發技術、大小型專案管理實務等技能。</p>
+</blockquote>
+<p>雖然跟「培育全球 Startup 渴求的人才」有點些微差異，但其實是大同小異的<br>
+像是與新創產業深度合作、小班教學、專案實戰等等</p>
+<p>而且最重要的一點：AppWorks School 目前是免費的<br>
+但也因為這個計畫剛起步，一次招收 20 個學生，在目前對 ALPHA camp 還沒有構成什麼太大的威脅<br>
+但以後呢？就說不定了</p>
+<h1><span id="alpha-camp-的優勢為何">ALPHA Camp 的優勢為何？</span></h1>
+<p>我認為 ALPHA camp 的優勢「絕對不在」專業課程，因為專業課程與其他競爭對手可以教的都差不多<br>
+不就是 Ruby on Rails 網站開發，iOS 手機程式開發等等嗎？</p>
+<p>也不會是「工作媒合」，因為這個其他競爭對手也有了<br>
+只要是以就業為導向的課程通常都會有這個服務</p>
+<p>ALPHA camp 的優勢在於以下幾點：</p>
+<h2><span id="專案實作">專案實作</span></h2>
+<p>就如同資工系的課都會有 final project 一樣，ALPHA camp 也有，並且有 demo day 讓你能夠展示作品<br>
+ALPHA camp 演進到現在有四個不同領域的班級，正好是做一個專案需要的幾種人才<br>
+大家湊在一起，就可以做一個產品、一個網站、一個 iOS App，跟一個小型的新創團隊其實沒兩樣<br>
+從這過程中，可以學習到如何開發一個產品，如何跟其他領域的人合作，也可以學到其他領域的一些東西<br>
+我認為是個很不錯的經歷</p>
+<p>其他競爭對手的課程都比較單一，沒有像 ALPHA camp 這麼多元<br>
+他們當然也有期末專案實作，但沒辦法組成一個完整的小團隊一起做這件事</p>
+<h2><span id="校友資源">校友資源</span></h2>
+<p>有些競爭對手的課程就是標榜著：你來學專業知識，結業後幫你媒合工作<br>
+結業了，找到工作了，然後離開了，再也不回來了</p>
+<p>理想的情況其實就跟高中社團一樣，會一屆屆傳承下去<br>
+會看到大你六七屆的學長回來社辦聊天，大你兩三屆的學姐會開社課教你東西<br>
+這些學長姐是很寶貴的資源</p>
+<p>ALPHA camp 也有想到這點，而且滿在意這件事情。所以會舉辦一些校友限定的活動<br>
+許多校友之後出去創業，要徵人也是第一個想到 ALPHA camp<br>
+因為他上過課，知道這邊的程度，對這邊的環境最熟悉</p>
+<p>在幾個競爭對手之中，我認為 ALPHA camp 的校友資源運用的最好</p>
+<p>節錄一段官網上的說明：</p>
+<blockquote>
+<p>ALPHA Camp 開辦以來，畢業校友已遍佈超過40間新創公司，在電商、獵頭、媒體、軟體開發或是創投等領域，都有我們校友的蹤跡。實戰營學員畢業後，將享有各式校友服務（如 Office Hour 與合作企業職缺推薦），我們也會不定期舉辦各式 Networking 活動，串連各屆校友人脈資源。ALPHA Camp 矢志成為畢業校友最堅實的職涯夥伴。</p>
+</blockquote>
+<h2><span id="新創思維">新創思維</span></h2>
+<p>有許多競爭對手只提供「專業課程」這一項<br>
+但 ALPHA camp 除了專業技能，還會訓練許多能力</p>
+<p>像是自學能力<br>
+儘管 ALPHA camp 是 full-time 的課程，但並不表示整天都在上課<br>
+事實上，有很長一段時間是讓你自學、寫作業用的<br>
+這麼大段時間，你當然也可以什麼都不做；但是你不做就跟不上<br>
+藉由這樣增進自學能力，學會如何「靠自己」解決問題<br>
+（有問題解決不了的時候當然還是可以問助教/講師）</p>
+<p>或是許多程式以外的能力<br>
+舉 <a href="https://www.alphacamp.co/peter-review/" target="_blank" rel="external">Web Development 實戰營學員心得</a> 當做例子</p>
+<blockquote>
+<p>在這邊我們學的不只是技術，而是「如何從無到有打造一個產品」的 Mindset。</p>
+</blockquote>
+<blockquote>
+<p>ALPHA Camp 也會安排很多 Core Lesson（三個班的同學都要上的課程），教的內容都蠻實用的，譬如 Pitch 、募資、Networking 技巧的等等，這是 ALPHA Camp 跟一般程式課程很不一樣的地方。</p>
+</blockquote>
+<h2><span id="總結">總結</span></h2>
+<p>上面學員心得那段講的很好<br>
+ALPHA Camp 的優勢就在於，其他競爭對手只提供「專業技能」，像是寫出一個網站、寫一個 App<br>
+但它提供的是：「如何從無到有打造一個產品」的 Mindset<br>
+除了讓你寫一個網站，還要讓你知道你為什麼要做這個網站？這個網站要給誰用？你要怎麼跟別人介紹這個網站？</p>
+<p>這些就是 ALPHA Camp 與其他競爭對手相較之下，勝出的地方</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/06/30/alphacamp-startup-rookies-4/" data-toggle="tooltip" data-placement="top" title="[心得] ALPHACamp Startup Rookies #4">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/06/26/alphacamp-startup-rookies-3/" data-toggle="tooltip" data-placement="top" title="[心得] ALPHACamp Startup Rookies #3">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">ALPHA Camp 是否為新創公司？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">試著闡述一下ALPHA Camp 的商業策略為何</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">第一個問題：ALPHA camp 可以提供什麼價值？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">第二個問題：那這些服務要提供給誰？誰是 ALPHA camp 的 TA？對誰有價值？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">第三個問題：要透過什麼方式，才能把價值傳遞給顧客？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">第四個問題：怎麼培養跟顧客之間的關係？讓顧客不是消費一次之後就離開？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">第五個問題：收入從哪裡來？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">第六個問題：有哪些資源是重要的、關鍵的，若是沒有就很難把這間公司做起來</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">第七個問題：需要做哪些重要的事情，才能發揮你的價值？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text">第八個問題：有哪些重要的夥伴？沒有這些夥伴就很難完成這個商業模式？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.9.</span> <span class="toc-nav-text">第九個問題：成本有哪些？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">在市面上是否有競爭產業？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">ALPHA Camp 的優勢為何？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">專案實作</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">校友資源</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">新創思維</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">總結</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#ALPHACamp" title="ALPHACamp">ALPHACamp</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2016/06/26/alphacamp-startup-rookies-hw1/";
+    var disqus_url = "https://blog.huli.tw/2016/06/26/alphacamp-startup-rookies-hw1/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

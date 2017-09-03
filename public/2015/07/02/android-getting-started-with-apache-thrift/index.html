@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          [Android] apache thrift 入門與android上的實作 - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2015/07/02/android-getting-started-with-apache-thrift/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                            
+                        </div>
+                        <h1>[Android] apache thrift 入門與android上的實作</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2015-07-02
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>最近想做IM相關的service，上網找了一些文件<br>
+發現一套由facebook開源，LINE有在用的RPC的framework，也就是今天要介紹的主角<br>
+<a href="https://thrift.apache.org/" target="_blank" rel="external">Apache Thrift</a></p>
+<p>先來談談有這套框架跟沒這套框架的差異在哪邊<br>
+假設今天我要寫一套IM，client跟server之間透過http以json格式溝通<br>
+例如說client發一個request到<code>api/getFriends</code>，server就回覆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	list: [</div><div class="line">  	....</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這樣做會碰到幾個問題</p>
+<ol>
+<li>透過http傳輸，你根本不需要<code>header</code>裡面的資訊，但又不可能捨棄</li>
+<li>如果哪天server要用別的語言改寫，怎麼辦？<br>
+如果有寫好document，就是直接照著之前的document重新實做一份<br>
+沒有的話就只能看著以前的code，一步步改寫成新的語言</li>
+</ol>
+<p>這個時候就來介紹Thrift可以怎麼解決這些問題了<br>
+基本上這就是一套RPC的framework</p>
+<p>你必須用thrift規範的格式寫好一份檔案，我直接把它看成api的document，例如說</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">service Calculator extends shared.SharedService &#123;</div><div class="line"></div><div class="line">  void ping(),</div><div class="line">  i32 add(1:i32 num1, 2:i32 num2)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就說你有一個<code>Calculator</code>的service，有兩個function，<code>ping</code>跟<code>add</code><br>
+<code>i32</code>其實就是32 bits的int</p>
+<p>有了這份以後，可以用thrift把它compile成串接API所需要的檔案<br>
+<code>thrift --gen &lt;language&gt; &lt;Thrift filename&gt;</code><br>
+thrift的強大之處就在這裡，你要用java來實作server，就編譯成java的檔案<br>
+你要用python寫client，你就編譯出.py的檔案</p>
+<p>先以java做server為例，compile完以後就會有一份.class檔案<br>
+import進去以後就可以<code>implements Calculator.Iface</code>，實作你剛剛定義的那兩個function</p>
+<p>client端的操作也很簡單，也是把剛剛編譯出來的檔案import進去<br>
+跟server建立連線以後就可以直接呼叫了</p>
+<p>再來就研究一下怎麼在android上面實作出client<br>
+一開始我是在gradle上面直接直接 <code>compile 'org.apache.thrift:libthrift:0.9.1'</code><br>
+後來發現這樣子會出現錯誤，因為裡面用到的http連接的class跟android本身的會衝突<br>
+所以不能直接這樣引入thrift<br>
+解法附在最底下的ref裡面，你要自己改code然後編譯出一個thrift的jar檔放入</p>
+<p>但網路資源豐富，<a href="https://github.com/briananderson1222/android-thrift-tutorial" target="_blank" rel="external">android-thrift-tutorial</a>這個repo底下就有這個jar檔，所以我就直接下載下來之後<code>compile files('libs/libthrift-0.9.1.jar')</code></p>
+<p>除此之外我們還需要兩個thrift會用到的library</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compile &apos;org.slf4j:slf4j-api:1.5.8&apos;</div><div class="line">compile &apos;org.slf4j:slf4j-log4j12:1.5.8&apos;</div></pre></td></tr></table></figure>
+<p>補充說明：<br>
+android會一直說找不到<code>javax.annotation</code><br>
+可參考 <a href="http://stackoverflow.com/questions/27217524/thrift-the-import-javax-annotation-cannot-be-resolved" target="_blank" rel="external">Thrift: the import javax.annotation cannot be resolved</a><br>
+加入一個jar檔之後即可</p>
+<p>加入這三行以後試著執行一下，應該就可以成功開啟了</p>
+<p>在這邊我所定義的thrift檔是一個<code>getMessage</code>的function</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">service Message &#123;</div><div class="line">	string getMessage(1:string username)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>android端因為是牽扯到網路連線，所以必須放在asynctask裡面</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ThriftTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">String</span>, <span class="title">Integer</span>, <span class="title">String</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> String <span class="title">doInBackground</span><span class="params">(String... str)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            TTransport transport;</div><div class="line"></div><div class="line">            transport = <span class="keyword">new</span> TSocket(<span class="string">"127.0.0.1"</span>, <span class="number">9090</span>);</div><div class="line">            transport.open();</div><div class="line"></div><div class="line">            TProtocol protocol = <span class="keyword">new</span> TBinaryProtocol(transport);</div><div class="line">            Message.Client client = <span class="keyword">new</span> Message.Client(protocol);</div><div class="line"></div><div class="line">            String ret = client.getMessage(<span class="string">"huli"</span>);</div><div class="line">            transport.close();</div><div class="line"></div><div class="line">            <span class="keyword">return</span> ret;</div><div class="line">        &#125; <span class="keyword">catch</span> (TException x) &#123;</div><div class="line">            x.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onProgressUpdate</span><span class="params">(Integer... progress)</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(String result)</span> </span>&#123;</div><div class="line">        Log.d(<span class="string">"APP"</span>, <span class="string">"thrift"</span>);</div><div class="line">        Log.d(<span class="string">"APP"</span>, result);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>Message.Client</code>的<code>Message</code>就是thrift所產生的.java檔案<br>
+儘管我只定義了一個function，但產生的code足足有兩千多行<br>
+可見thrift背後幫你把一大堆事情都處理掉了</p>
+<p>接著呼叫<code>new ThriftTask().execute();</code><br>
+就可以在logcat看到api所傳來的結果</p>
+<p>以我初步試驗的結果，覺得thrift還不錯，假設哪天要換server或是在別的client(web、desktop)也能迅速切換<br>
+不用再從頭開始打造</p>
+<p>google有一套<code>protobuf</code>也跟這個類似，只是支援的語言好像比較少</p>
+<p>thrift的中文討論非常少，如果之後有進一步使用或碰到什麼問題，再上來跟大家分享</p>
+<p>Evenote也在用這套 <a href="https://blog.evernote.com/tech/2011/05/26/evernote-and-thrift/" target="_blank" rel="external">So API Together: Evernote and Thrift</a><br>
+裡面提到facebook後來自己又open source改進的版本 <a href="https://code.facebook.com/posts/1468950976659943/under-the-hood-building-and-open-sourcing-fbthrift/" target="_blank" rel="external">Under the Hood: Building and open-sourcing fbthrift</a></p>
+<p>evenote有把自己thrift格式開源出來，要規劃API可以參考看看<br>
+<a href="https://github.com/evernote/evernote-thrift/tree/master/src" target="_blank" rel="external">evernote-thrift</a><br>
+line的則是有人破解出來XDD<br>
+<a href="http://altrepo.eu/git/purple-line/blob/master/libpurple/line.thrift" target="_blank" rel="external">purple-line</a></p>
+<p>ref:<br>
+<a href="http://gongstring.iteye.com/blog/481555" target="_blank" rel="external">关于解决 java.lang.NoClassDefFoundError: org/slf4j/impl/StaticLoggerBinder 的解决方法</a><br>
+<a href="http://mvnrepository.com/artifact/org.apache.thrift/libthrift/0.9.2" target="_blank" rel="external">Apache Thrift » 0.9.2</a><br>
+<a href="http://grokbase.com/t/thrift/commits/12cpyd071g/git-commit-thrift-1641-thrift-0-8-not-compatible-with-android-httpclient-patch-darin-tay" target="_blank" rel="external"> Thrift 0.8 not compatible with Android HttpClient </a><br>
+<a href="http://stackoverflow.com/questions/19141177/thrift-client-on-android" target="_blank" rel="external">Thrift client on Android</a><br>
+<a href="https://github.com/briananderson1222/android-thrift-tutorial" target="_blank" rel="external">android-thrift-tutorial</a><br>
+<a href="http://thrift-tutorial.readthedocs.org/en/latest/usage-example.html#java-multiplication-client" target="_blank" rel="external">Thrift by Example</a><br>
+<a href="https://github.com/LostInBrittany/Apache-Thrift-Bootcamp" target="_blank" rel="external">Apache-Thrift-Bootcamp</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2015/07/03/android-java-method-names-for-reflection-call/" data-toggle="tooltip" data-placement="top" title="[Android] java reflection - 用方法名稱呼叫">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2015/07/01/nodejs-long-polling-and-notification/" data-toggle="tooltip" data-placement="top" title="[Node.js] long polling and notification">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="nav">none</ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2015/07/02/android-getting-started-with-apache-thrift/";
+    var disqus_url = "https://blog.huli.tw/2015/07/02/android-getting-started-with-apache-thrift/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

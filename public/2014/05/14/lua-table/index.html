@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          [Lua] Table使用手冊 - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2014/05/14/lua-table/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#lua" title="lua">lua</a>
+                            
+                        </div>
+                        <h1>[Lua] Table使用手冊</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2014-05-14
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>在lua裡面有個很重要的東西叫做table，是個非常好用的東西<br>
+有多好用呢？<br>
+這篇就來介紹一下一些table的用法</p>
+<a id="more"></a>
+<p>第一，它可以當做陣列來用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">17</span>,<span class="number">19</span>&#125;</div><div class="line"></div><div class="line"><span class="built_in">print</span>(t[<span class="number">3</span>]) <span class="comment">--5</span></div><div class="line"></div><div class="line"><span class="comment">--印出所有元素</span></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span>,#t <span class="keyword">do</span></div><div class="line">	<span class="built_in">print</span>(t[i]..<span class="string">" "</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>要注意的是lua的第一個index是1而不像某些程式語言（java、C)是0<br>
+而<code>#table_name</code>是取得陣列長度的意思</p>
+<p>如果你想要一個二維陣列，那也很方便</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;</div><div class="line">	&#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;,</div><div class="line">  &#123;<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>&#125;,</div><div class="line">  &#123;<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">print</span>(t[<span class="number">2</span>][<span class="number">2</span>]) <span class="comment">--2</span></div><div class="line"><span class="built_in">print</span>(t[<span class="number">3</span>][<span class="number">1</span>]) <span class="comment">--3</span></div></pre></td></tr></table></figure>
+<p>不像C/C++必須先定義好陣列長度，lua的table長度是可以隨時變動的<br>
+要加入一個元素你有幾種方法可以用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;&#125;</div><div class="line">t[<span class="number">1</span>]=<span class="number">2</span></div><div class="line">t[#t+<span class="number">1</span>]=<span class="number">3</span></div><div class="line"><span class="built_in">table</span>.<span class="built_in">insert</span>(t,<span class="number">4</span>)</div><div class="line"><span class="comment">--t = &#123;2,3,4&#125;</span></div></pre></td></tr></table></figure>
+<p><code>table.insert</code>還可以指定要從table的哪個位置插入<br>
+例如說<code>table.insert(t,1,4)</code>就會在table的開頭插入4這個元素<br>
+原本在index 1的元素則會被推到index 2，往後的元素也都以此類推</p>
+<p>雖然你可以把table當做純粹的陣列使用，但是table能做的事情多更多！<br>
+例如說，他可以當做C++裡面的map來使用，也就是使用字串當做索引值</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;</div><div class="line">	[<span class="string">"a"</span>] = <span class="string">"apple"</span>,</div><div class="line">  [<span class="string">"b"</span>] = <span class="string">"baby"</span>,</div><div class="line">  [<span class="string">"c"</span>] = <span class="string">"cool"</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">print</span>(t[<span class="string">"a"</span>]) <span class="comment">--apple</span></div></pre></td></tr></table></figure>
+<p>除了可以這樣子用以外，你也可以換一種表示方法</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;</div><div class="line">	a = <span class="string">"apple"</span>,</div><div class="line">	b = <span class="string">"baby"</span>,</div><div class="line">	c = <span class="string">"cool"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">print</span>(t[<span class="string">"a"</span>]) <span class="comment">--apple</span></div></pre></td></tr></table></figure>
+<p>除了使用<code>t[&quot;a&quot;]以外</code>，你還可以用<code>t.a</code>來達成同樣的目的<br>
+像是</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> peter = &#123;</div><div class="line">	name = <span class="string">"peter"</span>,</div><div class="line">	height = <span class="number">180</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">print</span>(peter.height) <span class="comment">--180</span></div></pre></td></tr></table></figure>
+<p>也可以嘗試更複雜的使用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> family = &#123;</div><div class="line">	sister=&#123;</div><div class="line">		name=<span class="string">"Lisa"</span>	</div><div class="line">	&#125;,</div><div class="line">	father=&#123;</div><div class="line">		name=<span class="string">"nick"</span>	</div><div class="line">	&#125;,</div><div class="line">	mother=&#123;</div><div class="line">		name=<span class="string">"Elsa"</span></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">print</span>(family.sister.name) <span class="comment">--Lisa</span></div><div class="line"><span class="built_in">print</span>(family[<span class="string">"father"</span>][<span class="string">"name"</span>]) <span class="comment">-- nick</span></div></pre></td></tr></table></figure>
+<p>前面有講過如何遍歷一個陣列，而如果要遍歷像是這樣的table也很簡單</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> family = &#123;</div><div class="line">	sister=&#123;</div><div class="line">		name=<span class="string">"Lisa"</span>	</div><div class="line">	&#125;,</div><div class="line">	father=&#123;</div><div class="line">		name=<span class="string">"nick"</span>	</div><div class="line">	&#125;,</div><div class="line">	mother=&#123;</div><div class="line">		name=<span class="string">"Elsa"</span></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> <span class="built_in">pairs</span>(family) <span class="keyword">do</span></div><div class="line">	<span class="built_in">print</span>(key,value.name) </div><div class="line">	<span class="comment">--sister	Lisa</span></div><div class="line">	<span class="comment">--mother	Elsa</span></div><div class="line">    <span class="comment">--father	nick</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>key就是table的索引值，而value就是那個索引值裡面的東西<br>
+例如說上面的例子，取代的value就會是<code>{name=..}</code>這個東西，所以要用<code>value.name</code>把名字取出來</p>
+<p>而<code>pairs</code>是lua提供的一個函式，除了<code>pairs</code>以外還有一個很相似的<code>ipairs</code></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;</div><div class="line">	<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> <span class="built_in">ipairs</span>(t) <span class="keyword">do</span></div><div class="line">	<span class="built_in">print</span>(key,value) </div><div class="line">  <span class="comment">-- 1 10</span></div><div class="line">  <span class="comment">-- 2 20</span></div><div class="line">  <span class="comment">-- 3 30</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p><code>ipairs</code>跟<code>pairs</code>的差異，看幾個例子就知道了</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;</div><div class="line">	a=<span class="number">100</span>,<span class="number">10</span>,<span class="number">20</span>,[<span class="number">5</span>]=<span class="number">30</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> <span class="built_in">ipairs</span>(t) <span class="keyword">do</span></div><div class="line">	<span class="built_in">print</span>(key,value) </div><div class="line">	<span class="comment">--1 10</span></div><div class="line">	<span class="comment">--2 20</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在上面這個範例中，<code>t[a]=100</code>,<code>t[1]=10</code>,<code>t[2]=20</code>,<code>t[5]=30</code><br>
+<code>ipairs</code>會從index為1開始取，發現有<code>t[1]</code>所以繼續執行，發現有<code>t[2]</code>所以也繼續<br>
+但是當取到<code>t[3]</code>時發現沒有這個東西，於是就跳出了<br>
+所以可以知道<code>ipairs</code>會「順序性」的取出index為「數字」的值<br>
+而一旦中間斷掉了就不會再繼續（以上面的例子來說，沒有t[3]跟t[4]）</p>
+<p>那<code>pairs</code>呢？</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;</div><div class="line">	a=<span class="number">100</span>,<span class="number">10</span>,<span class="number">20</span>,[<span class="number">5</span>]=<span class="number">30</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> <span class="built_in">pairs</span>(t) <span class="keyword">do</span></div><div class="line">	<span class="built_in">print</span>(key,value) </div><div class="line">	<span class="comment">--1 10</span></div><div class="line">	<span class="comment">--2 20</span></div><div class="line">	<span class="comment">--a 100</span></div><div class="line">	<span class="comment">--5 30</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p><code>pairs</code>會把table裡面的每一組資料都取出來<br>
+這就是<code>pairs</code>跟<code>ipairs</code>的差異</p>
+<p>接著要介紹幾個lua提供的好用的table方法<br>
+前面已經有介紹過<code>table.insert</code>了<br>
+還有相似的<code>table.remove</code></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t=&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>&#125;</div><div class="line"><span class="built_in">table</span>.<span class="built_in">remove</span>(t,<span class="number">3</span>)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(t) <span class="keyword">do</span></div><div class="line">	<span class="built_in">print</span>(i,v)</div><div class="line">	<span class="comment">--1 1</span></div><div class="line">	<span class="comment">--2 3</span></div><div class="line">	<span class="comment">--3 7</span></div><div class="line">	<span class="comment">--4 9</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p><code>table.remove(t,3)</code>的3代表的是index為3的元素，所以會把index為3的&quot;5&quot;這個元素刪除，後面的則會遞補上來</p>
+<p>接下來還有<code>table.concat</code>，功能就跟javascript裡面的<code>join</code>差不多，就是用某個指定的字串把陣列串接起來</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t=&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>&#125;</div><div class="line"></div><div class="line"><span class="built_in">print</span>(<span class="built_in">table</span>.<span class="built_in">concat</span>(t,<span class="string">"!"</span>))</div><div class="line"><span class="comment">--1!3!5!7!9</span></div></pre></td></tr></table></figure>
+<p>最後還有很方便的<code>table.sort</code></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">4</span>&#125;</div><div class="line"><span class="built_in">table</span>.<span class="built_in">sort</span>(t)</div><div class="line"><span class="built_in">print</span>(<span class="built_in">table</span>.<span class="built_in">concat</span>( t,<span class="string">","</span>)) </div><div class="line"><span class="comment">-- 1,2,3,4 5</span></div></pre></td></tr></table></figure>
+<p>而你也可以使用<code>table.sort(t,compare_function)</code>傳入自己定義的函式，就會照著你的定義去排序<br>
+例如說你想要由大排到小</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">4</span>&#125;</div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">compare</span><span class="params">(a,b)</span></span></div><div class="line">	<span class="keyword">return</span> a&gt;b</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="built_in">table</span>.<span class="built_in">sort</span>(t,compare)</div><div class="line"><span class="built_in">print</span>(<span class="built_in">table</span>.<span class="built_in">concat</span>( t,<span class="string">","</span>)) </div><div class="line"><span class="comment">-- 5,4,3,2,1</span></div></pre></td></tr></table></figure>
+<p>或是你想讓偶數排在前面，如果一樣是偶數的話由小到大排</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">4</span>&#125;</div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">compare</span><span class="params">(a,b)</span></span></div><div class="line">	<span class="keyword">if</span>(a%<span class="number">2</span>==b%<span class="number">2</span>) <span class="keyword">then</span></div><div class="line">		<span class="keyword">return</span> a&lt;b</div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">return</span> a%<span class="number">2</span>&lt;b%<span class="number">2</span></div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="built_in">table</span>.<span class="built_in">sort</span>(t,compare)</div><div class="line"><span class="built_in">print</span>(<span class="built_in">table</span>.<span class="built_in">concat</span>( t,<span class="string">","</span>)) </div><div class="line"><span class="comment">-- 2,4,1,3,5</span></div></pre></td></tr></table></figure>
+<p>最後以一個實際上會用到table的例子做為這篇文章的總結<br>
+在Corona SDK中，我想建立一些按鈕，而我一開始是這樣寫的</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> start_button = widget.newButton&#123;</div><div class="line">    left = <span class="number">100</span>,top = <span class="number">200</span>,id = <span class="string">"start"</span>,</div><div class="line">    label = <span class="string">"start"</span>,onEvent = handleButtonEvent</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">local</span> game_button = widget.newButton&#123;</div><div class="line">    left = <span class="number">300</span>,top = <span class="number">400</span>,id = <span class="string">"game"</span>,</div><div class="line">    label = <span class="string">"game"</span>,onEvent = handleButtonEvent</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">local</span> end_button = widget.newButton&#123;</div><div class="line">    left = <span class="number">500</span>,top = <span class="number">400</span>,id = <span class="string">"end"</span>,</div><div class="line">    label = <span class="string">"end"</span>,onEvent = handleButtonEvent</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">local</span> pause_button = widget.newButton&#123;</div><div class="line">    left = <span class="number">600</span>,top = <span class="number">400</span>,id = <span class="string">"pause"</span>,</div><div class="line">    label = <span class="string">"pause"</span>,onEvent = handleButtonEvent</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一共有四個按鈕，但是這樣寫十分冗長，而且如果我要新增/修改都很不方便<br>
+於是我就改用table來做這件事</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> button_data = &#123;</div><div class="line">	&#123;id=<span class="string">"start"</span>,left=<span class="number">100</span>,top=<span class="number">500</span>,label=<span class="string">"start"</span>&#125;,</div><div class="line">	&#123;id=<span class="string">"game"</span>,left=<span class="number">300</span>,top=<span class="number">400</span>,label=<span class="string">"game"</span>&#125;,</div><div class="line">	&#123;id=<span class="string">"end"</span>,left=<span class="number">500</span>,top=<span class="number">400</span>,label=<span class="string">"end"</span>&#125;,</div><div class="line">	&#123;id=<span class="string">"pause"</span>,left=<span class="number">600</span>,top=<span class="number">500</span>,label=<span class="string">"pause"</span>&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">local</span> buttons = &#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> i=<span class="number">1</span>,#button_data <span class="keyword">do</span></div><div class="line">	<span class="keyword">local</span> btn=button_data[i]</div><div class="line">	buttons[i] = widget.newButton&#123;</div><div class="line">		id=btn.id,label=btn.label,</div><div class="line">		left=btn.left,top=btn.top,</div><div class="line">		onEvent = handleButtonEvent</div><div class="line">	&#125;</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>這樣子不覺得版面簡潔很多嗎？</p>
+<p>table真的是個很好用而且很方便的東西。</p>
+<p>參考資料：<br>
+<a href="http://lua-users.org/wiki/TablesTutorial" target="_blank" rel="external">Tables Tutorial</a><br>
+<a href="http://www.lua.org/pil/2.5.html" target="_blank" rel="external">Programming in Lua - Tables</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2014/05/14/lua-logical-operators/" data-toggle="tooltip" data-placement="top" title="[Lua] 邏輯運算">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2014/05/05/soap-vs-rest/" data-toggle="tooltip" data-placement="top" title="SOAP vs REST">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="nav">none</ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#lua" title="lua">lua</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2014/05/14/lua-table/";
+    var disqus_url = "https://blog.huli.tw/2014/05/14/lua-table/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

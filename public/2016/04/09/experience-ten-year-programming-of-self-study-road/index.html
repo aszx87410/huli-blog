@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          [心得] 十年程式自學之路 - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2016/04/09/experience-ten-year-programming-of-self-study-road/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#story" title="story">story</a>
+                            
+                        </div>
+                        <h1>[心得] 十年程式自學之路</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2016-04-09
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>（原文發表於 ptt soft_job 版，調整排版之後轉在於此）</p>
+<h1><span id="前言">前言</span></h1>
+<p>從國中開始自學程式到現在，已經有十年了<br>
+所以我應該算是個資深的自學者吧XD<br>
+有滿多心得想跟大家分享<br>
+這篇主要是分享一些我認為初學者可以參考的學習方向</p>
+<h1><span id="正文">正文</span></h1>
+<p>首先，沒有最好的程式語言，只有最適合的程式語言。<br>
+程式語言本來就只是工具、只是手段，從來都不是重點<br>
+重點是：你的目的是什麼？你要解決的問題是什麼？</p>
+<p>假設你今天想要寫一個網頁留言板（這邊只討論後端，不包含前端）<br>
+那你就不應該用 <code>C</code> 來寫，因為比起 <code>C</code>，<code>php</code> 會更適合</p>
+<p>你可能會問：那 <code>nodejs</code>, <code>rails</code>, <code>asp.net</code>… 就不適合嗎？<br>
+如果你只是「單純想寫個網頁留言板」，其實上面這些都很適合<br>
+挑一個你最喜歡的就好</p>
+<p>但如果你要解決的問題不一樣，就應該重新思考<br>
+例如說，「我想要超級快速的寫個網頁留言板」<br>
+你就應該用 <code>rails</code>，因為 <code>rails</code> 開發真的超級快，隨便打幾個 command，你的網頁就神奇的出現了！</p>
+<p>「我想要很潮的網頁留言板！」<br>
+那你可以考慮 <code>Go</code>, <code>Swift</code>, <code>Nodejs</code> 等等</p>
+<p>換個例子，若是你今天想要「研究電腦較底層的運作」<br>
+你應該要學 <code>C</code>，或是學組合語言<br>
+因為比起其他高階語言，這兩種絕對會讓你更了解底層到底在做什麼</p>
+<p>其實以上這些只是想提醒你：不要為了學程式而學程式<br>
+程式只是手段、手段！重點在於目的！重點在於你想要透過程式，達成什麼樣的目標<br>
+（如果你真的只是純粹喜歡寫程式，當然也是可以啦XD）</p>
+<p>所以，要想清楚你為什麼要學程式？</p>
+<p>我的理由很簡單：<br>
+我覺得寫程式讓我很有成就感，只要幾天就可以寫出一個網頁<br>
+可以幫自己寫部落格系統、幫系上寫投票網站之類的<br>
+儘管寫出來的東西可能不怎麼樣，但從無到有，是很感人的一件事<br>
+我永遠忘不了我用 <code>VB</code> 拉幾個按鈕出來，點下去就可以跑出文字的那瞬間，我有多感動<br>
+那是我第一支程式</p>
+<p>無論是單純有興趣或是只想要轉職，以下的幾項建議是我覺得能幫助到你的<br>
+這幾點我「基本上」是按照順序列的，也就是一個完成之後再完成下一項<br>
+但也有些例外，是可以隨時都學的</p>
+<h1><span id="1-學英文">1. 學英文</span></h1>
+<p>這個已經在版上講到爛掉<br>
+Q: 我該學什麼程式語言 A: 英文<br>
+為什麼？因為英文真的很重要！<br>
+聽說讀寫，至少讀要讀的懂，你才看的懂那些外國公司的 API 文件<br>
+發生問題的時候，才能去 stackoverflow 上面發問</p>
+<p>講到提問，推薦這篇：<a href="https://ihower.tw/blog/archives/457" target="_blank" rel="external">提問的藝術</a></p>
+<p>大家都會問問題，但有些問題不會有人想回答<br>
+像是隔空抓藥</p>
+<blockquote>
+<p>我寫了一個網路通訊的程式，想要讓A手機跟B手機可以傳訊息，<br>
+可是按了卻沒反應，怎麼辦？</p>
+</blockquote>
+<p>或是排版爛的程式碼</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">String a=<span class="string">"hello"</span>;</div><div class="line">String bb= <span class="string">"world"</span> ;  </div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)&#123;</div><div class="line"><span class="keyword">if</span>(socket.alive)&#123;</div><div class="line">socket.send(a);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一個好的問題，或是說，讓人看的懂得問題<br>
+應該要包含四點：</p>
+<h3><span id="1-目的你的程式要達成什麼目的">1. 目的（你的程式要達成什麼目的？）</span></h3>
+<h3><span id="2-手段你怎麼達成你的目的">2. 手段（你怎麼達成你的目的？）</span></h3>
+<h3><span id="3-錯誤在什麼場景下發生的什麼錯誤">3. 錯誤（在什麼場景下發生的什麼錯誤？）</span></h3>
+<h3><span id="4-程式碼有排版過的程式碼拜託">4. 程式碼（有排版過的程式碼，拜託）</span></h3>
+<p>以上問題可以修正成：</p>
+<blockquote>
+<p>我想要讓 A 手機跟 B 手機傳遞訊息，我用的是 java 的 socket<br>
+可是按下發送時<br>
+出現：<code>java.net.SocketException: Connection refused: connect</code><br>
+想請問一下有可能是錯在哪裡？<br>
+部分程式碼：<a href="https://gist.github.com/xxxxxx" target="_blank" rel="external">https://gist.github.com/xxxxxx</a></p>
+</blockquote>
+<p>上面的問題還可以再修正、補充更多細節<br>
+但至少比剛開始那個好滿多的，會讓人比較想回答</p>
+<p>程式碼一定要找適合的地方貼<br>
+不知道貼哪裡的話，google: 貼程式碼，就有一堆文章讓你參考</p>
+<p>好，我們繼續回到學英文這點XD<br>
+英文不好的話，中文的教學資源其實也很多<br>
+尤其是簡體中文，有很多高質量或是新手教學文都很不錯</p>
+<p>但畢竟較新的技術，或是較多人氣的地方用的還是英文<br>
+英文好的話絕對不吃虧，可以運用更多資源</p>
+<h1><span id="2-學會-google">2. 學會 google</span></h1>
+<p>別懷疑，這真的是超重要的能力<br>
+我時常覺得，會 google 就先贏一半了<br>
+現在網路資源這麼多，有時候發生你看不懂的 Error，完全沒頭緒<br>
+你就直接丟 google，就批哩啪啦一堆解法出現了<br>
+這時候除了很開心的 copy paste 以外，有一點很重要：「試著理解它」<br>
+若是不理解，你就只是個只會複製貼上的機器人，一點成長都沒有<br>
+至少要理解到兩點：為什麼有這問題、這個解法是如何解決的</p>
+<p>關鍵字的使用也很重要<br>
+我在搜尋的時候很常利用空白分割，不讓語句太死<br>
+例如說你想找：程式入門教學<br>
+我會搜尋：程式 入門</p>
+<p>想要找：在網頁上如何實作拖曳效果<br>
+我會搜尋：網頁 拖曳</p>
+<p>google 的能力可以慢慢培養，搜尋多了你就會有那種感覺了</p>
+<h1><span id="3-學-scratch">3. 學 scratch</span></h1>
+<p>我聽過這個很多次，但實際接觸才知道「真的很好用」<br>
+這個就是讓你用很簡單、很視覺化的方式來寫程式<br>
+你只要拖拉幾個拼圖、組合在一起，就可以寫出一隻可以動的程式<br>
+甚至是一個小遊戲！</p>
+<p>隨堂測驗：你要怎麼開始學 <code>scratch</code>？</p>
+<p>如果是我的話，就會搜尋：<code>scratch 教學</code>，或是 <code>scratch 入門</code><br>
+這邊直接幫大家附上兩篇排名較前面的結果<br>
+<a href="http://blog.ilc.edu.tw/blog/blog/1279" target="_blank" rel="external">scratch程式教學</a><br>
+<a href="http://www.codedata.com.tw/social-coding/scratch-for-kids-1/" target="_blank" rel="external">Scratch 教學的第 1 堂課（1/5）適合親子共學的兒童程式設計入門</a></p>
+<p>為什麼要學 <code>scratch</code> 呢？<br>
+前面有說到，每種程式語言都有不同的適合的場景<br>
+還有一點是，「每種程式語言，都有很大部分是相同的」<br>
+例如說：變數、函式、迴圈、條件判斷、陣列…</p>
+<p>你學 <code>C</code> 有這些、<code>Javascript</code> 有這些、<code>Swift</code> 有這些<br>
+不管學哪種程式，都會碰到這些最基本的東西<br>
+無論是再複雜的程式，都是這些基本的東西組裝而成</p>
+<p>從 <code>scratch</code> 來學這些基礎有兩個好處</p>
+<h2><span id="1不被語法限制">1.不被語法限制</span></h2>
+<h2><span id="2視覺化">2.視覺化</span></h2>
+<p><code>scratch</code> 裡面你幾乎不用打字，甚至可以看做是拼圖遊戲<br>
+你就把你想要的東西拼一拼，程式就寫完了<br>
+所以你學的是真正的「概念」，而不是語法</p>
+<p>舉例來說，如果你學 <code>C</code>，你就要學：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"hi\n"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果你學 <code>python</code>，就會是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(n):</div><div class="line">  print(<span class="string">"hi\n"</span>)</div></pre></td></tr></table></figure>
+<p>（我不會寫 python，寫錯的話抱歉QQ）</p>
+<p>但這兩者本質上是一樣的東西，都是迴圈，只是語法不同而已！<br>
+從 <code>scratch</code> 開始，可以讓你跳脫這些語法，只學那些精髓<br>
+你學完之後，看到 <code>C</code> 的這段就會知道：喔～這就是迴圈嘛</p>
+<p>第二點，視覺化也是很重要的一項<br>
+儘管我程式寫了十年，我永遠忘不掉，我在迴圈那邊卡了多久<br>
+尤其時雙重迴圈，根本就是惡夢！<br>
+「我知道這邊是1到10的意思，但是第二層為什麼會這樣」<br>
+「為什麼這樣就可以印出九九乘法表？」</p>
+<p>那時候我面對的是冷冰冰的程式碼，大概就是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=<span class="number">9</span>; i++)&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=<span class="number">9</span>; j++)&#123;</div><div class="line">    <span class="built_in">printf</span>(...);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>儘管我現在來看，可以從排版跟大括號一眼看出「block」的概念<br>
+但十年前的我完全不行，完全不知道這段到底在幹嘛</p>
+<p>可是 <code>scratch</code> 就不一樣了！<br>
+它直接用視覺化的拼圖的概念，讓你在迴圈裡面可以塞另外一塊拼圖<br>
+就可以明白為什麼雙重迴圈會是這樣了！</p>
+<p>最後附上我修某堂課的 <code>scratch</code> 作業，大概花了兩個小時<br>
+就只是一個簡單的小遊戲：<br>
+<a href="https://scratch.mit.edu/projects/98049439/" target="_blank" rel="external">https://scratch.mit.edu/projects/98049439/</a></p>
+<h1><span id="4-學著打指令command-line-操作">4. 學著打指令（command line 操作）</span></h1>
+<p>「蛤？這是什麼？」<br>
+就是電影裡面看起來很帥的，底是全黑的畫面<br>
+螢幕上面滿滿的文字，一張圖都沒有<br>
+在 windows 就是 cmd，命令提示字元<br>
+在 mac 就是 terminal，終端機</p>
+<p>假如你已經對上面介紹的 <code>scratch</code> 滿熟悉了<br>
+那你應該了解程式幾個基本概念<br>
+其中一個重要的概念是：寫程式其實就是在對電腦下指令</p>
+<p>其實呢，你平常在做的事情，也是在對電腦下指令<br>
+但作業系統幫你包裝好了，所以你只要動動手指就可以</p>
+<p>例如說你在網頁上按了重新整理，「我要重新整理」<br>
+換成程式大概就是：<code>page.refresh();</code></p>
+<p>或是：「點了前往 <a href="http://google.com" target="_blank" rel="external">google.com</a> 的連結」，<code>window.open('google.com');</code><br>
+（這邊程式碼都隨便寫的，但意思有到就好）</p>
+<p>我們所謂的 command line，就如同字面上這樣<br>
+是個「用文字對電腦下指令」的地方</p>
+<p>像是 <code>ls</code>，就是 list 的意思，會把你「現在在的地方」的檔案都顯示出來<br>
+「現在在的地方是哪裡？」打 <code>pwd</code>，Print Working Directory<br>
+就會顯示出你現在在「電腦的哪個資料夾底下」</p>
+<p>幫大家準備好幾個連結了：（關鍵字：終端機 教學）<br>
+<a href="http://blog.xuite.net/je35/blog/56152125" target="_blank" rel="external">OS X Lion 10.7 系統基礎教學系列 - 終端機基礎操作教學</a><br>
+<a href="https://goo.gl/Ax2pNi" target="_blank" rel="external">介紹命令行(command-line)介面</a><br>
+<a href="https://www.renfei.org/blog/mac-os-x-terminal-101.html" target="_blank" rel="external">Mac OS X Terminal 101：终端使用初级教程</a><br>
+<a href="http://www.minwt.com/mac/14653.html" target="_blank" rel="external">Mac OS X Terminal 終端機常用語法教學</a></p>
+<p>為什麼要學這個呢？因為工作上很大機會用的到<br>
+而且日常生活也很好用<br>
+有些功能你用 java 寫的要死要活，最後才發現原來電腦就有內建指令</p>
+<p>我也是最近一年才開始熟悉這些指令的操作<br>
+才發現原來內建指令這麼好用</p>
+<p>我認為對初學者，你要知道「有這樣一個東西」<br>
+並且了解：<code>cd</code>, <code>ls</code>, <code>pwd</code>, <code>touch</code>, <code>mkdir</code>, <code>rm</code>, <code>cat</code>, <code>grep</code> 這些指令<br>
+還有 <code>&gt;</code> <code>&gt;&gt;</code> <code>&lt;</code> <code>|</code> 這些符號在幹嘛，這樣就很足夠了</p>
+<p>想更精進的可以去學怎麼寫 shell script</p>
+<h1><span id="5-學怎麼用-browser-dev-tool">5. 學怎麼用 browser dev tool</span></h1>
+<p>chrome, firefox, safari, edge 都有一樣的東西，叫做開發者工具</p>
+<p>為什麼要學會這個呢？因為你可以了解很多東西！<br>
+日常生活中，你其實一直在接觸網路的概念，只是你沒發覺而已<br>
+你平常看到的網頁，其實也只是一堆文字而已<br>
+那為什麼文字會變成畫面？因為瀏覽器幫你解析，按照一定的規則畫出來<br>
+你可以右鍵-&gt;檢查，就可以看到你滑鼠指的地方本來的文字是什麼</p>
+<p>dev tool 可以講到一堆跟 web 有關的概念<br>
+get/post, ajax, status, css, js, html 等等<br>
+現成的好工具，不用嗎？</p>
+<p>有興趣深入了解的，我會下的關鍵字：dev tool 入門<br>
+（只是目前應該很少文章是用 dev tool 教你學習網路概念，有點可惜）</p>
+<h1><span id="6-選你想走的領域精進">6. 選你想走的領域精進</span></h1>
+<p>假設你上面都有確實做到，你現在應該對程式、對網路都不會太陌生了<br>
+這時候再來學專門的東西，我認為是事半功倍<br>
+為什麼？因為原本那些程式基礎你都可以跳過，你要學的只是語法</p>
+<p>學程式學的應該是「心法、內功」，而不是表面的限制<br>
+這樣就算換了一個你從沒看過的程式語言，你也會猜的到它在幹嘛</p>
+<p>如果你這時候想要報名一些課程，那就去吧<br>
+版上有很多心得可以參考<br>
+不過要注意的是心態要正確</p>
+<p>我之前寫過一篇文：<a href="http://huli.logdown.com/posts/307966" target="_blank" rel="external">那些「鹹魚翻身」的文章沒有告訴你的事</a></p>
+<p>有些新聞會打著什麼「服務生學程式，年薪暴增 300 萬」之類的<br>
+不要輕易相信這些，很多這種案例都是因為在學程式以前已經有某項專長<br>
+再把自己的專長跟程式結合起來<br>
+這些案例大多數時候並不適合「沒有任何背景」的人參考</p>
+<p>比起這些特殊的案例，版上很多文章都更有參考價值<br>
+版上很多心得文，看了就大概可以知道成效如何，出來的薪水如何</p>
+<p>或是版上也很多徵才文，稍微看一下大概就能知道現在行情大概在哪裡</p>
+<h1><span id="7-寫文章記錄心得">7. 寫文章記錄心得</span></h1>
+<p>可以開個 blog 寫寫自己的學習歷程、碰到的困難以及解法等等<br>
+為什麼要寫這個？</p>
+<p>第一是加深印象，你解決一個問題下次再碰到時，你還記得怎麼解嗎？<br>
+我記憶力不太好，有時候過兩三個月會忘掉<br>
+但這時候就因為我有寫 blog 記錄起來，可以查的到以前自己怎麼解的</p>
+<p>第二是增進功力<br>
+我要怎麼知道我真的了解一個東西？<br>
+我覺得寫下來，可以幫助你知道這點<br>
+例如說我今天要寫：git 入門教學<br>
+寫一寫發現自己不知道 rebase 在幹嘛，我就必須去查，查完之後寫在文章裡面<br>
+你寫的出來，你就一定懂這項技術<br>
+而且部落格是公開的，若有路人看到你寫錯，說不定還會來糾正你，你就又學到一課了！</p>
+<p>第三是累積個人聲望<br>
+好的部落格對於求職絕對有加分效果</p>
+<p>假設你今天是面試官<br>
+A 的履歷寫：精通 Javascript<br>
+B 的履歷寫：精通 Javascript，可參照我寫過的：深入 Javascript 原理系列文章</p>
+<p>結果你跑去 B 的部落格看，真的寫了一系列深入的文章在研究<br>
+不用面試，你就知道 B 是個有真材實料的人<br>
+（前提是面試官會去看你 blog XDD）</p>
+<h1><span id="8-學資料結構跟演算法">8. 學資料結構跟演算法</span></h1>
+<p>就是俗稱的 Data Structures and Algorithm，DSA</p>
+<p>假如你真的對這行很有興趣，想要一直待在這邊而且薪水越來越高的話<br>
+你就勢必要開始補足一些「自學的人通常不會有的本科系知識」</p>
+<p>因為自學者通常都直接從 html, css, javascript, php, rails 等等的開始<br>
+甚至連資料結構跟演算法都沒聽過！有接觸而且實作過的更是少數<br>
+那為什麼要學這兩樣東西呢？</p>
+<p>第一，增加自信<br>
+其實能力強，自信就會強<br>
+增加自信是因為，自學者通常也是非本科系的學生<br>
+可能會覺得自己跟本科系的實例有一段落差<br>
+這時候若是學了本科系在學的 DSA，就可以彌補這一段落差</p>
+<p>以我的例子來說，我高中的時候就在接觸 DSA<br>
+打打比賽，寫一些 online judge 的題目<br>
+（可參考：<a href="https://www.ptt.cc/bbs/Soft_Job/M.1451998694.A.9BA.html" target="_blank" rel="external">Re: [請益] 請問國中生程式設計競賽入門</a>）</p>
+<p>到現在出社會找工作，就是因為我有這段經歷<br>
+所以我有自信我絕對不會差本科系太多，甚至會比一些很混的畢業生強<br>
+事實上也是如此，去面試的時候有間公司考我排序的問題<br>
+就是一些很基本的，說你知道哪些排序法，跟時間複雜度之類的<br>
+我答完之後他們說：我是目前面試的十幾個裡面，回答的最清楚的<br>
+（可參考：<a href="https://www.ptt.cc/bbs/Soft_Job/M.1431190145.A.D28.html" target="_blank" rel="external">[心得] 15家中小型公司、新創公司面試心得分享</a>）</p>
+<p>自信在某些時候很重要，能夠為你帶來「打不倒的勇氣」<br>
+面試沒上，沒自信的人會覺得：一定是我太爛<br>
+有自信的人會覺得：是公司沒眼光<br>
+（前提是你的自信不是來自於自我感覺良好XD）</p>
+<p>第二，增進對電腦底層的理解度<br>
+剛開始你可能只是個拿 30k 的小螺絲釘<br>
+但工作久了，可能變成 40k, 50k，甚至 100k<br>
+當你薪水變得愈高，要解決的問題也相對的更重要<br>
+DSA 是大公司的必備技能之一，題目可參考 leetcode</p>
+<p>為什麼那些大公司面試要考這些？<br>
+如果不會二元樹反轉，就算是知名工程師也沒用？<br>
+（可參考：<a href="http://www.bnext.com.tw/ext_rss/view/id/758790" target="_blank" rel="external">Google面試這次惹爭議了：雖然我們公司 90%的工程師都用你開發的工具，但我們還是不聘用你</a>）</p>
+<p>就如同我開頭所說的，重點在目的、在於要解決的問題<br>
+你在一家普通的台灣電商網站工作，需要會什麼？<br>
+你可能要會寫 php，因為要改進購物車，要改進物品上架系統<br>
+所以你根本不必懂 DSA，因為沒什麼太大的幫助</p>
+<p>Google 要解決的問題是什麼？<br>
+可能是「排序 10 億個數字」、「阿發狗的下棋演算法」等等<br>
+從要解決的問題看來，你就知道為什麼 Google 面試時要考那些了</p>
+<p>如果你要在技術上日漸精進，你遲早要碰到那些較底層的東西<br>
+這跟問題規模有很大的關係，假設你公司今天是做售票網站的</p>
+<p>同時 100 個人搶，一般工程師都可以自己應付<br>
+同時 10000 個人搶，這就不一樣了，在伺服器上你可以能要多開幾台機器<br>
+要調整一些架構，而程式當然也要跟著調整<br>
+（延伸閱讀：<a href="https://blow.streetvoice.com/6338" target="_blank" rel="external">賣秒殺票跟你想得不一樣</a>、<a href="http://www.inside.com.tw/2015/01/17/kktix-tech-share" target="_blank" rel="external">號稱推不倒的售票網站KKTIX，技術現況分享</a>）</p>
+<p>或是你會發現許多大公司，常常都會自己有一些專案<br>
+為什麼？因為市面上沒有符合他們需求的東西，所以要自己寫一個<br>
+像是 React 就是這樣<br>
+如果你沒修過 DSA，你怎麼可能實作出 virtual DOM diff 的演算法？<br>
+（延伸閱讀：<a href="https://github.com/livoras/blog/issues/13" target="_blank" rel="external">深度剖析：如何实现一个 Virtual DOM 算法</a> ）</p>
+<p>（以上對於大公司面試為什麼要考這些的那一段都只是我的推測<br>
+小弟本人沒那麼強，沒去面試過<br>
+如果有進去過的前輩願意跳出來說：才不是這樣！你根本推測錯了！<br>
+麻煩不吝推文或站內信指正，感謝）</p>
+<p>附上兩篇跟我講的內容有點關係的<br>
+<a href="https://www.ptt.cc/bbs/Programming/M.1411474900.A.746.html" target="_blank" rel="external">Re: [討論] 所以練acm都底有啥好處？</a><br>
+<a href="http://blog.vgod.tw/2012/10/27/premature-optimization/" target="_blank" rel="external">過早最佳化是萬惡的根源</a></p>
+<p>最後，舉 vgod 那篇裡面引用到的一段：</p>
+<blockquote>
+<p>如果以蓋大樓來形容這個概念，把砌磚作為一種技能，把蓋大樓作為一種知識<br>
+我想可以這麼講：如果你早就知道你喜歡砌磚，很會砌磚，就直接去砌磚吧。<br>
+如果你的夢想是蓋大樓，你要學的東西還很多，那讀大學是你最好的途徑。<br>
+不是每個人都要蓋大樓，靠砌磚就可以賺錢了，砌的好還可以賺很多錢，大家搶著要。</p>
+</blockquote>
+<p>如果你很會寫購物車，那其實在台灣你也可以接到很多電商客戶，錢包也是賺滿滿<br>
+但如果你是想進 Google, Facebook 那種大公司<br>
+或是想要思考規模更大的問題該如何解決<br>
+那就學 DSA 吧！</p>
+<p>推薦這門 edx 上的課，<a href="https://goo.gl/xyNQMU" target="_blank" rel="external">對岸的清大的開放式課程</a></p>
+<p>補充：其實不只 DSA，資工系會修到的那些課都很值得去修<br>
+像是計算機概論、計算機組織與結構、作業系統、組合語言等等<br>
+因為這些也是跟電腦底層有很深厚的關係，能懂這些絕對是好事</p>
+<h1><span id="9-分享">9. 分享</span></h1>
+<p>這點呼應我前面提過的寫 blog<br>
+分享從來都不是單向的，在我分享經驗給其他人的時候，我也得到許多回饋<br>
+尤其是教學！在教別人的時候，你才會更了解自己哪邊不太懂</p>
+<p>我認為分享是一件很重要的事<br>
+取之於社會，用之於社會<br>
+我從以前就常看 soft_job 版，學到很多<br>
+為什麼學的到東西？就是因為很多前輩願意 po 文分享自己的經歷</p>
+<p>因此我也決定哪天當我有能力，我也要出來 po 文分享<br>
+這樣才能有一個正向循環</p>
+<p>我希望看我這篇文章有得到收穫的朋友，也可以記得這個道理<br>
+日後有心得記得在這裡 po 文分享XD</p>
+<h1><span id="10-推薦一些課程">10. 推薦一些課程</span></h1>
+<p>我修過的線上課程其實不多，大多數都是零碎的片段知識<br>
+但我有一堂真的很推薦、很推薦的課：CS50<br>
+我寫的這篇文章有介紹這門課在幹嘛<br>
+因為篇幅有點長，所以就不貼上來了<br>
+但就是基本程式、底層、網路、資訊安全、資料結構都有教到！<br>
+<a href="http://huli.logdown.com/posts/687027" target="_blank" rel="external">如海洋般的程式課程：CS50</a></p>
+<p>我上面說的：scratch, command line, dev tool 都是受到這門課的影響<br>
+他先教你 scratch，讓你理解程式基本概念，接著再教你 C<br>
+是的，初學者學 C 不太好，我原本也是這樣想<br>
+可是這門課幽默風趣，讓 C 不會這麼難，我有點改觀<br>
+總之這門課很「硬」，很扎實<br>
+但也因為他扎實，我相信你修完之後，保證很有收穫</p>
+<p>我自己都覺得我十年跌跌撞撞學的東西，怎麼他 20 幾堂課就教完了XD</p>
+<p>文章有點長，差不多該結尾了</p>
+<p>我去年有在做免費程式教學<br>
+但較遺憾的是，其實大多數都是單純的問與答，比較少真的動手教程式<br>
+時間不太夠，我也不太曉得從哪個環節開始教</p>
+<p>這邊有我寫下的心得與記錄<br>
+裡面我有寫了每個人的背景、問題以及我的回答<br>
+來找我的人大多都是新手，或許你可以參考看看<br>
+<a href="https://github.com/aszx87410/programming-tutorial-review" target="_blank" rel="external">台北免費程式教學心得分享</a></p>
+<p>最後<br>
+如果你真的想修 cs50 這門課的話<br>
+我想開個 slack 或是社團之類的，有興趣的可以一起討論<br>
+我全部作業都有乖乖寫，所以碰到問題我都可以幫忙回答XD</p>
+<p>社團網址：<a href="https://www.facebook.com/groups/556507217856457/" target="_blank" rel="external">cs50中文討論區</a></p>
+<p>另外，這幾年幫許多迷惘的初學者解惑，得出一點心得<br>
+規劃出一套我認為初學者很適合上的課程，能夠提升你的基礎知識與程式能力<br>
+目前正在 hahow 平台上面預購，有興趣的可以參考：<a href="https://goo.gl/gVFxiD" target="_blank" rel="external">初心者的計概與 coding 火球術</a></p>
+<p>感謝～</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/04/13/teaching-facebook-messenger-api/" data-toggle="tooltip" data-placement="top" title="[教學] Facebook Messenger API">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/03/28/cs50-programming-course-like-ocean/" data-toggle="tooltip" data-placement="top" title="如海洋般的程式課程：CS50">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">正文</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">1. 學英文</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text">1. 目的（你的程式要達成什麼目的？）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.0.2.</span> <span class="toc-nav-text">2. 手段（你怎麼達成你的目的？）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.0.3.</span> <span class="toc-nav-text">3. 錯誤（在什麼場景下發生的什麼錯誤？）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.0.4.</span> <span class="toc-nav-text">4. 程式碼（有排版過的程式碼，拜託）</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">2. 學會 google</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">3. 學 scratch</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">1.不被語法限制</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">2.視覺化</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">4. 學著打指令（command line 操作）</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">5. 學怎麼用 browser dev tool</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">6. 選你想走的領域精進</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">7. 寫文章記錄心得</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">8. 學資料結構跟演算法</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">9. 分享</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">12.</span> <span class="toc-nav-text">10. 推薦一些課程</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#story" title="story">story</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2016/04/09/experience-ten-year-programming-of-self-study-road/";
+    var disqus_url = "https://blog.huli.tw/2016/04/09/experience-ten-year-programming-of-self-study-road/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
