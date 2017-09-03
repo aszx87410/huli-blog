@@ -21,7 +21,7 @@ permalink_defaults:
 # Site settings
 SEOTitle: Huli's blog
 email: aszx87410@gmail.com
-description: "blog about frontend, backend and mobile development"
+description: ""
 keyword: ""
 header-img: img/header_img/home-bg-2-dark.png
 signature: false #show signature
