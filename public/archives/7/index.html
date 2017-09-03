@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="blog about frontend, backend and mobile development">
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/lidemy_logo.png">
     <!-- Place this tag in your head or just before your close body tag. -->
@@ -132,14 +132,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -206,6 +206,44 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/05/01/cs50-week0-guide/">
+        <h2 class="post-title">
+            [心得] cs50 week0 導讀
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            前言
+這陣子推廣 cs50 有成，臉書社團陸陸續續有許多人加入，願意給這們課程一個機會
+身為推他們入坑的人，覺得我可以提供一些方向，讓正在修這門課的人能夠在修課之前/之後更瞭解這週的內容
+於是我之後會寫一系列文章，大致講解每一週的內容會是什麼
+目標是讓你看完這篇文章之後，對於課程有六七成的掌握度
+課程目標
+（直接從官網複製來的，順便幫大家翻中文）
+
+Binary（二進位）
+ASCII
+Alg......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2016-05-01
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#cs50" title="cs50">cs50</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -517,44 +555,6 @@ http://blog.piasy.com/Android-Notification-Pending-Intent-......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/02/23/high-connection-setting/">
-        <h2 class="post-title">
-            [心得] 高併發伺服器設定
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            當初在設定的時候有碰到一些問題，跟上網找一些解法
-這篇純粹當作筆記，紀錄一下
-vi /etc/sysctl.conf
-加上
-net.netfilter.ip_conntrack_max=65535
-net.netfilter.nf_conntrack_max=65535
-如果設置沒開，可以這樣打開
-
-modprobe ip_conntrack
-lsmod |grep conn
-sysctl ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-02-23
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#backend" title="backend">backend</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -599,7 +599,7 @@ sysctl ......
             
         
             
-            <a href="/tags/#story" title="story" rel="19">story</a>
+            <a href="/tags/#story" title="story" rel="20">story</a>
             
         
             
@@ -613,13 +613,13 @@ sysctl ......
             
         
             
-            <a href="/tags/#Android" title="Android" rel="20">Android</a>
-            
-        
-            
         
             
             <a href="/tags/#javascript" title="javascript" rel="16">javascript</a>
+            
+        
+            
+            <a href="/tags/#Android" title="Android" rel="20">Android</a>
             
         
             
@@ -643,15 +643,15 @@ sysctl ......
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#backend" title="backend" rel="19">backend</a>
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -768,6 +768,10 @@ sysctl ......
     <ul>
       
         <li>
+          <a href="/2017/09/03/moving-from-logdown-to-hexo/">部落格搬家心得：從 Logdown 到 Hexo</a>
+        </li>
+      
+        <li>
           <a href="/2017/08/27/review-the-classical-sort-algorithm-with-javascript/">一起用 JavaScript 來複習經典排序法吧！</a>
         </li>
       
@@ -781,10 +785,6 @@ sysctl ......
       
         <li>
           <a href="/2017/08/27/ajax-and-cors/">輕鬆理解 Ajax 與跨來源請求</a>
-        </li>
-      
-        <li>
-          <a href="/2017/08/27/the-javascripts-prototype-chain/">該來理解 JavaScript 的原型鍊了</a>
         </li>
       
     </ul>

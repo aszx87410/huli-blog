@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="blog about frontend, backend and mobile development">
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/lidemy_logo.png">
     <!-- Place this tag in your head or just before your close body tag. -->
@@ -132,14 +132,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -206,6 +206,44 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/02/23/high-connection-setting/">
+        <h2 class="post-title">
+            [心得] 高併發伺服器設定
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            當初在設定的時候有碰到一些問題，跟上網找一些解法
+這篇純粹當作筆記，紀錄一下
+vi /etc/sysctl.conf
+加上
+net.netfilter.ip_conntrack_max=65535
+net.netfilter.nf_conntrack_max=65535
+如果設置沒開，可以這樣打開
+
+modprobe ip_conntrack
+lsmod |grep conn
+sysctl ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Huli on
+            2016-02-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#backend" title="backend">backend</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -522,40 +560,6 @@ Google Cardboard號稱窮人版VR果然不是叫假的，兩三百塊就可以�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2015/11/18/teaching-react-native-for-android-1/">
-        <h2 class="post-title">
-            [教學] React Native for Android - 1： 基礎
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            React Native出來已經一陣子了，而且陸陸續續被應用在許多App上，甚至還有些已經應用在production的環境
-在今年九月的時候，大家引頸期盼的 Android 版本居然提早釋出！
-想當初第一天的時候我興致勃勃地把example clone下來，發現弄了一陣子居然連demo都跑不起來QQ
-於是只好先放棄了
-但是幾個禮拜前再試了一次，跑ZhiHuDaily-React-Native......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2015-11-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#android" title="android">android</a>
-            
-              <a href="/tags/#react native" title="react native">react native</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -600,7 +604,7 @@ Google Cardboard號稱窮人版VR果然不是叫假的，兩三百塊就可以�
             
         
             
-            <a href="/tags/#story" title="story" rel="19">story</a>
+            <a href="/tags/#story" title="story" rel="20">story</a>
             
         
             
@@ -614,13 +618,13 @@ Google Cardboard號稱窮人版VR果然不是叫假的，兩三百塊就可以�
             
         
             
-            <a href="/tags/#Android" title="Android" rel="20">Android</a>
-            
-        
-            
         
             
             <a href="/tags/#javascript" title="javascript" rel="16">javascript</a>
+            
+        
+            
+            <a href="/tags/#Android" title="Android" rel="20">Android</a>
             
         
             
@@ -644,15 +648,15 @@ Google Cardboard號稱窮人版VR果然不是叫假的，兩三百塊就可以�
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#backend" title="backend" rel="19">backend</a>
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -769,6 +773,10 @@ Google Cardboard號稱窮人版VR果然不是叫假的，兩三百塊就可以�
     <ul>
       
         <li>
+          <a href="/2017/09/03/moving-from-logdown-to-hexo/">部落格搬家心得：從 Logdown 到 Hexo</a>
+        </li>
+      
+        <li>
           <a href="/2017/08/27/review-the-classical-sort-algorithm-with-javascript/">一起用 JavaScript 來複習經典排序法吧！</a>
         </li>
       
@@ -782,10 +790,6 @@ Google Cardboard號稱窮人版VR果然不是叫假的，兩三百塊就可以�
       
         <li>
           <a href="/2017/08/27/ajax-and-cors/">輕鬆理解 Ajax 與跨來源請求</a>
-        </li>
-      
-        <li>
-          <a href="/2017/08/27/the-javascripts-prototype-chain/">該來理解 JavaScript 的原型鍊了</a>
         </li>
       
     </ul>

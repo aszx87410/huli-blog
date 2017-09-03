@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="blog about frontend, backend and mobile development">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/lidemy_logo.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          部落格搬家心得：從 Logdown 到 Hexo - Huli&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://blog.huli.tw/2017/09/03/moving-from-logdown-to-hexo/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/article-bg.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#story" title="story">story</a>
+                            
+                        </div>
+                        <h1>部落格搬家心得：從 Logdown 到 Hexo</h1>
+                        <h2 class="subheading">早知道就早點搬...</h2>
+                        <span class="meta">
+                            Posted by Huli on
+                            2017-09-03
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="前言">前言</span></h1>
+<p>終於搬完啦！</p>
+<p>花了一整天的時間在搞搬家的東西，其實真的挺麻煩的，而且中途碰到滿多小問題，所以特地寫這篇來紀錄一下心得。</p>
+<h1><span id="為什麼搬家">為什麼搬家？</span></h1>
+<p>你知我知獨眼龍也知，Logdown 基本上已經是一個停滯的產品了，從很久以前就不再更新了，看樣子應該也不會再更新了。</p>
+<p>我真的滿喜歡 Logdown 的，因為我覺得使用起來很方便很順手，完全打到我，到既然是個停止維護的產品，繼續在那邊就會有一些風險，例如說哪天 blog 突然掛掉連不上或者是文章全部不見之類的。</p>
+<p>所以囉，就趁著最近有空趕快把部落格整個搬出來，避免之後發生什麼災難就來不及了。</p>
+<p>不過其實我也是滿不想搬的…畢竟搬家真的超麻煩，而且這次又換一個全新的 Domain，往長遠來看是好的啦，但也代表要放棄之前累積的那些流量就是了。</p>
+<h1><span id="第一個挑戰匯出文章">第一個挑戰：匯出文章</span></h1>
+<p>Logdown 後台有一個功能可以匯出所有 blog 的文章然後寄到你信箱，但我按了幾次他只有出現：「在 5 分鐘之後會把文章寄到你信箱」的通知，之後就什麼都沒收到了。</p>
+<p>所以我推測要嘛就是壞了，要嘛就是我文章太多檔案大小超過所以 GG。但不論是哪一種，都注定我用不到這個功能了。</p>
+<p>身為一個工程師，我馬上想到是不是該寫個爬蟲之類的，研究了一下 Logdown 的結構之後放棄了，因為他所有 API 傳回的資料都是 HTML…我不想自己 parse 啊…</p>
+<p>正當絕望之際，突然發現後台有個「下載 Markdown 格式」的功能，可以下載單篇文章，試過這個功能正常之後，立刻想到一個解法：</p>
+<blockquote>
+<p>只要有所有下載文章連結，就可以寫 script 全部載下來了</p>
+</blockquote>
+<h2><span id="第一步取得網址">第一步：取得網址</span></h2>
+<p>到 logdown 後台（<a href="http://logdown.com/account/posts" target="_blank" rel="external">http://logdown.com/account/posts</a> ），然後一直往下捲動直到沒有文章為止。</p>
+<p>打開 Chrome devtool 執行下面程式碼，然後把結果按右鍵保存起來</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="built_in">Array</span>.prototype.map.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">'a'</span>), item =&gt; item.getAttribute(<span class="string">'href'</span>)).filter(<span class="function"><span class="params">item</span> =&gt;</span> item.indexOf(<span class="string">'/raw'</span>) &gt;= <span class="number">0</span>);<span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">of</span> a) &#123;<span class="built_in">console</span>.log(<span class="string">'"'</span>+k+<span class="string">'"'</span>)&#125;</div></pre></td></tr></table></figure>
+<p>沒意外的話，console 應該會出現像下面這種結果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">....</div><div class="line">VM192:<span class="number">1</span> <span class="string">"/account/posts/294284-javascript-redux-middleware-details-tutorial/raw"</span></div><div class="line">VM192:<span class="number">1</span> <span class="string">"/account/posts/294037-javascript-redux-basic-tutorial/raw"</span></div><div class="line">VM192:<span class="number">1</span> <span class="string">"/account/posts/293940-javascript-redux-model-real-world-browserhistory-not-found/raw"</span></div></pre></td></tr></table></figure>
+<p>自己把前面那個惱人的字串取代掉之後，你就得到所有文章的網址了。</p>
+<h2><span id="第二步下載">第二步：下載</span></h2>
+<p>可是取得網址之後，這麼多網址要怎麼下載呢？</p>
+<p>很簡單，我們自己寫個 bash script 就搞定了！核心程式碼就是用 wget 把文章抓下來，這邊的 session key 自己去 chrome 裡面看 cookie 的值就好：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget --heade=<span class="string">"Cookie:_logdown_session=xxxx;"</span> http://logdown.com/account/posts/2223627-review-the-classical-sort-algorithm-with-javascript/raw -O review-the-classical-sort-algorithm-with-javascript.md</div></pre></td></tr></table></figure>
+<p>完整 script：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">declare</span> -a arr=(</div><div class="line"><span class="string">"/account/posts/2223627-review-the-classical-sort-algorithm-with-javascript/raw"</span></div><div class="line"><span class="string">"/account/posts/2223612-dom-event-capture-and-propagation/raw"</span></div><div class="line"><span class="string">"/account/posts/2223601-http-cache/raw"</span></div><div class="line"><span class="string">"/account/posts/2223581-ajax-and-cors/raw"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;arr[@]&#125;</span>"</span></div><div class="line"><span class="keyword">do</span></div><div class="line">  url=<span class="string">"http://logdown.com"</span><span class="variable">$&#123;i&#125;</span></div><div class="line">  name=`<span class="built_in">echo</span> <span class="variable">$url</span> | sed <span class="string">"s/.*posts\/[0-9]*[-]//g"</span> | sed <span class="string">"s/\/raw//g"</span>`</div><div class="line">  wget --heade=<span class="string">"Cookie:_logdown_session=xxx;"</span> <span class="variable">$url</span> -O <span class="variable">$name</span><span class="string">".md"</span></div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
+<p>把 arr 下面那些換成剛剛從 chrome 得來的網址並且把 session 換成自己的就搞定了，就把所有文章都下載了！</p>
+<p>當個工程師真好</p>
+<h1><span id="第二個挑戰修文章格式">第二個挑戰：修文章格式</span></h1>
+<p>從 logdown 下載下來的還需要加一些 meta tag 才能在 hexo 上面正常跑，而且我也想順便修一下 tag，這部分我完全是手動修…修了兩百篇左右，因為要加 tag 這也不能自動加。（硬要寫也是可以啦，但我懶得弄）</p>
+<p>還有一個地方是我有文章用到 hexo 禁止的語法，就是兩個大括號那個，hexo 就直接報錯，然後也沒跟我講哪一篇，我只好自己用二分搜尋法，不斷拿掉文章看問題到底出在哪邊。</p>
+<h1><span id="第三個挑戰table-of-content-壞掉">第三個挑戰：table of content 壞掉</span></h1>
+<p>現在大概右邊看到那個就是 TOC，Table Of Content，是個我滿喜歡的功能，但不知道為什麼這功能壞掉了，在我自己去 trace hexo 的 code 之後，發現是一個滿奇怪的問題，就是 cheerio 抓不到 span 的 id，所以連結全部變成 undefined。</p>
+<p>身為工程師，這種小問題當然是可以自己修，於是我就修了兩個小地方：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 原本的</span></div><div class="line"><span class="keyword">var</span> $ = cheerio.load(str);</div><div class="line"></div><div class="line"><span class="comment">// 改過的，加上 decodeEntities 處理中文</span></div><div class="line"><span class="comment">// https://cnodejs.org/topic/54bdd639514ea9146862ac37</span></div><div class="line"><span class="keyword">var</span> $ = cheerio.load(str, &#123;<span class="attr">decodeEntities</span>: <span class="literal">false</span>&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 原本的，會抓不到 id</span></div><div class="line"><span class="keyword">var</span> id = $(<span class="keyword">this</span>).attr(<span class="string">'id'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 自己加上下面這一段用 Regexp 抓出來</span></div><div class="line"><span class="keyword">if</span> (!id) &#123;</div><div class="line">  <span class="keyword">var</span> temp = $(<span class="keyword">this</span>).html().match(<span class="regexp">/id="(.*)"&gt;/</span>);</div><div class="line">  <span class="keyword">if</span> (temp &amp;&amp; temp[<span class="number">1</span>]) &#123;</div><div class="line">    id = temp[<span class="number">1</span>];</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>當一個工程師真好</p>
+<h1><span id="結論">結論</span></h1>
+<p>這次用的模板是：<a href="https://github.com/YenYuHsuan/hexo-theme-beantech" target="_blank" rel="external">hexo-theme-beantech</a>，是我覺得很不錯的一個版型，不過我也有自己修一些小地方就是了。</p>
+<p>經歷過這次搬家之後，覺得 Hexo（部落格系統）+ Github Page（Hosting）+ Cloudflare（https）根本是工程師寫部落的最佳實踐，全部免費的方案然後所有必要的東西一次擁有，真棒真棒。</p>
+<p>話說之後還可以改成配合 CI 做自動 deploy，那個就等之後再研究吧！</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/08/27/review-the-classical-sort-algorithm-with-javascript/" data-toggle="tooltip" data-placement="top" title="一起用 JavaScript 來複習經典排序法吧！">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#為什麼搬家"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">為什麼搬家？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#第一個挑戰匯出文章"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">第一個挑戰：匯出文章</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#第一步取得網址"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">第一步：取得網址</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#第二步下載"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">第二步：下載</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#第二個挑戰修文章格式"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">第二個挑戰：修文章格式</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#第三個挑戰table-of-content-壞掉"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">第三個挑戰：table of content 壞掉</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#結論"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">結論</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#story" title="story">story</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "huli";
+    var disqus_identifier = "https://blog.huli.tw/2017/09/03/moving-from-logdown-to-hexo/";
+    var disqus_url = "https://blog.huli.tw/2017/09/03/moving-from-logdown-to-hexo/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aszx87410">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huli 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49773306-3';
+    var _gaDomain = 'blog.huli.tw';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://blog.huli.tw/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
