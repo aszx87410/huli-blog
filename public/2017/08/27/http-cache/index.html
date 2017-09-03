@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keyword"  content="">
-    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <link rel="shortcut icon" href="/img/lidemy_logo.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
@@ -144,14 +144,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -393,7 +393,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">為什麼需要 Cache</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Expires</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Cache-Control 與 max-age</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">過期了，然後呢？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Last-Modified 與 If-Modified-Since</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Etag 與 If-None-Match</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">中場休息</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">不要快取怎麼辦？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">首頁的快取策略</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">最後一個問題</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">12.</span> <span class="toc-nav-text">總結</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.</span> <span class="toc-nav-text">參考資料</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#為什麼需要-cache"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">為什麼需要 Cache</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#expires"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Expires</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#cache-control-與-max-age"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Cache-Control 與 max-age</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#過期了然後呢"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">過期了，然後呢？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#last-modified-與-if-modified-since"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Last-Modified 與 If-Modified-Since</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#etag-與-if-none-match"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Etag 與 If-None-Match</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#中場休息"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">中場休息</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#不要快取怎麼辦"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">不要快取怎麼辦？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#首頁的快取策略"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">首頁的快取策略</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#最後一個問題"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">最後一個問題</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#總結"><span class="toc-nav-number">12.</span> <span class="toc-nav-text">總結</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#參考資料"><span class="toc-nav-number">13.</span> <span class="toc-nav-text">參考資料</span></a></li></ol>
         
         </div>
       </aside>
