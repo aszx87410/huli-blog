@@ -5,6 +5,7 @@ date: 2017-09-03 21:34:38
 subtitle: 早知道就早點搬...
 header-img: "/img/header_img/article-bg.png"
 tags: [story]
+categories: [Music,Test]
 ---
 
 # 前言
@@ -12,6 +13,8 @@ tags: [story]
 終於搬完啦！
 
 花了一整天的時間在搞搬家的東西，其實真的挺麻煩的，而且中途碰到滿多小問題，所以特地寫這篇來紀錄一下心得。
+
+<!--more-->
 
 # 為什麼搬家？
 

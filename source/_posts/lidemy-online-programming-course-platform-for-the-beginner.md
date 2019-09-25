@@ -11,6 +11,8 @@ tags: [tutorial,story]
 
 而這篇呢，就要來談談 Lidemy 的創辦背景以及理念
 
+<!-- more -->
+
 # 緣起
 
 我一直是個很喜歡教學的人，從最早在前公司開設的實體課程，到台北的[免費程式教學](https://github.com/aszx87410/programming-tutorial-review)，再到 Hahow 的[初心者的計概與 coding 火球術](http://course.huli.tw/)，最後是近期的[從新手到中手：前端工程加強班](https://github.com/aszx87410/frontend-intermediate-course)。
