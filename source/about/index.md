@@ -1,9 +1,8 @@
 ---
 layout: "about"
-title: "About"
+title: "關於我"
 date: 2019-09-25 04:48:33
 description: "Learing by sharing"
-header-img: "img/header_img/home-bg-o.png"
 comments: true
 ---
 
@@ -11,4 +10,4 @@ comments: true
 
 [LinkedIn](http://goo.gl/ar5yhh)
 
-Contact: aszx87410@gmail.com
+聯絡我：aszx87410@gmail.com
