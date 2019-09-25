@@ -1,0 +1,25 @@
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Writing database to /Users/huli/Documents/blog/huli-blog/db.json","time":"2019-09-25T13:44:57.060Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Hexo version: \u001b[35m3.9.0\u001b[39m","time":"2019-09-25T13:44:57.090Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Working directory: \u001b[35m~/Documents/blog/huli-blog/\u001b[39m","time":"2019-09-25T13:44:57.091Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Config loaded: \u001b[35m~/Documents/blog/huli-blog/_config.yml\u001b[39m","time":"2019-09-25T13:44:57.372Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-index\u001b[39m","time":"2019-09-25T13:44:57.429Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-deployer-git\u001b[39m","time":"2019-09-25T13:44:57.604Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-archive\u001b[39m","time":"2019-09-25T13:44:57.611Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-category\u001b[39m","time":"2019-09-25T13:44:57.617Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-tag\u001b[39m","time":"2019-09-25T13:44:57.624Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-ejs\u001b[39m","time":"2019-09-25T13:44:57.632Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-markdown-it\u001b[39m","time":"2019-09-25T13:44:57.639Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-seo-friendly-sitemap\u001b[39m","time":"2019-09-25T13:44:57.705Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-sass\u001b[39m","time":"2019-09-25T13:44:57.772Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-marked\u001b[39m","time":"2019-09-25T13:44:57.854Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-stylus\u001b[39m","time":"2019-09-25T13:44:57.856Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-server\u001b[39m","time":"2019-09-25T13:44:58.027Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-toc\u001b[39m","time":"2019-09-25T13:44:58.255Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Script loaded: \u001b[35mthemes/minos/scripts/99_config.js\u001b[39m","time":"2019-09-25T13:44:58.260Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Script loaded: \u001b[35mthemes/minos/scripts/01_check.js\u001b[39m","time":"2019-09-25T13:44:58.272Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Script loaded: \u001b[35mthemes/minos/scripts/99_content.js\u001b[39m","time":"2019-09-25T13:44:58.390Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Script loaded: \u001b[35mthemes/minos/scripts/99_tags.js\u001b[39m","time":"2019-09-25T13:44:58.391Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":20,"msg":"Script loaded: \u001b[35mthemes/minos/scripts/10_i18n.js\u001b[39m","time":"2019-09-25T13:44:58.395Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":30,"msg":"Deploying: \u001b[35mgit\u001b[39m","time":"2019-09-25T13:44:58.398Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":30,"msg":"Clearing .deploy_git folder...","time":"2019-09-25T13:44:58.411Z","v":0}
+{"name":"hexo","hostname":"LideMacBook-Pro.local","pid":94758,"level":30,"msg":"Copying files from public folder...","time":"2019-09-25T13:44:58.524Z","v":0}
