@@ -1,223 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword"  content="">
-    <link rel="shortcut icon" href="/img/lidemy_logo.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          淺談二分搜尋法 - Huli&#39;s blog
-        
-    </title>
+<title>淺談二分搜尋法 - Huli</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="canonical" href="https://blog.huli.tw/2016/09/23/binary-search-introduction/">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+
+
+<meta name="description" content>
+
+
+
+
+
+    <meta name="description" content="前言 在寫程式的時候，其實會滿常用到「搜尋」的功能，最簡單的搜尋就是在一串數字裡面找出你想要的數字，而這也是我們今天的主題。 這一篇大致上會分成三個部分，第一部分會先介紹線性搜尋法，第二部分介紹二分搜尋法，最後一部分談談二分搜尋法在不同條件底下的實作方式會有什麼不同。">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="淺談二分搜尋法">
+<meta property="og:url" content="https://blog.huli.tw/2016/09/23/binary-search-introduction/index.html">
+<meta property="og:site_name" content="Huli">
+<meta property="og:description" content="前言 在寫程式的時候，其實會滿常用到「搜尋」的功能，最簡單的搜尋就是在一串數字裡面找出你想要的數字，而這也是我們今天的主題。 這一篇大致上會分成三個部分，第一部分會先介紹線性搜尋法，第二部分介紹二分搜尋法，最後一部分談談二分搜尋法在不同條件底下的實作方式會有什麼不同。">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="http://i.imgur.com/JkRIHFb.gif">
+<meta property="og:image" content="http://i.imgur.com/Bi6YcqA.gif">
+<meta property="og:updated_time" content="2019-09-25T11:32:59.364Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="淺談二分搜尋法">
+<meta name="twitter:description" content="前言 在寫程式的時候，其實會滿常用到「搜尋」的功能，最簡單的搜尋就是在一串數字裡面找出你想要的數字，而這也是我們今天的主題。 這一篇大致上會分成三個部分，第一部分會先介紹線性搜尋法，第二部分介紹二分搜尋法，最後一部分談談二分搜尋法在不同條件底下的實作方式會有什麼不同。">
+<meta name="twitter:image" content="http://i.imgur.com/JkRIHFb.gif">
+
+
+
+
+
+<link rel="icon" href="/img/lidemy_logo.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            background-image: url('/img/header_img/article-bg.png')
-            /*post*/
-        
-    }
     
-</style>
-
-<header class="intro-header" >
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#algorithm" title="algorithm">algorithm</a>
-                            
-                        </div>
-                        <h1>淺談二分搜尋法</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by Huli on
-                            2016-09-23
-                        </span>
-                    </div>
-                
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    
+    
+    
+    
+    
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49773306-3"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-49773306-3');
 </script>
 
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
+    
 
-<!-- Post Content -->
-<article>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
-        <div class="row">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    Huli
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章列表</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+            <a class="navbar-item " href="/recommend">推薦閱讀</a>
+            
+            <a class="navbar-item " href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" target="_blank" title="Medium" href="https://medium.com/@hulitw">
+                
+                <i class="fab fa-medium"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Twitter" href="https://twitter.com/aszx87410">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Facebook" href="https://www.facebook.com/profile.php?id=100000221410594">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
 
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h1><span id="前言">前言</span></h1>
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            淺談二分搜尋法
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-09-23T14:36:00.000Z" itemprop="datePublished">2016年9月23日(3 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1><span id="前言">前言</span></h1>
 <p>在寫程式的時候，其實會滿常用到「搜尋」的功能，最簡單的搜尋就是在一串數字裡面找出你想要的數字，而這也是我們今天的主題。</p>
 <p>這一篇大致上會分成三個部分，第一部分會先介紹線性搜尋法，第二部分介紹二分搜尋法，最後一部分談談二分搜尋法在不同條件底下的實作方式會有什麼不同。</p>
+<a id="more"></a>
 <h1><span id="線性搜尋法">線性搜尋法</span></h1>
 <p>為了由淺入深，我們從最基礎的線性搜尋法（Linear search）開始談起。</p>
 <p>就如同它的名字一樣，線性搜尋法就是「從頭到尾一個一個找」，時間複雜度為 O(n)，很容易理解也很好實作</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">linear_search</span>(<span class="params">array, target</span>)</span>&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;array.length; i++)&#123;</div><div class="line">    <span class="keyword">if</span>(array[i]==target) <span class="keyword">return</span> i;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//找不到</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>或是可以參考這個簡單的動畫，錄自<a href="https://www.cs.usfca.edu/~galles/visualization/Search.html" target="_blank" rel="external">Algorithm Visualizations</a><br>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">linear_search</span>(<span class="hljs-params">array, target</span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>; i&lt;array.length; i++)&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span>(array[i]==target) <span class="hljs-keyword">return</span> i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>; <span class="hljs-comment">//找不到</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>或是可以參考這個簡單的動畫，錄自<a href="https://www.cs.usfca.edu/~galles/visualization/Search.html" target="_blank" rel="noopener">Algorithm Visualizations</a><br>
 <img src="http://i.imgur.com/JkRIHFb.gif" alt="線性搜尋法動畫"></p>
 <h1><span id="二分搜尋法">二分搜尋法</span></h1>
 <p>假如今天要搜尋的數列是有序的，我們便可以把線性搜尋法再做優化，使時間複雜度再更低一點</p>
@@ -251,10 +204,10 @@ R 代表的是：最右邊有可能的值，假如有答案，一定在 &lt;=R �
 所以當L &gt; R 的時候，&gt;=L 跟 &lt;=R 已經是空集合了，代表不可能有答案</p>
 <p>這邊還有一個要特別注意的點是<code>(L+R)/2</code>這邊，當值很大的時候可能會造成 overflow<br>
 為了避免這種情形，可以改寫成<code>(R-L)/2 + L</code></p>
-<p>可以參考一樣從 <a href="https://www.cs.usfca.edu/~galles/visualization/Search.html" target="_blank" rel="external">Algorithm Visualizations</a> 錄製的簡單動畫</p>
+<p>可以參考一樣從 <a href="https://www.cs.usfca.edu/~galles/visualization/Search.html" target="_blank" rel="noopener">Algorithm Visualizations</a> 錄製的簡單動畫</p>
 <p>（藍色是 L，黃色是 R，綠色是 M，要找的數字是 180）<br>
 <img src="http://i.imgur.com/Bi6YcqA.gif" alt="二分搜尋法動畫"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">binary_search</span>(<span class="params">array, target</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> L = <span class="number">0</span>, R = array.length - <span class="number">1</span>;</div><div class="line">  <span class="keyword">while</span>(L&lt;=R) &#123;</div><div class="line">    <span class="keyword">var</span> M = <span class="built_in">Math</span>.floor((L+R)/<span class="number">2</span>);</div><div class="line">    <span class="keyword">if</span>(array[M]==target)&#123;</div><div class="line">      <span class="keyword">return</span> M;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(array[M]&gt;target) &#123;</div><div class="line">      R = M - <span class="number">1</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      L = M + <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">binary_search</span>(<span class="hljs-params">array, target</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">var</span> L = <span class="hljs-number">0</span>, R = array.length - <span class="hljs-number">1</span>;</span><br><span class="line">  <span class="hljs-keyword">while</span>(L&lt;=R) &#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> M = <span class="hljs-built_in">Math</span>.floor((L+R)/<span class="hljs-number">2</span>);</span><br><span class="line">    <span class="hljs-keyword">if</span>(array[M]==target)&#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> M;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(array[M]&gt;target) &#123;</span><br><span class="line">      R = M - <span class="hljs-number">1</span>;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      L = M + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1><span id="不同條件的二分搜尋法">不同條件的二分搜尋法</span></h1>
 <p>剛剛所介紹的二分搜尋法，就只是要求在一連串數列裡面回答說有沒有找到，有的話在第幾個位置有<br>
 如果數列裡面有重複的數字，而且條件稍微變更一下成：回傳「第一個」出現的位置<br>
@@ -268,12 +221,12 @@ R 代表的是：最右邊有可能的值，假如有答案，一定在 &lt;=R �
 <li>回傳最後一個 &lt;=target 的位置</li>
 <li>回傳最後一個 &lt;target 的位置</li>
 </ol>
-<p>（可參考：<a href="http://www.cplusplus.com/reference/algorithm/lower_bound/" target="_blank" rel="external">lower_bound</a>）<br>
+<p>（可參考：<a href="http://www.cplusplus.com/reference/algorithm/lower_bound/" target="_blank" rel="noopener">lower_bound</a>）<br>
 再搭配上剛剛所說的找等於 target 的第一個與最後一個的位置<br>
 可以知道這樣的變形總共有 6 種，那該怎麼辦呢？</p>
 <p>其實原理都很類似，一樣是用二分搜尋去排除最多的數字，但是在一些條件判斷上會有些微差異<br>
 如果弄得不好的話，很容易會造成無窮迴圈，例如說找最後一個小於target 的數：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">search</span>(<span class="params">array, target</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> L = <span class="number">0</span>, R = array.length - <span class="number">1</span>;</div><div class="line">  <span class="keyword">while</span>(L&lt;=R) &#123;</div><div class="line">    <span class="keyword">var</span> M = <span class="built_in">Math</span>.floor((L+R)/<span class="number">2</span>);</div><div class="line">    <span class="keyword">if</span>(array[M]&lt;target)&#123;</div><div class="line">      L = M;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      R = M - <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> M;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">search</span>(<span class="hljs-params">array, target</span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">var</span> L = <span class="hljs-number">0</span>, R = array.length - <span class="hljs-number">1</span>;</span><br><span class="line">  <span class="hljs-keyword">while</span>(L&lt;=R) &#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> M = <span class="hljs-built_in">Math</span>.floor((L+R)/<span class="hljs-number">2</span>);</span><br><span class="line">    <span class="hljs-keyword">if</span>(array[M]&lt;target)&#123;</span><br><span class="line">      L = M;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      R = M - <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> M;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>我們拿這一組範例去跑：<code>search([1,2,3,4,5],2)</code><br>
 剛開始 L=0, R=4, M=2<br>
 array[2] = 3 &gt; 2，所以 R = 2-1 = 1</p>
@@ -284,12 +237,12 @@ array[0] = 1 &lt; target，L = M = 0</p>
 一些條件沒有設定好，或許只是差一個等號或者是+1 -1，但就是搞不定</p>
 <p>網路上可以找到許多文章，都是在講解應該要怎麼設定這些條件：</p>
 <ol>
-<li><a href="http://www.cnblogs.com/ider/archive/2012/04/01/binary_search.html" target="_blank" rel="external">二分查找法的实现和应用汇总</a></li>
-<li><a href="http://duanple.blog.163.com/blog/static/709717672009049528185/" target="_blank" rel="external">漫谈二分查找-Binary Search </a></li>
-<li><a href="http://zhengboyang.com/2016/03/18/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E6%B3%95%E7%AE%80%E5%8D%95%E5%88%86%E6%9E%90%E4%B8%8E%E6%80%BB%E7%BB%93/" target="_blank" rel="external">二分搜索法简单分析与总结</a></li>
+<li><a href="http://www.cnblogs.com/ider/archive/2012/04/01/binary_search.html" target="_blank" rel="noopener">二分查找法的实现和应用汇总</a></li>
+<li><a href="http://duanple.blog.163.com/blog/static/709717672009049528185/" target="_blank" rel="noopener">漫谈二分查找-Binary Search </a></li>
+<li><a href="http://zhengboyang.com/2016/03/18/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E6%B3%95%E7%AE%80%E5%8D%95%E5%88%86%E6%9E%90%E4%B8%8E%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">二分搜索法简单分析与总结</a></li>
 </ol>
-<p>或是這篇知乎上的問答也有很多討論可以參考：<a href="https://www.zhihu.com/question/36132386" target="_blank" rel="external">二分查找有几种写法？它们的区别是什么？</a><br>
-其中我最喜歡的是<a href="https://www.zhihu.com/question/36132386/answer/97729337" target="_blank" rel="external">這個回答</a>：</p>
+<p>或是這篇知乎上的問答也有很多討論可以參考：<a href="https://www.zhihu.com/question/36132386" target="_blank" rel="noopener">二分查找有几种写法？它们的区别是什么？</a><br>
+其中我最喜歡的是<a href="https://www.zhihu.com/question/36132386/answer/97729337" target="_blank" rel="noopener">這個回答</a>：</p>
 <blockquote>
 <p>说到面试，其实这题的难点在于最后边界条件，那么我们根本不用判断那个边界，二分到区间小到一定程<br>
 度，比如5个元素以下，就顺序查找好了，反正也是O(lgN)的，而且最后5个元素顺序查找平均也只需要比较两三次而已，跟你二分差不多，我本人也很推荐在实际工程中这样写，可以规避很多麻烦的bug，用最稳妥的办法解决问题</p>
@@ -303,303 +256,277 @@ array[0] = 1 &lt; target，L = M = 0</p>
 <li>當這區間剩下的數很少時，改用線性搜尋</li>
 </ol>
 <p>這樣就不用怕碰到無窮迴圈的問題了，下面附上程式碼：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 傳回最後一個 &lt; target 的數</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">lower_bound</span>(<span class="params">array, target</span>) </span>&#123;</div><div class="line">	</div><div class="line">  <span class="comment">// 先看看是否沒答案</span></div><div class="line">  <span class="comment">// 如果第一個數還是沒有 &lt; target，代表沒答案</span></div><div class="line">  <span class="keyword">if</span>(array[<span class="number">0</span>]&gt;=target) <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">  </div><div class="line">  <span class="comment">// 結束條件是區間內剩兩個數字的時候</span></div><div class="line">  <span class="keyword">var</span> L = <span class="number">0</span>, R = array.length<span class="number">-1</span>;</div><div class="line">  <span class="keyword">while</span>((R-L+<span class="number">1</span>)&gt;<span class="number">2</span>) &#123;</div><div class="line">    <span class="keyword">var</span> M = <span class="built_in">Math</span>.floor((L+R)/<span class="number">2</span>);</div><div class="line">    <span class="keyword">if</span>(array[M]&lt;target)&#123;</div><div class="line">      L = M;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      R = M - <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">// 在答案範圍內用線性搜尋</span></div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=R; i&gt;=L; i--)&#123;</div><div class="line">  	<span class="keyword">if</span>(array[i]&lt;target)&#123;</div><div class="line">  		<span class="keyword">return</span> i;</div><div class="line">  	&#125;</div><div class="line">  &#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 傳回最後一個 &lt; target 的數</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">lower_bound</span>(<span class="hljs-params">array, target</span>) </span>&#123;</span><br><span class="line">	</span><br><span class="line">  <span class="hljs-comment">// 先看看是否沒答案</span></span><br><span class="line">  <span class="hljs-comment">// 如果第一個數還是沒有 &lt; target，代表沒答案</span></span><br><span class="line">  <span class="hljs-keyword">if</span>(array[<span class="hljs-number">0</span>]&gt;=target) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment">// 結束條件是區間內剩兩個數字的時候</span></span><br><span class="line">  <span class="hljs-keyword">var</span> L = <span class="hljs-number">0</span>, R = array.length<span class="hljs-number">-1</span>;</span><br><span class="line">  <span class="hljs-keyword">while</span>((R-L+<span class="hljs-number">1</span>)&gt;<span class="hljs-number">2</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> M = <span class="hljs-built_in">Math</span>.floor((L+R)/<span class="hljs-number">2</span>);</span><br><span class="line">    <span class="hljs-keyword">if</span>(array[M]&lt;target)&#123;</span><br><span class="line">      L = M;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      R = M - <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment">// 在答案範圍內用線性搜尋</span></span><br><span class="line">  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=R; i&gt;=L; i--)&#123;</span><br><span class="line">  	<span class="hljs-keyword">if</span>(array[i]&lt;target)&#123;</span><br><span class="line">  		<span class="hljs-keyword">return</span> i;</span><br><span class="line">  	&#125;</span><br><span class="line">  &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>就算條件變得不一樣，例如說要找：<code>&gt;=target</code>, <code>&lt;target</code> 等等的，只要改一下條件，用差不多的架構就可以得到解答</p>
 <h1><span id="結論">結論</span></h1>
 <p>其實原本我是想好好研究一下在不同狀況下的二分搜，那些條件到底要怎麼訂，有沒有什麼統一的規則可以參考<br>
 但最後覺得還是文末給出的解法最方便，不但好想，而且還好寫<br>
 不用去顧慮那些&lt;&gt;=的符號跟+1-1的問題，在執行效率上也差不多</p>
 <p>在演算法這一塊我也不是專業的，若是文章之中有哪部分有錯的話，還麻煩各位前輩指正 &lt;(_ _)&gt;</p>
-<p>最後附上不嚴謹的測試與各種版本的 JavaScript 程式碼：<a href="https://repl.it/DgDU/1" target="_blank" rel="external">https://repl.it/DgDU/1</a></p>
-
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2016/09/29/fast-restful-nodejs-api-backend/" data-toggle="tooltip" data-placement="top" title="用 Node.js 快速打造 RESTful API">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2016/08/01/little-big-angry-1-unable-to-cancel-your-subscription-to-the-newsletter/" data-toggle="tooltip" data-placement="top" title="小地方大生氣 #1：無法取消訂閱的電子報">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
-            </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
+<p>最後附上不嚴謹的測試與各種版本的 JavaScript 程式碼：<a href="https://repl.it/DgDU/1" target="_blank" rel="noopener">https://repl.it/DgDU/1</a></p>
 
     
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#線性搜尋法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">線性搜尋法</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#二分搜尋法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">二分搜尋法</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#不同條件的二分搜尋法"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">不同條件的二分搜尋法</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#結論"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">結論</span></a></li></ol>
-        
-        </div>
-      </aside>
-    
-
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#algorithm" title="algorithm">algorithm</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
-                    
-                </ul>
-                
-            </div>
-        </div>
     </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Algorithm/">#Algorithm</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2016/09/29/fast-restful-nodejs-api-backend/">用 Node.js 快速打造 RESTful API</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2016/07/21/the-battle-against-ddos-nginx-iptables-and-fail2ban/">[心得] 與 DDoS 奮戰：nginx, iptables 與 fail2ban</a>
+            
+        </span>
+    </div>
+    
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d8b39b069ba670012bf92b9&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
 
 
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "huli";
-    var disqus_identifier = "https://blog.huli.tw/2016/09/23/binary-search-introduction/";
-    var disqus_url = "https://blog.huli.tw/2016/09/23/binary-search-introduction/";
 
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://blog.huli.tw/2016/09/23/binary-search-introduction/';
+        this.page.identifier = '2016/09/23/binary-search-introduction/';
+        
+        this.language = 'en';
+        
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'huli' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<!-- disqus embedded js code start end -->
 
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
 
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'left',
-          icon: 'ℬ'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+    </div>
+</section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/aszx87410">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Huli 2017 
-                    <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
-                    </iframe>
-                </p>
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Huli&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
-
-
-<!-- async load function -->
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-tw");
+</script>
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
     <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
         })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
     </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+
+    
+    
+
+    
 
 
-<!-- jquery.tagcloud.js -->
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-<!--fastClick.js -->
-<script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-<!-- Google Analytics -->
-
-
-<script>
-    // dynamic User by Hux
-    var _gaId = 'UA-49773306-3';
-    var _gaDomain = 'blog.huli.tw';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-</script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
-<!-- Image to hack wechat -->
-<img src="https://blog.huli.tw/img/huli_logo.jpg" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js"></script>
+    
 </body>
-
 </html>

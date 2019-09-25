@@ -1,233 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword"  content="">
-    <link rel="shortcut icon" href="/img/lidemy_logo.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          [Android] 人人都會的 apk 反編譯 - Huli&#39;s blog
-        
-    </title>
+<title>[Android] 人人都會的 apk 反編譯 - Huli</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="canonical" href="https://blog.huli.tw/2016/03/20/android-apk-decompile/">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+
+
+<meta name="description" content>
+
+
+
+
+
+    <meta name="description" content="前言 對於 Android 工程師來說，了解如何反編譯可以增進自己對 Android 底層的理解，也可以思考如何保護自己的 apk 不被反編譯。 對於一般人來說，許多現成的工具可以幫助我們非常輕鬆的、只要打打幾個指令就可以反編譯 apk，看到 java source code，滿足自己的好奇心。 本篇文章只介紹一些工具的使用，適合初學者觀看。若是想了解更底層的知識，可以參考文末附上的延伸閱讀。">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Android] 人人都會的 apk 反編譯">
+<meta property="og:url" content="https://blog.huli.tw/2016/03/20/android-apk-decompile/index.html">
+<meta property="og:site_name" content="Huli">
+<meta property="og:description" content="前言 對於 Android 工程師來說，了解如何反編譯可以增進自己對 Android 底層的理解，也可以思考如何保護自己的 apk 不被反編譯。 對於一般人來說，許多現成的工具可以幫助我們非常輕鬆的、只要打打幾個指令就可以反編譯 apk，看到 java source code，滿足自己的好奇心。 本篇文章只介紹一些工具的使用，適合初學者觀看。若是想了解更底層的知識，可以參考文末附上的延伸閱讀。">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="http://user-image.logdown.io/user/7013/blog/6977/post/661513/uVN5gnA0QC6PEdujMIZg_device-2016-03-20-152510.png">
+<meta property="og:image" content="http://user-image.logdown.io/user/7013/blog/6977/post/661513/Ahk6ZkFOQm7ECISEyxMI_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-03-20%20%E4%B8%8B%E5%8D%883.32.47.png">
+<meta property="og:image" content="http://user-image.logdown.io/user/7013/blog/6977/post/661513/RNKaPElHQA2BJ02proFr_device-2016-03-20-160501.png">
+<meta property="og:image" content="http://user-image.logdown.io/user/7013/blog/6977/post/661513/zrnTKCQgT0OeIPbkkfp8_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-03-20%20%E4%B8%8B%E5%8D%884.10.15.png">
+<meta property="og:updated_time" content="2019-09-25T11:32:52.648Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Android] 人人都會的 apk 反編譯">
+<meta name="twitter:description" content="前言 對於 Android 工程師來說，了解如何反編譯可以增進自己對 Android 底層的理解，也可以思考如何保護自己的 apk 不被反編譯。 對於一般人來說，許多現成的工具可以幫助我們非常輕鬆的、只要打打幾個指令就可以反編譯 apk，看到 java source code，滿足自己的好奇心。 本篇文章只介紹一些工具的使用，適合初學者觀看。若是想了解更底層的知識，可以參考文末附上的延伸閱讀。">
+<meta name="twitter:image" content="http://user-image.logdown.io/user/7013/blog/6977/post/661513/uVN5gnA0QC6PEdujMIZg_device-2016-03-20-152510.png">
+
+
+
+
+
+<link rel="icon" href="/img/lidemy_logo.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            background-image: url('/img/header_img/article-bg.png')
-            /*post*/
-        
-    }
     
-</style>
-
-<header class="intro-header" >
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#Android" title="Android">Android</a>
-                            
-                        </div>
-                        <h1>[Android] 人人都會的 apk 反編譯</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by Huli on
-                            2016-03-20
-                        </span>
-                    </div>
-                
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    
+    
+    
+    
+    
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49773306-3"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-49773306-3');
 </script>
 
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
+    
 
-<!-- Post Content -->
-<article>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
-        <div class="row">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    Huli
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章列表</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+            <a class="navbar-item " href="/recommend">推薦閱讀</a>
+            
+            <a class="navbar-item " href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" target="_blank" title="Medium" href="https://medium.com/@hulitw">
+                
+                <i class="fab fa-medium"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Twitter" href="https://twitter.com/aszx87410">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Facebook" href="https://www.facebook.com/profile.php?id=100000221410594">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
 
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h2><span id="前言">前言</span></h2>
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            [Android] 人人都會的 apk 反編譯
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-03-20T14:11:00.000Z" itemprop="datePublished">2016年3月20日(4 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Android/">Android</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h2><span id="前言">前言</span></h2>
 <p>對於 Android 工程師來說，了解如何反編譯可以增進自己對 Android 底層的理解，也可以思考如何保護自己的 apk 不被反編譯。<br>
 對於一般人來說，許多現成的工具可以幫助我們非常輕鬆的、只要打打幾個指令就可以反編譯 apk，看到 java source code，滿足自己的好奇心。<br>
 本篇文章只介紹一些工具的使用，適合初學者觀看。若是想了解更底層的知識，可以參考文末附上的延伸閱讀。</p>
+<a id="more"></a>
 <h2><span id="事前準備">事前準備</span></h2>
 <p>首先，我們需要一個用來被破解的 apk，簡單用任何你平常熟悉的工具自己 build 一個就好了<br>
-架構很簡單，只要一個 <code>MainActivity</code> 跟兩個<code>TextView</code>就好</p>
-<figure class="highlight java"><figcaption><span>MainActivity.java</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        TextView text = (TextView)findViewById(R.id.text);</div><div class="line">        text.setText(<span class="string">"Taiwan No1"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight xml"><figcaption><span>activity_main.xml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"@string/hello_world"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/text"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+架構很簡單，只要一個 <code>MainActivity</code> 跟兩個<code>TextView</code>就好<br>
+<figure class="highlight java hljs"><figcaption><span>MainActivity.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView text = (TextView)findViewById(R.id.text);</span><br><span class="line">        text.setText(<span class="hljs-string">"Taiwan No1"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight xml hljs"><figcaption><span>activity_main.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:text</span>=<span class="hljs-string">"@string/hello_world"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/text"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>安裝到手機上之後，會看到這樣的畫面：<br>
 <img src="http://user-image.logdown.io/user/7013/blog/6977/post/661513/uVN5gnA0QC6PEdujMIZg_device-2016-03-20-152510.png" alt="device-2016-03-20-152510.png"></p>
 <h2><span id="實際動手">實際動手</span></h2>
 <p>好，這個就是我們要拿來測試的 apk 了<br>
 接著你需要一些非常好用的工具</p>
 <ol>
-<li><a href="http://ibotpeaches.github.io/Apktool/" target="_blank" rel="external">apktool</a></li>
-<li><a href="http://jd.benow.ca/" target="_blank" rel="external">jd-gui</a></li>
-<li><a href="https://sourceforge.net/projects/dex2jar/" target="_blank" rel="external">dex2jar</a></li>
+<li><a href="http://ibotpeaches.github.io/Apktool/" target="_blank" rel="noopener">apktool</a></li>
+<li><a href="http://jd.benow.ca/" target="_blank" rel="noopener">jd-gui</a></li>
+<li><a href="https://sourceforge.net/projects/dex2jar/" target="_blank" rel="noopener">dex2jar</a></li>
 </ol>
 <p>如何安裝就不再贅述了，大家看看文件或是上網搜尋一下就會有一堆解答<br>
 <code>apktool</code>是拿來把 apk 拆開用的，可以反編譯 apk 之後，看到 <code>smali</code> 檔案跟 <code>resource</code><br>
@@ -235,18 +190,18 @@
 <p>接著我們開啟 terminal，到剛剛那個示範 apk 的目錄底下，執行<code>apktool d APKNAME.apk</code><br>
 <img src="http://user-image.logdown.io/user/7013/blog/6977/post/661513/Ahk6ZkFOQm7ECISEyxMI_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-03-20%20%E4%B8%8B%E5%8D%883.32.47.png" alt="螢幕快照 2016-03-20 下午3.32.47.png"></p>
 <p>執行以後，會自動生成一個<code>APKNAME</code>的資料夾，裡面就是反編譯出來的東西了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── AndroidManifest.xml</div><div class="line">├── apktool.yml</div><div class="line">├── original</div><div class="line">├── res</div><div class="line">└── smali</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── AndroidManifest.xml</span><br><span class="line">├── apktool.yml</span><br><span class="line">├── original</span><br><span class="line">├── res</span><br><span class="line">└── smali</span><br></pre></td></tr></table></figure></p>
 <p>其中比較值得講的是<code>smali</code>這個資料夾，其實這裡面就是你的 source code，只是格式不太一樣<br>
 你可以在<code>smali</code>這資料夾裡面找到你的<code>MainActivity.java</code>，內容如下：<br>
 （覺得長得很奇怪是很正常的事，但是認真多看幾眼，你會發現其實沒那麼難懂）</p>
-<figure class="highlight java"><figcaption><span>MainActivity.java</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">.class <span class="keyword">public</span> Lapktest/huli/com/apkdecompile/MainActivity;</div><div class="line">.<span class="keyword">super</span> Landroid/app/Activity;</div><div class="line">.source <span class="string">"MainActivity.java"</span></div><div class="line"></div><div class="line"># direct methods</div><div class="line">.method <span class="keyword">public</span> constructor &lt;init&gt;()V</div><div class="line">    .locals <span class="number">0</span></div><div class="line"></div><div class="line">    .prologue</div><div class="line">    .line <span class="number">8</span></div><div class="line">    invoke-direct &#123;p0&#125;, Landroid/app/Activity;-&gt;&lt;init&gt;()V</div><div class="line"></div><div class="line">    <span class="keyword">return</span>-<span class="keyword">void</span></div><div class="line">.end method</div><div class="line"></div><div class="line"># virtual methods</div><div class="line">.<span class="function">method <span class="keyword">protected</span> <span class="title">onCreate</span><span class="params">(Landroid/os/Bundle;)</span>V</span></div><div class="line"><span class="function">    .locals 2</span></div><div class="line"><span class="function">    .param p1, "savedInstanceState"    # Landroid/os/Bundle</span>;</div><div class="line"></div><div class="line">    .prologue</div><div class="line">    .line <span class="number">12</span></div><div class="line">    invoke-<span class="keyword">super</span> &#123;p0, p1&#125;, Landroid/app/Activity;-&gt;onCreate(Landroid/os/Bundle;)V</div><div class="line"></div><div class="line">    .line <span class="number">13</span></div><div class="line">    <span class="keyword">const</span> v1, <span class="number">0x7f040019</span></div><div class="line"></div><div class="line">    invoke-virtual &#123;p0, v1&#125;, Lapktest/huli/com/apkdecompile/MainActivity;-&gt;setContentView(I)V</div><div class="line"></div><div class="line">    .line <span class="number">14</span></div><div class="line">    <span class="keyword">const</span> v1, <span class="number">0x7f0c0050</span></div><div class="line"></div><div class="line">    invoke-virtual &#123;p0, v1&#125;, Lapktest/huli/com/apkdecompile/MainActivity;-&gt;findViewById(I)Landroid/view/View;</div><div class="line"></div><div class="line">    move-result-object v0</div><div class="line"></div><div class="line">    check-cast v0, Landroid/widget/TextView;</div><div class="line"></div><div class="line">    .line <span class="number">15</span></div><div class="line">    .local v0, <span class="string">"text"</span>:Landroid/widget/TextView;</div><div class="line">    <span class="keyword">const</span>-string v1, <span class="string">"Taiwan No1"</span></div><div class="line"></div><div class="line">    invoke-virtual &#123;v0, v1&#125;, Landroid/widget/TextView;-&gt;setText(Ljava/lang/CharSequence;)V</div><div class="line"></div><div class="line">    .line <span class="number">16</span></div><div class="line">    <span class="keyword">return</span>-<span class="keyword">void</span></div><div class="line">.end method</div></pre></td></tr></table></figure>
+<p><figure class="highlight java hljs"><figcaption><span>MainActivity.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">.class <span class="hljs-keyword">public</span> Lapktest/huli/com/apkdecompile/MainActivity;</span><br><span class="line">.<span class="hljs-keyword">super</span> Landroid/app/Activity;</span><br><span class="line">.source <span class="hljs-string">"MainActivity.java"</span></span><br><span class="line"></span><br><span class="line"># direct methods</span><br><span class="line">.method <span class="hljs-keyword">public</span> constructor &lt;init&gt;()V</span><br><span class="line">    .locals <span class="hljs-number">0</span></span><br><span class="line"></span><br><span class="line">    .prologue</span><br><span class="line">    .line <span class="hljs-number">8</span></span><br><span class="line">    invoke-direct &#123;p0&#125;, Landroid/app/Activity;-&gt;&lt;init&gt;()V</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span>-<span class="hljs-keyword">void</span></span><br><span class="line">.end method</span><br><span class="line"></span><br><span class="line"># virtual methods</span><br><span class="line">.<span class="hljs-function">method <span class="hljs-keyword">protected</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Landroid/os/Bundle;)</span>V</span></span><br><span class="line"><span class="hljs-function">    .locals 2</span></span><br><span class="line"><span class="hljs-function">    .param p1, "savedInstanceState"    # Landroid/os/Bundle</span>;</span><br><span class="line"></span><br><span class="line">    .prologue</span><br><span class="line">    .line <span class="hljs-number">12</span></span><br><span class="line">    invoke-<span class="hljs-keyword">super</span> &#123;p0, p1&#125;, Landroid/app/Activity;-&gt;onCreate(Landroid/os/Bundle;)V</span><br><span class="line"></span><br><span class="line">    .line <span class="hljs-number">13</span></span><br><span class="line">    <span class="hljs-keyword">const</span> v1, <span class="hljs-number">0x7f040019</span></span><br><span class="line"></span><br><span class="line">    invoke-virtual &#123;p0, v1&#125;, Lapktest/huli/com/apkdecompile/MainActivity;-&gt;setContentView(I)V</span><br><span class="line"></span><br><span class="line">    .line <span class="hljs-number">14</span></span><br><span class="line">    <span class="hljs-keyword">const</span> v1, <span class="hljs-number">0x7f0c0050</span></span><br><span class="line"></span><br><span class="line">    invoke-virtual &#123;p0, v1&#125;, Lapktest/huli/com/apkdecompile/MainActivity;-&gt;findViewById(I)Landroid/view/View;</span><br><span class="line"></span><br><span class="line">    move-result-object v0</span><br><span class="line"></span><br><span class="line">    check-cast v0, Landroid/widget/TextView;</span><br><span class="line"></span><br><span class="line">    .line <span class="hljs-number">15</span></span><br><span class="line">    .local v0, <span class="hljs-string">"text"</span>:Landroid/widget/TextView;</span><br><span class="line">    <span class="hljs-keyword">const</span>-string v1, <span class="hljs-string">"Taiwan No1"</span></span><br><span class="line"></span><br><span class="line">    invoke-virtual &#123;v0, v1&#125;, Landroid/widget/TextView;-&gt;setText(Ljava/lang/CharSequence;)V</span><br><span class="line"></span><br><span class="line">    .line <span class="hljs-number">16</span></span><br><span class="line">    <span class="hljs-keyword">return</span>-<span class="hljs-keyword">void</span></span><br><span class="line">.end method</span><br></pre></td></tr></table></figure></p>
 <p>你可以仔細對照一下剛剛自己寫的 java code，會發現只是換了種格式而已</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setContentView(R.layout.activity_main);</div></pre></td></tr></table></figure>
+<p><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setContentView(R.layout.activity_main);</span><br></pre></td></tr></table></figure></p>
 <p>其實就等於</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.line <span class="number">13</span></div><div class="line"><span class="keyword">const</span> v1, <span class="number">0x7f040019</span></div><div class="line">invoke-virtual &#123;p0, v1&#125;, Lapktest/huli/com/apkdecompile/MainActivity;-&gt;setContentView(I)V</div></pre></td></tr></table></figure>
+<p><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.line <span class="hljs-number">13</span></span><br><span class="line"><span class="hljs-keyword">const</span> v1, <span class="hljs-number">0x7f040019</span></span><br><span class="line">invoke-virtual &#123;p0, v1&#125;, Lapktest/huli/com/apkdecompile/MainActivity;-&gt;setContentView(I)V</span><br></pre></td></tr></table></figure></p>
 <p>你可能會好奇，這個<code>0x7f040019</code>是哪來的？<br>
-事實上，你可以在<code>res/values/public.xml</code>這個檔案裡面找到答案：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">public</span> <span class="attr">type</span>=<span class="string">"layout"</span> <span class="attr">name</span>=<span class="string">"activity_main"</span> <span class="attr">id</span>=<span class="string">"0x7f040019"</span> /&gt;</span></div></pre></td></tr></table></figure>
+事實上，你可以在<code>res/values/public.xml</code>這個檔案裡面找到答案：<br>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">public</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"layout"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"activity_main"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"0x7f040019"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>到這裡，應該就可以大概猜出 Android 在編譯時候的流程</p>
 <ol>
 <li>把所有資源檔壓縮、處理並且包在一起，產生<code>id與記憶體位置對照表</code></li>
@@ -254,14 +209,14 @@
 <li>把 java code 變成 smali code（有點像把 C 變成組合語言的程式碼那樣）</li>
 </ol>
 <h2><span id="修改">修改</span></h2>
-<p>在剛剛的<code>smali</code>裡面，有這麼一段：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.line <span class="number">15</span></div><div class="line">.local v0, <span class="string">"text"</span>:Landroid/widget/TextView;</div><div class="line"><span class="keyword">const</span>-string v1, <span class="string">"Taiwan No1"</span></div><div class="line"></div><div class="line">invoke-virtual &#123;v0, v1&#125;, Landroid/widget/TextView;-&gt;setText(Ljava/lang/CharSequence;)V</div></pre></td></tr></table></figure>
+<p>在剛剛的<code>smali</code>裡面，有這麼一段：<br>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.line <span class="hljs-number">15</span></span><br><span class="line">.local v0, <span class="hljs-string">"text"</span>:Landroid/widget/TextView;</span><br><span class="line"><span class="hljs-keyword">const</span>-string v1, <span class="hljs-string">"Taiwan No1"</span></span><br><span class="line"></span><br><span class="line">invoke-virtual &#123;v0, v1&#125;, Landroid/widget/TextView;-&gt;setText(Ljava/lang/CharSequence;)V</span><br></pre></td></tr></table></figure></p>
 <p>讓我們把<code>Taiwan No1</code>換成<code>T@iw@n n0!</code><br>
 還記得另一個<code>TextView</code>有用到<code>R.string.hello_world</code>嗎？<br>
-在<code>res/values/strings.xml</code>裡面，可以找到這一串的定義：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"hello_world"</span>&gt;</span>Hello world!<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>改成</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"hello_world"</span>&gt;</span>HELLO WORLD<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div></pre></td></tr></table></figure>
+在<code>res/values/strings.xml</code>裡面，可以找到這一串的定義：<br>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">string</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"hello_world"</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>改成<br>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">string</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"hello_world"</span>&gt;</span>HELLO WORLD<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>確定都有改完以後，就可以把這些程式碼再度「組裝」回去<br>
 還記得剛剛反編譯的指令嗎？<code>apktool d APK_NAME.apk</code><br>
 這邊的<code>d</code>就是<code>decompile</code>的意思，所以如果要逆向組裝回去，就是<code>b</code>，<code>build</code></p>
@@ -291,302 +246,276 @@
 這邊的話以後有機會再介紹</p>
 <h2><span id="延伸閱讀">延伸閱讀</span></h2>
 <ol>
-<li><a href="https://magiclen.org/android-decompiler/" target="_blank" rel="external">Android 反編譯與防止被反編譯</a></li>
-<li><a href="http://aiur3908.blogspot.tw/2015/07/android-proguard.html" target="_blank" rel="external">[Android] 程式碼混淆(ProGuard)與反組譯</a></li>
-<li><a href="http://blog.davidou.org/archives/553" target="_blank" rel="external">[Android] 反組譯 破解Android的apk安裝檔</a></li>
-<li><a href="http://www.wangchenlong.org/2016/03/19/reverse-analyze-apk/" target="_blank" rel="external">反编译的常用工具与使用方法</a></li>
-<li><a href="http://blog.csdn.net/wdaming1986/article/details/8299996" target="_blank" rel="external">Smali–Dalvik虚拟机指令语言–&gt;【android_smali语法学习一】</a></li>
-<li><a href="http://blog.isming.me/2015/01/14/android-decompile-smali/" target="_blank" rel="external">android反编译-smali语法</a></li>
+<li><a href="https://magiclen.org/android-decompiler/" target="_blank" rel="noopener">Android 反編譯與防止被反編譯</a></li>
+<li><a href="http://aiur3908.blogspot.tw/2015/07/android-proguard.html" target="_blank" rel="noopener">[Android] 程式碼混淆(ProGuard)與反組譯</a></li>
+<li><a href="http://blog.davidou.org/archives/553" target="_blank" rel="noopener">[Android] 反組譯 破解Android的apk安裝檔</a></li>
+<li><a href="http://www.wangchenlong.org/2016/03/19/reverse-analyze-apk/" target="_blank" rel="noopener">反编译的常用工具与使用方法</a></li>
+<li><a href="http://blog.csdn.net/wdaming1986/article/details/8299996" target="_blank" rel="noopener">Smali–Dalvik虚拟机指令语言–&gt;【android_smali语法学习一】</a></li>
+<li><a href="http://blog.isming.me/2015/01/14/android-decompile-smali/" target="_blank" rel="noopener">android反编译-smali语法</a></li>
 </ol>
 
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2016/03/28/tsinghua-dsa-w1/" data-toggle="tooltip" data-placement="top" title="[心得] 北京清華數據結構 W1">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2016/03/08/android-keystore-command-hash-sha1/" data-toggle="tooltip" data-placement="top" title="[Android] keystore 相關指令">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
-            </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
-
     
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#事前準備"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">事前準備</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#實際動手"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">實際動手</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#修改"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">修改</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#總結"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">總結</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#延伸閱讀"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">延伸閱讀</span></a></li></ol>
-        
-        </div>
-      </aside>
-    
-
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#Android" title="Android">Android</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
-                    
-                </ul>
-                
-            </div>
-        </div>
     </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Android/">#Android</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2016/03/28/cs50-programming-course-like-ocean/">如海洋般的程式課程：CS50</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2016/01/19/my-ideal-interview-process/">我心目中的理想面試流程</a>
+            
+        </span>
+    </div>
+    
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d8b39b069ba670012bf92b9&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
 
 
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "huli";
-    var disqus_identifier = "https://blog.huli.tw/2016/03/20/android-apk-decompile/";
-    var disqus_url = "https://blog.huli.tw/2016/03/20/android-apk-decompile/";
 
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://blog.huli.tw/2016/03/20/android-apk-decompile/';
+        this.page.identifier = '2016/03/20/android-apk-decompile/';
+        
+        this.language = 'en';
+        
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'huli' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<!-- disqus embedded js code start end -->
 
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
 
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'left',
-          icon: 'ℬ'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+    </div>
+</section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/aszx87410">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Huli 2017 
-                    <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
-                    </iframe>
-                </p>
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Huli&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
-
-
-<!-- async load function -->
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-tw");
+</script>
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
     <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
         })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
     </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+
+    
+    
+
+    
 
 
-<!-- jquery.tagcloud.js -->
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-<!--fastClick.js -->
-<script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-<!-- Google Analytics -->
-
-
-<script>
-    // dynamic User by Hux
-    var _gaId = 'UA-49773306-3';
-    var _gaDomain = 'blog.huli.tw';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-</script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
-<!-- Image to hack wechat -->
-<img src="https://blog.huli.tw/img/huli_logo.jpg" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js"></script>
+    
 </body>
-
 </html>

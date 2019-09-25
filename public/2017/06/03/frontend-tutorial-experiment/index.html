@@ -1,217 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword"  content="">
-    <link rel="shortcut icon" href="/img/lidemy_logo.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          一場三十人的免費程式教學實驗：成果與檢討 - Huli&#39;s blog
-        
-    </title>
+<title>一場三十人的免費程式教學實驗：成果與檢討 - Huli</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="canonical" href="https://blog.huli.tw/2017/06/03/frontend-tutorial-experiment/">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+
+
+<meta name="description" content>
+
+
+
+
+
+    <meta name="description" content="緣起 在三個月前，我在 ptt 上 po 文（[分享] 免費程式教學(前端)），說我願意提供一系列的免費程式前端教學。只要是有網頁基礎的都能夠報名，歡迎大家寫信給我，並且附上幾個提問的回答，最後我會挑 5~10 個人進行培訓。">
+<meta name="keywords" content="Story">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一場三十人的免費程式教學實驗：成果與檢討">
+<meta property="og:url" content="https://blog.huli.tw/2017/06/03/frontend-tutorial-experiment/index.html">
+<meta property="og:site_name" content="Huli">
+<meta property="og:description" content="緣起 在三個月前，我在 ptt 上 po 文（[分享] 免費程式教學(前端)），說我願意提供一系列的免費程式前端教學。只要是有網頁基礎的都能夠報名，歡迎大家寫信給我，並且附上幾個提問的回答，最後我會挑 5~10 個人進行培訓。">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://lh3.googleusercontent.com/sLNEwU6lsl-Z4pfvinvCQJnAgeuXNjlELPOizkqrgaMpMGDPOiDKsritR31V9dVJV--tIKI1B2Tei0p-0Gn0lGriudKFoNw2433zGKlPtQUWv1t4mpqZpy9DTWtH6z7H6068Lq6OqWNODHFL6B_m2uFyGpAxMscaUAMG2Ux1YDZSeFu5zbxEPDwbAPh5T8qASA3Nph0lMQemC4PreyCMkZVBypAM3jxnGh-AyAr63gMy5df7zdldO6pK-K-bAj0xLfAMq3NvM9ISYinh9nRV3Dl3SqGceZeFvWqCWukqRVhaDTbuE1mivd1lmZQW1Xr6N_vZ7BRijfeoGbBy-FMOa1OWtlk2REpMuqnIq31UNEkH8LPJMQAPi61BfuLxce-JhFLKmq8pAKALQSBGVnXZhHScVbwYz2sxn54PHrQvQ1jAVOkJXRtAHFopQ-8FkC-xchzudzm0K0bFtcP7si5uYW9Qsz89emofRJw5FnGUstQeE3tjpbCUdV3FH1_rucXmMXfkiTPrwO7O6wfrepNkFKI4ozi33jilRdSsboUW1ni5NcDF_QF59ithYoZyb9Dbc2NYDpoRiUMg81uFjDPhuRr_J2cnnaHjPo6D4EouhYJPtu75EWDZCu-F83c92-M0MdmRzGQiY30_GiEZxtmdk4Of4EJE2Y_4QyoQD21axQ=w1066-h567-no">
+<meta property="og:updated_time" content="2019-09-25T11:31:01.101Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一場三十人的免費程式教學實驗：成果與檢討">
+<meta name="twitter:description" content="緣起 在三個月前，我在 ptt 上 po 文（[分享] 免費程式教學(前端)），說我願意提供一系列的免費程式前端教學。只要是有網頁基礎的都能夠報名，歡迎大家寫信給我，並且附上幾個提問的回答，最後我會挑 5~10 個人進行培訓。">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/sLNEwU6lsl-Z4pfvinvCQJnAgeuXNjlELPOizkqrgaMpMGDPOiDKsritR31V9dVJV--tIKI1B2Tei0p-0Gn0lGriudKFoNw2433zGKlPtQUWv1t4mpqZpy9DTWtH6z7H6068Lq6OqWNODHFL6B_m2uFyGpAxMscaUAMG2Ux1YDZSeFu5zbxEPDwbAPh5T8qASA3Nph0lMQemC4PreyCMkZVBypAM3jxnGh-AyAr63gMy5df7zdldO6pK-K-bAj0xLfAMq3NvM9ISYinh9nRV3Dl3SqGceZeFvWqCWukqRVhaDTbuE1mivd1lmZQW1Xr6N_vZ7BRijfeoGbBy-FMOa1OWtlk2REpMuqnIq31UNEkH8LPJMQAPi61BfuLxce-JhFLKmq8pAKALQSBGVnXZhHScVbwYz2sxn54PHrQvQ1jAVOkJXRtAHFopQ-8FkC-xchzudzm0K0bFtcP7si5uYW9Qsz89emofRJw5FnGUstQeE3tjpbCUdV3FH1_rucXmMXfkiTPrwO7O6wfrepNkFKI4ozi33jilRdSsboUW1ni5NcDF_QF59ithYoZyb9Dbc2NYDpoRiUMg81uFjDPhuRr_J2cnnaHjPo6D4EouhYJPtu75EWDZCu-F83c92-M0MdmRzGQiY30_GiEZxtmdk4Of4EJE2Y_4QyoQD21axQ=w1066-h567-no">
+
+
+
+
+
+<link rel="icon" href="/img/lidemy_logo.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            background-image: url('/img/header_img/article-bg.png')
-            /*post*/
-        
-    }
     
-</style>
-
-<header class="intro-header" >
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#story" title="story">story</a>
-                            
-                        </div>
-                        <h1>一場三十人的免費程式教學實驗：成果與檢討</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by Huli on
-                            2017-06-03
-                        </span>
-                    </div>
-                
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    
+    
+    
+    
+    
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49773306-3"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-49773306-3');
 </script>
 
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
+    
 
-<!-- Post Content -->
-<article>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
-        <div class="row">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    Huli
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章列表</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+            <a class="navbar-item " href="/recommend">推薦閱讀</a>
+            
+            <a class="navbar-item " href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" target="_blank" title="Medium" href="https://medium.com/@hulitw">
+                
+                <i class="fab fa-medium"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Twitter" href="https://twitter.com/aszx87410">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Facebook" href="https://www.facebook.com/profile.php?id=100000221410594">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
 
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h1><span id="緣起">緣起</span></h1>
-<p>在三個月前，我在 ptt 上 po 文（<a href="https://www.ptt.cc/bbs/Soft_Job/M.1488469002.A.E34.html" target="_blank" rel="external">[分享] 免費程式教學(前端)</a>），說我願意提供一系列的免費程式前端教學。只要是有網頁基礎的都能夠報名，歡迎大家寫信給我，並且附上幾個提問的回答，最後我會挑 5~10 個人進行培訓。</p>
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            一場三十人的免費程式教學實驗：成果與檢討
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-06-03T07:16:00.000Z" itemprop="datePublished">2017年6月3日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Others/">Others</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1><span id="緣起">緣起</span></h1>
+<p>在三個月前，我在 ptt 上 po 文（<a href="https://www.ptt.cc/bbs/Soft_Job/M.1488469002.A.E34.html" target="_blank" rel="noopener">[分享] 免費程式教學(前端)</a>），說我願意提供一系列的免費程式前端教學。只要是有網頁基礎的都能夠報名，歡迎大家寫信給我，並且附上幾個提問的回答，最後我會挑 5~10 個人進行培訓。</p>
+<a id="more"></a>
 <p>上面所指的提問如下：</p>
 <ol>
 <li>自我介紹（例如說背景、怎麼學程式的、程式能力到哪）</li>
@@ -222,7 +174,7 @@
 </ol>
 <p>那篇文章是 3/2 發出的，報名截止日期到 3/11，而 3/15 以前會寄信給被我錄取的人</p>
 <p>先來講講當初為什麼會想要開這個免費程式教學吧！其實原文裡面也有寫了，我再講得更清楚一點</p>
-<p>在這之前，其實我就曾經辦過<a href="https://www.ptt.cc/bbs/Soft_Job/M.1445780425.A.9C6.html" target="_blank" rel="external">類似的活動</a>了，雖然也是程式教學，但其實來找我的都是毫無經驗的初學者，我能給的都是一些比較大方向的建議，例如說跟他們介紹什麼是前端、什麼是後端，介紹幾種程式語言，並且推薦給他們適合初學者的。</p>
+<p>在這之前，其實我就曾經辦過<a href="https://www.ptt.cc/bbs/Soft_Job/M.1445780425.A.9C6.html" target="_blank" rel="noopener">類似的活動</a>了，雖然也是程式教學，但其實來找我的都是毫無經驗的初學者，我能給的都是一些比較大方向的建議，例如說跟他們介紹什麼是前端、什麼是後端，介紹幾種程式語言，並且推薦給他們適合初學者的。</p>
 <p>上一次教學大概接觸了十幾個人，可是卻幾乎沒有一個「真正碰到寫程式」，都僅止於「想學程式但又還沒開始」的階段</p>
 <p>可是這不是我想要的，我想要的是實際讓學生們動手寫程式，並且驗證看看「我的方法」是不是真的有效，至於這個方法是什麼，我們稍後會提到。因此，我這次的教學才會把學生限定在「有前端程式基礎」，那代表我可以往更深的地方去教。</p>
 <h1><span id="爆炸的信箱">爆炸的信箱</span></h1>
@@ -250,7 +202,7 @@
 <p>大家都已經有寄信對我做個簡單的自我介紹了，現在換我來做個簡單的自我介紹。</p>
 <p>我叫胡立，現在在新加坡擔任前端工程師，來這邊大約五個月左右而已。</p>
 <p>學程式是從升國中的時候開始，一路上基本都自學，小時候寫 VB，長大之後跑去玩程式競賽寫 C/C++，之後對手機程式有興趣跑去寫 Java, Android，大學時終於踏上網頁之路學習 PHP 跟前端網頁。實習時候發覺自己對前端比較有興趣，就開始比較專攻前端以及 Node.js 後端開發</p>
-<p>更詳細的資料你可以參考我的 Linkedin：<a href="https://www.linkedin.com/in/hulii%EF%BC%8C%E4%B9%8B%E5%BE%8C%E7%9A%84%E4%BA%A4%E6%B5%81%E5%A4%A7%E5%AE%B6%E4%B9%9F%E4%B8%8D%E7%94%A8%E5%A4%AA%E5%9A%B4%E8%82%85%EF%BC%8C%E5%B0%B1%E5%8F%AB%E6%88%91" target="_blank" rel="external">https://www.linkedin.com/in/hulii，之後的交流大家也不用太嚴肅，就叫我</a> huli 或是胡立就好，太嚴肅的話我也會覺得怪怪的XDD</p>
+<p>更詳細的資料你可以參考我的 Linkedin：<a href="https://www.linkedin.com/in/hulii%EF%BC%8C%E4%B9%8B%E5%BE%8C%E7%9A%84%E4%BA%A4%E6%B5%81%E5%A4%A7%E5%AE%B6%E4%B9%9F%E4%B8%8D%E7%94%A8%E5%A4%AA%E5%9A%B4%E8%82%85%EF%BC%8C%E5%B0%B1%E5%8F%AB%E6%88%91" target="_blank" rel="noopener">https://www.linkedin.com/in/hulii，之後的交流大家也不用太嚴肅，就叫我</a> huli 或是胡立就好，太嚴肅的話我也會覺得怪怪的XDD</p>
 <p>有關於這個教學活動，還有以下幾點要跟大家說明：</p>
 <ol>
 <li>
@@ -412,7 +364,7 @@ Huli</p>
 B：為什麼？<br>
 A：因為潮啊！</p>
 <p>如果「潮」這個理由不夠有說服力的話而 A 又提不出其他更好的理由，那就沒有必要改用 TypeScript。</p>
-<p>之前有一篇很紅的文章，叫做：<a href="https://zhuanlan.zhihu.com/p/22782487" target="_blank" rel="external">在 2016 年學 JavaScript 是一種什麼樣的體驗</a>，我覺得有一個很可惜的點，那就是有些人看完之後的心得都只有：「唉，對啊！前端現在也太複雜了吧！」</p>
+<p>之前有一篇很紅的文章，叫做：<a href="https://zhuanlan.zhihu.com/p/22782487" target="_blank" rel="noopener">在 2016 年學 JavaScript 是一種什麼樣的體驗</a>，我覺得有一個很可惜的點，那就是有些人看完之後的心得都只有：「唉，對啊！前端現在也太複雜了吧！」</p>
 <p>但我覺得這篇文章你應該去思考的是：「裡面那些工具是不是真的需要用到？那些工具想解決的問題，到底是不是我碰到的問題？」，這才是這篇文章的重點。</p>
 <p>舉例來說，裡面有一段這樣寫：</p>
 <blockquote>
@@ -435,7 +387,7 @@ A：因為潮啊！</p>
 <p>而這 36 人之中，只有 26 人有完成第一次作業，意思是說，有 10 個人連作業都沒做，28% 的人就這樣不見了。因此之後的數據我會把參與這次課程的人數調降為 26 人。</p>
 <p>能夠撐完十次作業的，只有 8 個人而已，大約是 30%。</p>
 <p>下圖是每一次作業完成的人數</p>
-<p><img src="https://lh3.googleusercontent.com/sLNEwU6lsl-Z4pfvinvCQJnAgeuXNjlELPOizkqrgaMpMGDPOiDKsritR31V9dVJV--tIKI1B2Tei0p-0Gn0lGriudKFoNw2433zGKlPtQUWv1t4mpqZpy9DTWtH6z7H6068Lq6OqWNODHFL6B_m2uFyGpAxMscaUAMG2Ux1YDZSeFu5zbxEPDwbAPh5T8qASA3Nph0lMQemC4PreyCMkZVBypAM3jxnGh-AyAr63gMy5df7zdldO6pK-K-bAj0xLfAMq3NvM9ISYinh9nRV3Dl3SqGceZeFvWqCWukqRVhaDTbuE1mivd1lmZQW1Xr6N_vZ7BRijfeoGbBy-FMOa1OWtlk2REpMuqnIq31UNEkH8LPJMQAPi61BfuLxce-JhFLKmq8pAKALQSBGVnXZhHScVbwYz2sxn54PHrQvQ1jAVOkJXRtAHFopQ-8FkC-xchzudzm0K0bFtcP7si5uYW9Qsz89emofRJw5FnGUstQeE3tjpbCUdV3FH1_rucXmMXfkiTPrwO7O6wfrepNkFKI4ozi33jilRdSsboUW1ni5NcDF_QF59ithYoZyb9Dbc2NYDpoRiUMg81uFjDPhuRr_J2cnnaHjPo6D4EouhYJPtu75EWDZCu-F83c92-M0MdmRzGQiY30_GiEZxtmdk4Of4EJE2Y_4QyoQD21axQ=w1066-h567-no" alt=""></p>
+<p><img src="https://lh3.googleusercontent.com/sLNEwU6lsl-Z4pfvinvCQJnAgeuXNjlELPOizkqrgaMpMGDPOiDKsritR31V9dVJV--tIKI1B2Tei0p-0Gn0lGriudKFoNw2433zGKlPtQUWv1t4mpqZpy9DTWtH6z7H6068Lq6OqWNODHFL6B_m2uFyGpAxMscaUAMG2Ux1YDZSeFu5zbxEPDwbAPh5T8qASA3Nph0lMQemC4PreyCMkZVBypAM3jxnGh-AyAr63gMy5df7zdldO6pK-K-bAj0xLfAMq3NvM9ISYinh9nRV3Dl3SqGceZeFvWqCWukqRVhaDTbuE1mivd1lmZQW1Xr6N_vZ7BRijfeoGbBy-FMOa1OWtlk2REpMuqnIq31UNEkH8LPJMQAPi61BfuLxce-JhFLKmq8pAKALQSBGVnXZhHScVbwYz2sxn54PHrQvQ1jAVOkJXRtAHFopQ-8FkC-xchzudzm0K0bFtcP7si5uYW9Qsz89emofRJw5FnGUstQeE3tjpbCUdV3FH1_rucXmMXfkiTPrwO7O6wfrepNkFKI4ozi33jilRdSsboUW1ni5NcDF_QF59ithYoZyb9Dbc2NYDpoRiUMg81uFjDPhuRr_J2cnnaHjPo6D4EouhYJPtu75EWDZCu-F83c92-M0MdmRzGQiY30_GiEZxtmdk4Of4EJE2Y_4QyoQD21axQ=w1066-h567-no" alt></p>
 <p>可以看到掉得最多的一次是 hw2 -&gt; hw3，寫 CSS 必備神器：CSS 預處理器，我也不知道為什麼這一週會掉這麼多人。</p>
 <p>課程結束之後的問卷回饋，作業沒有做完的理由有：時間無法配合、作業難度太高、懶惰、有其他事情、沒興趣。</p>
 <p>而問卷中有一題是：「覺得難度最高的作業是哪一個？」，大多數人的回答都是 hw5（讓網頁變得更完整：加上 placeholder 與 infinite scroll）跟 hw6（返璞歸真：vanilla js），因為以前完全沒有寫過類似的東西。</p>
@@ -460,8 +412,8 @@ A：因為潮啊！</p>
 <h2><span id="課程心得">課程心得</span></h2>
 <p>回饋問卷裡的心得礙於篇幅，貼在這邊不太適合，因此我只貼兩篇寫在自己 Blog 的。</p>
 <ol>
-<li><a href="http://peggyloveslearning.blogspot.sg/2017/06/frontend-intermediate-course.html" target="_blank" rel="external">Frontend Intermediate Course - 學習心得</a></li>
-<li><a href="http://dez.logdown.com/posts/2017/06/19/huli-frontend-intermediate-course" target="_blank" rel="external">心得｜Huli’s Frontend Intermediate Course｜緣起與收穫</a></li>
+<li><a href="http://peggyloveslearning.blogspot.sg/2017/06/frontend-intermediate-course.html" target="_blank" rel="noopener">Frontend Intermediate Course - 學習心得</a></li>
+<li><a href="http://dez.logdown.com/posts/2017/06/19/huli-frontend-intermediate-course" target="_blank" rel="noopener">心得｜Huli’s Frontend Intermediate Course｜緣起與收穫</a></li>
 </ol>
 <h1><span id="自我檢討">自我檢討</span></h1>
 <p>先來說缺點的部分，其實比起優點，我更想聽到的是缺點。因為知道缺點在哪邊才能持續改進嘛，但不知道是這次表現太好還是學生不好意思，缺點的部分回饋的比較少。</p>
@@ -491,301 +443,275 @@ A：因為潮啊！</p>
 <h1><span id="總結">總結</span></h1>
 <p>先感謝我的學生們，陪我走過了十週的課程，並且願意在結束之後給予回饋。</p>
 <p>我一直覺得，程式教學應該要能有更好的方法，能夠幫助學生更快上手、更快理解。這次的課程讓我驗證了我目前的方向是對的，之後也會一直朝著這方向前進。</p>
-<p>如果你對這次課程感興趣，可以前往課程的 <a href="https://github.com/aszx87410/frontend-intermediate-course" target="_blank" rel="external">Github 頁面</a>觀看課程內容，或是到<a href="https://www.youtube.com/playlist?list=PLeWlPscCzV-fg5N5-tscVwM8oX07dXemq" target="_blank" rel="external">Youtube</a>直接觀看影片。</p>
-<p>也可以直接到我最近才開的線上課程平台：<a href="https://lidemy.teachable.com/" target="_blank" rel="external">Lidemy 鋰學院</a>註冊課程，完全免費！我把作業內容跟影片都上傳到上面了。（但因為課程已經結束了，所以沒有人會幫你改作業）</p>
+<p>如果你對這次課程感興趣，可以前往課程的 <a href="https://github.com/aszx87410/frontend-intermediate-course" target="_blank" rel="noopener">Github 頁面</a>觀看課程內容，或是到<a href="https://www.youtube.com/playlist?list=PLeWlPscCzV-fg5N5-tscVwM8oX07dXemq" target="_blank" rel="noopener">Youtube</a>直接觀看影片。</p>
+<p>也可以直接到我最近才開的線上課程平台：<a href="https://lidemy.teachable.com/" target="_blank" rel="noopener">Lidemy 鋰學院</a>註冊課程，完全免費！我把作業內容跟影片都上傳到上面了。（但因為課程已經結束了，所以沒有人會幫你改作業）</p>
 <p>我認為這堂課的價值在於「先寫作業，後講解」的教學模式，因此像上面這樣把教學影片公佈出來，我不打算盈利，都是完全免費的資源，開放大家隨意取用，因為這堂課的核心價值已經不見了，所以也沒必要收費。</p>
-<p>我希望我的課程在各個環節上都能夠公開透明，因此，若是對學員課後提交的回饋表單有興趣，<a href="https://docs.google.com/spreadsheets/d/1nHSuV-zE5cO3GM5gAiEtN-05kJIQNzQgAd5jQn92a9o/edit?usp=sharing" target="_blank" rel="external">這邊</a>有學員回饋的完整備份（只有刪除掉一些個人資料）。</p>
-<p>最後，感謝大家願意花時間閱讀這篇落落長的文章，若是對我後續的教學實驗或課程有興趣，麻煩請追蹤<a href="https://www.facebook.com/lidemytw" target="_blank" rel="external">Lidemy 鋰學院粉絲專頁</a>，後續的消息都會公布在那邊。</p>
+<p>我希望我的課程在各個環節上都能夠公開透明，因此，若是對學員課後提交的回饋表單有興趣，<a href="https://docs.google.com/spreadsheets/d/1nHSuV-zE5cO3GM5gAiEtN-05kJIQNzQgAd5jQn92a9o/edit?usp=sharing" target="_blank" rel="noopener">這邊</a>有學員回饋的完整備份（只有刪除掉一些個人資料）。</p>
+<p>最後，感謝大家願意花時間閱讀這篇落落長的文章，若是對我後續的教學實驗或課程有興趣，麻煩請追蹤<a href="https://www.facebook.com/lidemytw" target="_blank" rel="noopener">Lidemy 鋰學院粉絲專頁</a>，後續的消息都會公布在那邊。</p>
 <p>感謝。</p>
 
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2017/06/17/my-programming-experience-1/" data-toggle="tooltip" data-placement="top" title="自學、哲學、講學：我的程式之路（上）">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2017/05/28/experience-of-seeing-doctor-in-singapore/" data-toggle="tooltip" data-placement="top" title="[心得] 新加坡看病初體驗">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
-            </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
-
     
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#緣起"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">緣起</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#爆炸的信箱"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">爆炸的信箱</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#課程大綱背後的涵義"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">課程大綱背後的涵義</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#解決問題"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">解決問題</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#基本-htmlcss-練習以-twitch-為例"><span class="toc-nav-number">4.0.1.</span> <span class="toc-nav-text">基本 HTML/CSS 練習：以 Twitch 為例</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#讓畫面變得更動態神奇的-css-transition"><span class="toc-nav-number">4.0.2.</span> <span class="toc-nav-text">讓畫面變得更動態：神奇的 CSS transition</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#寫-css-必備神器css-預處理器"><span class="toc-nav-number">4.0.3.</span> <span class="toc-nav-text">寫 CSS 必備神器：CSS 預處理器</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#從假資料到真資料ajax-與-api-串接"><span class="toc-nav-number">4.0.4.</span> <span class="toc-nav-text">從假資料到真資料：Ajax 與 API 串接</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#讓網頁變得更完整加上-placeholder-與-infinite-scroll"><span class="toc-nav-number">4.0.5.</span> <span class="toc-nav-text">讓網頁變得更完整：加上 placeholder 與 infinite scroll</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#返璞歸真vanilla-js"><span class="toc-nav-number">4.0.6.</span> <span class="toc-nav-text">返璞歸真：vanilla js</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#走向國際i18n"><span class="toc-nav-number">4.0.7.</span> <span class="toc-nav-text">走向國際：i18n</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#當我們包在一起webpack"><span class="toc-nav-number">4.0.8.</span> <span class="toc-nav-text">當我們包在一起：Webpack</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#節省-request-的極致一為全全為一"><span class="toc-nav-number">4.0.9.</span> <span class="toc-nav-text">節省 Request 的極致：一為全，全為一</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#改掉你的壞習慣eslint-與-standard"><span class="toc-nav-number">4.0.10.</span> <span class="toc-nav-text">改掉你的壞習慣：ESLint 與 standard</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#課程進行方式"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">課程進行方式</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#課程成效"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">課程成效</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#學員回饋"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">學員回饋</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#老師在講解或改作業時有什麼優點"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">老師在講解或改作業時有什麼優點？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#老師在講解或改作業時有什麼缺點"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">老師在講解或改作業時有什麼缺點？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#課程心得"><span class="toc-nav-number">7.3.</span> <span class="toc-nav-text">課程心得</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#自我檢討"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">自我檢討</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#1改作業有時候馬馬虎虎"><span class="toc-nav-number">8.0.1.</span> <span class="toc-nav-text">1.改作業有時候馬馬虎虎。</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link " href="#2課程規劃不夠痛"><span class="toc-nav-number">8.0.2.</span> <span class="toc-nav-text">2.課程規劃不夠「痛」</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#總結"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">總結</span></a></li></ol>
-        
-        </div>
-      </aside>
-    
-
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#story" title="story">story</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
-                    
-                </ul>
-                
-            </div>
-        </div>
     </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Story/">#Story</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2017/06/24/lidemy-online-programming-course-platform-for-the-beginner/">Lidemy 鋰學院：為初學者而生的線上程式課程平台</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2017/03/12/csrf-introduction/">讓我們來談談 CSRF</a>
+            
+        </span>
+    </div>
+    
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d8b39b069ba670012bf92b9&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
 
 
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "huli";
-    var disqus_identifier = "https://blog.huli.tw/2017/06/03/frontend-tutorial-experiment/";
-    var disqus_url = "https://blog.huli.tw/2017/06/03/frontend-tutorial-experiment/";
 
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://blog.huli.tw/2017/06/03/frontend-tutorial-experiment/';
+        this.page.identifier = '2017/06/03/frontend-tutorial-experiment/';
+        
+        this.language = 'en';
+        
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'huli' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<!-- disqus embedded js code start end -->
 
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
 
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'left',
-          icon: 'ℬ'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+    </div>
+</section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/aszx87410">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Huli 2017 
-                    <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
-                    </iframe>
-                </p>
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Huli&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
-
-
-<!-- async load function -->
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-tw");
+</script>
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
     <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
         })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
     </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+
+    
+    
+
+    
 
 
-<!-- jquery.tagcloud.js -->
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-<!--fastClick.js -->
-<script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-<!-- Google Analytics -->
-
-
-<script>
-    // dynamic User by Hux
-    var _gaId = 'UA-49773306-3';
-    var _gaDomain = 'blog.huli.tw';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-</script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
-<!-- Image to hack wechat -->
-<img src="https://blog.huli.tw/img/huli_logo.jpg" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js"></script>
+    
 </body>
-
 </html>

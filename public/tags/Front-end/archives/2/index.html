@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>標籤: Front-end - Huli</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content>
+
+
+
+
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Huli">
+<meta property="og:url" content="https://blog.huli.tw/tags/Front-end/archives/2/index.html">
+<meta property="og:site_name" content="Huli">
+<meta property="og:locale" content="zh-tw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Huli">
+
+
+
+
+
+<link rel="icon" href="/img/lidemy_logo.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49773306-3"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-49773306-3');
+</script>
+
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    Huli
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章列表</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+            <a class="navbar-item " href="/recommend">推薦閱讀</a>
+            
+            <a class="navbar-item " href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" target="_blank" title="Medium" href="https://medium.com/@hulitw">
+                
+                <i class="fab fa-medium"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Twitter" href="https://twitter.com/aszx87410">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Facebook" href="https://www.facebook.com/profile.php?id=100000221410594">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section section-heading">
+    <div class="container">
+        <div class="content">
+            <h5>#Front-end</h5>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2018/06/23/javascript-call-by-value-or-reference/" itemprop="url">深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2018-06-23T20:10:00.000Z" itemprop="datePublished">2018年6月23日(1 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>其實這週原本是要來寫淺拷貝跟深拷貝的差異以及實作，但在找資料的時候無意間又看到 call by value 與 call by reference 相關的文章，越研究發現越有趣。原本以為自己已經搞懂了這個問題，但沒想到看的資料越多，卻把自己弄的越糊塗。</p>
+<p>要寫這篇文章其實有兩個不同的方式，一個是詳實記錄我研究這個問題的過程以及心中的疑惑，以及最後如何得到解答，簡單來說就是按照時間軸來寫；另外一個是當我研究完以後，再重新以自己的方式整理，並且用更簡單易懂的方式來表達。</p>
+<p>以往我的文章大多數都走第二種路線，重新歸納整理過後再寫出一篇相對上更容易理解的文章，用我的方式帶著大家一步步跟著我的脈絡去探討問題最後得出解答。</p>
+<p>但這次我想嘗試第一種，帶大家看看我平常寫文章的時候都看了哪些資料，以及發想的過程為何，這樣應該也滿有趣的。</p>
+<p>Let’s go!</p>
+        <p class="article-more-link">
+            <a href="/2018/06/23/javascript-call-by-value-or-reference/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2018/03/31/react-fiber-and-lifecycles/" itemprop="url">淺談 React Fiber 及其對 lifecycles 造成的影響</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2018-03-31T20:10:00.000Z" itemprop="datePublished">2018年3月31日(1 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/React/">React</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>雖然說從以前就一直聽到 React 要把內部的 reconciler 換成一個叫做 Fiber 的東西，但從沒仔細研究過，也不知道這樣子的改變會對上層造成什麼影響。</p>
+<p>真正開始比較深入理解，是在某一次使用 Redux Form 時踩到一個相關的 bug，才知道 React 自從正式改用 Fiber 之後，其實對上層也有一些改變。</p>
+<p>這篇的標題「淺談」不是騙你的，這篇真的很淺，我不會談到 Fiber 底層的運作（因為我也還沒認真研究過），只會用白話文跟你說 Fiber 大概是怎樣，是為了解決什麼樣子的問題而誕生。</p>
+        <p class="article-more-link">
+            <a href="/2018/03/31/react-fiber-and-lifecycles/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2018/03/12/css-keylogger/" itemprop="url">CSS keylogger：攻擊與防禦</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2018-03-12T21:10:00.000Z" itemprop="datePublished">2018年3月12日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Front-end/">Front-end</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>前陣子在 Hacker News 上面看到這篇：<a href="https://news.ycombinator.com/item?id=16422696" target="_blank" rel="noopener">Show HN: A CSS Keylogger</a>，大開眼界，決定要找個時間好好來研究一下，並且寫一篇文章分享給大家。</p>
+<p>這篇會講到以下東西：</p>
+<ol>
+<li>什麼是 keylogger</li>
+<li>CSS keylogger 的原理</li>
+<li>CSS keylogger 與 React</li>
+<li>防禦方法</li>
+</ol>
+<p>好，那就讓我們開始吧！</p>
+        <p class="article-more-link">
+            <a href="/2018/03/12/css-keylogger/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2018/01/15/react-performance-immutable-and-scu/" itemprop="url">React 性能優化大挑戰：一次理解 Immutable data 跟 shouldComponentUpdate</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2018-01-15T21:10:00.000Z" itemprop="datePublished">2018年1月15日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/React/">React</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>前陣子正在重構公司的專案，試了一些東西之後發現自己對於 React 的渲染機制其實不太了解，不太知道 render 什麼時候會被觸發。而後來我發現不只我這樣，其實還有滿多人對這整個機制不太熟悉，因此決定寫這篇來分享自己的心得。</p>
+<p>其實不知道怎麼優化倒還好，更慘的事情是你自以為在優化，其實卻在拖慢效能，而根本的原因就是對 React 的整個機制還不夠熟。被「優化」過的 component 反而還變慢了！這個就嚴重了。</p>
+<p>因此，這篇文章會涵蓋到下面幾個主題：</p>
+<ol>
+<li>Component 跟 PureComponent 的差異</li>
+<li>shouldComponentUpdate 的作用</li>
+<li>React 的渲染機制</li>
+<li>為什麼要用 Immutable data structures</li>
+</ol>
+<p>為了判別你到底對以上這些理解多少，我們馬上進行幾個小測驗！有些有陷阱，請睜大眼睛看清楚啦！</p>
+        <p class="article-more-link">
+            <a href="/2018/01/15/react-performance-immutable-and-scu/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/12/08/introduction-to-rxjs-observable/" itemprop="url">希望是最淺顯易懂的 RxJS 教學</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-12-08T21:07:00.000Z" itemprop="datePublished">2017年12月8日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Front-end/">Front-end</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>關注 RxJS 已經好一段時間了，最早知道這個東西是因為 <a href="https://redux-observable.js.org/" target="_blank" rel="noopener">redux-observable</a>，是一個 redux 的 middleware，Netflix 利用它來解決複雜的非同步相關問題，那時候我連<code>redux-saga</code>都還沒搞懂，沒想到就又有新的東西出來了。</p>
+<p>半年前花了一些時間，找了很多網路上的資料，試圖想要搞懂這整個東西。可是對我來說，很多教學的步調都太快了，不然就是講得太仔細，反而讓初學者無所適從。</p>
+<p>這次有機會在公司的新專案裡面嘗試導入<code>redux-observable</code>，身為提倡要導入的人，勢必要對這東西有一定的瞭解。秉持著這個想法，上週認真花了點時間再次把相關資源都研究了一下，漸漸整理出一套「我覺得應該可以把 RxJS 講得更好懂」的方法，在這邊跟大家分享一下。</p>
+<p>在開始之前，要先大力稱讚去年 iT 邦幫忙鐵人賽的 Web 組冠軍：<a href="https://ithelp.ithome.com.tw/users/20103367/ironman/1199" target="_blank" rel="noopener">30 天精通 RxJS</a>，這系列文章寫得很完整，感受得出來作者下了很多功夫在這上面。看完這篇之後如果對更多應用有興趣的，可以去把這系列的文章讀完。</p>
+<p>好，那就讓我們開始吧！</p>
+        <p class="article-more-link">
+            <a href="/2017/12/08/introduction-to-rxjs-observable/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/10/04/payment-request-api/" itemprop="url">統一網頁支付介面：Payment Request API</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-10-04T20:07:00.000Z" itemprop="datePublished">2017年10月4日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Front-end/">Front-end</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>之前在 <a href="https://news.ycombinator.com/item?id=15272374" target="_blank" rel="noopener">Hacker News</a> 上面看到了這一篇文章：<a href="https://www.w3.org/blog/wpwg/2017/09/14/payment-request-api-now-being-implemented-in-all-major-browsers-advances-on-the-recommendation-track/" target="_blank" rel="noopener">Payment Request API — Now Being Implemented in All Major Browsers</a>，大意就是 <code>Payment Request API</code> 這一個東西將會在主流瀏覽器上面被實作出來。</p>
+<p>在這之前，我完全沒有聽過這個東西，完全不知道它在做什麼。但經過我稍微研究之後，發現這個原來是網頁支付介面的未來。</p>
+        <p class="article-more-link">
+            <a href="/2017/10/04/payment-request-api/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/09/06/spa-single-page-application/" itemprop="url">前後端分離與 SPA</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-09-06T20:07:00.000Z" itemprop="datePublished">2017年9月6日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Front-end/">Front-end</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>這篇的原文（<a href="http://ithelp.ithome.com.tw/articles/10187675" target="_blank" rel="noopener">你走你的陽關道，我走我的獨木橋：前後端分離</a>）是我之前在 iT 邦幫忙鐵人賽的其中一篇文章，寫完之後有陸陸續續收到一些回饋，就想說可以重新整理一下這篇文章，讓它變得再更清楚一點。</p>
+<p>如果你有以下疑惑的話，這篇文章非常適合你：</p>
+<ol>
+<li>為什麼前端會有 MVC？</li>
+<li>前端 MVC 跟後端 MVC 有什麼不一樣？</li>
+<li>為什麼要有 SPA（Single Page Application）？</li>
+</ol>
+        <p class="article-more-link">
+            <a href="/2017/09/06/spa-single-page-application/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/08/27/review-the-classical-sort-algorithm-with-javascript/" itemprop="url">一起用 JavaScript 來複習經典排序法吧！</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-08-27T20:20:00.000Z" itemprop="datePublished">2017年8月27日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>最近剛好上到 <a href="https://www.youtube.com/watch?v=jUyQqLvg8Qw" target="_blank" rel="noopener">CS50 Week3</a>，這一週的主題是：Algorithms，裡面介紹到了幾種經典的排序法，像是選擇排序、泡沫排序、插入排序以及合併排序。</p>
+<p>我覺得身為一個軟體工程師，大概一輩子都脫離不了排序了，畢竟這是經典演算法之一嘛！與其每次要面試之前都凌亂的準備，不如現在就整理出一篇，紀錄一下各個排序法的心得，幫自己做個統整。</p>
+<p>因此，這一篇將利用 JavaScript 來實作各個經典排序演算法。</p>
+<p>這次實做的排序法都會是由小到大排序，並且為了方便起見，每一個排序法「都會直接更改原本的 array」，但如果你不想改到原本的也很簡單，在每一個的函式最開頭加上：<code>arr = arr.slice()</code>複製一份原本的即可。</p>
+<p>還有，因為文章裡面比較難放動畫，所以我只能放一些圖片而已，若是想搭配視覺化演算法一起學習的話，我非常推薦 <a href="https://visualgo.net/en" target="_blank" rel="noopener">VISUALGO</a>，這網站絕對會讓你對排序的理解度更上一層樓。</p>
+        <p class="article-more-link">
+            <a href="/2017/08/27/review-the-classical-sort-algorithm-with-javascript/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/08/27/dom-event-capture-and-propagation/" itemprop="url">DOM 的事件傳遞機制：捕獲與冒泡</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-08-27T20:18:00.000Z" itemprop="datePublished">2017年8月27日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Front-end/">Front-end</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>（補充：感謝 othree 前輩的指點，指出這其實是在講 DOM 裡面事件傳遞的順序，因此把標題以及內文修正，原標題為：JavaScript 的事件傳遞機制：捕獲與冒泡）</p>
+<p>今天為大家帶來的內容是 DOM 裡面的事件傳遞機制，而與這些事件相關的程式碼，相信大家應該不太陌生，就是<code>addEventListener</code>, <code>preventDefault</code>跟<code>stopPropagation</code>。</p>
+<p>簡單來說，就是事件在 DOM 裡面傳遞的順序，以及你可以對這些事件做什麼。</p>
+<p>為什麼會有「傳遞順序」這一詞呢？假設你有一個<code>ul</code>元素，底下有很多<code>li</code>，代表不同的 item。當你點擊任何一個<code>li</code>的時候，其實你也點擊了<code>ul</code>，因為<code>ul</code>把所有的<code>li</code>都包住了。</p>
+<p>假如我在兩個元素上面都加了<code>eventListener</code>，哪一個會先執行？這時候呢，知道事件的執行順序就很重要。</p>
+<p>另外，由於某些瀏覽器（沒錯，我就是在說 IE）的機制比較不太一樣，因此那些東西我完全不會提到，有興趣的可以研究文末附的參考資料。</p>
+        <p class="article-more-link">
+            <a href="/2017/08/27/dom-event-capture-and-propagation/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/08/27/http-cache/" itemprop="url">循序漸進理解 HTTP Cache 機制</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-08-27T20:15:00.000Z" itemprop="datePublished">2017年8月27日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>前陣子在研究跟 HTTP Cache 有關的一些東西，看得眼花撩亂，不同的 Header 愈看愈混亂，像是<code>Pragma</code>, <code>Cache-Control</code>, <code>Etag</code>, <code>Last-Modified</code>, <code>Expires</code> 等等。找了許多參考資料閱讀之後才有了比較深刻的理解，想說若是從一個比較不同的角度來理解 Cache，說不定會比較容易了解這些 Header 到底在做什麼。</p>
+<p>在之前查的資料裡面，很多篇都是逐一解釋各個 Header 的作用以及參數，而我認為其實參數講多了容易造成初學者混淆，想說怎麼有這麼多奇怪的參數，而且每一個看起來都很像。所以這篇文章嘗試一步一步藉由不同的問題來引導出各個 Header 使用的場景以及出現的目的。還有，因為這篇是給初學者看的，所以不會講到所有的參數。</p>
+<p>其實關於 Cache 這一部分，很多網路資源的說法都不太一樣，如果碰到有疑義的地方我會盡量以 RFC 上面寫的標準為主。如果有錯誤的話還麻煩不吝指正，感謝。</p>
+        <p class="article-more-link">
+            <a href="/2017/08/27/http-cache/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+    
+        
+<nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
+    <div class="pagination-previous">
+        <a href="/tags/Front-end/">上一頁</a>
+    </div>
+    <div class="pagination-next">
+        <a href="/tags/Front-end/archives/3/">下一頁</a>
+    </div>
+    <ul class="pagination-list is-hidden-mobile">
+        
+        <li><a class="pagination-link" href="/tags/Front-end/">1</a></li>
+        
+        <li><a class="pagination-link is-current" href="/tags/Front-end/archives/2/">2</a></li>
+        
+        <li><a class="pagination-link" href="/tags/Front-end/archives/3/">3</a></li>
+        
+    </ul>
+</nav>
+    
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Huli&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-tw");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>

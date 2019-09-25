@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>前後端分離與 SPA - Huli</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content>
+
+
+
+
+
+    <meta name="description" content="前言 這篇的原文（你走你的陽關道，我走我的獨木橋：前後端分離）是我之前在 iT 邦幫忙鐵人賽的其中一篇文章，寫完之後有陸陸續續收到一些回饋，就想說可以重新整理一下這篇文章，讓它變得再更清楚一點。 如果你有以下疑惑的話，這篇文章非常適合你：  為什麼前端會有 MVC？ 前端 MVC 跟後端 MVC 有什麼不一樣？ 為什麼要有 SPA（Single Page Application）？">
+<meta name="keywords" content="Front-end">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前後端分離與 SPA">
+<meta property="og:url" content="https://blog.huli.tw/2017/09/06/spa-single-page-application/index.html">
+<meta property="og:site_name" content="Huli">
+<meta property="og:description" content="前言 這篇的原文（你走你的陽關道，我走我的獨木橋：前後端分離）是我之前在 iT 邦幫忙鐵人賽的其中一篇文章，寫完之後有陸陸續續收到一些回饋，就想說可以重新整理一下這篇文章，讓它變得再更清楚一點。 如果你有以下疑惑的話，這篇文章非常適合你：  為什麼前端會有 MVC？ 前端 MVC 跟後端 MVC 有什麼不一樣？ 為什麼要有 SPA（Single Page Application）？">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://user-images.githubusercontent.com/2755720/49350531-4b3eff00-f6ea-11e8-9d8f-448f80ddd114.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/2755720/49350544-57c35780-f6ea-11e8-9325-b01c6f0c312b.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/2755720/49350552-5c880b80-f6ea-11e8-81c2-e6161bbf6efc.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/2755720/49350560-614cbf80-f6ea-11e8-88cb-d183bced83bb.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/2755720/49350576-6e69ae80-f6ea-11e8-8827-3e8d2e6a090e.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/2755720/49350581-76295300-f6ea-11e8-8332-3f9e80ecb0cb.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/2755720/49350590-7de8f780-f6ea-11e8-95b2-e2c7bc7f63dc.png">
+<meta property="og:updated_time" content="2019-09-25T11:25:19.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前後端分離與 SPA">
+<meta name="twitter:description" content="前言 這篇的原文（你走你的陽關道，我走我的獨木橋：前後端分離）是我之前在 iT 邦幫忙鐵人賽的其中一篇文章，寫完之後有陸陸續續收到一些回饋，就想說可以重新整理一下這篇文章，讓它變得再更清楚一點。 如果你有以下疑惑的話，這篇文章非常適合你：  為什麼前端會有 MVC？ 前端 MVC 跟後端 MVC 有什麼不一樣？ 為什麼要有 SPA（Single Page Application）？">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/2755720/49350531-4b3eff00-f6ea-11e8-9d8f-448f80ddd114.png">
+
+
+
+
+
+<link rel="icon" href="/img/lidemy_logo.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49773306-3"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-49773306-3');
+</script>
+
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    Huli
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章列表</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+            <a class="navbar-item " href="/recommend">推薦閱讀</a>
+            
+            <a class="navbar-item " href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" target="_blank" title="Medium" href="https://medium.com/@hulitw">
+                
+                <i class="fab fa-medium"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Twitter" href="https://twitter.com/aszx87410">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Facebook" href="https://www.facebook.com/profile.php?id=100000221410594">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            前後端分離與 SPA
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-09-06T20:07:00.000Z" itemprop="datePublished">2017年9月6日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Front-end/">Front-end</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1><span id="前言">前言</span></h1>
+<p>這篇的原文（<a href="http://ithelp.ithome.com.tw/articles/10187675" target="_blank" rel="noopener">你走你的陽關道，我走我的獨木橋：前後端分離</a>）是我之前在 iT 邦幫忙鐵人賽的其中一篇文章，寫完之後有陸陸續續收到一些回饋，就想說可以重新整理一下這篇文章，讓它變得再更清楚一點。</p>
+<p>如果你有以下疑惑的話，這篇文章非常適合你：</p>
+<ol>
+<li>為什麼前端會有 MVC？</li>
+<li>前端 MVC 跟後端 MVC 有什麼不一樣？</li>
+<li>為什麼要有 SPA（Single Page Application）？</li>
+</ol>
+<a id="more"></a>
+<p>（其實關於 MVC 到底是什麼就有很多討論了，但因為這篇文章的重點不在於此，所以對這方面就不多加描述，有興趣的朋友們可參考：<a href="http://blog.turn.tw/?p=1539" target="_blank" rel="noopener">MVC是一個巨大誤會</a>）</p>
+<h1><span id="先從你熟悉的流程開始">先從你熟悉的流程開始</span></h1>
+<p>如果你要寫一個簡易的部落格，你會怎麼做？</p>
+<p>這答案很簡單嘛，可以先挑一個喜歡的框架，例如說 Rails、Laravel 等等，然後先定義好幾個 URL，再把 DB 的 Schema 想好，最後開始動手 coding。</p>
+<p>例如說首頁的部分就是去 DB 把所有文章都撈回來，然後把資料丟到 view 裡面去 render，搞定！</p>
+<p>總而言之，流程大概是這樣：</p>
+<img width="923" alt="server" src="https://user-images.githubusercontent.com/2755720/49350531-4b3eff00-f6ea-11e8-9d8f-448f80ddd114.png">
+<p>當你想要訪問文章列表這個頁面的時候，瀏覽器會送 request 到 server，然後經過 controller 與 model，最後把資料帶給 view。</p>
+<p>view 再回傳一份完整的 HTML 檔案（這個動作就叫做 render），而瀏覽器拿到之後，只要顯示出來就好。因為 render 在 server side，所以這也叫做 server side render。</p>
+<p>這個流程照理來說，應該會是你最熟悉的流程，因為一大堆網頁都是這個樣子做的。</p>
+<p>在這個狀況底下，一個只負責前端的工程師，基本上就是負責 view 這個資料夾底下的所有東西，必須用框架提供的 template 把資料跟 HTML 整合在一起。而當他需要 debug 的時候，必須要把整個專案都跑起來，才能看到畫面輸出的結果。</p>
+<p>這樣的工作流程讓前後端切得沒有那麼開，畢竟前端工程師還需要會跑 rails，需要設定 DB，搞不好還要會設定 nginx！</p>
+<p>現在的方法雖然把資料（Model）跟顯示（View）切開了，但都還是在後端，有沒有更好的方法呢？有沒有辦法，讓後端專注在提供資料，前端專注在顯示資料呢？</p>
+<p>有！</p>
+<h1><span id="client-side-render">client side render</span></h1>
+<p>剛剛我們提到了 server side render，由後端直接回傳整份 HTML，瀏覽器直接顯示就好，因為 response 就是完整的網頁了。</p>
+<p>但既然會特別區分 server 跟 client，就代表還有一種方式叫做 client side render，這又是什麼呢？</p>
+<p>大家都知道，JavaScript 可以動態的產生內容，而 client side render 指的就是當前端拿到資料以後，才用 JavaScript 動態的把那些內容填到網頁上面。</p>
+<p>直接拿程式碼出來說明，大家會比較好理解一點。</p>
+<p>首先，我們的 server 現在就只專注在提供資料，所以就開一個 API 出來：</p>
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 首頁，直接輸出所有留言</span></span><br><span class="line">app.get(<span class="hljs-string">'/'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment">// 從資料庫拿出所有的留言</span></span><br><span class="line">  db.getPosts(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, posts</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err) &#123;</span><br><span class="line">      res.send(err);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">  </span><br><span class="line">      <span class="hljs-comment">// 直接把所有 posts 丟出去</span></span><br><span class="line">      res.send(&#123;</span><br><span class="line">        posts: posts</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>如果用瀏覽器打開這個 API 的網址，應該會看到 JSON 格式的資料：</p>
+<p><figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"posts"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"585f662a77467405888b3bbe"</span>,</span><br><span class="line">      <span class="hljs-attr">"author"</span>: <span class="hljs-string">"huli"</span>,</span><br><span class="line">      <span class="hljs-attr">"content"</span>: <span class="hljs-string">"2222"</span>,</span><br><span class="line">      <span class="hljs-attr">"createTime"</span>: <span class="hljs-string">"2016-12-25T06:24:42.990Z"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"585f662777467405888b3bbd"</span>,</span><br><span class="line">      <span class="hljs-attr">"author"</span>: <span class="hljs-string">"huli"</span>,</span><br><span class="line">      <span class="hljs-attr">"content"</span>: <span class="hljs-string">"1111"</span>,</span><br><span class="line">      <span class="hljs-attr">"createTime"</span>: <span class="hljs-string">"2016-12-25T06:24:39.601Z"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>後端的部分已經準備就緒，順利地提供資料了，再來我們來看前端，只需要一個<code>index.html</code>就可以了。</p>
+<p><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span> /&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.jquery.com/jquery-1.12.4.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-javascript">    $(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span></span><br><span class="line">      getPosts();</span><br><span class="line">    &#125;)</span><br><span class="line">  </span><br><span class="line"><span class="hljs-javascript">    <span class="hljs-comment">// ajax 抓取文章</span></span></span><br><span class="line"><span class="hljs-javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPosts</span>(<span class="hljs-params"></span>) </span>&#123;</span></span><br><span class="line"><span class="hljs-javascript">      $.ajax(&#123;</span></span><br><span class="line"><span class="hljs-javascript">        url: <span class="hljs-string">'http://localhost:3000/'</span>,</span></span><br><span class="line"><span class="hljs-javascript">        success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">response</span>) </span>&#123;</span></span><br><span class="line"><span class="hljs-javascript">          <span class="hljs-keyword">if</span> (!response.posts) &#123;</span></span><br><span class="line"><span class="hljs-javascript">            <span class="hljs-keyword">return</span> alert(<span class="hljs-string">'Error'</span>);</span></span><br><span class="line">          &#125;</span><br><span class="line"><span class="hljs-javascript">          <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; response.posts.length; i++) &#123;</span></span><br><span class="line">  </span><br><span class="line"><span class="hljs-javascript">            <span class="hljs-comment">// 丟給 render function</span></span></span><br><span class="line">            addPost(response.posts[i]);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line"><span class="hljs-javascript">        error: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>&#123;</span></span><br><span class="line"><span class="hljs-javascript">          <span class="hljs-built_in">console</span>.log(err);</span></span><br><span class="line"><span class="hljs-javascript">          alert(<span class="hljs-string">'抓取失敗'</span>);</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line"><span class="hljs-javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addPost</span>(<span class="hljs-params">post</span>) </span>&#123;</span></span><br><span class="line"><span class="hljs-javascript">      <span class="hljs-keyword">var</span> item = <span class="hljs-string">''</span> + </span></span><br><span class="line"><span class="hljs-xml">        '<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"panel panel-default"</span>&gt;</span>' +</span></span><br><span class="line"><span class="hljs-xml">          '<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"panel-heading"</span>&gt;</span>' +</span></span><br><span class="line"><span class="hljs-javascript">            <span class="hljs-string">'&lt;h3 class="panel-title"&gt;'</span> + post.author +<span class="hljs-string">', 發佈時間：'</span> + post.createTime + <span class="hljs-string">'&lt;/h3&gt;'</span> +</span></span><br><span class="line"><span class="hljs-javascript">          <span class="hljs-string">'&lt;/div&gt;'</span> +</span></span><br><span class="line"><span class="hljs-xml">          '<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"panel-body"</span>&gt;</span>' +</span></span><br><span class="line">            post.content</span><br><span class="line"><span class="hljs-javascript">          <span class="hljs-string">'&lt;/div&gt;'</span> +</span></span><br><span class="line"><span class="hljs-javascript">        <span class="hljs-string">'&lt;/div&gt;'</span>;</span></span><br><span class="line"><span class="hljs-javascript">      $(<span class="hljs-string">'.posts'</span>).append(item);</span></span><br><span class="line">    &#125;</span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-primary"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/posts"</span>&gt;</span>發表新留言<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>留言列表<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"posts"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>接著打開 <code>index.html</code>，就可以看到預期中的畫面出現了，跟我們之前用 server side render 產生的畫面應該一模一樣。用右鍵 -&gt; 檢查去檢視，會發現所有元素都在。</p>
+<img width="735" alt="ele1" src="https://user-images.githubusercontent.com/2755720/49350544-57c35780-f6ea-11e8-9325-b01c6f0c312b.png">
+<p>但是如果你改用右鍵 -&gt; 檢視原始碼，會發現幾乎是空的：</p>
+<img width="553" alt="ele2" src="https://user-images.githubusercontent.com/2755720/49350552-5c880b80-f6ea-11e8-81c2-e6161bbf6efc.png">
+<p>這個就是 client side render 跟 server side render 最大的差別。因為對於前者，我們是在執行期間「動態」去跟後端伺服器拿資料，再動態產生你看到的那些元素。</p>
+<p>而那些元素原本不存在 index.html 裡面，是我們後來自己用 jQuery append 上去的，所以檢視原始碼當然不會出現任何東西。</p>
+<p>我們來看一張 client side render 的示意圖：</p>
+<img width="925" alt="client" src="https://user-images.githubusercontent.com/2755720/49350560-614cbf80-f6ea-11e8-88cb-d183bced83bb.png">
+<p>在 server side 的地方，view 這層直接被忽略了，因為後端只輸出 JSON 格式的資料而已，而這邊的第五步：把傳回來的資料 render 成 HTML 指的就是我們上面那個用 jQuery 動態 append 上去的步驟。</p>
+<p>而在這種狀況底下，你有沒有發現前後端已經切開了？</p>
+<p>後端工程師從此之後不用再管 view 裡面到底裝什麼，不用再教前端工程師怎麼跑 rails，他只要負責制定 API 文件，提供前端需要的資料就好。</p>
+<p>而前端工程師也不需要跑那些服務了，只需要用他們最熟悉的瀏覽器打開 HTML 檔案就行了，利用 ajax 從後端拿資料，並且在自己這邊用 JavaScript 動態產生內容。</p>
+<p>在這種情況下，前後端的部署也可以完全拆開，前端的部分最簡單，只需要隨便找一個可以放 html 檔案的地方就好，例如說 Amazon S3。所以前端幾乎不會有掛掉的問題，也不會有流量的問題，因為它只是個靜態檔案而已。</p>
+<p>假如 server 有一天掛了，API 也跟著掛了，使用者依然可以造訪網頁，只是看不到資料而已，或者是你可以顯示出一個錯誤的圖案。但如果是舊的那種綁在一起的架構，server 一旦掛掉，你連畫面都渲染不出來。</p>
+<p>再者，因為現在把 data 跟 view 完全切開來，你要替換任何一邊都是很方便的。例如說你後端不想用 rails 了你要用 go，完全沒問題！只要保持 API 的格式一樣，你後端就算要用 C 也沒人管你。</p>
+<p>前端也是一樣，你要選 Angular，選 React 或是選 Vue 甚至你要手刻都可以，反正都不關後端工程師的事情。</p>
+<h1><span id="可是事情沒那麼簡單">可是，事情沒那麼簡單</span></h1>
+<p>雖然這種場景聽起來很美好，但千萬不要忽略了這樣子的改變會造成的後果。</p>
+<p>什麼後果？那就是前端會變得有夠複雜。</p>
+<p>仔細想想我們一開始提到的那種開發架構，統一從後端 render，所以我一個頁面就準備一個 view 的檔案，如果使用者訪問<code>/posts</code>，我就<code>render('posts.ejs')</code>；若是訪問<code>/about</code>，我就<code>render('about.ejs')</code>。</p>
+<p>第一個問題來了：</p>
+<blockquote>
+<p>既然剛剛說前端只有一個 index.html，那不就代表使用者訪問 <code>/posts</code>跟訪問<code>/about</code>，都是到同一個檔案？那我要怎麼渲染不同頁面？</p>
+</blockquote>
+<p>因為在以往，路由的部分是 server 負責，就如同我上面說的一樣，server 依據不同的路由來決定要渲染哪一個頁面。可是現在切開之後，前端只剩下一個 index.html 了，那怎麼辦呢？</p>
+<p>只好讓前端來負責了。</p>
+<p>前端可以透過<code>window.location</code>或者是 <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API" target="_blank" rel="noopener">history API</a> 來管理網址，就可以知道使用者現在想要造訪哪一個頁面。</p>
+<p>這邊有一個小細節稍微提一下，那就是剛剛講過前端只有一個 html 檔案，所以網址可能像是這樣：<code>https://example.com/index.html</code>。</p>
+<p>只有一個網址而已，怎麼知道使用者要造訪哪一個頁面？</p>
+<p>在以前我們要造訪<code>posts</code>的話，網址可能會是：<code>https://example.com/posts</code>，可是現在我們前端已經變成一個靜態檔案了，只有那一個路徑而已，該怎麼做呢？</p>
+<p>第一種方法是利用 hash，例如說<code>https://example.com/index.html#posts</code>，前端再去解析後面的字串。</p>
+<p>第二種是利用<code>nginx</code>或其他類似的服務，把所有<code>https://example.com/*</code>的網址都一律輸出 index.html 這個檔案，這樣子看起來就會跟以前一樣了。</p>
+<p>我到<code>/posts</code>，server 會回傳 index.html，我到<code>/about</code> server 也會回傳一樣的內容。</p>
+<p>但總之呢，因為後端不再處理這邊的路由了，所以這個部分完全轉交給前端負責，你必須在前端自己管理 URL 的狀態，去決定現在要顯示哪一個頁面。</p>
+<p>那這邊要怎麼做呢？最簡單的方法就是跟以往後端做法一樣，你到哪一個網址，我就根據網址輸出怎樣的東西。</p>
+<p>前端的程式碼大概會長這樣：</p>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">render</span>(<span class="hljs-params">path</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-comment">// 清空整個畫面</span></span><br><span class="line">  $(body).empty();</span><br><span class="line">  <span class="hljs-keyword">if</span> (path === <span class="hljs-string">'posts'</span>) &#123;</span><br><span class="line">    renderPostsPage();</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (path === <span class="hljs-string">'about'</span>) &#123;</span><br><span class="line">    renderAboutPage();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>只要每一次到一個新的網址，我就把現在內容全部清空再渲染一次就好。</p>
+<p>是很簡單沒錯，但是效能有大大的問題，因為有些部分你其實根本不用清空。例如說網站最上方會有的導覽列跟最下面的 footer，基本上每一個頁面都有，是不會變的。</p>
+<p>針對那些不變的部分，應該保留起來才對，不然每一次都清空重建一樣的東西很沒有效率。你可能會說這不就跟後端以前寫 view 一樣，抽出共通的部分然後放在 layout 裡面之類的。</p>
+<p>不不，這不一樣。後端 render 本質上就是「每一個不同頁面就回傳一份不同的 html 檔案」，而我們現在前端 render 其實也有把共通的部分抽出來，但前端的難題在：「要怎麼只更新部分畫面，而不是暴力的每次都砍掉重練」。</p>
+<p>你有沒有開始漸漸覺得前端越來越多事情要做了？</p>
+<h1><span id="single-page-application">Single Page Application</span></h1>
+<p>當你把這種東西發揮到極致，會覺得很像在寫一個 App 一樣，這東西就叫做 SPA，Single Page Application。</p>
+<p>就如同字面上的意思一樣，我們現在只有一個 index.html 檔案，但是用起來卻像一個 App。</p>
+<p>最經典的例子就是 Gmail。你在用 Gmail 的時候，完全沒有換頁。全部的動作都是在「同一個頁面」上面發生的，所以你載入的檔案從頭到尾就只有一個 index.html，完全沒有換過。</p>
+<p>你在 Gmail 上面做的任何動作，都是用 ajax 發 request 給 server，server 回傳資料以後 client 端再用 JavaScript 把畫面 render 出來。</p>
+<p>所以你在用 Gmail 的時候，會感覺好像在用一個 App 而不是在用網頁，因為頁面之間的跳轉很流暢，不像一般網頁中間可能會有白屏出現。</p>
+<p>既然都叫做 Application 了，這時候的前端工程師已經不是大家以往想像的那樣，只需要會 HTML 跟 CSS 刻刻畫面，用 JavaScript 做點小特效跟互動。</p>
+<p>要寫 SPA 的話，最難的就是狀態的管理。因為很多東西以前後端都幫你做掉了，所以你完全不用考慮這件事，但現在要了。</p>
+<p>舉個例子好了，以前你訪問一篇文章，假設是<code>/post/12</code>，一點下去之後快速切回首頁再點擊其他文章，server 也就只是再回傳相對應的 HTML 而已。</p>
+<p>可是呢，SPA 就不一樣了，考慮一下下面的流程：</p>
+<ol>
+<li>使用者點擊<code>/post/12</code></li>
+<li>query API</li>
+<li>使用者返回首頁</li>
+<li>使用者點擊<code>/posts/13</code></li>
+<li>query API</li>
+<li>拿到 response，渲染頁面</li>
+</ol>
+<p>假設使用者點擊的速度很快，在第七步的時候，很有可能會先拿到第二步的 response，就會發生使用者明明點進去 A 文章，內容卻是 B 文章的狀況。</p>
+<p>這只是一個簡單的例子，實戰上還有一大堆要考慮的問題，例如說還沒有拿到資料的時候要顯示什麼，拿到之後要怎麼更新等等。</p>
+<h1><span id="前端-mvc">前端 MVC</span></h1>
+<p>在前端變得愈來愈複雜之後，你應該也能理解為什麼前端需要 MVC 了。如果你有寫過純 PHP，經歷過那種商業邏輯跟 view 跟 model 混雜在同一個檔案的時期，應該也很能理解為什麼需要 MVC。</p>
+<p>因為我們要把職責切開來嘛，讓大家各自負責該負責的東西，才不會全部混在一起變成義大利麵。</p>
+<p>前端 MVC 其實跟後端 MVC 滿類似，然後前端也要設定路由，剛剛有提過了。就是設定哪一個 URL 要去哪一個 Controller，再去相對應的 Model 拿資料，最後輸出 View。</p>
+<p>這邊稍微比較一下前後端的 MVC 在做的事情：</p>
+<table>
+<thead>
+<tr>
+<th> </th>
+<th>前端</th>
+<th>後端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>去跟後端 API 拿資料</td>
+<td>去跟 DB 拿資料</td>
+</tr>
+<tr>
+<td>View</td>
+<td>在前端動態產生畫面</td>
+<td>無</td>
+</tr>
+<tr>
+<td>Controller</td>
+<td>呼叫相對應的 Model 並 render 畫面</td>
+<td>呼叫相對應的 Model 並傳回資料</td>
+</tr>
+</tbody>
+</table>
+<img width="968" alt="mvc" src="https://user-images.githubusercontent.com/2755720/49350576-6e69ae80-f6ea-11e8-8827-3e8d2e6a090e.png">
+<p>你會發現其實前後端做的事情都差不多，只是前端注重在 render 畫面，後端注重在輸出資料。還可以畫出這一張完整的流程圖：</p>
+<img width="933" alt="all" src="https://user-images.githubusercontent.com/2755720/49350581-76295300-f6ea-11e8-8332-3f9e80ecb0cb.png">
+<p>用文字來解釋的話，流程是這樣的：</p>
+<ol>
+<li>使用者造訪 /posts 這個網址，代表他想看全部文章</li>
+<li>前端的路由去處理，負責呼叫對應到的 controller</li>
+<li>前端 controller 去呼叫 Model 拿資料</li>
+<li>前端 Model 透過 API，去 /api/posts 這個網址拿資料</li>
+<li>後端路由接到 request，丟給對應到的後端 controller</li>
+<li>後端 controller 跟後端 Model 拿資料</li>
+<li>後端 controller 把資料傳回去</li>
+<li>前端 Modle 拿到資料以後回傳給前端 controller，並且把資料丟給 view</li>
+<li>client side render，把畫面渲染出來</li>
+</ol>
+<p>你上面看到的這整套，大概就是最基本的 SPA 的架構了。後端只負責輸出資料，前端來負責抓資料跟渲染畫面。把前後端完完全全的切開了，就算你後端壞掉，你前端還是看得到畫面（只是可能會顯示個錯誤畫面之類的）；你前端壞掉，後端還是能安穩的輸出資料供其他服務使用。</p>
+<p>兩邊乾乾淨淨，而且任何一邊都會比較好維護，前端工程師想要改任何跟介面有關的東西，都跟後端完全沒有關係，其實就等於是兩個不同的專案的意思。</p>
+<h1><span id="我們真的需要-spa-嗎">我們真的需要 SPA 嗎？</span></h1>
+<p>上面提到了這麼多，我認為前端開發的複雜化跟 SPA 有滿大的關係，畢竟你現在就等於是在開發一個完整的 App，怎麼可能不複雜？</p>
+<p>可是別忘記問自己：</p>
+<blockquote>
+<p>我們真的需要 SPA 嗎？</p>
+</blockquote>
+<p>有些場景是一定要用的，例如說音樂播放網站。</p>
+<p>為什麼？因為你必須一邊播放音樂，一邊讓他可以在網站上看其他的資料，例如說歌手介紹、專輯介紹之類的。如果你今天不是用 SPA，那使用者點到別的頁面的時候，瀏覽器就跳頁了，音樂就停了。哇靠這個體驗也太差了，完全不能接受。</p>
+<p>所以這種網站一定要用 SPA，沒有其他選擇。用了之後因為不會跳頁，所以你點擊歌手介紹的時候，只是發一個 ajax request，然後收到 response 之後用 JavaScript 把接收到的資料 render 成 HTML 顯示出來。不管到哪一個頁面，都不會真的跳轉，不會載入新的 HTML 檔案。</p>
+<p>那有些地方我覺得不用也行，但用了之後可以加強使用者體驗，例如說 Twitch 前一陣子的新功能，在你跳去看其他頁面的時候，你原本在看的實況會縮到左下角。</p>
+<p><img src="https://user-images.githubusercontent.com/2755720/49350590-7de8f780-f6ea-11e8-95b2-e2c7bc7f63dc.png" alt="twitch 2"></p>
+<p>總之，會需要用到 Single Page Application 的場合有兩個，一個是因為必須要這樣做，另一個是因為可以增進使用者體驗，讓使用者覺得操作起來更順暢。</p>
+<p>如果你發現你要做的東西不符合這兩種場合，你可以選擇不要做 SPA，可以選擇就依照之前那樣的 MVC 架構，由 server side 去 render、去處理。這一切都是可以選擇的。</p>
+<p>除此之外，其實 SPA 也有一些缺點，例如說你明明只要看一個頁面而已，卻要把一大包的 JavaScript 或是其他頁面的 template 一起下載下來。</p>
+<p>又或者因為是 client side render，所以有些搜尋引擎爬不到任何資料（因為你的 index.html 幾乎是空的），不過 Google 很厲害，會爬 JavaScript 執行完之後的結果。可是這對 SEO 來說還是不太好。</p>
+<p>當然上面都有一些方法可以解決啦，例如說可以把 js 檔案分開，你到那一個頁面就只要下載那一個頁面的 js 即可。SEO 的解決方法則是將兩種結合，第一次先在 server side render，之後的操作都改用 client side render，就可以保證搜尋引擎也能爬到完整的 HTML。</p>
+<p>但你知道的，可以解決是一回事，要花多少心力去解決又是另外一回事了。</p>
+<h1><span id="總結">總結</span></h1>
+<p>這篇大概講到了一開始最常見的網站架構，然後到近期導致前端開發複雜化的 SPA。我以前剛接觸的時候也是一頭霧水，想說到底前端為什麼需要 MVC。可是經過這一連串的脈絡思考下來，就很能理解原因了。</p>
+<p>當你東西變得愈來愈複雜，就需要一個架構去把職責切割開來，不然會造成日後維護上的困難。</p>
+<p>當你越瞭解 SPA 所帶來的優缺點，你在選擇要不要用的時候就有更多面向可以參考，就有更多的理由去支持你所做的決定，而不單單僅是「哇！好潮喔！別人用了我也要用！」</p>
+<p>希望這篇對大家有幫助，最後附上一篇延伸閱讀：<a href="https://medium.freecodecamp.org/why-i-hate-your-single-page-app-f08bb4ff9134" target="_blank" rel="noopener">Why I hate your Single Page App</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Front-end/">#Front-end</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2017/10/04/payment-request-api/">統一網頁支付介面：Payment Request API</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2017/09/03/moving-from-logdown-to-hexo/">部落格搬家心得：從 Logdown 到 Hexo</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d8b39b069ba670012bf92b9&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://blog.huli.tw/2017/09/06/spa-single-page-application/';
+        this.page.identifier = '2017/09/06/spa-single-page-application/';
+        
+        this.language = 'en';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'huli' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Huli&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-tw");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>

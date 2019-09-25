@@ -3,17 +3,22 @@
 
     <sitemap>
         <loc>https://blog.huli.tw/post-sitemap.xml</loc>
-        <lastmod>2017-09-03T14:02:49.000Z</lastmod>
+        <lastmod>2019-09-25T13:16:07.865Z</lastmod>
     </sitemap>
 
     <sitemap>
         <loc>https://blog.huli.tw/page-sitemap.xml</loc>
-        <lastmod>2017-09-03T01:16:08.000Z</lastmod>
+        <lastmod>2019-09-25T13:04:32.977Z</lastmod>
+    </sitemap>
+
+    <sitemap>
+        <loc>https://blog.huli.tw/category-sitemap.xml</loc>
+        <lastmod>2019-09-25T11:32:52.648Z</lastmod>
     </sitemap>
 
     <sitemap>
         <loc>https://blog.huli.tw/tag-sitemap.xml</loc>
-        <lastmod>2017-09-03T10:44:08.000Z</lastmod>
+        <lastmod>2019-09-25T10:47:13.325Z</lastmod>
     </sitemap>
 
 </sitemapindex>

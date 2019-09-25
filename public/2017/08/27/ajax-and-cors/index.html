@@ -1,220 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword"  content="">
-    <link rel="shortcut icon" href="/img/lidemy_logo.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          輕鬆理解 Ajax 與跨來源請求 - Huli&#39;s blog
-        
-    </title>
+<title>輕鬆理解 Ajax 與跨來源請求 - Huli</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="canonical" href="https://blog.huli.tw/2017/08/27/ajax-and-cors/">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+
+
+<meta name="description" content>
+
+
+
+
+
+    <meta name="description" content="前言 一般來說在學習寫網頁的時候，最先碰到的會是 HTML 與 CSS，負責把版面刻出來以及美化版面，當基礎打穩之後，會開始學習 JavaScript，試著做出一點互動性的效果。而「互動」除了使用者跟瀏覽器的互動以外，別忘了還有 Client 端跟 Server 端的互動，也就是必須要學會從瀏覽器用 JavaScript 跟後端 Server 拿資料，否則你的網頁資料都只能是寫死的。 這篇的主要預">
+<meta name="keywords" content="Front-end,JavaScript,Ajax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="輕鬆理解 Ajax 與跨來源請求">
+<meta property="og:url" content="https://blog.huli.tw/2017/08/27/ajax-and-cors/index.html">
+<meta property="og:site_name" content="Huli">
+<meta property="og:description" content="前言 一般來說在學習寫網頁的時候，最先碰到的會是 HTML 與 CSS，負責把版面刻出來以及美化版面，當基礎打穩之後，會開始學習 JavaScript，試著做出一點互動性的效果。而「互動」除了使用者跟瀏覽器的互動以外，別忘了還有 Client 端跟 Server 端的互動，也就是必須要學會從瀏覽器用 JavaScript 跟後端 Server 拿資料，否則你的網頁資料都只能是寫死的。 這篇的主要預">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="http://blog.techbridge.cc/img/huli/twitch.png">
+<meta property="og:image" content="http://blog.techbridge.cc/img/huli/fs.png">
+<meta property="og:image" content="http://blog.techbridge.cc/img/huli/twitch2.png">
+<meta property="og:image" content="http://blog.techbridge.cc/img/huli/cors1.png">
+<meta property="og:image" content="http://blog.techbridge.cc/img/huli/cors2.png">
+<meta property="og:updated_time" content="2019-09-25T10:50:53.800Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="輕鬆理解 Ajax 與跨來源請求">
+<meta name="twitter:description" content="前言 一般來說在學習寫網頁的時候，最先碰到的會是 HTML 與 CSS，負責把版面刻出來以及美化版面，當基礎打穩之後，會開始學習 JavaScript，試著做出一點互動性的效果。而「互動」除了使用者跟瀏覽器的互動以外，別忘了還有 Client 端跟 Server 端的互動，也就是必須要學會從瀏覽器用 JavaScript 跟後端 Server 拿資料，否則你的網頁資料都只能是寫死的。 這篇的主要預">
+<meta name="twitter:image" content="http://blog.techbridge.cc/img/huli/twitch.png">
+
+
+
+
+
+<link rel="icon" href="/img/lidemy_logo.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            background-image: url('/img/header_img/article-bg.png')
-            /*post*/
-        
-    }
     
-</style>
-
-<header class="intro-header" >
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#frontend" title="frontend">frontend</a>
-                            
-                              <a class="tag" href="/tags/#ajax" title="ajax">ajax</a>
-                            
-                              <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
-                            
-                        </div>
-                        <h1>輕鬆理解 Ajax 與跨來源請求</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by Huli on
-                            2017-08-27
-                        </span>
-                    </div>
-                
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    
+    
+    
+    
+    
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49773306-3"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-49773306-3');
 </script>
 
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
+    
 
-<!-- Post Content -->
-<article>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
-        <div class="row">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    Huli
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章列表</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+            <a class="navbar-item " href="/recommend">推薦閱讀</a>
+            
+            <a class="navbar-item " href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" target="_blank" title="Medium" href="https://medium.com/@hulitw">
+                
+                <i class="fab fa-medium"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Twitter" href="https://twitter.com/aszx87410">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Facebook" href="https://www.facebook.com/profile.php?id=100000221410594">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
 
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h1><span id="前言">前言</span></h1>
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            輕鬆理解 Ajax 與跨來源請求
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-08-27T20:12:00.000Z" itemprop="datePublished">2017年8月27日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Front-end/">Front-end</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1><span id="前言">前言</span></h1>
 <p>一般來說在學習寫網頁的時候，最先碰到的會是 HTML 與 CSS，負責把版面刻出來以及美化版面，當基礎打穩之後，會開始學習 JavaScript，試著做出一點互動性的效果。而「互動」除了使用者跟瀏覽器的互動以外，別忘了還有 Client 端跟 Server 端的互動，也就是必須要學會從瀏覽器用 JavaScript 跟後端 Server 拿資料，否則你的網頁資料都只能是寫死的。</p>
 <p>這篇的主要預設讀者是網頁前端的初學者，希望能讓本來不太理解怎麼跟 Server 交換資料或是怎麼串 APi 的讀者看完之後，能夠更了解該怎麼跟後端串接。</p>
 <a id="more"></a>
@@ -225,7 +176,7 @@
 </blockquote>
 <p>其實這跟你做的網頁類型有關，假如說你今天做的是一個官方網站，很可能整個網站都是靜態的，只要 HTML 跟 CSS 就可以了，並不需要跟後端 Server 拿資料。</p>
 <p>那我們先假設今天要做的是一個可以瀏覽現在 Twitch 實況列表的網頁好了，如下圖。</p>
-<p><img src="http://blog.techbridge.cc/img/huli/twitch.png" alt=""></p>
+<p><img src="http://blog.techbridge.cc/img/huli/twitch.png" alt></p>
 <p>如果這個網頁不跟後端拿資料，就代表說網頁的內容都是固定的，無論什麼時候看都一樣。可是這樣的話就不對了嘛，因為這個網頁的目標是顯示出「現在有在開實況的頻道」，所以內容是會跟著改變的。</p>
 <p>既然會跟著改變，就必須不斷的去更新資料，從 Server 那邊拿資料回來，接著在前端處理過後顯示。</p>
 <p>已經確認有拿資料的必要性之後，就可以問自己兩個問題：</p>
@@ -255,13 +206,13 @@
 <h1><span id="api-documentation">API Documentation</span></h1>
 <p>既然已經知道 API 是什麼了，也知道要串接 API，那下一個問題就是「那要怎麼串呢？」</p>
 <p>剛剛前面有提過檔案存取的例子，其實這個比較像是呼叫作業系統或是程式語言的函式庫提供的 Function，而這些 Function 你通常都可以在官方文件上查到更詳細的說明，例如說 Node.js 的讀取檔案：</p>
-<p><img src="http://blog.techbridge.cc/img/huli/fs.png" alt=""></p>
-<p>（來源：<a href="https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback%EF%BC%89" target="_blank" rel="external">https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback）</a></p>
+<p><img src="http://blog.techbridge.cc/img/huli/fs.png" alt></p>
+<p>（來源：<a href="https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback%EF%BC%89" target="_blank" rel="noopener">https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback）</a></p>
 <p>上面就有寫說你應該呼叫哪一個 Function，應該傳入哪些參數。</p>
 <p>API 的串接也是一樣，一定要有文件你才知道怎麼串，不然根本串不起來，因為你連要傳什麼參數都不知道。</p>
-<p>我們可以先來看看<a href="https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api/" target="_blank" rel="external">Twitch API 文件</a>是怎麼寫的。</p>
+<p>我們可以先來看看<a href="https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api/" target="_blank" rel="noopener">Twitch API 文件</a>是怎麼寫的。</p>
 <p>裡面說明了你必須要有一個<code>Client ID</code>，然後 API Root 的 URL 是 <code>https://api.twitch.tv/kraken</code> 等等，這些都是與 API 相關的基本資訊。如果你在左側欄隨便點一個 API，會看到個別 API 的詳細資訊：</p>
-<p><img src="http://blog.techbridge.cc/img/huli/twitch2.png" alt=""></p>
+<p><img src="http://blog.techbridge.cc/img/huli/twitch2.png" alt></p>
 <p>這邊就有寫說網址是什麼，你應該傳的參數是什麼等等，下面還有附上參考範例，這就是一個很完整的 API 文件。</p>
 <p>通常在寫網頁的時候，我們都會直接講 API，但其實我們指的是 Web API，也就是透過網路來傳輸的 API。那有沒有非 Web API 呢？有，像我們前面提到的跟作業系統要讀檔的 API，就都是在本機底下執行的，沒有透過任何網路。</p>
 <p>不過這其實也不用太在意，反正大家都習慣講 API，聽得懂就好。</p>
@@ -271,13 +222,13 @@
 <p>要在瀏覽器上面發送 Request，必須應用到一種技術叫做 Ajax，全名是「Asynchronous JavaScript and XML」，重點在於<code>Asynchronous</code>這個單字，非同步。</p>
 <p>在講什麼是非同步之前，就要先來提一下什麼是同步。你原本寫的 JavaScript 就幾乎都是同步執行的。意思是他執行到某一行的時候，會等這行執行完畢，才執行到下一行，確保執行順序。</p>
 <p>也就是說下面這段程式碼，最後一行需要等很長一段時間才能執行到：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> count = <span class="number">10000000</span>;</div><div class="line"><span class="keyword">while</span>(count--) &#123;</div><div class="line">  <span class="comment">// 做一些耗時的操作</span></div><div class="line">&#125;</div><div class="line">  </div><div class="line"><span class="comment">// 等很久才被執行到</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'done'</span>)</div></pre></td></tr></table></figure>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> count = <span class="hljs-number">10000000</span>;</span><br><span class="line"><span class="hljs-keyword">while</span>(count--) &#123;</span><br><span class="line">  <span class="hljs-comment">// 做一些耗時的操作</span></span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="hljs-comment">// 等很久才被執行到</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">'done'</span>)</span><br></pre></td></tr></table></figure></p>
 <p>看起來滿有道理的，程式本來不就是一行一行執行的嗎？可是如果今天牽涉到網路操作的話，大家可以思考看看下面這個例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 假設有個發送 Request 的函式叫做 sendRequest</span></div><div class="line"><span class="keyword">var</span> result = sendRequest(<span class="string">'https://api.twitch.tv/kraken/games/top?client_id=xxx'</span>);</div><div class="line">  </div><div class="line"><span class="comment">// 等很久才被執行到</span></div><div class="line"><span class="built_in">console</span>.log(result);</div></pre></td></tr></table></figure>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 假設有個發送 Request 的函式叫做 sendRequest</span></span><br><span class="line"><span class="hljs-keyword">var</span> result = sendRequest(<span class="hljs-string">'https://api.twitch.tv/kraken/games/top?client_id=xxx'</span>);</span><br><span class="line">  </span><br><span class="line"><span class="hljs-comment">// 等很久才被執行到</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure></p>
 <p>當 JavaScript 執行到<code>sendRequest</code>的時候，由於是同步的，就會等待 Response 回來才繼續做事。換句話說，在 Response 還沒回來之前，整個 JavaScript 引擎是不會執行任何東西的！很可怕對吧，你點任何有牽涉到 JavaScript 的東西，都不會有反應，因為 JavaScript 還在等 Response 回來。</p>
 <p>所以呢，像是這種已經預期到可能非常耗時間，非常不穩定的操作，就不能用同步的方式來執行，而是要用非同步。</p>
 <p>非同步是什麼意思呢？就是執行完之後就不管它了，不等結果回來就繼續執行下一行：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 假設有個發送 Request 的函式叫做 sendRequest</span></div><div class="line"><span class="keyword">var</span> result = sendRequest(<span class="string">'https://api.twitch.tv/kraken/games/top?client_id=xxx'</span>);</div><div class="line">  </div><div class="line"><span class="comment">// 上面 Request 發送完之後就執行到這一行，所以 result 不會有東西</span></div><div class="line"><span class="comment">// 因為 Response 根本沒有回來</span></div><div class="line"><span class="built_in">console</span>.log(result);</div></pre></td></tr></table></figure>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 假設有個發送 Request 的函式叫做 sendRequest</span></span><br><span class="line"><span class="hljs-keyword">var</span> result = sendRequest(<span class="hljs-string">'https://api.twitch.tv/kraken/games/top?client_id=xxx'</span>);</span><br><span class="line">  </span><br><span class="line"><span class="hljs-comment">// 上面 Request 發送完之後就執行到這一行，所以 result 不會有東西</span></span><br><span class="line"><span class="hljs-comment">// 因為 Response 根本沒有回來</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure></p>
 <p>這邊需要特別注意的是「非同步的 Function 不能直接透過 return 把結果傳回來」，為什麼？因為像上面這個例子，它發送 Request 之後就會執行到下一行了，這個時候根本就還沒有 Response，是要回傳什麼？</p>
 <p>那怎麼辦呢？先聽我舉個很常見的小例子吧！</p>
 <p>我之前在新加坡的 Food Court 吃飯的時候，那邊每一張桌子上面都會有桌號。你去點餐的時候，只要跟老闆講說你坐哪一桌，等餐點完成之後老闆就會自己主動送過來。</p>
@@ -286,21 +237,21 @@
 Response 回來之後（等餐點做好之後），會自己幫我把結果送過來（老闆會自己送過來）。</p>
 <p>在點餐的例子中，老闆可以透過桌號知道應該把資料送到哪邊，那在 JavaScript 裡面呢？可以透過 Function！而這個 Function，我們就稱作 Callback Function，回呼函式。</p>
 <p>當非同步的操作完成時，就可以呼叫這個 Function，並且把資料帶進來。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 假設有個發送 Request 的函式叫做 sendRequest</span></div><div class="line">sendRequest(<span class="string">'https://api.twitch.tv/kraken/games/top?client_id=xxx'</span>, callMe);</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">callMe</span> (<span class="params">response</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(response);</div><div class="line">&#125;</div><div class="line">  </div><div class="line"><span class="comment">// 或者寫成匿名函式</span></div><div class="line">sendRequest(<span class="string">'https://api.twitch.tv/kraken/games/top?client_id=xxx'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(response);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 假設有個發送 Request 的函式叫做 sendRequest</span></span><br><span class="line">sendRequest(<span class="hljs-string">'https://api.twitch.tv/kraken/games/top?client_id=xxx'</span>, callMe);</span><br><span class="line">  </span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callMe</span> (<span class="hljs-params">response</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(response);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="hljs-comment">// 或者寫成匿名函式</span></span><br><span class="line">sendRequest(<span class="hljs-string">'https://api.twitch.tv/kraken/games/top?client_id=xxx'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">response</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(response);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>現在你就知道為什麼網路的操作是非同步，以及什麼是 callback function 了。</p>
 <h1><span id="xmlhttprequest">XMLHttpRequest</span></h1>
 <p>方才提到 Ajax、非同步以及 callback function 的概念，但還是沒講到要怎麼發送 Request，只寫了一個假的<code>sendRequest</code>函式當作參考而已。</p>
 <p>要發送 Request 的話，就要透過瀏覽器幫我們準備好的一個物件，叫做<code>XMLHttpRequest</code>，範例程式碼如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">request.open(<span class="string">'GET'</span>, <span class="string">`https://api.twitch.tv/kraken/games/top?client_id=xxx`</span>, <span class="literal">true</span>);</div><div class="line">request.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (request.status &gt;= <span class="number">200</span> &amp;&amp; request.status &lt; <span class="number">400</span>) &#123;</div><div class="line">  </div><div class="line">    <span class="comment">// Success!</span></div><div class="line">    <span class="built_in">console</span>.log(request.responseText);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">request.send();</div></pre></td></tr></table></figure>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> XMLHttpRequest();</span><br><span class="line">request.open(<span class="hljs-string">'GET'</span>, <span class="hljs-string">`https://api.twitch.tv/kraken/games/top?client_id=xxx`</span>, <span class="hljs-literal">true</span>);</span><br><span class="line">request.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (request.status &gt;= <span class="hljs-number">200</span> &amp;&amp; request.status &lt; <span class="hljs-number">400</span>) &#123;</span><br><span class="line">  </span><br><span class="line">    <span class="hljs-comment">// Success!</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(request.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">request.send();</span><br></pre></td></tr></table></figure></p>
 <p>上面的<code>request.onload</code>其實就是在指定說當資料回來的時候，要用哪一個 function 去處理。</p>
 <p>有了上面這一段程式碼之後，你終於大功告成，終於可以串接 Twitch API，從那邊拿資料下來了！真是可喜可賀，從此之後，你就跟「串接 API」這個技能過著幸福快樂的生活…</p>
 <p>才怪。</p>
 <h1><span id="same-origin-policy">Same Origin Policy</span></h1>
 <p>正當你以為自己已經對串接 API 駕輕就熟，想說去串接別的 API 試試看好了的時候，才發現一串就出問題了：</p>
-<p><img src="http://blog.techbridge.cc/img/huli/cors1.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">XMLHttpRequest cannot load </div><div class="line">http://odata.tn.edu.tw/ebookapi/api/getOdataJH/?level=all. </div><div class="line">No &apos;Access-Control-Allow-Origin&apos; header is present on the </div><div class="line">requested resource. Origin &apos;null&apos; is therefore not allowed access.</div></pre></td></tr></table></figure>
+<p><img src="http://blog.techbridge.cc/img/huli/cors1.png" alt></p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">XMLHttpRequest cannot load </span><br><span class="line">http://odata.tn.edu.tw/ebookapi/api/getOdataJH/?level=all. </span><br><span class="line">No &apos;Access-Control-Allow-Origin&apos; header is present on the </span><br><span class="line">requested resource. Origin &apos;null&apos; is therefore not allowed access.</span><br></pre></td></tr></table></figure></p>
 <p>咦？為什麼會有這個錯誤呢？</p>
-<p>其實是瀏覽器因為安全性的考量，有一個東西叫做<a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Same_origin_policy_for_JavaScript" target="_blank" rel="external">同源政策</a>，Same-origin policy。</p>
+<p>其實是瀏覽器因為安全性的考量，有一個東西叫做<a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Same_origin_policy_for_JavaScript" target="_blank" rel="noopener">同源政策</a>，Same-origin policy。</p>
 <p>意思就是說如果你現在這個網站的跟你要呼叫的 API 的網站「不同源」的時候，瀏覽器一樣會幫你發 Request，但是會把 Response 給擋下來，不讓你的 JavaScript 拿到並且傳回錯誤。</p>
 <p>什麼是不同源呢？其實你想簡單一點，只要是 Domain 不一樣就是不同源，或者是一個用<code>http</code>一個用<code>https</code>也是不同源，端口號不一樣也是不同源。</p>
 <p>所以如果你是接別人 API 的話，大多數情形都是不同源的。</p>
@@ -314,17 +265,17 @@ Response 回來之後（等餐點做好之後），會自己幫我把結果送�
 <p>這個字段你應該不陌生才對，覺得陌生的可以拉回去上面看，剛剛的錯誤訊息其實就有講到這一個 Header。</p>
 <p>當瀏覽器收到 Response 之後，會先檢查<code>Access-Control-Allow-Origin</code>裡面的內容，如果裡面有包含現在這個發起 Request 的 Origin 的話，就會允許通過，讓程式順利接收到 Response。</p>
 <p>如果你打開 Devtool 仔細看一開始我們發給 Twitch 的 Request，你會發現 Response 的 Header 大概是長這樣：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Content-Type: application/json</div><div class="line">Content-Length: 71</div><div class="line">Connection: keep-alive</div><div class="line">Server: nginx</div><div class="line">Access-Control-Allow-Origin: *</div><div class="line">Cache-Control: no-cache, no-store, must-revalidate, private</div><div class="line">Expires: 0</div><div class="line">Pragma: no-cache</div><div class="line">Twitch-Trace-Id: e316ddcf2fa38a659fa95af9012c9358</div><div class="line">X-Ctxlog-Logid: 1-5920052c-446a91950e3abed21a360bd5</div><div class="line">Timing-Allow-Origin: https://www.twitch.tv</div></pre></td></tr></table></figure>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: application/json</span><br><span class="line">Content-Length: 71</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Server: nginx</span><br><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Cache-Control: no-cache, no-store, must-revalidate, private</span><br><span class="line">Expires: 0</span><br><span class="line">Pragma: no-cache</span><br><span class="line">Twitch-Trace-Id: e316ddcf2fa38a659fa95af9012c9358</span><br><span class="line">X-Ctxlog-Logid: 1-5920052c-446a91950e3abed21a360bd5</span><br><span class="line">Timing-Allow-Origin: https://www.twitch.tv</span><br></pre></td></tr></table></figure></p>
 <p>重點是這一行：<code>Access-Control-Allow-Origin: *</code>，星號就代表萬用字元，意思是任何一個 Origin 都接受。所以當瀏覽器接收到這個 Response 之後，比對目前的 Origin 符合<code>*</code>這個規則，檢驗通過，允許我們接受跨來源請求的回應。</p>
 <p>除了這個 Header 以外，其實還有其他的可以用，例如說<code>Access-Control-Allow-Headers</code>跟<code>Access-Control-Allow-Methods</code>，就可以定義接受哪些 Request Header 以及接受哪些 Method。</p>
 <p>總結一下，如果你想要發起跨來源 HTTP 請求並且順利收到回應的話，需要確保 Server 端有加上<code>Access-Control-Allow-Origin</code>，不然 Response 會被瀏覽器給擋下來並且顯示出錯誤訊息。</p>
 <h1><span id="preflight-request">Preflight Request</span></h1>
 <p>還記得 Twitch 的 API 文件嗎？裡面需要帶一個<code>client-id</code>的參數，而文件裡面寫說你可以帶在 GET 的參數上面，也可以帶在 Header 裡，我們來試試看帶在 Header 裡會怎樣吧！打開 Devtool，你會看到一個神奇的現象：</p>
-<p><img src="http://blog.techbridge.cc/img/huli/cors2.png" alt=""></p>
+<p><img src="http://blog.techbridge.cc/img/huli/cors2.png" alt></p>
 <p>咦？我明明只發了一個 Request，怎麼變兩個了？而且第一個的 Method 居然是<code>OPTIONS</code>。只是多加了一個 Header 就多了一個 Request，是為什麼呢？</p>
 <p>其實這又跟上面講的 CORS 有關了，CORS 把 Request 分成兩種，一種是簡單請求（simple requests）。什麼是簡單請求呢？其實定義有滿長一串的，我認為有需要用到的時候再看就好，但總之如果你沒有加任何自定義的 Header，而且又是 GET 的話，絕對是簡單請求（這個夠簡單了吧）</p>
 <p>反之呢，如果你有加一些自定義的 Header，例如說我們剛剛加的<code>Client-ID</code>，這個 Request 就絕對不是簡單請求。</p>
-<p>（定義可參考：<a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Access_control_CORS#%E7%B0%A1%E5%96%AE%E8%AB%8B%E6%B1%82" target="_blank" rel="external">MDN: 簡單請求</a>）</p>
+<p>（定義可參考：<a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Access_control_CORS#%E7%B0%A1%E5%96%AE%E8%AB%8B%E6%B1%82" target="_blank" rel="noopener">MDN: 簡單請求</a>）</p>
 <p>從上述分類可知，我們剛剛發起的 Request 因為有帶了 Custom header，所以不會是簡單請求，那為什麼會多一個 Request 呢？</p>
 <p>這一個 Request 叫做 Preflight Request，中文翻作「預檢請求」，因為非簡單請求可能會帶有一些使用者資料，因此會先透過 Preflight Request 去確認後續的請求能否送出。</p>
 <p>如果這個 Preflight Request 沒有過的話，真的 Request 也就不會發送了，這就是預檢請求的目的。</p>
@@ -339,325 +290,299 @@ Response 回來之後（等餐點做好之後），會自己幫我把結果送�
 <p>還記得一開始提到的同源政策吧？仔細思考一下會發現，其實有些東西是不受同源政策限制的，例如說<code>&lt;script&gt;</code>這個 Tag，我們不是常常引用 CDN 或是 Google Analytics 之類的第三方套件嗎？網址都是其他 Domain 的，但是卻能正常載入。</p>
 <p>JSONP 就是利用<code>&lt;script&gt;</code>的這個特性來達成跨來源請求的。</p>
 <p>今天先想像你有一段 HTML 長這樣：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">  <span class="keyword">var</span> response = &#123;</span></div><div class="line"><span class="javascript">    data: <span class="string">'test'</span></span></div><div class="line"><span class="undefined">  &#125;;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">  <span class="built_in">console</span>.log(response);</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-javascript">  <span class="hljs-keyword">var</span> response = &#123;</span></span><br><span class="line"><span class="hljs-javascript">    data: <span class="hljs-string">'test'</span></span></span><br><span class="line">  &#125;;</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-javascript">  <span class="hljs-built_in">console</span>.log(response);</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>很好懂的一段程式碼，我就不多做解釋了。那如果今天把上面那一段換成一串網址呢？</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://another-origin.com/api/games"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">  <span class="built_in">console</span>.log(response);</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://another-origin.com/api/games"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-javascript">  <span class="hljs-built_in">console</span>.log(response);</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>如果<code>https://another-origin.com/api/games</code>這個網址返回的內容就是剛剛的：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> response = &#123;</div><div class="line">  data: <span class="string">'test'</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> response = &#123;</span><br><span class="line">  data: <span class="hljs-string">'test'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>那我不就一樣可以拿到資料了嗎？而且這些資料還是 Server 端控制的，所以 Server 可以給我任何資料。但是這樣用全域變數其實不太好，我們可以借用剛剛的 Callback Function 的概念，改成這樣：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined">  receiveData(&#123;</span></div><div class="line"><span class="javascript">    data: <span class="string">'test'</span></span></div><div class="line"><span class="undefined">  &#125;);</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">receiveData</span> (<span class="params">response</span>) </span>&#123;</span></div><div class="line"><span class="javascript">    <span class="built_in">console</span>.log(response);</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span><br><span class="line">  receiveData(&#123;</span><br><span class="line"><span class="hljs-javascript">    data: <span class="hljs-string">'test'</span></span></span><br><span class="line">  &#125;);</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-javascript">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">receiveData</span> (<span class="hljs-params">response</span>) </span>&#123;</span></span><br><span class="line"><span class="hljs-javascript">    <span class="hljs-built_in">console</span>.log(response);</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>所以 JSONP 是什麼？JSONP 其實就是透過上面這種形式，利用<code>&lt;script&gt;</code>裡面放資料，透過指定好的 function 把資料給帶回去。你只要把第一段的<code>&lt;script&gt;</code>那邊想成是 Server 的回傳值，你就可以理解了。</p>
 <p>實務上在操作 JSONP 的時候，Server 通常會提供一個<code>callback</code>的參數讓 client 端帶過去。Twitch API 有提供 JSONP 的版本，我們可以直接來看範例：</p>
 <p>URL: <code>https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=aaa&amp;limit=1</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aaa(&#123;<span class="string">"_total"</span>:<span class="number">1069</span>,<span class="string">"_links"</span>:&#123;<span class="string">"self"</span>:<span class="string">"https://api.twitch.tv/kraken/games/top?limit=1"</span>,<span class="string">"next"</span>:<span class="string">"https://api.twitch.tv/kraken/games/top?limit=1\u0026offset=1"</span>&#125;,<span class="string">"top"</span>:[&#123;<span class="string">"game"</span>:&#123;<span class="string">"name"</span>:<span class="string">"Dota 2"</span>,<span class="string">"popularity"</span>:<span class="number">63361</span>,<span class="string">"_id"</span>:<span class="number">29595</span>,<span class="string">"giantbomb_id"</span>:<span class="number">32887</span>,<span class="string">"box"</span>:&#123;<span class="string">"large"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-272x380.jpg"</span>,<span class="string">"medium"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-136x190.jpg"</span>,<span class="string">"small"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-52x72.jpg"</span>,<span class="string">"template"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg"</span>&#125;,<span class="string">"logo"</span>:&#123;<span class="string">"large"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-240x144.jpg"</span>,<span class="string">"medium"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-120x72.jpg"</span>,<span class="string">"small"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-60x36.jpg"</span>,<span class="string">"template"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg"</span>&#125;,<span class="string">"_links"</span>:&#123;&#125;,<span class="string">"localized_name"</span>:<span class="string">"Dota 2"</span>,<span class="string">"locale"</span>:<span class="string">"zh-tw"</span>&#125;,<span class="string">"viewers"</span>:<span class="number">65243</span>,<span class="string">"channels"</span>:<span class="number">373</span>&#125;]&#125;)</div></pre></td></tr></table></figure>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aaa(&#123;<span class="hljs-string">"_total"</span>:<span class="hljs-number">1069</span>,<span class="hljs-string">"_links"</span>:&#123;<span class="hljs-string">"self"</span>:<span class="hljs-string">"https://api.twitch.tv/kraken/games/top?limit=1"</span>,<span class="hljs-string">"next"</span>:<span class="hljs-string">"https://api.twitch.tv/kraken/games/top?limit=1\u0026offset=1"</span>&#125;,<span class="hljs-string">"top"</span>:[&#123;<span class="hljs-string">"game"</span>:&#123;<span class="hljs-string">"name"</span>:<span class="hljs-string">"Dota 2"</span>,<span class="hljs-string">"popularity"</span>:<span class="hljs-number">63361</span>,<span class="hljs-string">"_id"</span>:<span class="hljs-number">29595</span>,<span class="hljs-string">"giantbomb_id"</span>:<span class="hljs-number">32887</span>,<span class="hljs-string">"box"</span>:&#123;<span class="hljs-string">"large"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-272x380.jpg"</span>,<span class="hljs-string">"medium"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-136x190.jpg"</span>,<span class="hljs-string">"small"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-52x72.jpg"</span>,<span class="hljs-string">"template"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg"</span>&#125;,<span class="hljs-string">"logo"</span>:&#123;<span class="hljs-string">"large"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-240x144.jpg"</span>,<span class="hljs-string">"medium"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-120x72.jpg"</span>,<span class="hljs-string">"small"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-60x36.jpg"</span>,<span class="hljs-string">"template"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg"</span>&#125;,<span class="hljs-string">"_links"</span>:&#123;&#125;,<span class="hljs-string">"localized_name"</span>:<span class="hljs-string">"Dota 2"</span>,<span class="hljs-string">"locale"</span>:<span class="hljs-string">"zh-tw"</span>&#125;,<span class="hljs-string">"viewers"</span>:<span class="hljs-number">65243</span>,<span class="hljs-string">"channels"</span>:<span class="hljs-number">373</span>&#125;]&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>URL: <code>https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">receiveData(&#123;<span class="string">"_total"</span>:<span class="number">1067</span>,<span class="string">"_links"</span>:&#123;<span class="string">"self"</span>:<span class="string">"https://api.twitch.tv/kraken/games/top?limit=1"</span>,<span class="string">"next"</span>:<span class="string">"https://api.twitch.tv/kraken/games/top?limit=1\u0026offset=1"</span>&#125;,<span class="string">"top"</span>:[&#123;<span class="string">"game"</span>:&#123;<span class="string">"name"</span>:<span class="string">"Dota 2"</span>,<span class="string">"popularity"</span>:<span class="number">63361</span>,<span class="string">"_id"</span>:<span class="number">29595</span>,<span class="string">"giantbomb_id"</span>:<span class="number">32887</span>,<span class="string">"box"</span>:&#123;<span class="string">"large"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-272x380.jpg"</span>,<span class="string">"medium"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-136x190.jpg"</span>,<span class="string">"small"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-52x72.jpg"</span>,<span class="string">"template"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg"</span>&#125;,<span class="string">"logo"</span>:&#123;<span class="string">"large"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-240x144.jpg"</span>,<span class="string">"medium"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-120x72.jpg"</span>,<span class="string">"small"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-60x36.jpg"</span>,<span class="string">"template"</span>:<span class="string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg"</span>&#125;,<span class="string">"_links"</span>:&#123;&#125;,<span class="string">"localized_name"</span>:<span class="string">"Dota 2"</span>,<span class="string">"locale"</span>:<span class="string">"zh-tw"</span>&#125;,<span class="string">"viewers"</span>:<span class="number">65622</span>,<span class="string">"channels"</span>:<span class="number">376</span>&#125;]&#125;)</div></pre></td></tr></table></figure>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">receiveData(&#123;<span class="hljs-string">"_total"</span>:<span class="hljs-number">1067</span>,<span class="hljs-string">"_links"</span>:&#123;<span class="hljs-string">"self"</span>:<span class="hljs-string">"https://api.twitch.tv/kraken/games/top?limit=1"</span>,<span class="hljs-string">"next"</span>:<span class="hljs-string">"https://api.twitch.tv/kraken/games/top?limit=1\u0026offset=1"</span>&#125;,<span class="hljs-string">"top"</span>:[&#123;<span class="hljs-string">"game"</span>:&#123;<span class="hljs-string">"name"</span>:<span class="hljs-string">"Dota 2"</span>,<span class="hljs-string">"popularity"</span>:<span class="hljs-number">63361</span>,<span class="hljs-string">"_id"</span>:<span class="hljs-number">29595</span>,<span class="hljs-string">"giantbomb_id"</span>:<span class="hljs-number">32887</span>,<span class="hljs-string">"box"</span>:&#123;<span class="hljs-string">"large"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-272x380.jpg"</span>,<span class="hljs-string">"medium"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-136x190.jpg"</span>,<span class="hljs-string">"small"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-52x72.jpg"</span>,<span class="hljs-string">"template"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg"</span>&#125;,<span class="hljs-string">"logo"</span>:&#123;<span class="hljs-string">"large"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-240x144.jpg"</span>,<span class="hljs-string">"medium"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-120x72.jpg"</span>,<span class="hljs-string">"small"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-60x36.jpg"</span>,<span class="hljs-string">"template"</span>:<span class="hljs-string">"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg"</span>&#125;,<span class="hljs-string">"_links"</span>:&#123;&#125;,<span class="hljs-string">"localized_name"</span>:<span class="hljs-string">"Dota 2"</span>,<span class="hljs-string">"locale"</span>:<span class="hljs-string">"zh-tw"</span>&#125;,<span class="hljs-string">"viewers"</span>:<span class="hljs-number">65622</span>,<span class="hljs-string">"channels"</span>:<span class="hljs-number">376</span>&#125;]&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>有發現了嗎？它就是透過你帶過去的<code>callback</code>這個參數當作函式名稱，把 JavaScript 物件整個傳到 Function 裡面，你就可以在 Function 裡面拿到資料。</p>
 <p>結合起來會變這樣：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">receiveData</span> (<span class="params">response</span>) </span>&#123;</span></div><div class="line"><span class="javascript">    <span class="built_in">console</span>.log(response);</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-javascript">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">receiveData</span> (<span class="hljs-params">response</span>) </span>&#123;</span></span><br><span class="line"><span class="hljs-javascript">    <span class="hljs-built_in">console</span>.log(response);</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>利用 JSONP，也可以存取跨來源的資料。但 JSONP 的缺點就是你要帶的那些參數永遠都只能用附加在網址上的方式（GET）帶過去，沒辦法用 POST。</p>
 <p>如果能用 CORS 的話，還是應該優先考慮 CORS。</p>
 <h1><span id="總結">總結</span></h1>
 <p>今天這篇文章的內容就是從抓資料這件事情開始，一步步告訴你應該去哪裡抓？應該怎麼抓？用 API 抓，那什麼是 API？怎麼在 JavaScript 裡面呼叫 Web API？怎麼樣存取跨來源的資料？</p>
-<p>一般來說，跟前端抓資料有關的東西我基本上都提到了，不過有個遺珠之憾是沒有提到<a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="external">Fetch API</a>，這是比較新的標準，也是拿來抓資料用的，MDN 上面的介紹是：</p>
+<p>一般來說，跟前端抓資料有關的東西我基本上都提到了，不過有個遺珠之憾是沒有提到<a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="noopener">Fetch API</a>，這是比較新的標準，也是拿來抓資料用的，MDN 上面的介紹是：</p>
 <blockquote>
 <p>The Fetch API provides an interface for fetching resources (including across the network). It will seem familiar to anyone who has used XMLHttpRequest, but the new API provides a more powerful and flexible feature set.</p>
 </blockquote>
 <p>有興趣的讀者們可以自己去看一下。</p>
 <p>希望大家看完這篇之後，會更了解怎麼樣串接後端 API，以及串接的時候可能會碰到哪些困難。</p>
 
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2017/08/27/http-cache/" data-toggle="tooltip" data-placement="top" title="循序漸進理解 HTTP Cache 機制">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2017/08/27/the-javascripts-prototype-chain/" data-toggle="tooltip" data-placement="top" title="該來理解 JavaScript 的原型鍊了">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
-            </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
-
     
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#先從舉例開始"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">先從舉例開始</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#api"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">API</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#api-documentation"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">API Documentation</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#ajax"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Ajax</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#xmlhttprequest"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">XMLHttpRequest</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#same-origin-policy"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Same Origin Policy</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#cors"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">CORS</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#preflight-request"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">Preflight Request</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#jsonp"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">JSONP</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#總結"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">總結</span></a></li></ol>
-        
-        </div>
-      </aside>
-    
-
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#frontend" title="frontend">frontend</a>
-                        
-                          <a class="tag" href="/tags/#ajax" title="ajax">ajax</a>
-                        
-                          <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
-                    
-                </ul>
-                
-            </div>
-        </div>
     </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Front-end/">#Front-end</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/JavaScript/">#JavaScript</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Ajax/">#Ajax</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2017/08/27/http-cache/">循序漸進理解 HTTP Cache 機制</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2017/08/27/the-javascripts-prototype-chain/">該來理解 JavaScript 的原型鍊了</a>
+            
+        </span>
+    </div>
+    
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d8b39b069ba670012bf92b9&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
 
 
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "huli";
-    var disqus_identifier = "https://blog.huli.tw/2017/08/27/ajax-and-cors/";
-    var disqus_url = "https://blog.huli.tw/2017/08/27/ajax-and-cors/";
 
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://blog.huli.tw/2017/08/27/ajax-and-cors/';
+        this.page.identifier = '2017/08/27/ajax-and-cors/';
+        
+        this.language = 'en';
+        
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'huli' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<!-- disqus embedded js code start end -->
 
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
 
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'left',
-          icon: 'ℬ'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+    </div>
+</section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/aszx87410">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Huli 2017 
-                    <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
-                    </iframe>
-                </p>
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Huli&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
-
-
-<!-- async load function -->
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-tw");
+</script>
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
     <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
         })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
     </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+
+    
+    
+
+    
 
 
-<!-- jquery.tagcloud.js -->
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-<!--fastClick.js -->
-<script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-<!-- Google Analytics -->
-
-
-<script>
-    // dynamic User by Hux
-    var _gaId = 'UA-49773306-3';
-    var _gaDomain = 'blog.huli.tw';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-</script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
-<!-- Image to hack wechat -->
-<img src="https://blog.huli.tw/img/huli_logo.jpg" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js"></script>
+    
 </body>
-
 </html>

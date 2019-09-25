@@ -1,218 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword"  content="">
-    <link rel="shortcut icon" href="/img/lidemy_logo.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          部落格搬家心得：從 Logdown 到 Hexo - Huli&#39;s blog
-        
-    </title>
+<title>部落格搬家心得：從 Logdown 到 Hexo - Huli</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="canonical" href="https://blog.huli.tw/2017/09/03/moving-from-logdown-to-hexo/">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+
+
+<meta name="description" content>
+
+
+
+
+
+    <meta name="description" content="前言 終於搬完啦！ 花了一整天的時間在搞搬家的東西，其實真的挺麻煩的，而且中途碰到滿多小問題，所以特地寫這篇來紀錄一下心得。">
+<meta name="keywords" content="Others">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部落格搬家心得：從 Logdown 到 Hexo">
+<meta property="og:url" content="https://blog.huli.tw/2017/09/03/moving-from-logdown-to-hexo/index.html">
+<meta property="og:site_name" content="Huli">
+<meta property="og:description" content="前言 終於搬完啦！ 花了一整天的時間在搞搬家的東西，其實真的挺麻煩的，而且中途碰到滿多小問題，所以特地寫這篇來紀錄一下心得。">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2019-09-25T10:54:40.974Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="部落格搬家心得：從 Logdown 到 Hexo">
+<meta name="twitter:description" content="前言 終於搬完啦！ 花了一整天的時間在搞搬家的東西，其實真的挺麻煩的，而且中途碰到滿多小問題，所以特地寫這篇來紀錄一下心得。">
+
+
+
+
+
+<link rel="icon" href="/img/lidemy_logo.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            background-image: url('/img/header_img/article-bg.png')
-            /*post*/
-        
-    }
     
-</style>
-
-<header class="intro-header" >
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#story" title="story">story</a>
-                            
-                        </div>
-                        <h1>部落格搬家心得：從 Logdown 到 Hexo</h1>
-                        <h2 class="subheading">早知道就早點搬...</h2>
-                        <span class="meta">
-                            Posted by Huli on
-                            2017-09-03
-                        </span>
-                    </div>
-                
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    
+    
+    
+    
+    
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49773306-3"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-49773306-3');
 </script>
 
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
+    
 
-<!-- Post Content -->
-<article>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
-        <div class="row">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    Huli
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章列表</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+            <a class="navbar-item " href="/recommend">推薦閱讀</a>
+            
+            <a class="navbar-item " href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" target="_blank" title="Medium" href="https://medium.com/@hulitw">
+                
+                <i class="fab fa-medium"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Twitter" href="https://twitter.com/aszx87410">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Facebook" href="https://www.facebook.com/profile.php?id=100000221410594">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
 
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h1><span id="前言">前言</span></h1>
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            部落格搬家心得：從 Logdown 到 Hexo
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-09-03T19:34:38.000Z" itemprop="datePublished">2017年9月3日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Others/">Others</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1><span id="前言">前言</span></h1>
 <p>終於搬完啦！</p>
 <p>花了一整天的時間在搞搬家的東西，其實真的挺麻煩的，而且中途碰到滿多小問題，所以特地寫這篇來紀錄一下心得。</p>
+<a id="more"></a>
 <h1><span id="為什麼搬家">為什麼搬家？</span></h1>
 <p>你知我知獨眼龍也知，Logdown 基本上已經是一個停滯的產品了，從很久以前就不再更新了，看樣子應該也不會再更新了。</p>
 <p>我真的滿喜歡 Logdown 的，因為我覺得使用起來很方便很順手，完全打到我，到既然是個停止維護的產品，繼續在那邊就會有一些風險，例如說哪天 blog 突然掛掉連不上或者是文章全部不見之類的。</p>
@@ -227,18 +177,18 @@
 <p>只要有所有下載文章連結，就可以寫 script 全部載下來了</p>
 </blockquote>
 <h2><span id="第一步取得網址">第一步：取得網址</span></h2>
-<p>到 logdown 後台（<a href="http://logdown.com/account/posts" target="_blank" rel="external">http://logdown.com/account/posts</a> ），然後一直往下捲動直到沒有文章為止。</p>
-<p>打開 Chrome devtool 執行下面程式碼，然後把結果按右鍵保存起來</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="built_in">Array</span>.prototype.map.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">'a'</span>), item =&gt; item.getAttribute(<span class="string">'href'</span>)).filter(<span class="function"><span class="params">item</span> =&gt;</span> item.indexOf(<span class="string">'/raw'</span>) &gt;= <span class="number">0</span>);<span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">of</span> a) &#123;<span class="built_in">console</span>.log(<span class="string">'"'</span>+k+<span class="string">'"'</span>)&#125;</div></pre></td></tr></table></figure>
+<p>到 logdown 後台（<a href="http://logdown.com/account/posts" target="_blank" rel="noopener">http://logdown.com/account/posts</a> ），然後一直往下捲動直到沒有文章為止。</p>
+<p>打開 Chrome devtool 執行下面程式碼，然後把結果按右鍵保存起來<br>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> a = <span class="hljs-built_in">Array</span>.prototype.map.call(<span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">'a'</span>), item =&gt; item.getAttribute(<span class="hljs-string">'href'</span>)).filter(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.indexOf(<span class="hljs-string">'/raw'</span>) &gt;= <span class="hljs-number">0</span>);<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> k <span class="hljs-keyword">of</span> a) &#123;<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'"'</span>+k+<span class="hljs-string">'"'</span>)&#125;</span><br></pre></td></tr></table></figure></p>
 <p>沒意外的話，console 應該會出現像下面這種結果：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">....</div><div class="line">VM192:<span class="number">1</span> <span class="string">"/account/posts/294284-javascript-redux-middleware-details-tutorial/raw"</span></div><div class="line">VM192:<span class="number">1</span> <span class="string">"/account/posts/294037-javascript-redux-basic-tutorial/raw"</span></div><div class="line">VM192:<span class="number">1</span> <span class="string">"/account/posts/293940-javascript-redux-model-real-world-browserhistory-not-found/raw"</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">....</span><br><span class="line">VM192:<span class="hljs-number">1</span> <span class="hljs-string">"/account/posts/294284-javascript-redux-middleware-details-tutorial/raw"</span></span><br><span class="line">VM192:<span class="hljs-number">1</span> <span class="hljs-string">"/account/posts/294037-javascript-redux-basic-tutorial/raw"</span></span><br><span class="line">VM192:<span class="hljs-number">1</span> <span class="hljs-string">"/account/posts/293940-javascript-redux-model-real-world-browserhistory-not-found/raw"</span></span><br></pre></td></tr></table></figure></p>
 <p>自己把前面那個惱人的字串取代掉之後，你就得到所有文章的網址了。</p>
 <h2><span id="第二步下載">第二步：下載</span></h2>
 <p>可是取得網址之後，這麼多網址要怎麼下載呢？</p>
 <p>很簡單，我們自己寫個 bash script 就搞定了！核心程式碼就是用 wget 把文章抓下來，這邊的 session key 自己去 chrome 裡面看 cookie 的值就好：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget --heade=<span class="string">"Cookie:_logdown_session=xxxx;"</span> http://logdown.com/account/posts/2223627-review-the-classical-sort-algorithm-with-javascript/raw -O review-the-classical-sort-algorithm-with-javascript.md</div></pre></td></tr></table></figure>
+<p><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --heade=<span class="hljs-string">"Cookie:_logdown_session=xxxx;"</span> http://logdown.com/account/posts/2223627-review-the-classical-sort-algorithm-with-javascript/raw -O review-the-classical-sort-algorithm-with-javascript.md</span><br></pre></td></tr></table></figure></p>
 <p>完整 script：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">declare</span> -a arr=(</div><div class="line"><span class="string">"/account/posts/2223627-review-the-classical-sort-algorithm-with-javascript/raw"</span></div><div class="line"><span class="string">"/account/posts/2223612-dom-event-capture-and-propagation/raw"</span></div><div class="line"><span class="string">"/account/posts/2223601-http-cache/raw"</span></div><div class="line"><span class="string">"/account/posts/2223581-ajax-and-cors/raw"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;arr[@]&#125;</span>"</span></div><div class="line"><span class="keyword">do</span></div><div class="line">  url=<span class="string">"http://logdown.com"</span><span class="variable">$&#123;i&#125;</span></div><div class="line">  name=`<span class="built_in">echo</span> <span class="variable">$url</span> | sed <span class="string">"s/.*posts\/[0-9]*[-]//g"</span> | sed <span class="string">"s/\/raw//g"</span>`</div><div class="line">  wget --heade=<span class="string">"Cookie:_logdown_session=xxx;"</span> <span class="variable">$url</span> -O <span class="variable">$name</span><span class="string">".md"</span></div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
+<p><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">declare</span> -a arr=(</span><br><span class="line"><span class="hljs-string">"/account/posts/2223627-review-the-classical-sort-algorithm-with-javascript/raw"</span></span><br><span class="line"><span class="hljs-string">"/account/posts/2223612-dom-event-capture-and-propagation/raw"</span></span><br><span class="line"><span class="hljs-string">"/account/posts/2223601-http-cache/raw"</span></span><br><span class="line"><span class="hljs-string">"/account/posts/2223581-ajax-and-cors/raw"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-string">"<span class="hljs-variable">$&#123;arr[@]&#125;</span>"</span></span><br><span class="line"><span class="hljs-keyword">do</span></span><br><span class="line">  url=<span class="hljs-string">"http://logdown.com"</span><span class="hljs-variable">$&#123;i&#125;</span></span><br><span class="line">  name=`<span class="hljs-built_in">echo</span> <span class="hljs-variable">$url</span> | sed <span class="hljs-string">"s/.*posts\/[0-9]*[-]//g"</span> | sed <span class="hljs-string">"s/\/raw//g"</span>`</span><br><span class="line">  wget --heade=<span class="hljs-string">"Cookie:_logdown_session=xxx;"</span> <span class="hljs-variable">$url</span> -O <span class="hljs-variable">$name</span><span class="hljs-string">".md"</span></span><br><span class="line"><span class="hljs-keyword">done</span></span><br></pre></td></tr></table></figure></p>
 <p>把 arr 下面那些換成剛剛從 chrome 得來的網址並且把 session 換成自己的就搞定了，就把所有文章都下載了！</p>
 <p>當個工程師真好</p>
 <h1><span id="第二個挑戰修文章格式">第二個挑戰：修文章格式</span></h1>
@@ -247,297 +197,275 @@
 <h1><span id="第三個挑戰table-of-content-壞掉">第三個挑戰：table of content 壞掉</span></h1>
 <p>現在大概右邊看到那個就是 TOC，Table Of Content，是個我滿喜歡的功能，但不知道為什麼這功能壞掉了，在我自己去 trace hexo 的 code 之後，發現是一個滿奇怪的問題，就是 cheerio 抓不到 span 的 id，所以連結全部變成 undefined。</p>
 <p>身為工程師，這種小問題當然是可以自己修，於是我就修了兩個小地方：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 原本的</span></div><div class="line"><span class="keyword">var</span> $ = cheerio.load(str);</div><div class="line"></div><div class="line"><span class="comment">// 改過的，加上 decodeEntities 處理中文</span></div><div class="line"><span class="comment">// https://cnodejs.org/topic/54bdd639514ea9146862ac37</span></div><div class="line"><span class="keyword">var</span> $ = cheerio.load(str, &#123;<span class="attr">decodeEntities</span>: <span class="literal">false</span>&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 原本的，會抓不到 id</span></div><div class="line"><span class="keyword">var</span> id = $(<span class="keyword">this</span>).attr(<span class="string">'id'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 自己加上下面這一段用 Regexp 抓出來</span></div><div class="line"><span class="keyword">if</span> (!id) &#123;</div><div class="line">  <span class="keyword">var</span> temp = $(<span class="keyword">this</span>).html().match(<span class="regexp">/id="(.*)"&gt;/</span>);</div><div class="line">  <span class="keyword">if</span> (temp &amp;&amp; temp[<span class="number">1</span>]) &#123;</div><div class="line">    id = temp[<span class="number">1</span>];</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 原本的</span></span><br><span class="line"><span class="hljs-keyword">var</span> $ = cheerio.load(str);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 改過的，加上 decodeEntities 處理中文</span></span><br><span class="line"><span class="hljs-comment">// https://cnodejs.org/topic/54bdd639514ea9146862ac37</span></span><br><span class="line"><span class="hljs-keyword">var</span> $ = cheerio.load(str, &#123;<span class="hljs-attr">decodeEntities</span>: <span class="hljs-literal">false</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 原本的，會抓不到 id</span></span><br><span class="line"><span class="hljs-keyword">var</span> id = $(<span class="hljs-keyword">this</span>).attr(<span class="hljs-string">'id'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 自己加上下面這一段用 Regexp 抓出來</span></span><br><span class="line"><span class="hljs-keyword">if</span> (!id) &#123;</span><br><span class="line">  <span class="hljs-keyword">var</span> temp = $(<span class="hljs-keyword">this</span>).html().match(<span class="hljs-regexp">/id="(.*)"&gt;/</span>);</span><br><span class="line">  <span class="hljs-keyword">if</span> (temp &amp;&amp; temp[<span class="hljs-number">1</span>]) &#123;</span><br><span class="line">    id = temp[<span class="hljs-number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>當一個工程師真好</p>
 <h1><span id="結論">結論</span></h1>
-<p>這次用的模板是：<a href="https://github.com/YenYuHsuan/hexo-theme-beantech" target="_blank" rel="external">hexo-theme-beantech</a>，是我覺得很不錯的一個版型，不過我也有自己修一些小地方就是了。</p>
+<p>這次用的模板是：<a href="https://github.com/YenYuHsuan/hexo-theme-beantech" target="_blank" rel="noopener">hexo-theme-beantech</a>，是我覺得很不錯的一個版型，不過我也有自己修一些小地方就是了。</p>
 <p>經歷過這次搬家之後，覺得 Hexo（部落格系統）+ Github Page（Hosting）+ Cloudflare（https）根本是工程師寫部落的最佳實踐，全部免費的方案然後所有必要的東西一次擁有，真棒真棒。</p>
 <p>話說之後還可以改成配合 CI 做自動 deploy，那個就等之後再研究吧！</p>
 
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                    
-                        <li class="next">
-                            <a href="/2017/08/27/review-the-classical-sort-algorithm-with-javascript/" data-toggle="tooltip" data-placement="top" title="一起用 JavaScript 來複習經典排序法吧！">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
-            </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
-
     
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#為什麼搬家"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">為什麼搬家？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#第一個挑戰匯出文章"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">第一個挑戰：匯出文章</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#第一步取得網址"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">第一步：取得網址</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link " href="#第二步下載"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">第二步：下載</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#第二個挑戰修文章格式"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">第二個挑戰：修文章格式</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#第三個挑戰table-of-content-壞掉"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">第三個挑戰：table of content 壞掉</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link " href="#結論"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">結論</span></a></li></ol>
-        
-        </div>
-      </aside>
-    
-
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#story" title="story">story</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
-                    
-                </ul>
-                
-            </div>
-        </div>
     </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Others/">#Others</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2017/09/06/spa-single-page-application/">前後端分離與 SPA</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2017/08/27/review-the-classical-sort-algorithm-with-javascript/">一起用 JavaScript 來複習經典排序法吧！</a>
+            
+        </span>
+    </div>
+    
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d8b39b069ba670012bf92b9&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
 
 
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "huli";
-    var disqus_identifier = "https://blog.huli.tw/2017/09/03/moving-from-logdown-to-hexo/";
-    var disqus_url = "https://blog.huli.tw/2017/09/03/moving-from-logdown-to-hexo/";
 
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://blog.huli.tw/2017/09/03/moving-from-logdown-to-hexo/';
+        this.page.identifier = '2017/09/03/moving-from-logdown-to-hexo/';
+        
+        this.language = 'en';
+        
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'huli' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<!-- disqus embedded js code start end -->
 
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
 
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'left',
-          icon: 'ℬ'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+    </div>
+</section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/aszx87410">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Huli 2017 
-                    <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
-                    </iframe>
-                </p>
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Huli&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
-
-
-<!-- async load function -->
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-tw");
+</script>
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
     <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
         })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
     </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+
+    
+    
+
+    
 
 
-<!-- jquery.tagcloud.js -->
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-<!--fastClick.js -->
-<script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-<!-- Google Analytics -->
-
-
-<script>
-    // dynamic User by Hux
-    var _gaId = 'UA-49773306-3';
-    var _gaDomain = 'blog.huli.tw';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-</script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
-<!-- Image to hack wechat -->
-<img src="https://blog.huli.tw/img/huli_logo.jpg" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js"></script>
+    
 </body>
-
 </html>

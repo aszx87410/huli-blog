@@ -1,536 +1,462 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword"  content="">
-    <link rel="shortcut icon" href="/img/lidemy_logo.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          [心得] iTerm2 + zsh，打造更好的工作環境 - Huli&#39;s blog
-        
-    </title>
+<title>[心得] iTerm2 + zsh，打造更好的工作環境 - Huli</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="canonical" href="https://blog.huli.tw/2016/01/03/iterm2-zsh-better-environment/">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+
+
+<meta name="description" content>
+
+
+
+
+
+    <meta name="description" content="平常有在寫 code 的，無論是寫哪一種程式語言、或是哪一種開發環境，都會有一定的時間需要執行一些命令 這時候就會開啟 terminal 開始鍵入指令，最常用的像是cd, ls, git, ssh, rsync之類的 可是系統內建的終端機其實滿難用的，今天要跟大家推薦一套比較好的選擇">
+<meta name="keywords" content="Tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[心得] iTerm2 + zsh，打造更好的工作環境">
+<meta property="og:url" content="https://blog.huli.tw/2016/01/03/iterm2-zsh-better-environment/index.html">
+<meta property="og:site_name" content="Huli">
+<meta property="og:description" content="平常有在寫 code 的，無論是寫哪一種程式語言、或是哪一種開發環境，都會有一定的時間需要執行一些命令 這時候就會開啟 terminal 開始鍵入指令，最常用的像是cd, ls, git, ssh, rsync之類的 可是系統內建的終端機其實滿難用的，今天要跟大家推薦一套比較好的選擇">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="http://user-image.logdown.io/user/7013/blog/6977/post/402147/fEGlo1qnSLOxyKl8Lcv0_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-01-03%20%E4%B8%8B%E5%8D%882.59.15.jpg">
+<meta property="og:updated_time" content="2019-09-25T11:33:42.171Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[心得] iTerm2 + zsh，打造更好的工作環境">
+<meta name="twitter:description" content="平常有在寫 code 的，無論是寫哪一種程式語言、或是哪一種開發環境，都會有一定的時間需要執行一些命令 這時候就會開啟 terminal 開始鍵入指令，最常用的像是cd, ls, git, ssh, rsync之類的 可是系統內建的終端機其實滿難用的，今天要跟大家推薦一套比較好的選擇">
+<meta name="twitter:image" content="http://user-image.logdown.io/user/7013/blog/6977/post/402147/fEGlo1qnSLOxyKl8Lcv0_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-01-03%20%E4%B8%8B%E5%8D%882.59.15.jpg">
+
+
+
+
+
+<link rel="icon" href="/img/lidemy_logo.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            background-image: url('/img/header_img/article-bg.png')
-            /*post*/
-        
-    }
     
-</style>
-
-<header class="intro-header" >
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#tool" title="tool">tool</a>
-                            
-                        </div>
-                        <h1>[心得] iTerm2 + zsh，打造更好的工作環境</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by Huli on
-                            2016-01-03
-                        </span>
-                    </div>
-                
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    
+    
+    
+    
+    
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49773306-3"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-49773306-3');
 </script>
 
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
+    
 
-<!-- Post Content -->
-<article>
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
-        <div class="row">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    Huli
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章列表</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+            <a class="navbar-item " href="/recommend">推薦閱讀</a>
+            
+            <a class="navbar-item " href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" target="_blank" title="Medium" href="https://medium.com/@hulitw">
+                
+                <i class="fab fa-medium"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Twitter" href="https://twitter.com/aszx87410">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Facebook" href="https://www.facebook.com/profile.php?id=100000221410594">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
 
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>平常有在寫 code 的，無論是寫哪一種程式語言、或是哪一種開發環境，都會有一定的時間需要執行一些命令<br>
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            [心得] iTerm2 + zsh，打造更好的工作環境
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-01-03T13:21:00.000Z" itemprop="datePublished">2016年1月3日(4 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Others/">Others</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>平常有在寫 code 的，無論是寫哪一種程式語言、或是哪一種開發環境，都會有一定的時間需要執行一些命令<br>
 這時候就會開啟 terminal 開始鍵入指令，最常用的像是<code>cd</code>, <code>ls</code>, <code>git</code>, <code>ssh</code>, <code>rsync</code>之類的<br>
 可是系統內建的終端機其實滿難用的，今天要跟大家推薦一套比較好的選擇</p>
-<p><a href="https://www.iterm2.com/" target="_blank" rel="external">iTerm2</a>可以取代你的終端機，裝了以後保證你每次都不會想要打開內建的，而是打開這個應用程式。<br>
+<a id="more"></a>
+<p><a href="https://www.iterm2.com/" target="_blank" rel="noopener">iTerm2</a>可以取代你的終端機，裝了以後保證你每次都不會想要打開內建的，而是打開這個應用程式。<br>
 用這個有什麼好處呢？第一就是很多設定可以調、可以個人化；第二就是介面比較好看，也比較好操作；第三則是可以開很多個分頁，就跟你用瀏覽器一樣，如果要分割畫面的話也是很容易的。</p>
-<p>裝好以後可以先來挑個自己中意的佈景主題，很多人都用 <a href="http://ethanschoonover.com/solarized" target="_blank" rel="external">solarized</a>，但我自己是比較喜歡 <a href="https://zenorocha.github.io/dracula-theme/iterm/" target="_blank" rel="external">dracula</a>。這邊純粹看你自己覺得哪套比較好看就裝哪個。</p>
+<p>裝好以後可以先來挑個自己中意的佈景主題，很多人都用 <a href="http://ethanschoonover.com/solarized" target="_blank" rel="noopener">solarized</a>，但我自己是比較喜歡 <a href="https://zenorocha.github.io/dracula-theme/iterm/" target="_blank" rel="noopener">dracula</a>。這邊純粹看你自己覺得哪套比較好看就裝哪個。</p>
 <p>外觀都弄的差不多之後，可以開始來裝 zsh 了<br>
 zsh 是什麼呢？這個就要先從 bash 開始講了，你現在無論是打開 iTerm2 或是內建的終端機，出現的畫面都是在執行 bash 的畫面，所以 bash 也是一個程式，那當然也可以被取代掉。<br>
-我自己用過的兩套一套就是 zsh，另一套是 <a href="http://fishshell.com/" target="_blank" rel="external">fish</a><br>
+我自己用過的兩套一套就是 zsh，另一套是 <a href="http://fishshell.com/" target="_blank" rel="noopener">fish</a><br>
 其實 fish 我用的滿不錯的，但看到 zsh 好像外掛比較多、佈景主題也比較多所以就跳過來了，fish 我覺得內建的功能就滿夠用了，尤其是自動提示的功能超 OP，每次都覺得很厲害</p>
-<p>至於 zsh 的話，其實 mac 就有內建了，但除了這個以外，推薦必裝的東西叫做：<a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">oh-my-zsh</a>，他先幫你載好一些主題、外掛跟設定，簡單來說可以看成是 zsh 的懶人包版本，裝了之後有一堆東西可以用。</p>
+<p>至於 zsh 的話，其實 mac 就有內建了，但除了這個以外，推薦必裝的東西叫做：<a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener">oh-my-zsh</a>，他先幫你載好一些主題、外掛跟設定，簡單來說可以看成是 zsh 的懶人包版本，裝了之後有一堆東西可以用。</p>
 <p><code>~/.zshrc</code>是你的設定檔，要調什麼都來這邊調就對了</p>
-<p>裝好以後第一件事情當然還是<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/themes" target="_blank" rel="external">換主題</a>，或是也可用<code>random</code>，每次開啟的時候都會用不同的主題，也是滿特別的。<br>
-<code>agnoster</code>是一套滿 fancy 的主題，要裝之前記得先 <a href="https://github.com/powerline/fonts" target="_blank" rel="external">安裝字型</a>，並且在 <code>iTerm2</code>裡面的 Preference -&gt; Profile -&gt; Text 調整好字型，才能夠正確看到一些特殊符號。</p>
+<p>裝好以後第一件事情當然還是<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/themes" target="_blank" rel="noopener">換主題</a>，或是也可用<code>random</code>，每次開啟的時候都會用不同的主題，也是滿特別的。<br>
+<code>agnoster</code>是一套滿 fancy 的主題，要裝之前記得先 <a href="https://github.com/powerline/fonts" target="_blank" rel="noopener">安裝字型</a>，並且在 <code>iTerm2</code>裡面的 Preference -&gt; Profile -&gt; Text 調整好字型，才能夠正確看到一些特殊符號。</p>
 <p>我自己是用 <code>tonotdo</code>這個主題然後再改了一下，他原本時間在最右邊，我把它調到最左邊然後上色<br>
-這個主題還滿容易改的，檔案在<code>~/.oh-my-zsh/themes/tonotdo.zsh-theme</code>，我把前三行改成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PROMPT=&apos;%&#123;$fg_no_bold[yellow]%&#125;[%*] %&#123;$fg_no_bold[cyan]%&#125;%n%&#123;$fg_no_bold[red]%&#125; ➜ %&#123;$fg_no_bold[green]%&#125;%3~$(git_prompt_info)%&#123;$reset_color%&#125;» &apos;</div></pre></td></tr></table></figure>
+這個主題還滿容易改的，檔案在<code>~/.oh-my-zsh/themes/tonotdo.zsh-theme</code>，我把前三行改成：<br>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PROMPT=&apos;%&#123;$fg_no_bold[yellow]%&#125;[%*] %&#123;$fg_no_bold[cyan]%&#125;%n%&#123;$fg_no_bold[red]%&#125; ➜ %&#123;$fg_no_bold[green]%&#125;%3~$(git_prompt_info)%&#123;$reset_color%&#125;» &apos;</span><br></pre></td></tr></table></figure></p>
 <p>大家可以自己試著改改看，滿容易的</p>
-<p>裝好佈景主題以後開始來裝外掛，<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins" target="_blank" rel="external">oh-my-zsh wiki</a>裡面有介紹了一下每個內建外掛是在做什麼，只要在設定檔加一些字就可以使用了，預設只會幫你啟用<code>git</code>。<br>
-如果想裝更多的，在<a href="https://github.com/unixorn/awesome-zsh-plugins" target="_blank" rel="external">awesome-zsh-plugins</a>可以找到，我自己就多裝了<a href="https://github.com/tarruda/zsh-autosuggestions" target="_blank" rel="external">zsh-autosuggestions</a>。</p>
+<p>裝好佈景主題以後開始來裝外掛，<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins" target="_blank" rel="noopener">oh-my-zsh wiki</a>裡面有介紹了一下每個內建外掛是在做什麼，只要在設定檔加一些字就可以使用了，預設只會幫你啟用<code>git</code>。<br>
+如果想裝更多的，在<a href="https://github.com/unixorn/awesome-zsh-plugins" target="_blank" rel="noopener">awesome-zsh-plugins</a>可以找到，我自己就多裝了<a href="https://github.com/tarruda/zsh-autosuggestions" target="_blank" rel="noopener">zsh-autosuggestions</a>。</p>
 <p>介紹到這邊就差不多了，剩下都是個人設定微調的部份，或是裝一些自己覺得實用的 plugin<br>
 附上一張我的 iTerm2 截圖當做結尾<br>
 <img src="http://user-image.logdown.io/user/7013/blog/6977/post/402147/fEGlo1qnSLOxyKl8Lcv0_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-01-03%20%E4%B8%8B%E5%8D%882.59.15.jpg" alt="螢幕快照 2016-01-03 下午2.59.15.jpg"></p>
 <p>參考資料：</p>
 <ol>
-<li><a href="http://linux.vbird.org/linux_basic/0320bash.php#bash" target="_blank" rel="external">認識與學習BASH</a></li>
-<li><a href="http://swiftcafe.io/2015/07/25/iterm" target="_blank" rel="external">iTerm - 让你的命令行也能丰富多彩</a></li>
-<li><a href="http://blog.littlelin.info/posts/2014/01/05/mac-os-x-command-line-environment-setup" target="_blank" rel="external"> Mac OS X 的 Command Line 環境設定</a></li>
-<li><a href="http://ucheng.logdown.com/posts/2013/10/30/spruce-up-your-terminal" target="_blank" rel="external">[iTerm2] 美化你的Terminal</a></li>
-<li><a href="http://icarus4.logdown.com/posts/177661-from-bash-to-zsh-setup-tips" target="_blank" rel="external">bash 轉移 zsh (oh-my-zsh) 設定心得</a></li>
-<li><a href="http://iphone4.tw/forums/showthread.php?t=206652" target="_blank" rel="external">Oh-My-Zsh 讓你的終端機更強大更美觀</a></li>
+<li><a href="http://linux.vbird.org/linux_basic/0320bash.php#bash" target="_blank" rel="noopener">認識與學習BASH</a></li>
+<li><a href="http://swiftcafe.io/2015/07/25/iterm" target="_blank" rel="noopener">iTerm - 让你的命令行也能丰富多彩</a></li>
+<li><a href="http://blog.littlelin.info/posts/2014/01/05/mac-os-x-command-line-environment-setup" target="_blank" rel="noopener"> Mac OS X 的 Command Line 環境設定</a></li>
+<li><a href="http://ucheng.logdown.com/posts/2013/10/30/spruce-up-your-terminal" target="_blank" rel="noopener">[iTerm2] 美化你的Terminal</a></li>
+<li><a href="http://icarus4.logdown.com/posts/177661-from-bash-to-zsh-setup-tips" target="_blank" rel="noopener">bash 轉移 zsh (oh-my-zsh) 設定心得</a></li>
+<li><a href="http://iphone4.tw/forums/showthread.php?t=206652" target="_blank" rel="noopener">Oh-My-Zsh 讓你的終端機更強大更美觀</a></li>
 </ol>
 
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2016/01/07/costco-data/" data-toggle="tooltip" data-placement="top" title="[心得] costco 數據整理">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2015/12/16/remix-mini-android-pc/" data-toggle="tooltip" data-placement="top" title="[開箱] remix mini, Android PC">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
-            </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
-
     
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="nav">none</ol>
-        
-        </div>
-      </aside>
-    
-
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#tool" title="tool">tool</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
-                    
-                </ul>
-                
-            </div>
-        </div>
     </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Tool/">#Tool</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2016/01/19/my-ideal-interview-process/">我心目中的理想面試流程</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2015/09/03/javascript-redux-middleware-details-tutorial/">[Javascript] redux 的 middleware 詳解</a>
+            
+        </span>
+    </div>
+    
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d8b39b069ba670012bf92b9&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
 
 
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "huli";
-    var disqus_identifier = "https://blog.huli.tw/2016/01/03/iterm2-zsh-better-environment/";
-    var disqus_url = "https://blog.huli.tw/2016/01/03/iterm2-zsh-better-environment/";
 
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://blog.huli.tw/2016/01/03/iterm2-zsh-better-environment/';
+        this.page.identifier = '2016/01/03/iterm2-zsh-better-environment/';
+        
+        this.language = 'en';
+        
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'huli' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<!-- disqus embedded js code start end -->
 
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
 
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'left',
-          icon: 'ℬ'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+    </div>
+</section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/aszx87410">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Huli 2017 
-                    <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
-                    </iframe>
-                </p>
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Huli&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
-
-
-<!-- async load function -->
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-tw");
+</script>
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
     <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
         })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
     </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+
+    
+    
+
+    
 
 
-<!-- jquery.tagcloud.js -->
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-<!--fastClick.js -->
-<script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-<!-- Google Analytics -->
-
-
-<script>
-    // dynamic User by Hux
-    var _gaId = 'UA-49773306-3';
-    var _gaDomain = 'blog.huli.tw';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-</script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
-<!-- Image to hack wechat -->
-<img src="https://blog.huli.tw/img/huli_logo.jpg" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js"></script>
+    
 </body>
-
 </html>

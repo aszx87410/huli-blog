@@ -1,961 +1,743 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword"  content="">
-    <link rel="shortcut icon" href="/img/lidemy_logo.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          Huli&#39;s blog
-        
-    </title>
+<title>Huli</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="canonical" href="https://blog.huli.tw/archives/4/">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+
+
+<meta name="description" content>
+
+
+
+
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Huli">
+<meta property="og:url" content="https://blog.huli.tw/archives/4/index.html">
+<meta property="og:site_name" content="Huli">
+<meta property="og:locale" content="zh-tw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Huli">
+
+
+
+
+
+<link rel="icon" href="/img/lidemy_logo.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            background-image: url('/img/header_img/home-bg-2-dark.png') 
-            /*config*/
-        
-    }
     
-</style>
-
-<header class="intro-header" >
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="site-heading">
-                        <h1>Huli&#39;s blog</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Learning by sharing</span>
-                    </div>
-                
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Huli&#39;s blog</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    
+    
+    
+    
+    
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49773306-3"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-49773306-3');
 </script>
 
 
-    <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <!-- Main Content -->
-
-
-<div class="post-preview">
-
-    <a href="/2016/09/23/binary-search-introduction/">
-        <h2 class="post-title">
-            淺談二分搜尋法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前言
-在寫程式的時候，其實會滿常用到「搜尋」的功能，最簡單的搜尋就是在一串數字裡面找出你想要的數字，而這也是我們今天的主題。
-這一篇大致上會分成三個部分，第一部分會先介紹線性搜尋法，第二部分介紹二分搜尋法，最後一部分談談二分搜尋法在不同條件底下的實作方式會有什麼不同。
-線性搜尋法
-為了由淺入深，我們從最基礎的線性搜尋法（Linear search）開始談起。
-就如同它的名字一樣，線性搜尋法就......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-09-23
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-            
-        </div>
     
 
-</div>
-<hr>
 
-<div class="post-preview">
-
-    <a href="/2016/08/01/little-big-angry-1-unable-to-cancel-your-subscription-to-the-newsletter/">
-        <h2 class="post-title">
-            小地方大生氣 #1：無法取消訂閱的電子報
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            小地方大生氣是一個我胡亂想到的標題，主要是記錄那些生活中不斷、不斷碰到的事情
-哪些事情？就是有一些小細節，重要的細節，沒有被注意到而導致使用者的不便的事情
-今天這一篇，就讓我們來談談電子報這件事情
-許多網站在加入會員的時候什麼都沒問，就自動幫你訂閱了電子報
-比較好的會預設幫你勾選，但你還是可以根據自己的自由意志在註冊時取消
-除了偶爾的促銷電子報以外，有時候也會收到一些通知信件
-例如說有人加你......
-        </div>
-    </a>
+</head>
+<body>
     
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-08-01
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#other" title="other">other</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/21/the-battle-against-ddos-nginx-iptables-and-fail2ban/">
-        <h2 class="post-title">
-            [心得] 與 DDoS 奮戰：nginx, iptables 與 fail2ban
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            最近發生主機被大量 request 攻擊的事件，而且慘的是這台主機放的是論壇服務
-假設攻擊的點是論壇首頁，每次 request 都會去 query DB，而且有一堆 join
-其中還有些是 POST 的指令會讓 db update
-就這樣一直瘋狂又 select 又 update 導致 DB lock，cpu 飆高掛掉
-如果論壇是自己寫的，還可以在 DB 跟 application 之間加上......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-07-21
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#story" title="story">story</a>
-            
-              <a href="/tags/#server" title="server">server</a>
-            
-              <a href="/tags/#ddos" title="ddos">ddos</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/17/alphacamp-startup-rookies-summary/">
-        <h2 class="post-title">
-            [心得] ALPHACamp Startup Rookies 總結
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            為期一個月的 ALPHACamp Startup Rookies 就在今天正式畫下句點
-先幫自己鼓個掌，達成了每一堂課都有寫一篇心得的成就
-也因為這些文章，才可以自己再複習一次全部的課程，好好回想一下這一個月到底學到什麼
-這篇文章主要分成四個部分：
-
-ALPHACamp Startup Rookies 是什麼？
-我為什麼參加？
-每一堂課到底在上什麼？
-值得嗎？（優缺點分析）
-
-ALPHACa......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-07-17
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#ALPHACamp" title="ALPHACamp">ALPHACamp</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/17/alphacamp-startup-rookies-11/">
-        <h2 class="post-title">
-            [心得] ALPHACamp Startup Rookies #11
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            今日主題：成為新創圈搶手人才 (Your Startup’s Career Guide)
-這堂課是 Startup Rookies 的最後一堂課，找來 Acer 的 Roger 跟 25sprout的 Alex
-主持人是 Bernard，跟他們兩個聊一些跟新創有關的
-例如說 Alex 創辦公司的歷程，公司風氣，現在公司的組織架構跟成長歷程、做的產品之類的
-Roger 的話目前是在 BYOC ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-07-17
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#ALPHACamp" title="ALPHACamp">ALPHACamp</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/14/alphacamp-startup-rookies-10/">
-        <h2 class="post-title">
-            [心得] ALPHACamp Startup Rookies #10
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本日主題：如何建立品牌價值
-今天這堂是找奧美的人來講品牌的一些相關概念
-什麼是品牌？為什麼需要品牌？
-其實品牌定義起來滿困難的，而且這個品牌存在於哪裡？存在於「消費者的腦中」
-你要不斷透過一些方法（廣告、logo…）去跟消費者溝通，不斷傳達你的「承諾」
-brand 的字源是「烙印」，仔細想一想發現滿適合的
-有些品牌會把層次拉高到情感面，而不是工具面
-例如說 apple 的：think dif......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-07-14
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#ALPHACamp" title="ALPHACamp">ALPHACamp</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/13/alphacamp-startup-rookies-9/">
-        <h2 class="post-title">
-            [心得] ALPHACamp Startup Rookies #9
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本日主題：如何創造使用者喜歡的產品
-今天請到 shopline 的 founder/CEO, Tony 來分享自己的心得
-當他稍微介紹完 shopline 以後，還是有些人搞不懂到底跟 pchome/yahoo 超級商城差在哪邊
-我覺得這是因為 shopline 有時候會說自己是一個「平台」，而這個字會造成一些誤解
-於是我決定跟大家介紹一下 shopline
-假設你今天是一個素人，想要經營網......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-07-13
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#ALPHACamp" title="ALPHACamp">ALPHACamp</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/10/alphacamp-startup-rookies-8/">
-        <h2 class="post-title">
-            [心得] ALPHACamp Startup Rookies #8
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本日主題：社群的建立與打造
-講者是：小嚕
-我一直到剛剛看到他 Facebook 頁面才知道我聽過這個人
-今天的課內容很豐富，東西滿多的
-從行銷開始講起，例如說分成主動跟被動
-然後不同的產品有不同的行銷方式，要針對產品去選擇行銷方式
-提到許多例子，說現在有些看起來很新的模式其實以前在沒有網路的時代就有了
-例如直播賣東西 vs 電視購物
-可能是因為我有追蹤一些行銷名人的關係
-所以有些例子我在他們......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-07-10
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#ALPHACamp" title="ALPHACamp">ALPHACamp</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/09/why-you-should-start-from-scratch-to-learning-program/">
-        <h2 class="post-title">
-            為什麼你應該從 Scratch 開始學程式
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            在我的另外一篇文章：[心得] 十年程式自學之路有提及：學 scratch 這件事情。因為我覺得這件事情非常重要，因此特別再寫一篇文章好好講述背後的理由。
-我的經歷
-先從我自己開始談起吧！我的第一個程式語言是 VB.NET
-還記得那個時候我也曾經上網找過許多文章，看看大家都推薦第一個語言應該要是什麼
-那為什麼後來選了 VB.NET 呢？很簡單，因為 C 的語法我實在是看不懂
-我實在是不知道那些......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-07-09
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#other" title="other">other</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/05/alphacamp-startup-rookies-7/">
-        <h2 class="post-title">
-            [心得] ALPHACamp Startup Rookies #7
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本次主題：從 0 到 1 的新創軟體工程 (Startup Engineering)
-講者是知名的 ihower 大大
-今天才知道原來他是 ALPHACamp 的 CTO
-主要就是一堆名詞解釋
-程式、組合語言、編譯器等等
-然後 C, C++, Java, Swift, python, ruby… 大概介紹一下
-就是介紹靜態跟動態程式語言有什麼不一樣，差別在哪裡
-哪些語言主要是拿來做什麼、哪些......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Huli on
-            2016-07-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#ALPHACamp" title="ALPHACamp">ALPHACamp</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-        <li class="previous">
-            <a href="/archives/3/">&larr; Newer Posts</a>
-        </li>
-    
-    
-        <li class="next">
-            <a href="/archives/5/">Older Posts &rarr;</a>
-        </li>
-    
-</ul>
-
-
-
-                <!-- 如果开启评论功能 -->
-                
-            </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-            <a href="/tags/#other" title="other" rel="21">other</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#frontend" title="frontend" rel="25">frontend</a>
-            
-        
-            
-            <a href="/tags/#ALPHACamp" title="ALPHACamp" rel="23">ALPHACamp</a>
-            
-        
-            
-            <a href="/tags/#story" title="story" rel="20">story</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#javascript" title="javascript" rel="16">javascript</a>
-            
-        
-            
-            <a href="/tags/#Android" title="Android" rel="20">Android</a>
-            
-        
-            
-            <a href="/tags/#travel" title="travel" rel="19">travel</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#corona" title="corona" rel="12">corona</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#backend" title="backend" rel="19">backend</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#japan" title="japan" rel="12">japan</a>
-            
-        
-    </div>
-</section>
-
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
-
-        
-            <img id = "avatar_pic" src="/img/huli_logo.jpg" />
-        
-
-        
-            <p>Hi, i&#39;m Huli</p>
-        
-
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
-
-            
-
-            
-
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/aszx87410">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2017/09/03/moving-from-logdown-to-hexo/">部落格搬家心得：從 Logdown 到 Hexo</a>
-        </li>
-      
-        <li>
-          <a href="/2017/08/27/review-the-classical-sort-algorithm-with-javascript/">一起用 JavaScript 來複習經典排序法吧！</a>
-        </li>
-      
-        <li>
-          <a href="/2017/08/27/dom-event-capture-and-propagation/">DOM 的事件傳遞機制：捕獲與冒泡</a>
-        </li>
-      
-        <li>
-          <a href="/2017/08/27/http-cache/">循序漸進理解 HTTP Cache 機制</a>
-        </li>
-      
-        <li>
-          <a href="/2017/08/27/ajax-and-cors/">輕鬆理解 Ajax 與跨來源請求</a>
-        </li>
-      
-    </ul>
-  </div>
-
-        <hr>
-    
-        <!-- Friends Blog -->
-
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-
-    
-        <li><a href="http://blog.techbridge.cc" target="_blank">TechBridge</a></li>
-    
-</ul>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
                 
+                    
+                    Huli
+                    
                 
-                
-
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/aszx87410">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Huli 2017 
-                    <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
-                    </iframe>
-                </p>
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章列表</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+            <a class="navbar-item " href="/recommend">推薦閱讀</a>
+            
+            <a class="navbar-item " href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" target="_blank" title="Medium" href="https://medium.com/@hulitw">
+                
+                <i class="fab fa-medium"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Twitter" href="https://twitter.com/aszx87410">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+               
+            <a class="navbar-item" target="_blank" title="Facebook" href="https://www.facebook.com/profile.php?id=100000221410594">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/08/27/http-cache/" itemprop="url">循序漸進理解 HTTP Cache 機制</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-08-27T20:15:00.000Z" itemprop="datePublished">2017年8月27日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>前陣子在研究跟 HTTP Cache 有關的一些東西，看得眼花撩亂，不同的 Header 愈看愈混亂，像是<code>Pragma</code>, <code>Cache-Control</code>, <code>Etag</code>, <code>Last-Modified</code>, <code>Expires</code> 等等。找了許多參考資料閱讀之後才有了比較深刻的理解，想說若是從一個比較不同的角度來理解 Cache，說不定會比較容易了解這些 Header 到底在做什麼。</p>
+<p>在之前查的資料裡面，很多篇都是逐一解釋各個 Header 的作用以及參數，而我認為其實參數講多了容易造成初學者混淆，想說怎麼有這麼多奇怪的參數，而且每一個看起來都很像。所以這篇文章嘗試一步一步藉由不同的問題來引導出各個 Header 使用的場景以及出現的目的。還有，因為這篇是給初學者看的，所以不會講到所有的參數。</p>
+<p>其實關於 Cache 這一部分，很多網路資源的說法都不太一樣，如果碰到有疑義的地方我會盡量以 RFC 上面寫的標準為主。如果有錯誤的話還麻煩不吝指正，感謝。</p>
+        <p class="article-more-link">
+            <a href="/2017/08/27/http-cache/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/08/27/ajax-and-cors/" itemprop="url">輕鬆理解 Ajax 與跨來源請求</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-08-27T20:12:00.000Z" itemprop="datePublished">2017年8月27日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Front-end/">Front-end</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>一般來說在學習寫網頁的時候，最先碰到的會是 HTML 與 CSS，負責把版面刻出來以及美化版面，當基礎打穩之後，會開始學習 JavaScript，試著做出一點互動性的效果。而「互動」除了使用者跟瀏覽器的互動以外，別忘了還有 Client 端跟 Server 端的互動，也就是必須要學會從瀏覽器用 JavaScript 跟後端 Server 拿資料，否則你的網頁資料都只能是寫死的。</p>
+<p>這篇的主要預設讀者是網頁前端的初學者，希望能讓本來不太理解怎麼跟 Server 交換資料或是怎麼串 APi 的讀者看完之後，能夠更了解該怎麼跟後端串接。</p>
+        <p class="article-more-link">
+            <a href="/2017/08/27/ajax-and-cors/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/08/27/the-javascripts-prototype-chain/" itemprop="url">該來理解 JavaScript 的原型鍊了</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-08-27T20:10:00.000Z" itemprop="datePublished">2017年8月27日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h2>前言</h2>
+<p>老實說 JavaScript 的原型鍊一直是我很懼怕的一個主題，理由很簡單，因為真的不太好理解。光是一堆名詞跟錯綜複雜的關係就可以把你搞瘋，例如說<code>prototype</code>, <code>__proto__</code>, <code>constructor</code>, <code>Object.prototype</code>, <code>Function.prototype</code>, <code>new</code>等等。</p>
+<p>可是呢，這又確實是 JavaScript 很重要的一部分，而且是面試的必考題，就算現在不懂，以後遲早有一天要把它弄懂，不然的話永遠都沒辦法把自己的技術能力往上提高一個檔次。</p>
+<p>有關原型鍊的文章你可以在網路上搜到一大堆，每一篇的理解方式都不太一樣，有些直接搬出一大堆專有名詞，嚇都把你嚇死了。而我也是一直到最近，看了幾篇我覺得切入角度比較不錯的文章，才真正對原型鍊有比較深刻的理解。</p>
+<p>就趁著現在這個機會，讓我們多瞭解一點 JavaScript 的原型鍊吧！這篇適合對 JavaScript 有一點概念但又不是很清楚的人觀看，如果文章中有講錯的地方，也麻煩不吝在評論中指出，感謝。</p>
+        <p class="article-more-link">
+            <a href="/2017/08/27/the-javascripts-prototype-chain/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/08/27/a-cookie-problem/" itemprop="url">我遇過的最難的 Cookie 問題</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-08-27T20:07:00.000Z" itemprop="datePublished">2017年8月27日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h2>前言</h2>
+<p>幾個禮拜前我在工作上碰到了一些跟 Cookie 有關的問題，在這之前，我原本想說：Cookie 不就那樣嘛，就算有些屬性不太熟悉，上網找一下資料就好了，哪有什麼跟 Cookie 有關的難題？</p>
+<p>然而事實證明我錯了。我還真的碰到了一個讓我解超久的 Cookie 問題。</p>
+<p>相信看到這邊，很多人應該躍躍欲試了，那我就先來考一下大家：</p>
+<blockquote>
+<p>什麼情形下，Cookie 會寫不進去？</p>
+</blockquote>
+<p>像是語法錯誤那種顯而易見的就不用說了，除此之外你可能會答說：寫完全不同 domain 的 Cookie。例如說你的網頁在 <code>http://a.com</code> 卻硬要寫 <code>http://b.com</code> 的 Cookie，這種情形當然寫不進去。</p>
+<p>或者，你可能會回答：不在 https 卻想加上 <code>Secure</code> flag 的 Cookie。<br>
+沒錯，像是這種情形也會寫不進去。</p>
+<p>除了這些，你還能想到什麼嗎？</p>
+<p>如果想不太到，那就聽我娓娓道來吧！</p>
+        <p class="article-more-link">
+            <a href="/2017/08/27/a-cookie-problem/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/06/24/lidemy-online-programming-course-platform-for-the-beginner/" itemprop="url">Lidemy 鋰學院：為初學者而生的線上程式課程平台</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-06-24T06:33:00.000Z" itemprop="datePublished">2017年6月24日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Others/">Others</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>最近剛把<a href="https://lidemy.teachable.com" target="_blank" rel="noopener"> Lidemy 鋰學院</a>這個線上程式課程平台給弄好，目前這網站是建在 <a href="https://teachable.com/" target="_blank" rel="noopener">Teachable</a> 上面，一個能夠快速搭建課程平台的服務。</p>
+<p>而這篇呢，就要來談談 Lidemy 的創辦背景以及理念</p>
+        <p class="article-more-link">
+            <a href="/2017/06/24/lidemy-online-programming-course-platform-for-the-beginner/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/06/03/frontend-tutorial-experiment/" itemprop="url">一場三十人的免費程式教學實驗：成果與檢討</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-06-03T07:16:00.000Z" itemprop="datePublished">2017年6月3日(2 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Others/">Others</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>緣起</h1>
+<p>在三個月前，我在 ptt 上 po 文（<a href="https://www.ptt.cc/bbs/Soft_Job/M.1488469002.A.E34.html" target="_blank" rel="noopener">[分享] 免費程式教學(前端)</a>），說我願意提供一系列的免費程式前端教學。只要是有網頁基礎的都能夠報名，歡迎大家寫信給我，並且附上幾個提問的回答，最後我會挑 5~10 個人進行培訓。</p>
+        <p class="article-more-link">
+            <a href="/2017/06/03/frontend-tutorial-experiment/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2017/03/12/csrf-introduction/" itemprop="url">讓我們來談談 CSRF</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2017-03-12T19:47:00.000Z" itemprop="datePublished">2017年3月12日(3 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Front-end/">Front-end</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h2>前言</h2>
+<p>最近剛好碰到一些 CSRF 的案例，趁著這次機會好好研究了一下。深入研究之後才發現這個攻擊其實滿可怕的，因為很容易忽略它。但幸好現在有些 Framework 都有內建防禦 CSRF 的功能，可以很簡單的開啟。</p>
+<p>但儘管如此，我認為還是有必要瞭解一下 CSRF 到底在幹嘛，是透過怎樣的手段攻擊，以及該如何防禦。就讓我們先來簡單的介紹一下它吧！</p>
+<p>CSRF 是一種 Web 上的攻擊手法，全稱是 Cross Site Request Forgery，跨站請求偽造。不要跟 XSS 搞混了，他們兩種是不同的東西，那到底什麼是 CSRF 呢？先從我自身的一個案例談起好了。</p>
+        <p class="article-more-link">
+            <a href="/2017/03/12/csrf-introduction/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2016/11/26/livestreamming-hls-note/" itemprop="url">直播協議 hls 筆記</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-11-26T09:20:00.000Z" itemprop="datePublished">2016年11月26日(3 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Others/">Others</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1>前言</h1>
+<p>最近剛好在做直播相關的東西，雖然說是做前端，但還是必須懂一些直播的原理<br>
+至少要知道有哪些格式，以及各種格式的優缺點是什麼，做起來也會比較踏實</p>
+<p>這篇就簡單記錄一些心得跟資料，如果想比較深入了解 hls 的，可以參考下面這兩篇文章：</p>
+<ol>
+<li><a href="http://www.samirchen.com/ios-rtmp-vs-hls/" target="_blank" rel="noopener">直播协议的选择：RTMP vs. HLS</a></li>
+<li><a href="http://www.eduve.org/knowledge/732" target="_blank" rel="noopener">在线视频之HLS协议—学习笔记：M3U8格式讲解及实际应用分析</a></li>
+</ol>
+        <p class="article-more-link">
+            <a href="/2016/11/26/livestreamming-hls-note/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2016/09/29/redis-introduction/" itemprop="url">資料庫的好夥伴：Redis</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-09-28T22:30:00.000Z" itemprop="datePublished">2016年9月29日(3 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Back-end/">Back-end</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h2>前言</h2>
+<p><a href="http://redis.io/" target="_blank" rel="noopener">Redis</a> 是一個 in-memory 的 key-value database，因此常常被用在需要快取（Cache）一些資料的場合，可以減輕許多後端資料庫的壓力。這篇就來簡單介紹一下 Redis 提供哪些好用的東西，以及可以應用在什麼地方。</p>
+        <p class="article-more-link">
+            <a href="/2016/09/29/redis-introduction/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2016/09/29/fast-way-to-get-apk-information/" itemprop="url">快速取得 apk 相關資訊</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2016-09-28T22:26:00.000Z" itemprop="datePublished">2016年9月29日(3 年前)</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Android/">Android</a>
+        </span>
+        
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>（原文發表於：<a href="http://blog.techbridge.cc/2016/05/20/fast-way-to-get-apk-information/%EF%BC%89" target="_blank" rel="noopener">http://blog.techbridge.cc/2016/05/20/fast-way-to-get-apk-information/）</a></p>
+<h2>前言</h2>
+<p>在 <a href="http://blog.techbridge.cc/2016/03/24/android-decompile-introduction/" target="_blank" rel="noopener">之前</a>，我們曾經介紹過如何反編譯 Android Apk。而藉由反編譯，我們可以知道許多跟 apk 有關的資訊，例如說 <code>AndroidManifest.xml</code>，只要這個檔案就可以看出 apk 的一些基本資訊，還可以看到整個 apk 的程式碼跟使用到的資源（圖檔、影片、聲音等等）。</p>
+<p>但若是今天我們只想要知道基本資訊，完全不想知道 apk 是怎麼寫的，也根本不關心它用到哪些資源，那該怎麼辦呢？反編譯需要一點時間，愈大的 apk 需要愈久，有沒有更好的方法呢？</p>
+        <p class="article-more-link">
+            <a href="/2016/09/29/fast-way-to-get-apk-information/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+    
+        
+<nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
+    <div class="pagination-previous">
+        <a href="/archives/3/">上一頁</a>
+    </div>
+    <div class="pagination-next">
+        <a href="/archives/5/">下一頁</a>
+    </div>
+    <ul class="pagination-list is-hidden-mobile">
+        
+        <li><a class="pagination-link" href="/">1</a></li>
+        
+        <li><a class="pagination-link" href="/archives/2/">2</a></li>
+        
+        <li><a class="pagination-link" href="/archives/3/">3</a></li>
+        
+        <li><a class="pagination-link is-current" href="/archives/4/">4</a></li>
+        
+        <li><a class="pagination-link" href="/archives/5/">5</a></li>
+        
+    </ul>
+</nav>
+    
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Huli&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
-
-
-<!-- async load function -->
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-tw");
+</script>
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
     <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
         })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
     </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+
+    
+    
+
+    
 
 
-<!-- jquery.tagcloud.js -->
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://blog.huli.tw/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-<!--fastClick.js -->
-<script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-<!-- Google Analytics -->
-
-
-<script>
-    // dynamic User by Hux
-    var _gaId = 'UA-49773306-3';
-    var _gaDomain = 'blog.huli.tw';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-</script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
-<!-- Image to hack wechat -->
-<img src="https://blog.huli.tw/img/huli_logo.jpg" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js"></script>
+    
 </body>
-
 </html>
