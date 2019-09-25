@@ -16,70 +16,6 @@ root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
-#Custom Setting Start
-
-# Site settings
-SEOTitle: Huli
-email: aszx87410@gmail.com
-description: ""
-keyword: ""
-header-img: img/header_img/home-bg-2-dark.png
-signature: false #show signature
-signature-img: img/signature/BeanTechSign-white.png 
-
-
-# SNS settings
-# RSS: false
-# weibo_username:     Demonbaneen
-# zhihu_username:     Demonbane
-github_username:    aszx87410
-# twitter_username:   Demonbane_x
-facebook_username: ""
-linkedin_username:  ""
-
-# Build settings
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
-
-# Disqus settings
-disqus_username: huli
-
-# Duoshuo settings
-# duoshuo_username: kaijun
-# Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
-
-
-# Analytics settings
-# Baidu Analytics
-# ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
-# Google Analytics
-ga_track_id: 'UA-49773306-3'          # Format: UA-xxxxxx-xx
-ga_domain: blog.huli.tw
-
-
-# widget behavior
-## Archive
-archive_type: 'monthly'
-show_count: true
-
-
-## Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 10              # A tag will be featured if the size of it is more than this condition value
-
-
-## Friends
-friends: [
-    {
-        title: "TechBridge",
-        href: "http://blog.techbridge.cc"
-    }
-]
-
-
-#Custom Setting End
-
-
 
 # Directory
 source_dir: source
@@ -129,18 +65,7 @@ archive_generator:
   per_page: 20
   yearly: true
   monthly: true
-  daily: false
-  
-# Markdown-it config
-## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
-markdown:
-  render:
-    html: true
-    xhtmlOut: false
-    breaks: true
-    linkify: true
-    typographer: true
-    quotes: '“”‘’'
+  daily: false  
   
 # Extensions
 ## Plugins: https://hexo.io/plugins/
