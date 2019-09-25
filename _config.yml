@@ -82,3 +82,9 @@ deploy:
   type: git
   repository: https://github.com/aszx87410/blog.huli.tw.git
   branch: master
+
+# RSS
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
