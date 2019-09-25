@@ -3,7 +3,9 @@ title: '直播協議 hls 筆記'
 date: 2016-11-26 10:20
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [livestream,hls]
+tags: [Hls,Others]
+categories:
+  - Others
 ---
 # 前言
 最近剛好在做直播相關的東西，雖然說是做前端，但還是必須懂一些直播的原理
@@ -13,6 +15,8 @@ tags: [livestream,hls]
 
 1. [直播协议的选择：RTMP vs. HLS](http://www.samirchen.com/ios-rtmp-vs-hls/)
 2. [在线视频之HLS协议—学习笔记：M3U8格式讲解及实际应用分析](http://www.eduve.org/knowledge/732)
+
+<!-- more -->
 
 # hls 是什麼？
 我覺得以直播來說，hls 是一個相當好懂的協定，其實就是透過一個 `.m3u8` 的播放列表，然後裡面有多個 `.ts` 的檔案

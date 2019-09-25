@@ -2,8 +2,9 @@
 title: '循序漸進理解 HTTP Cache 機制'
 date: 2017-08-27 22:15
 catalog: true
-header-img: "/img/header_img/article-bg.png"
-tags: [frontend,http,cache] 
+tags: [Front-end,HTTP,Cache]
+categories:
+  - Web 
 ---
 # 前言
 前陣子在研究跟 HTTP Cache 有關的一些東西，看得眼花撩亂，不同的 Header 愈看愈混亂，像是`Pragma`, `Cache-Control`, `Etag`, `Last-Modified`, `Expires` 等等。找了許多參考資料閱讀之後才有了比較深刻的理解，想說若是從一個比較不同的角度來理解 Cache，說不定會比較容易了解這些 Header 到底在做什麼。

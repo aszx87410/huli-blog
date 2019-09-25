@@ -2,11 +2,14 @@
 title: '資料庫的好夥伴：Redis'
 date: 2016-09-29 00:30
 catalog: true
-header-img: "/img/header_img/article-bg.png"
-tags: [backend,redis,database]
+tags: [Back-end,Redis]
+categories:
+  - Back-end
 ---
 ## 前言
 [Redis](http://redis.io/) 是一個 in-memory 的 key-value database，因此常常被用在需要快取（Cache）一些資料的場合，可以減輕許多後端資料庫的壓力。這篇就來簡單介紹一下 Redis 提供哪些好用的東西，以及可以應用在什麼地方。
+
+<!-- more -->
 
 ## 常用指令
 [Redis 的官網](http://redis.io/commands)列出了支援的每一條指令，我們先來看看最簡單的：

@@ -2,8 +2,9 @@
 title: '[Javascript] Promise, generator, async與ES6'
 date: 2015-08-26 17:04
 catalog: true
-header-img: "/img/header_img/article-bg.png"
-tags: [javascript,frontend]
+tags: [JavaScript,Front-end]
+categories:
+  - JavaScript
 ---
 在Javascript裡面，有一個超級重要的概念就是非同步，這也是剛入門的時候最容易搞混、忘記的觀念
 ES6原生支援了`Promise`，搭配`Generator`使用效果更佳，而ES7甚至支援了`async`的語法

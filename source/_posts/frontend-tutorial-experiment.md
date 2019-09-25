@@ -3,11 +3,15 @@ title: '一場三十人的免費程式教學實驗：成果與檢討'
 date: 2017-06-03 09:16
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [story]
+tags: [Story]
+categories:
+  - Others
 ---
 # 緣起
 
 在三個月前，我在 ptt 上 po 文（[[分享] 免費程式教學(前端)](https://www.ptt.cc/bbs/Soft_Job/M.1488469002.A.E34.html)），說我願意提供一系列的免費程式前端教學。只要是有網頁基礎的都能夠報名，歡迎大家寫信給我，並且附上幾個提問的回答，最後我會挑 5~10 個人進行培訓。
+
+<!-- more -->
 
 上面所指的提問如下：
 1. 自我介紹（例如說背景、怎麼學程式的、程式能力到哪）

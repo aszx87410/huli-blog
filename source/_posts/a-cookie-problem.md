@@ -2,8 +2,10 @@
 title: '我遇過的最難的 Cookie 問題'
 date: 2017-08-27 22:07
 catalog: true
-header-img: "/img/header_img/article-bg.png"
-tags: [cookie, frontend] 
+tags:
+	- Cookie
+categories:
+	- Web
 ---
 ## 前言
 

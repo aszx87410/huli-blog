@@ -3,13 +3,17 @@ title: '用 Node.js 快速打造 RESTful API'
 date: 2016-09-29 00:23
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [nodejs,backend]
+tags: [Node.js,Back-end]
+categories:
+  - Back-end
 ---
 （原文發表於：http://blog.techbridge.cc/2016/04/23/fast-restful-nodejs-api-backend/）
 
 ## 前言
 
 現今有些網站採用了 Single Page Application 的方案，後端只負責提供 API 讓前端抓取資料，達成完全的前後端分離。前端的選擇有很多種，你可以用 `Angular`，可以用 `Ember.js`，也可以用 `React + Redux`。至於後端的 API，必須符合固定格式，才能讓前端的人員比較好抓取。而這個「固定格式」，最常見的就是我們今天的重點：`RESTful`。
+
+<!-- more -->
 
 ## 什麼是 RESTful？
 與起從硬生生的文字解釋下手，不如先從實際範例著手。假設現在你要寫一個部落格網站的後端 API，十個人可能會有十種寫法；例如說「抓取所有文章」這個功能：

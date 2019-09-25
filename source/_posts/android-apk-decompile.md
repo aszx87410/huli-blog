@@ -4,11 +4,15 @@ date: 2016-03-20 15:11
 catalog: true
 header-img: "/img/header_img/article-bg.png"
 tags: [Android]
+categories:
+  - Android
 ---
 ## 前言
 對於 Android 工程師來說，了解如何反編譯可以增進自己對 Android 底層的理解，也可以思考如何保護自己的 apk 不被反編譯。
 對於一般人來說，許多現成的工具可以幫助我們非常輕鬆的、只要打打幾個指令就可以反編譯 apk，看到 java source code，滿足自己的好奇心。
 本篇文章只介紹一些工具的使用，適合初學者觀看。若是想了解更底層的知識，可以參考文末附上的延伸閱讀。
+
+<!-- more -->
 
 ## 事前準備
 首先，我們需要一個用來被破解的 apk，簡單用任何你平常熟悉的工具自己 build 一個就好了

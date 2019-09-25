@@ -2,8 +2,9 @@
 title: '[心得] 與 DDoS 奮戰：nginx, iptables 與 fail2ban'
 date: 2016-07-21 16:38
 catalog: true
-header-img: "/img/header_img/article-bg.png"
-tags: [story,server,ddos]
+tags: [Story,Server,DDoS]
+categories:
+  - Back-end
 ---
 最近發生主機被大量 request 攻擊的事件，而且慘的是這台主機放的是論壇服務
 假設攻擊的點是論壇首頁，每次 request 都會去 query DB，而且有一堆 join
@@ -12,6 +13,8 @@ tags: [story,server,ddos]
 
 如果論壇是自己寫的，還可以在 DB 跟 application 之間加上 redis 之類的快取
 但偏偏這個論壇系統是別人的，沒有辦法動
+
+<!-- more -->
 
 先簡單講一下架構，為了分散流量
 前面有一台 AWS ELB 做 load balancing，後面有兩台機器

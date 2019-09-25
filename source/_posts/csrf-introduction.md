@@ -3,7 +3,9 @@ title: '讓我們來談談 CSRF'
 date: 2017-03-12 20:47
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [frontend,backend,csrf,security]
+tags: [Front-end,Back-end,CSRF]
+categories:
+  - Front-end
 ---
 ## 前言
 
@@ -12,6 +14,8 @@ tags: [frontend,backend,csrf,security]
 但儘管如此，我認為還是有必要瞭解一下 CSRF 到底在幹嘛，是透過怎樣的手段攻擊，以及該如何防禦。就讓我們先來簡單的介紹一下它吧！
 
 CSRF 是一種 Web 上的攻擊手法，全稱是 Cross Site Request Forgery，跨站請求偽造。不要跟 XSS 搞混了，他們兩種是不同的東西，那到底什麼是 CSRF 呢？先從我自身的一個案例談起好了。
+
+<!-- more -->
 
 ## 偷懶的刪除功能
 以前我有做個一個簡單的後台頁面，就想成是一個部落格吧！可以發表、刪除以及編輯文章，介面大概長得像這樣：

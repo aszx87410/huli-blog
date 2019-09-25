@@ -2,8 +2,9 @@
 title: '輕鬆理解 Ajax 與跨來源請求'
 date: 2017-08-27 22:12
 catalog: true
-header-img: "/img/header_img/article-bg.png"
-tags: [ajax,javascript,frontend]
+tags: [Ajax,JavaScript,Front-end]
+categories:
+  - Front-end
 ---
 # 前言
 

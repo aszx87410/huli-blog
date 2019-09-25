@@ -2,8 +2,9 @@
 title: '該來理解 JavaScript 的原型鍊了'
 date: 2017-08-27 22:10
 catalog: true
-header-img: "/img/header_img/article-bg.png"
-tags: [frontend,javascript]
+tags: [Front-end,JavaScript]
+categories:
+  - JavaScript
 ---
 ## 前言
 

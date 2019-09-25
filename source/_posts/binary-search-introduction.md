@@ -3,13 +3,17 @@ title: '淺談二分搜尋法'
 date: 2016-09-23 16:36
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [algorithm]
+tags: [Algorithm]
+categories:
+  - Algorithm
 ---
 # 前言
 
 在寫程式的時候，其實會滿常用到「搜尋」的功能，最簡單的搜尋就是在一串數字裡面找出你想要的數字，而這也是我們今天的主題。
 
 這一篇大致上會分成三個部分，第一部分會先介紹線性搜尋法，第二部分介紹二分搜尋法，最後一部分談談二分搜尋法在不同條件底下的實作方式會有什麼不同。
+
+<!-- more -->
 
 # 線性搜尋法
 

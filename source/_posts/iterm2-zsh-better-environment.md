@@ -3,11 +3,15 @@ title: '[心得] iTerm2 + zsh，打造更好的工作環境'
 date: 2016-01-03 14:21
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [tool]
+tags: [Tool]
+categories:
+  - Others
 ---
 平常有在寫 code 的，無論是寫哪一種程式語言、或是哪一種開發環境，都會有一定的時間需要執行一些命令
 這時候就會開啟 terminal 開始鍵入指令，最常用的像是`cd`, `ls`, `git`, `ssh`, `rsync`之類的
 可是系統內建的終端機其實滿難用的，今天要跟大家推薦一套比較好的選擇
+
+<!-- more -->
 
 [iTerm2](https://www.iterm2.com/)可以取代你的終端機，裝了以後保證你每次都不會想要打開內建的，而是打開這個應用程式。
 用這個有什麼好處呢？第一就是很多設定可以調、可以個人化；第二就是介面比較好看，也比較好操作；第三則是可以開很多個分頁，就跟你用瀏覽器一樣，如果要分割畫面的話也是很容易的。

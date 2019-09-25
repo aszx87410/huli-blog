@@ -3,7 +3,9 @@ title: '如海洋般的程式課程：CS50'
 date: 2016-03-28 21:56
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [cs50]
+tags: [CS50]
+categories:
+  - Others
 ---
 CS50 的全名是 **Introduction to Computer Science**，是一堂哈佛大學的通識課程
 在 [edx](https://www.edx.org/course/introduction-computer-science-harvardx-cs50x) 上面有開課，任何人都可以去修，甚至還有助教幫你改作業（只有程式作業，不包含其他像是紙本作業的那種題目）
@@ -13,6 +15,8 @@ CS50 的全名是 **Introduction to Computer Science**，是一堂哈佛大學�
 
 先來回答標題的意思：如海洋般的程式課程。為什麼是海洋，因為這門課：**又深又廣**
 有多深多廣呢？我記下每一週的課程大綱跟作業，請你身邊有資工背景的朋友看看，就會知道我在說什麼了
+
+<!-- more -->
 
 ## 第零週
 二進位、ASCII、RGB、二分搜尋法

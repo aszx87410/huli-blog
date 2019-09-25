@@ -3,9 +3,9 @@ title: 部落格搬家心得：從 Logdown 到 Hexo
 catalog: true
 date: 2017-09-03 21:34:38
 subtitle: 早知道就早點搬...
-header-img: "/img/header_img/article-bg.png"
-tags: [story]
-categories: [Music,Test]
+tags: [Others]
+categories:
+  - Others
 ---
 
 # 前言

@@ -3,7 +3,9 @@ title: '我心目中的理想面試流程'
 date: 2016-01-19 23:15
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [other]
+tags: [Others]
+categories:
+  - Others
 ---
 儘管去年面試了大約二十家公司，但我也是一直到最近才明白，面試流程對一間公司來說有多麼重要
 當然，HR 的重要程度也非同小可
@@ -21,6 +23,8 @@ tags: [other]
 3. 面試後
 
 以下就根據這三個步驟一一來討論
+
+<!-- more -->
 
 ## 面試前
 就我所知，在安排面試的時候主要可分為兩種方式，

@@ -3,7 +3,9 @@ title: '快速取得 apk 相關資訊'
 date: 2016-09-29 00:26
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [android,apk,aapt]
+tags: [Android]
+categories:
+  - Android
 ---
 （原文發表於：http://blog.techbridge.cc/2016/05/20/fast-way-to-get-apk-information/）
 
@@ -11,6 +13,8 @@ tags: [android,apk,aapt]
 在 [之前](http://blog.techbridge.cc/2016/03/24/android-decompile-introduction/)，我們曾經介紹過如何反編譯 Android Apk。而藉由反編譯，我們可以知道許多跟 apk 有關的資訊，例如說 `AndroidManifest.xml`，只要這個檔案就可以看出 apk 的一些基本資訊，還可以看到整個 apk 的程式碼跟使用到的資源（圖檔、影片、聲音等等）。
 
 但若是今天我們只想要知道基本資訊，完全不想知道 apk 是怎麼寫的，也根本不關心它用到哪些資源，那該怎麼辦呢？反編譯需要一點時間，愈大的 apk 需要愈久，有沒有更好的方法呢？
+
+<!-- more -->
 
 ## 需要哪些資訊？
 首先我們先來定義一下「基本資訊」指的是哪些。以我來說，我想取得的基本資訊有以下六點：

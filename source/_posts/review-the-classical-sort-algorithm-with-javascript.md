@@ -1,9 +1,10 @@
 ---
 title: '一起用 JavaScript 來複習經典排序法吧！'
-date: 2017-08-27 22:20
+date: 2017-08-27 22:20:00
 catalog: true
-header-img: "/img/header_img/article-bg.png"
-tags: [frontend,javascript,algorithm]
+tags: [Front-end,JavaScript,Algorithm]
+categories:
+  - Algorithm
 ---
 # 前言
 

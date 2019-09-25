@@ -3,7 +3,9 @@ title: 'DOM 的事件傳遞機制：捕獲與冒泡'
 date: 2017-08-27 22:18
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [frontend,javascript,dom]
+tags: [Front-end,DOM]
+categories:
+  - Front-end
 ---
 # 前言
 

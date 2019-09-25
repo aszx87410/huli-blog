@@ -1,10 +1,12 @@
 ---
 layout: post
-title: '[Javascript] redux的middleware詳解'
+title: '[Javascript] redux 的 middleware 詳解'
 date: 2015-09-03 15:45
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [javascript,frontend,redux] 
+tags: [JavaScript,Front-end,Redux,React] 
+categories:
+  - React
 ---
 之前寫了[一篇文章](http://huli.logdown.com/posts/294037-javascript-redux-basic-tutorial)簡單的筆記一下自己在看redux的心得，在這邊還是要再次推薦官方文件，因為寫的超級清楚。
 
