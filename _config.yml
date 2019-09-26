@@ -65,7 +65,18 @@ archive_generator:
   per_page: 20
   yearly: true
   monthly: true
-  daily: false  
+  daily: false 
+
+# Markdown-it config
+## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: '“”‘’' 
   
 # Extensions
 ## Plugins: https://hexo.io/plugins/
