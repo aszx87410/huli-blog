@@ -654,7 +654,7 @@ var b = function () {}
 
 ![error](/img/js-func/p3.png)
 
-這個函式其實還是叫做 b，否則的話 stacktrace 的紀錄就會寫 `annoymous`。這個看似好像很直觀，但其實背後有點學問在，這個命名是在我們把函式賦值給 b 時才作用的，可以參考 [12.15.4 Runtime Semantics: Evaluation](http://www.ecma-international.org/ecma-262/10.0/index.html#sec-assignment-operators-runtime-semantics-evaluation)：
+這個函式其實還是叫做 b，否則的話 stacktrace 的紀錄就會寫 `anonymous`。這個看似好像很直觀，但其實背後有點學問在，這個命名是在我們把函式賦值給 b 時才作用的，可以參考 [12.15.4 Runtime Semantics: Evaluation](http://www.ecma-international.org/ecma-262/10.0/index.html#sec-assignment-operators-runtime-semantics-evaluation)：
 
 ![12.15.4 Runtime Semantics: Evaluation](/img/js-func/p4.png)
 
