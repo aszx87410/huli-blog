@@ -108,7 +108,19 @@ a3('world')
 大家可以發現在宣告函式的時候，一定都會有 function 這個關鍵字
 那有沒有辦法做到不用 function 關鍵字，也能建立函式呢？
 
-這時候可能有人立刻會想到：那不就是 arrow function！對，所以我要多加一個限制，不能使用 arrow function。
+這時候可能有人立刻會想到：那不就是 arrow function！對，所以我要多加一個限制，不能使用 arrow function。還有人可能會想到：那 class 上的 method 或是 object 上的呢？例如說：
+
+``` js
+var obj = {
+  hello() {
+    console.log(1)
+  }
+}
+
+obj.hello()
+```
+
+這的確也是一種方法，但我說的不是 class 或是 object 的 method，而是一個跟物件無關的 function，就像：`function add(a, b){}` 這一種的。
 
 大家可以想一下是否還有其他方法。
 
@@ -504,13 +516,13 @@ function doSomeMagic() {
 你以為結束了嗎？我原本也以為結束了，直到我在寫這篇文章的時候又想到還有一個延伸題，那就是如果連 `doSomeMagic` 都變成匿名函式呢？
 
 ``` js
-(function(obj) {
+(function() {
   (function() {
     // show your magic here
     // 只能改動這個函式
     
   })()
-  console.log(obj.str) // 要讓這邊輸出的變成 world
+  console.log(arguments[0].str) // 要讓這邊輸出的變成 world
 })({str: 'hello'})
 ```
 
@@ -761,24 +773,26 @@ run(function (n) {
 好，既然是這樣的話，大家還記得前面那個題目嗎？施展魔法的那個：
 
 ``` js
-(function(obj) {
+(function() {
   (function() {
     // show your magic here
     // 只能改動這個函式
     
   })()
-  console.log(obj.str) // 要讓這邊輸出的變成 world
+  console.log(arguments[0].str) // 要讓這邊輸出的變成 world
 })({str: 'hello'})
 ```
 
-解答就是十分噁心的組合：
+解答就是這個十分噁心的組合：
 
 ``` js
-(function(obj) {
+(function() {
   (function() {
+    // show your magic here
+    // 只能改動這個函式
     arguments.callee.caller.arguments[0].str = 'world'
   })()
-  console.log(obj.str) // 要讓這邊輸出的變成 world
+  console.log(arguments[0].str) // 要讓這邊輸出的變成 world
 })({str: 'hello'})
 ```
 
