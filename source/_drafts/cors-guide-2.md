@@ -79,7 +79,7 @@ Response 的 status 是 0，body 的內容是空的，type 是一個叫做 `opaq
 
 為什麼會這樣呢？
 
-當你傳進 `mode: no-cors` 的時候就代表「我就是要發 request 到一個沒有 CORS header 的 url」，既然是這樣的話，那自然也就不會出現 `No 'Access-Control-Allow-Origin' header is present on the requested resource` 這個錯誤，因為你本來就預期到這件事了。
+當你傳進 `mode: no-cors` 的時候，就代表跟瀏覽器說：「我就是要發 request 到一個沒有 CORS header 的 url，所以請不要給我錯誤」，既然是這樣的話，那自然也就不會出現 `No 'Access-Control-Allow-Origin' header is present on the requested resource` 這個錯誤，因為你本來就預期到這件事了。
 
 但這樣設置並不代表你就拿得到 response，事實上正好相反，用 `mode: no-cors` 的話，你**一定**拿不到 response。沒錯，一定拿不到，就算後端幫你把 `Access-Control-Allow-Origin` 這個 header 加上去了，你也拿不到 response。
 
@@ -263,9 +263,11 @@ function getUser(userId) {
 }
 ```
 
-總結一下這個方法，這個方法利用 script 標籤不會擋跨來源請求的特性，讓 server 動態產生檔案的內容，並且利用呼叫 JS 函式的方式傳遞 JSON 格式的資料。這個方法就是大名鼎鼎的 JSONP，JSON with Padding（padding 是填充的意思，可以想成就是前面填的那個 function 名稱）。
+總結一下這個方法，這個方法利用 script 標籤不會擋跨來源請求的特性，讓 server 動態產生檔案的內容，並且利用呼叫 JS 函式的方式傳遞 JSON 格式的資料。
 
-這個方法在早期 CORS 的規範還不完全時挺常用的，巧秒地跨過了瀏覽器的安全性限制。不過它的缺點是因為你只能用 script 的方式去呼叫，所以你只能用 GET 這個 method，其他 POST、PATCH、DELETE 什麼的都不能用。
+這個方法就是大名鼎鼎的 JSONP，JSON with Padding（padding 是填充的意思，可以想成就是前面填的那個 function 名稱）。
+
+這個方法在早期 CORS 的規範還不完全時挺常用的，巧秒地跨過了瀏覽器的安全性限制。不過它的缺點是因為你只能用 script 的方式去呼叫，所以只能用 GET 這個 method，其他 POST、PATCH、DELETE 什麼的都不能用。
 
 以前在使用 jQuery 提供的 `$.ajax` 的時候，就知道裡面有一個 JSONP 的參數可以調整，害我一直以為他們是同樣的東西，但其實只是 jQuery 把他們包起來而已。
 
@@ -303,7 +305,7 @@ JSONP 的原理是透過 script 標籤傳遞資料跨過限制，而一般我們
 
 這點是這一句：No 'Access-Control-Allow-Origin' header is present on the requested resource
 
-剛剛有提到說後端才是擁有權限，可以告訴瀏覽器說：「我允許這個 origin 跨來源存取我的資源」的一方，而告訴瀏覽器的方法，就是在 response 加上一個 header。
+剛剛有提到說後端才是擁有權限的那一方，可以告訴瀏覽器：「我允許這個 origin 跨來源存取我的資源」，而告訴瀏覽器的方法，就是在 response 加上一個 header。
 
 這個 header 的名稱叫做 `Access-Control-Allow-Origin`，內容就是你想要放行的 origin，例如說：`Access-Control-Allow-Origin: http://localhost:8081`，這樣就是允許 `http://localhost:8081` 的跨來源請求。
 
@@ -325,7 +327,7 @@ app.listen(3000, function () {
 });
 ```
 
-這樣就是在跟瀏覽器說：「任何 origin 都可以拿到我的 response，所以你不需要擋下來」。所以當你前端在用 AJAX 去送 request 的時候，就可以拿到 response，也不會出現任何錯誤。
+這樣就是在跟瀏覽器說：「任何 origin 都可以拿到我的 response，你不需要擋下來」。所以當前端用 AJAX 去送 request 的時候，就可以拿到 response，不會出現任何錯誤。
 
 這邊有一個常見的錯誤，就是有些人以為 `Access-Control-Allow-Origin` 這個 header 是前端在發送 request 時要加的。不，這完全是錯的，前端加這個完全沒有用，因為這個 header 只存在 response 裡面，是後端才需要加的，前端加了跟沒加一模一樣。
 
@@ -342,11 +344,11 @@ app.get('/', function (req, res) {
 
 就是這麼的簡單，只要加了一個 header，就可以告訴瀏覽器說：「我同意這個 origin 拿到我的 response」，就這樣就好了。
 
-這才是從根本去解決跨來源請求的問題。如果你跟你想存取的資源有合作關係的話，通常直接請他們設定這個 header 就行了。例如說你在串接公司後端的 API，發現碰到 CORS 問題，這時候請去找後端工程師幫你把這個 header 加上去。
+這才是從根本去解決跨來源請求的問題。如果你跟想存取的資源有合作關係的話，通常直接請他們設定這個 header 就行了。例如說你在串接公司後端的 API，發現碰到 CORS 問題，這時候請去找後端工程師幫你把這個 header 加上去。
 
-不要想著靠自己來解決，因為這不是前端該解決的問題。這是後端該解決的，只是你要幫助他，告訴他應該怎麼解。
+不要想著靠自己來解決，因為這不是前端該解決的問題，是後端該解決的，只是你要幫助他，告訴他應該怎麼解。
 
-上面我有強調一件事，那就是「你跟你想存取的資源有合作關係」，但有時候，你可能就是會想要在前端拿一些「跟你沒有合作關係」的資料，例如說你想呼叫別人家的非公開 API，或是去抓 google.com 的內容之類的，這些資源絕對不會給你 `Access-Control-Allow-Origin` 這個 header。
+上面我有強調一件事，那就是「你跟想存取的資源有合作關係」，但有時候，你可能就是會想要在前端拿一些「跟你沒有合作關係」的資料，例如說你想呼叫別人家的非公開 API，或是去抓 google.com 的內容之類的，這些資源絕對不會給你 `Access-Control-Allow-Origin` 這個 header。
 
 這時候怎麼辦呢？
 
@@ -356,9 +358,9 @@ app.get('/', function (req, res) {
 
 這幾篇文章中不斷提醒大家，同源政策什麼的都只是「瀏覽器的限制」，一旦脫離了瀏覽器，就沒有任何限制了，proxy server 就是如此。
 
-Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞，代表的意思會有一點點不同，但是大方向都是一樣的，就是原本你是從 A 傳資料到 B，就在變成你從 A 傳到 P，P 再傳到 B，然後再回傳回來，中間那個 P 就擔任著「代理」的角色。
+Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞，代表的意思會有一點點不同，但是大方向都是一樣的。原本你是從 A 傳資料到 B，用代理以後變成你從 A 傳到 P（proxy server），P 再傳到 B，然後再回傳回來，中間那個 P 就擔任著「代理」的角色。
 
-這就像是藝人與經紀人一樣，對外的工作都是經紀人負責接洽，談完以後才告知藝人。而藝人如果想找誰合作，也是讓經紀人去問，問完再跟藝人說。所以經紀人其實就是藝人明星的「代理」人。
+這就像是藝人與經紀人一樣，對外的工作都是經紀人負責接洽，談完以後才告知藝人。而藝人如果想找誰合作，也是讓經紀人去問，問完再跟藝人說。所以經紀人其實就是藝人明星的「代理人」。
 
 那要如何把這個概念應用在 CORS 相關的問題上面呢？
 
@@ -395,7 +397,7 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 
 ## 總結
 
-在這一篇裡面我們看了很多種不同的解法，你應該會最常用的應該是「請後端加上 CORS header」這一種，因為這通常是最正確的解法。但如果你對後端沒有掌控權，例如說你就是想要抓其他不認識的網域的資料，那大概會自己架一個 proxy server 或者是找現成的，讓 proxy 幫你加上 CORS header。
+在這一篇裡面我們看了很多種不同的解法，你最常用的應該要是「請後端加上 CORS header」這一種，因為這通常是最正確的解法。但如果你對後端沒有掌控權，例如說你就是想要抓其他不認識的網域的資料，那大概會自己架一個 proxy server 或者是找現成的，讓 proxy 幫你加上 CORS header。
 
 若是後端 API 只提供 JSONP 形式的方式，那也可以用 JSONP 來做；只是在自己電腦上想測試東西又覺得 CORS 很煩的話，裝個擴充套件來解決這問題也是可以的，但要注意的是這只有在自己電腦上有用，換一台電腦就失效了。
 

@@ -9,13 +9,13 @@ categories:
 
 ## 前言
 
-三年前的時候寫了一篇文章：[輕鬆理解 AJAX 與跨來源請求](https://blog.huli.tw/2017/08/27/ajax-and-cors/)，提到了串接 API、AJAX、Same-origin policy、JSONP 以及 CORS，當時把自己想講的都放進去了，但現在回頭看，好像有很多滿重要的部分沒有提到。
+三年前的時候寫了一篇文章：[輕鬆理解 AJAX 與跨來源請求](https://blog.huli.tw/2017/08/27/ajax-and-cors/)，提到了串接 API、AJAX、same-origin policy、JSONP 以及 CORS，當時把自己想講的都放進去了，但現在回頭看，好像有很多滿重要的部分沒有提到。
 
 三年後，再次挑戰這個主題，並且試著表達地更完整。
 
-會想寫這個系列的念頭來自於臉書上的社團。有許多社群都可以讓新手發問，而 CORS 是發問頻率很高的主題，從有些回答當中可以看出來，不是大家都對 CORS 有著正確的觀念。
+會想寫這個系列是因為在程式相關的討論區上，CORS 是發問頻率很高的主題，無論是前端或是後端都有可能來問相關的問題。
 
-所以我就想說：「好，那我來寫一個系列好了，我要試著把這個主題寫到每個碰到 CORS 問題的人都會來看這個系列，而且看完以後就知道該怎麼解決問題」，如果文章的品質沒辦法達成這個目標，我會持續改進。
+所以我就想說：「好，那我來寫一個系列好了，我要試著把這個主題寫到每個碰到 CORS 問題的人都會來看這個系列，而且看完以後就知道該怎麼解決問題」，這算是我對這篇文章的目標，如果文章的品質沒辦法達成這個目標，我會持續改進。
 
 這系列一共有五篇文章，分別是：
 
@@ -27,11 +27,11 @@ categories:
 
 會從 same-origin policy 開始講起，接著講到為什麼跨來源存取資源會有錯誤，再來會講如何錯誤地以及正確地解決 CORS 相關的問題，而第三篇會詳細講解跨來源請求的詳細流程，像是 preflight request 之類的東西。
 
-基礎的部分，看前三篇就夠了，接著會比較深一點。第四篇會帶你一起看 spec，證明前面幾篇不是我在虎爛的，而最後一篇則是帶大家看看 CORB（Cross-Origin Read Blocking）、COEP（Cross-Origin Embedder Policy）或是 COOP（Cross-Origin-Opener-Policy）之類的跨來源相關規定。
+基礎的部分看前三篇就夠了，接下來會比較深一點。第四篇會帶你一起看 spec，證明前面幾篇不是我在虎爛的，而最後一篇則是帶大家看看 CORB（Cross-Origin Read Blocking）、COEP（Cross-Origin Embedder Policy）或是 COOP（Cross-Origin-Opener-Policy）之類的跨來源相關規定。
 
-身為系列文的第一篇，就是要帶大家去思考為什麼要有 same-origin policy 的存在，為什麼跨來源存取資源會錯誤。如果你不知道這個問題的解答，那你通常都不是真的理解 CORS 到底在規範什麼，也很有可能會用一些錯誤的解法去解這個問題。
+身為系列文的第一篇，就是要帶大家去思考為什麼要有 same-origin policy 的存在，為什麼跨來源存取資源會錯誤。如果你不知道這個問題的答案，那你通常都不是真的理解 CORS 到底在規範什麼，也很有可能會用一些錯誤的解法去解這個問題。
 
-在這篇裡面，我預設大家已經對跨來源請求以及 CORS 有一點概念了，如果完全沒有概念的話，可以先去讀一下我以前寫過的這篇：[輕鬆理解 AJAX 與跨來源請求](https://blog.huli.tw/2017/08/27/ajax-and-cors/)。
+在這篇裡面，我預設大家已經對跨來源請求以及 CORS 有一些概念了，如果完全沒有概念的話，可以先去讀一下我以前寫過的這篇：[輕鬆理解 AJAX 與跨來源請求](https://blog.huli.tw/2017/08/27/ajax-and-cors/)。
 
 在正式開始以前，想先跟大家講一個小故事，跟整個 CORS 有關的一個小故事，反正大家就當一個無厘頭故事看就好，等真正理解完整個跨來源請求相關的東西以後，就知道這故事代表什麼了。
 
@@ -49,7 +49,7 @@ categories:
 
 第三個方法是讓大家都願意把資訊告訴他，這樣就不會被警衛攔截，就能順利知道問題的答案。
 
-好，故事結束了，雖然我想一想覺得沒有到很精緻就是了，不過浮誇的故事總是比較吸引人注意，就先這樣吧。
+好，故事結束了，雖然我覺得沒有到很貼切就是了，不過浮誇的故事總是比較吸引人注意，就先這樣吧，接著讓我們來進入主題。
 
 
 <!-- more -->
@@ -61,9 +61,9 @@ categories:
 > request has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the 
 requested resource.
 
-在前端用 XMLHttpRequest 或者是用 fetch 的時候，應該都有碰過這個錯誤。在跟後端或是串接網路上的 API 的時候，就是串不起來，而你也不知道到底是哪邊出了錯，甚至連這是前端還是後端要處理的可能都不太知道。
+在前端用 XMLHttpRequest 或者是用 fetch 的時候，應該都有碰過這個錯誤。在串接後端或是網路上的 API 時，就是串不起來，而你也不知道到底是哪邊出了錯，甚至連這是前端還是後端要處理的可能都不太知道。
 
-我在這邊可以直接先跟你講答案：
+因此，我在這邊要直接先跟你講答案：
 
 > 大部分情形下，CORS 都不是前端的問題，純前端是解決不了的。
 
@@ -76,7 +76,7 @@ requested resource.
 
 ## 什麼是跨來源？
 
-跨來源的英文是 cross origin，顧名思義，當你想要從來源 A 去拿來源 B 的東西，就是跨來源。「來源」這個詞的英文原名叫做 origin，我還是覺得講原名比較習慣。
+跨來源的英文是 cross origin顧名思義，當你想要從來源 A 去拿來源 B 的東西，就是跨來源。
 
 而這個來源，其實就是代表著「發送 request 的來源」，例如說你現在在 `https://huli.tw` 發送一個 request 出去，那這個 request 的 origin 就是 `https://huli.tw`。
 
@@ -101,7 +101,7 @@ requested resource.
 
 從以上範例可以得知，其實要達成 same origin 滿困難的，如果只看網址的話，基本上要長得一模一樣，只有 path 跟後面的部分可以不一樣，例如說 `https://huli.tw/a/b/c/index.html?a=1` 跟 `https://huli.tw/show/cool/b.html` 就是同源的，因為都是在同一個 schema + host + post 底下。
 
-在實務上面，也很常會把前端網站本身跟 API 用不同的網域來表示，例如說 `huli.tw` 就是前端網站，`api.huli.tw` 就是後端 API，所以實務上也很常碰到跨來源請求的場景。
+在實務上面，其實很常會把前端網站本身跟 API 用不同的網域來表示，例如說 `huli.tw` 就是前端網站，`api.huli.tw` 就是後端 API，所以實務上也很常碰到跨來源請求的場景。
 
 ## 為什麼不能跨來源呼叫 API？
 
@@ -109,7 +109,7 @@ requested resource.
 
 但其實這個定義有點不清楚，更精確一點的說法是：「為什麼不能用 XMLHttpRequest 或是 fetch（或也可以簡單稱作 AJAX）獲取跨來源的資源？」
 
-會特別講這個 case，是因為去拿一個「跨來源的資源」其實很常見，例如說 `<img src="https://another-domain.com/bg.png" />`，這其實就是跨來源去抓取資源，只是這邊我們抓取的目標是圖片而已。
+會特別講這個更精確的定義，是因為去拿一個「跨來源的資源」其實很常見，例如說 `<img src="https://another-domain.com/bg.png" />`，這其實就是跨來源去抓取資源，只是這邊我們抓取的目標是圖片而已。
 
 或者是：`<scripr src="https://another-domain.com/script.js" />`，這也是跨來源請求，去抓一個 JS 檔案回來並且執行。
 
@@ -131,7 +131,7 @@ requested resource.
 
 看起來好像沒什麼問題，只是拿 Google 首頁的 HTML 而已，沒什麼大不了。
 
-但如果今天我恰好知道你們公司有一個「內部」的公開網站，域名叫做 `http://internal.good-company.com`，這是外部連不進去的，只有公司員工的電腦可以連的到，然後我在我的網頁寫一段 AJAX 去拿它的資料，是不是就可以拿得到網站內如？那我拿到以後是不是就可以傳回我的 server？
+但如果今天我恰好知道你們公司有一個「內部」的公開網站，域名叫做 `http://internal.good-company.com`，這是外部連不進去的，只有公司員工的電腦可以連的到，然後我在我的網頁寫一段 AJAX 去拿它的資料，是不是就可以拿得到網站內容？那我拿到以後是不是就可以傳回我的 server？
 
 這樣就有了安全性的問題，因為攻擊者可以拿到一些機密資料。
 
@@ -197,7 +197,7 @@ for (let port = 80; port < 10000; port++) {
 
 小明正負責寫一個專案，網址是：`https://best-landing-page.tw`。這網站會需要用到公司其他網站的某個檔案，裡面是一些使用者資料，網址是：`https://lidemy.com/users.json`。小明直接點開這個網址，發現用瀏覽器可以看到檔案的內容，於是就說：
 
-> 既然我用瀏覽器可以看得到內容，就表示瀏覽器打得開，那用 AJAX 的時候也一定可以拿得到資料！我們來串接 API 用 AJAX 拿資料吧！
+> 既然我用瀏覽器可以看得到內容，就表示瀏覽器打得開，那用 AJAX 的時候也一定可以拿得到資料！我們來用 AJAX 拿資料吧！
 
 請問小明的說法是正確的嗎？如果錯誤，請指出錯誤的地方。
 
@@ -206,11 +206,11 @@ for (let port = 80; port < 10000; port++) {
 
 小明正在做的專案需要串接 API，而公司內部有一個 API 是拿來刪除文章的，只要把文章 id 用 POST 帶過去即可刪除。
 
-舉例來說：`POST https://lidemy.com/deletePost` 並帶上 id=13，就會刪除 id 是 13 的文章。
+舉例來說：`POST https://lidemy.com/deletePost` 並帶上 id=13，就會刪除 id 是 13 的文章（沒有做任何權限檢查）。
 
 公司前後端的網域是不同的，而且後端並沒有加上 CORS 的 header，因此小明認為前端用 AJAX 會受到同源政策的限制，request 根本發不出去。
 
-而實際上去呼叫以後，果然 console 也出現：「request has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource」 的錯誤。
+而實際上呼叫以後，果然 console 也出現：「request has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource」 的錯誤。
 
 所以小明認為前端沒辦法利用 AJAX 呼叫這個 API 刪除文章，文章是刪不掉的。
 
