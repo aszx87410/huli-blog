@@ -485,3 +485,20 @@ function Example() {
 
 這篇記錄了一下我對 useEffect 的理解，有什麼問題都可以再找我討論。
 
+## 後記（於 2020-09-10 補充）
+
+文章發出之後，經[社團](https://www.facebook.com/groups/reactjs.tw/permalink/2725146031094311/?__cft__[0]=AZXWpC3mxMQ4Ucyj0n6JXK7gGPPqb1GzcjZG0rCwbGXkOcuMCCn_PzeZHTNfpH0s9hq8rHBL_h5QQ2QqzD3X_9yqa_kopA4qMhOzcIKV7-lIXe8ftgtwLCQZX9_W4-Q0h-5iFLPIQuaXQmbWcwnwI_UM18_37Nf5fiG9V1HuNOjxzs7wldMgkBUfwFnT6I9uvxc&__tn__=%2CO%2CP-R)中有人提醒才突然察覺到，其實我這篇講的只是 useEffect 的其中一個部分而已。
+
+useEffect 沒有那麼複雜，就只是「function component render 之後會執行的 side effect」，就這樣而已。甚至可以跟 state 一點關係都沒有。我後來想想，覺得這樣的確才是對 useEffect 的正確理解。
+
+至於這篇文章中所提到的，可以說是 useEffect 的其中一個應用方式。
+
+因為 useEffect 的第二個參數可以指定「在哪些 dependencies 有變動的時候，我才想執行這個 side effect」，然後你在 dependencies 之中可以放 state，那就變成這篇文章所說的：「當 state 改變以後，我想做些什麼」。所以這篇提的只是 useEffect 的其中一個用法而已，並沒有看到 useEffect 的全貌。
+
+useEffect 就是：「function component render 之後，會執行的 side effect」。
+
+而文章中提的用法，就只是把 useEffect 加上 dependencies，變成：「function component render 之後，『如果 state 改變了』，會執行的 side effect」。
+
+另外，其實上面那句用「如果 state 改變了」也沒有到那麼精確，因為在 didMount 的時候也會執行 useEffect，但那時候 state 並沒有變，還是初始值。所以更精確的講法或許是：「function component render 之後，如果是 didMount 或是 state 改變了，會執行的 sideEffect」。
+
+感謝[陳冠霖](https://medium.com/@as790726)的指正。
