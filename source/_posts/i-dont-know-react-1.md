@@ -333,7 +333,7 @@ class Comp extends React.Component {
 
 > You may call setState() immediately in componentDidMount(). It will trigger an extra rendering, but it will happen before the browser updates the screen. This guarantees that even though the render() will be called twice in this case, the user won’t see the intermediate state.
 
-在 setState 裡面如果同步去呼叫 componentDidMount，會立刻觸發第二次 render，而且會在瀏覽器更新畫面之前，因此第一次 render 的結果使用者並不會看到，只會顯示第二次的。
+在 componentDidMount 裡面如果同步去呼叫 setState，會立刻觸發第二次 render，而且會在瀏覽器更新畫面之前，因此第一次 render 的結果使用者並不會看到，只會顯示第二次的。
 
 這就能解釋為什麼我們的淡入功能會壞掉了。
 
