@@ -29,9 +29,9 @@ categories:
 
 基礎的部分看前三篇就夠了，接下來會比較深一點。第四篇會帶你一起看 spec，證明前面幾篇不是我在虎爛的，而最後一篇則是帶大家看看 CORB（Cross-Origin Read Blocking）、COEP（Cross-Origin Embedder Policy）或是 COOP（Cross-Origin-Opener-Policy）之類的跨來源相關規定。
 
-身為系列文的第一篇，就是要帶大家去思考為什麼要有 same-origin policy 的存在，為什麼跨來源存取資源會錯誤。如果你不知道這個問題的答案，那你通常都不是真的理解 CORS 到底在規範什麼，也很有可能會用一些錯誤的解法去解這個問題。
+身為系列文的第一篇，就是要帶大家去思考為什麼要有 same-origin policy 的存在，為什麼跨來源存取資源會錯誤。如果不知道這個問題的答案，那通常都不是真的理解 CORS 到底在規範什麼，也很有可能會用一些錯誤的解法去解這個問題。
 
-在這篇裡面，我預設大家已經對跨來源請求以及 CORS 有一些概念了，如果完全沒有概念的話，可以先去讀一下我以前寫過的這篇：[輕鬆理解 AJAX 與跨來源請求](https://blog.huli.tw/2017/08/27/ajax-and-cors/)。
+在這篇裡面，我預設大家已經對跨來源請求以及 CORS 有一些基本概念了，如果完全沒有概念的話，可以先去讀一下我以前寫過的這篇：[輕鬆理解 AJAX 與跨來源請求](https://blog.huli.tw/2017/08/27/ajax-and-cors/)。
 
 在正式開始以前，想先跟大家講一個小故事，跟整個 CORS 有關的一個小故事，反正大家就當一個無厘頭故事看就好，等真正理解完整個跨來源請求相關的東西以後，就知道這故事代表什麼了。
 
@@ -58,10 +58,9 @@ categories:
 
 我相信大家一定都對這個錯誤訊息不陌生：
 
-> request has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the 
-requested resource.
+> request has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 
-在前端用 XMLHttpRequest 或者是用 fetch 的時候，應該都有碰過這個錯誤。在串接後端或是網路上的 API 時，就是串不起來，而你也不知道到底是哪邊出了錯，甚至連這是前端還是後端要處理的可能都不太知道。
+在前端用 XMLHttpRequest 或者是用 fetch 的時候，應該都有碰過這個錯誤。在串接後端或是網路上的 API 時，就是串不起來，而你也不知道是哪邊出了錯，甚至連這是前端還是後端要處理的可能都不太知道。
 
 因此，我在這邊要直接先跟你講答案：
 
@@ -76,7 +75,7 @@ requested resource.
 
 ## 什麼是跨來源？
 
-跨來源的英文是 cross origin顧名思義，當你想要從來源 A 去拿來源 B 的東西，就是跨來源。
+跨來源的英文是 cross origin，顧名思義，當你想要從來源 A 去拿來源 B 的東西，就是跨來源。
 
 而這個來源，其實就是代表著「發送 request 的來源」，例如說你現在在 `https://huli.tw` 發送一個 request 出去，那這個 request 的 origin 就是 `https://huli.tw`。
 
@@ -84,12 +83,12 @@ requested resource.
 
 所以 `https://huli.tw` 跟 `https://google.com` 不同源，因為它們的 origin 不一樣。
 
-更精確一點地說，你可以把 origin 當作是：schema + host + port 的組合。schema 就是最前面的那個 `https` 或是 `http` 之類的東西，host 就是 `huli.tw`，而 port 的話如果沒有特別指定，http 預設的 port 就是 80，https 就是 443。
+更精確一點地說，你可以把 origin 當作是：scheme + host + port 的組合。scheme 就是最前面的那個 `https` 或是 `http` 之類的東西，host 就是 `huli.tw`，而 port 的話如果沒有特別指定，http 預設的 port 就是 80，https 就是 443。
 
 所以呢，
 
 1. `https://huli.tw` 跟 `https://huli.tw/api` 同源，因為 scheme + host + port 都一樣（`/api` 是 path 的部分，不是 host）
-2. `https://huli.tw` 跟 `http://huli.tw` 不同源，因為 schema 不一樣
+2. `https://huli.tw` 跟 `http://huli.tw` 不同源，因為 scheme 不一樣
 3. `http://huli.tw` 跟 `http://huli.tw:3000` 不同源，因為 port 不一樣 
 4. `https://api.huli.tw` 跟 `https://data.huli.tw` 不同源，因為 host 不一樣
 5. `https://huli.tw` 跟 `https://api.huli.tw` 不同源，因為 host 不一樣
@@ -99,13 +98,15 @@ requested resource.
 在這邊特別強調，cookie 比對的規則叫做：[Domain Matching
 ](https://tools.ietf.org/html/rfc6265#section-5.1.3)，它是看 domain 而不是看我們這邊所定義的 origin，千萬不要搞混了（有關這點，會在之後的章節再詳細說明）。
 
-從以上範例可以得知，其實要達成 same origin 滿困難的，如果只看網址的話，基本上要長得一模一樣，只有 path 跟後面的部分可以不一樣，例如說 `https://huli.tw/a/b/c/index.html?a=1` 跟 `https://huli.tw/show/cool/b.html` 就是同源的，因為都是在同一個 schema + host + post 底下。
+從以上範例可以得知，其實要達成 same origin 滿困難的，如果只看網址的話，基本上要長得一模一樣，只有 path 跟後面的部分可以不一樣，例如說 `https://huli.tw/a/b/c/index.html?a=1` 跟 `https://huli.tw/show/cool/b.html` 他們都是在同一個 scheme + host + post 底下，origin 都會是`https://huli.tw`，因此這兩個網址是同源的。
 
-在實務上面，其實很常會把前端網站本身跟 API 用不同的網域來表示，例如說 `huli.tw` 就是前端網站，`api.huli.tw` 就是後端 API，所以實務上也很常碰到跨來源請求的場景。
+在實務上面，其實也滿常會把前端網站本身跟 API 用不同的網域來表示，例如說 `huli.tw` 就是前端網站，`api.huli.tw` 就是後端 API，所以實務上也很常碰到跨來源請求的場景。
+
+（順帶一提，想避開跨來源的話會把前後端放在同一個 origin 下，例如說 huli.tw/api 就都是後端 API，其他路徑則是前端網站。）
 
 ## 為什麼不能跨來源呼叫 API？
 
-理解了同源的定義之後，我們可以來看剛剛的這個問題，那就是：「為麼不能跨來源呼叫 API？」。
+理解了同源的定義之後，我們可以來看剛剛的另一個問題，就是：「為麼不能跨來源呼叫 API？」。
 
 但其實這個定義有點不清楚，更精確一點的說法是：「為什麼不能用 XMLHttpRequest 或是 fetch（或也可以簡單稱作 AJAX）獲取跨來源的資源？」
 
@@ -131,11 +132,11 @@ requested resource.
 
 看起來好像沒什麼問題，只是拿 Google 首頁的 HTML 而已，沒什麼大不了。
 
-但如果今天我恰好知道你們公司有一個「內部」的公開網站，域名叫做 `http://internal.good-company.com`，這是外部連不進去的，只有公司員工的電腦可以連的到，然後我在我的網頁寫一段 AJAX 去拿它的資料，是不是就可以拿得到網站內容？那我拿到以後是不是就可以傳回我的 server？
+但如果今天我恰好知道你們公司有一個「內部」的公開網站，網址叫做 `http://internal.good-company.com`，這是外部連不進去的，只有公司員工的電腦可以連的到，然後我在我的網頁寫一段 AJAX 去拿它的資料，是不是就可以拿得到網站內容？那我拿到以後是不是就可以傳回我的 server？
 
 這樣就有了安全性的問題，因為攻擊者可以拿到一些機密資料。
 
-（加圖）
+![](/img/cors/p1.png)
 
 1. 目標打開惡意網站
 2. 惡意網站用 AJAX 抓取內部機密網站的資料
@@ -146,7 +147,7 @@ requested resource.
 
 如果你覺得這樣太難，那我換個例子。
 
-我請問你一個問題，你平常在開發的時候，是不是都是在自己電腦開一個 server 起來，網址有可能是 `http://localhost:3000` 或是 `http://localhost:5566` 之類的？以現代前端開發來說，再常見不過了。
+我請問你一個問題，你平常在開發的時候，是不是都是在自己電腦開一個 server 起來，網址有可能是 `http://localhost:3000` 或是 `http://localhost:5566` 之類的？以現代前端開發來說，這再常見不過了。
 
 如果瀏覽器沒有擋跨來源的 API，那我就可以寫一段這樣的程式碼：
 
@@ -187,7 +188,7 @@ for (let port = 80; port < 10000; port++) {
 
 因為這些比較像是「網頁資源的一部分」，例如說我想要用別人的圖片，我就用 `<img>` 來引入，想要用 CSS 就用 `<link href="...">`，這些標籤可以拿到的資源是有限制的。再者，這些取得回來的資源，**我沒辦法用程式去讀取它**，這很重要。
 
-既然沒辦法用程式去讀取它，那我也沒辦法把拿到的結果傳到其他地方，就比較不會有資料外洩的問題。
+我載入圖片之後它就真的只是張圖片，只有瀏覽器知道圖片的內容，我不會知道，我也沒有辦法用程式去讀取它。既然沒辦法用程式去讀取它，那我也沒辦法把拿到的結果傳到其他地方，就比較不會有資料外洩的問題。
 
 想要正確認識跨來源請求，第一步就是認識「為什麼瀏覽器要把這些擋住」，而第二步，就是對於「怎麼個擋法」有正確的認知。底下我準備了兩題小測驗，大家可以試著回答看看。
 
@@ -204,7 +205,7 @@ for (let port = 80; port < 10000; port++) {
 
 ### 第二題
 
-小明正在做的專案需要串接 API，而公司內部有一個 API 是拿來刪除文章的，只要把文章 id 用 POST 帶過去即可刪除。
+小明正在做的專案需要串接 API，而公司內部有一個 API 是拿來刪除文章的，只要把文章 id 用 POST 以 application/x-www-form-urlencoded 的 content type 帶過去即可刪除。
 
 舉例來說：`POST https://lidemy.com/deletePost` 並帶上 id=13，就會刪除 id 是 13 的文章（沒有做任何權限檢查）。
 
@@ -230,9 +231,9 @@ JavaScript 是一個程式語言，所以像 `var`、`if else`、`for`、`functi
 
 所以你的 JavaScript 是在瀏覽器上執行的，而這個執行環境會提供給你一些東西使用，例如說 DOM（document）、`console.log`、`setTimeout`、`XMLHttpRequest` 或是 `fetch`，這些其實都不是 JavsScript（或是更精確地說，ECMAScript）的一部分。這些是瀏覽器給我們使用的，所以我們只有在瀏覽器上面執行 JavaScript 時才用得到。
 
-（補圖）
+![](/img/cors/p2.png)
 
-因此你可能有過類似的經驗，想說為什麼一樣的 code 搬到 Node.js 去就沒辦法執行。現在你知道了，那是因為 Node.js 並沒有提供這些東西，例如說 `fetch`，你沒辦法直接在 Node.js 裡面使用它（如果可以，那就代表你有用其它 library）。
+因此你可能有過類似的經驗，想說為什麼一樣的 code 搬到 Node.js 去就沒辦法執行。現在你知道了，那是因為 Node.js 並沒有提供這些東西，例如說 `fetch`，你沒辦法直接在 Node.js 裡面使用它（如果可以，那就代表你有用其它 library 或是 polyfill）。
 
 相反過來也是，你把 JavaScript 用 Node.js 執行時，你可以用 `process` 或是 `fs`，但你在瀏覽器上面就沒辦法。不同的執行環境會提供不同的東西，你要很清楚現在是在哪個執行環境。
 
@@ -246,11 +247,11 @@ JavaScript 是一個程式語言，所以像 `var`、`if else`、`for`、`functi
 
 可是如果你今天退伍了，不在軍營裡面，也不是阿兵哥了，你就自由了，就再也不用做上面那些事了。瀏覽器在這邊就像是軍營，它是一個限制器，有著諸多的規則，一但脫離它，就什麼規則都沒有了。
 
-如果你有聽懂我在講什麼，大概就知道為什麼 proxy 一定可以解決 CORS 的問題（這之後會再詳細講）。
+如果你有聽懂我在講什麼，大概就知道為什麼 proxy 一定可以解決 CORS 的問題，因為它是透過後端自己去拿資料，而不是透過瀏覽器（這之後會再詳細講）。
 
 而瀏覽器本身在開網頁的時候，也是根本沒有什麼 same-origin policy 的規則，你想開什麼網頁就開什麼，不會阻止你。
 
-所以隨堂測驗的第一題，用瀏覽器打得開那個 JSON 檔案，這根本不算什麼，因為一定打得開，這跟 CORS 一點關係都沒有。
+所以隨堂測驗的第一題，用瀏覽器打得開那個 JSON 檔案，這根本不算什麼，因為一定打得開，這跟 CORS 一點關係都沒有。用瀏覽器瀏覽網站，跟用 AJAX 拿資料是完全不同的兩件事。
 
 所以第一題的解答是：「小明的說法錯誤，用瀏覽器能打開檔案不代表什麼，跟 CORS 無關。是不是能夠跨來源使用 AJAX，要看 response 的 header」。
 
@@ -271,6 +272,24 @@ JavaScript 是一個程式語言，所以像 `var`、`if else`、`for`、`functi
 所以瀏覽器擋住的不是 request，而是 response。你的 request 已經抵達 server 端，server 也回傳 response 了，只是瀏覽器不把結果給你而已。
 
 因此第二題的答案是，儘管小明看到這個 CORS 的錯誤，但因為 request 其實已經發到 server 去了，所以文章有被刪掉，只是小明拿不到 response 而已。對，文章被刪掉了，真的。
+
+最後再補充一個觀念，前面有講說擋 CORS 是為了安全性，如果沒有擋的話，那攻擊者可以利用 AJAX 去拿內網的非公開資料，公司機密就外洩了。而這邊我又說「脫離瀏覽器就沒有 CORS 問題」，那不就代表就算有 CORS 擋住，我還是可以自己發 request 去同一個網站拿資料嗎？難道這樣就沒有安全性問題嗎？
+
+舉例來說，我自己用 curl 或是 Postman 或任何工具，不是就能不被 CORS 限制住嗎？
+
+會這樣想的人忽略了一個特點，這兩種有一個根本性的差異。假設今天我們的目標是某個公司的內網，網址是：http://internal.good-company.com
+
+如果我直接從我電腦上透過 curl 發 request，我只會得到一個錯誤，因為一來我不是在那間公司的內網所以沒有權限，二來我甚至連這個 domain 都有可能連不到，因為只有內網可以解析。
+
+而 CORS 是：「我寫了一個網站，讓內網使用者去開這個網站，並且發送 request 去拿資料」。這兩者最大的區別是「是從誰的電腦造訪網站」，前者是我自己，後者則是透過其他人（而且是可以連到內網的人）。
+
+![](/img/cors/internal.png)
+
+如圖所示，上半部是攻擊者自己去連那個網址，會連不進去，因為攻擊目標在內網裡。所以儘管沒有 same-origin policy，攻擊者依然拿不到想要的東西。
+
+而下半部則是攻擊者寫了一個惡意網站，並且想辦法讓使用者去造訪那個網站，像是標 1 的那邊，當使用者造訪網站之後，就是 2 的流程，會用 AJAX 發 request 到攻擊目標（internal server），3 拿完資料以後，就是步驟 4 回傳到攻擊者這邊。
+
+有了 same-origin policy 的保護，步驟 4 就不會成立，因為 JS 拿不到 fetch 完的結果，所以不會知道 response 是什麼。
 
 ## 總結
 

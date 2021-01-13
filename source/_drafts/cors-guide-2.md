@@ -9,7 +9,7 @@ categories:
 
 ## 前言
 
-在上一篇 [CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？]()裡面，我們理解了為什麼瀏覽器要有 same-origin policy，以及跨來源請求擋的其實是 response 而不是 request。在釐清了一些錯誤的觀念以及對 CORS 有基本的認知以後，就可以先來講講怎麼樣解決 CORS 的問題。
+在上一篇 [CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？]()裡面，我們理解了為什麼瀏覽器要有 same-origin policy，以及跨來源請求擋的其實是 response 而不是 request。在釐清了一些錯誤的觀念以及對 CORS 有基本的認知以後，就可以來講講怎麼樣解決 CORS 的問題。
 
 先跟大家預告一下，這篇會提到的解決問題的方法並不完整。事實上，跨來源請求分成兩種，簡單請求跟非簡單請求，這一篇只會針對「簡單請求」，至於到底怎麼分簡單還是非簡單，以及非簡單的要如何處理，這些都會在下一篇提到。
 
@@ -33,13 +33,15 @@ categories:
 
 把安全機制關掉以後，就可以順利拿到 response，瀏覽器也會跳一個提示出來：
 
-（補圖）
+![](/img/cors/disable-browser.png)
 
 問題是解決了，但為什麼我說這是治標不治本呢？因為只有在你電腦上沒問題而已，在其他人的電腦上面還是有問題。有些人會在開發時圖個方便把這個設置關起來，就不會碰到任何 CORS 的問題，但我認為這是比較不好的做法，因為你關掉的不只是 CORS，你連其他安全機制也一起關掉了。
 
 總之呢，只是跟大家介紹有這個解法，但不推薦使用。
 
 ## 解法二：把 fetch mode 設成 no-cors
+
+這絕對是新手最常犯的錯誤之一，請看仔細了。
 
 如果你是使用 fetch 去抓取資料，例如說這樣（這個網頁的 origin 是 `http://localhost:8081`，跟 `http://localhost:3000` 不同源）：
 
@@ -71,26 +73,26 @@ fetch('http://localhost:3000', {
 
 改了程式碼之後重新執行，果真不會跳錯誤出來了！console 一片乾淨，只是印出來的值似乎怪怪的：
 
-（補圖）
+![](/img/cors/opaque.png)
 
-Response 的 status 是 0，body 的內容是空的，type 是一個叫做 `opaque` 的東西，看起來很奇怪。但如果我們打開 devtool 並且切到 Network 的那一個 tab 去看，會發現其實後端是有回傳 response 的：
+Response 的 status 是 0，body 的內容是空的，type 是一個叫做 `opaque` 的東西，看起來很奇怪。但如果我們打開 devtool 並且切到 Network 的那一個 tab 去看，會發現其實後端是有回傳 response 的。
 
-（補圖）
+咦，瀏覽器明明就有拿到 response，為什麼程式裡面卻沒有內容？為什麼會這樣呢？
 
-為什麼會這樣呢？
+這是因為，`mode: no-cors` 跟你想的完全不一樣。
 
-當你傳進 `mode: no-cors` 的時候，就代表跟瀏覽器說：「我就是要發 request 到一個沒有 CORS header 的 url，所以請不要給我錯誤」，既然是這樣的話，那自然也就不會出現 `No 'Access-Control-Allow-Origin' header is present on the requested resource` 這個錯誤，因為你本來就預期到這件事了。
+當你傳入 `mode: no-cors` 的時候，就代表跟瀏覽器說：「我就是要發 request 到一個沒有 CORS header 的 url，所以請不要給我錯誤」，既然是這樣的話，那自然也就不會出現 `No 'Access-Control-Allow-Origin' header is present on the requested resource` 這個錯誤，因為你本來就預期到這件事了。
 
 但這樣設置並不代表你就拿得到 response，事實上正好相反，用 `mode: no-cors` 的話，你**一定**拿不到 response。沒錯，一定拿不到，就算後端幫你把 `Access-Control-Allow-Origin` 這個 header 加上去了，你也拿不到 response。
 
-所以，如果你發現你用了 `mode: no-cors` 這東西，那有 99% 的機率是你用錯了，你根本不該用這個。用了的話你反而會很困惑，因為：
+設置這個 mode 以後，並不會神奇地就讓你可以突破限制拿到東西，正好相反，這個模式是在跟瀏覽器說：「我就是要發 request 給一個沒有 cors header 的資源，我知道我拿不到 response，所以你絕對不要給我 response」。
+
+所以，如果你發現你用了 `mode: no-cors` 這東西，那有 99% 的機率是用錯了，根本不該用這個。用了的話你反而會很困惑，因為：
 
 1. 你在 network tab 可以看到 response
 2. 而且你的程式沒有產生任何錯誤
 
-但是你就是拿不到 response，它就是空的，這都是因為 no-cors 這個 mode。用了以後你可能就會跟[這個 issue](https://github.com/lexich/redux-api/issues/151) 裡面的人一樣感到困惑。
-
-總結一下，設置這個 mode 以後，並不會神奇地就讓你可以突破限制拿到東西，正好相反，這個模式是在跟瀏覽器說：「我就是要發 request 給一個沒有 cors header 的資源，我知道我拿不到 response，所以你絕對不要給我 response」。
+但是你就是拿不到 response，它就是空的，這都是因為 no-cors 這個 mode。用了以後你可能就會跟[這個 issue](https://github.com/lexich/redux-api/issues/151) 裡面的人一樣感到困惑。因此加上這個只是不會拿到錯誤而已，但是並沒有突破跨網域的限制，還是拿不到 response。
 
 至於在什麼場合會用到這個 mode，我還要再研究一下，大家可以先參考：
 
@@ -234,7 +236,7 @@ setData({"name":"user1"})
   <button onclick="getUser(2)">user2</button>
 </body>
 </html>
-``` 
+```
 
 如此一來，當 script 載入完成以後，就會呼叫 setData 這個 function 並且把資料帶進去，我們就可以拿到資料了。
 
@@ -246,7 +248,6 @@ app.get('/users/:userId', function (req, res) {
   const callback = req.query.callback;
   res.end(`${callback}(${JSON.stringify(users[userId])})`);
 });
-
 ```
 
 而前端就可以自己帶上一個 query string，指定 callback function 的名稱：
@@ -273,8 +274,6 @@ function getUser(userId) {
 
 JSONP 的原理是透過 script 標籤傳遞資料跨過限制，而一般我們使用的 AJAX 都是用 XMLHttpRequest 或是 fetch，這兩種方法的原理相去甚遠，完全不一樣。
 
-儘管 JSONP 這東西我講過很多次了，但每次再提都還是會覺得很神奇很厲害，怎麼想到用 script 來傳遞資料的。
-
 最後做個總結，JSONP 是一種用 script 標籤傳遞資料藉此避開 CORS policy 的方法，必須要透過 server 配合才能使用（因為它回傳的東西其實是一段 JavaScript，而不是只有資料），目前有些網站的 API 還有支援 JSONP，例如說 [Twitch API](https://dev.twitch.tv/docs/v5)。
 
 ## 中場休息
@@ -286,6 +285,8 @@ JSONP 的原理是透過 script 標籤傳遞資料跨過限制，而一般我們
 3. 不要用 AJAX 拿資料
 
 都沒有辦法真正解決問題。
+
+第一種只對自己瀏覽器有效，第二種只是自欺欺人，還是拿不到 response，第三種需要 server 特別支援而且有其限制。
 
 這就是為什麼我在上一篇裡面說了：「大部分情形下，CORS 都不是前端的問題，純前端是解決不了的」。瀏覽器因為安全性的考量所以會把東西給擋住，因此，你必須要讓瀏覽器知道：「這其實是安全的」，它才會放行。
 
@@ -329,9 +330,9 @@ app.listen(3000, function () {
 
 這樣就是在跟瀏覽器說：「任何 origin 都可以拿到我的 response，你不需要擋下來」。所以當前端用 AJAX 去送 request 的時候，就可以拿到 response，不會出現任何錯誤。
 
-這邊有一個常見的錯誤，就是有些人以為 `Access-Control-Allow-Origin` 這個 header 是前端在發送 request 時要加的。不，這完全是錯的，前端加這個完全沒有用，因為這個 header 只存在 response 裡面，是後端才需要加的，前端加了跟沒加一模一樣。
+這邊有一個常見的錯誤，就是有些人以為 `Access-Control-Allow-Origin` 這個 header 是前端在發送 request 時要加的。不，這完全是錯的，前端加這個完全沒有用，因為這個 header 只存在 response 裡面，是後端才需要加的，前端加了跟沒加一樣。
 
-所以如果你在前端有加這個，麻煩把它拿掉。
+所以如果你在前端有加這個，麻煩把它拿掉。再次強調，CORS 問題不是純前端可以解決的，基本上一定需要後端的介入。
 
 如果只想針對特定的 origin 開放權限，只要傳入要開放的 origin 就行了：
 
@@ -344,7 +345,7 @@ app.get('/', function (req, res) {
 
 就是這麼的簡單，只要加了一個 header，就可以告訴瀏覽器說：「我同意這個 origin 拿到我的 response」，就這樣就好了。
 
-這才是從根本去解決跨來源請求的問題。如果你跟想存取的資源有合作關係的話，通常直接請他們設定這個 header 就行了。例如說你在串接公司後端的 API，發現碰到 CORS 問題，這時候請去找後端工程師幫你把這個 header 加上去。
+這才是從根本去解決跨來源請求的問題。如果你跟想存取的資源有合作關係的話，通常直接請他們設定這個 header 就行了。例如說你在串接公司後端的 API 時碰到 CORS 問題，這時候請去找後端工程師幫你把這個 header 加上去。
 
 不要想著靠自己來解決，因為這不是前端該解決的問題，是後端該解決的，只是你要幫助他，告訴他應該怎麼解。
 
@@ -364,22 +365,22 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 
 那要如何把這個概念應用在 CORS 相關的問題上面呢？
 
-如果你想拿 A 網站的資料，但是他沒有提供 `Access-Control-Allow-Origin` 這個 header，你就自己寫個 server，從後端去拿 A 網站的資料，再把資料丟回給自己的前端就行了。因為自己的後端可以自己控制，所以你想加什麼 header 就加什麼 header，想拿什麼資料就拿什麼。
+如果你想拿 A 網站的資料，但是它沒有提供 `Access-Control-Allow-Origin` 這個 header，你就自己寫個 server，從後端去拿 A 網站的資料，再把資料丟回給自己的前端就行了。因為自己的後端可以自己控制，所以你想加什麼 header 就加什麼 header，想拿什麼資料就拿什麼。
 
-（圖片待補）
+![](/img/cors/proxy.png)
 
 圖片中的數字代表以下流程：
 
 1. 瀏覽器發 request 到 proxy，說要拿 huli.tw 的資料
-2. proxy server 去跟 huli.tw 拿資料（後端，沒有跨來源限制）
-3. huli.tw 回傳資料給 proxy（後端，沒有跨來源限制）
+2. proxy server 去跟 huli.tw 拿資料（後端，不是瀏覽器所以沒有跨來源限制）
+3. huli.tw 回傳資料給 proxy（同上，沒有跨來源限制）
 4. proxy 回傳資料給瀏覽器，並加上 CORS header（所以前端不會被擋）
 
 大家應該都有聽過的 [CORS Anywhere](https://github.com/Rob--W/cors-anywhere/)，開頭就直接寫了：
 
 > CORS Anywhere is a NodeJS proxy which adds CORS headers to the proxied request.
 
-就是一個 proxy server，幫你把你想存取的資源加上 CORS 的 header。或是如果你有在用 Chrome 上幫你解決 CORS 問題的 [plugin](https://github.com/vitvad/Access-Control-Allow-Origin/blob/master/background.js#L33)，背後原理其實也只是用 plugin 幫你把 response 加上 `Access-Control-Allow-Origin` 這個 header 而已。
+就是一個 proxy server，幫你把想存取的資源加上 CORS 的 header。或是如果你有在用 Chrome 上幫你解決 CORS 問題的 [plugin](https://github.com/vitvad/Access-Control-Allow-Origin/blob/master/background.js#L33)，背後原理其實也只是用 plugin 幫你把 response 加上 `Access-Control-Allow-Origin` 這個 header 而已。
 
 所以，要解決 CORS 沒有什麼魔法，無論你是裝了 plugin 還是用了 proxy server，背後原理都是一樣的，都還是那個 `Access-Control-Allow-Origin` 的 header。
 
@@ -389,11 +390,11 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 
 來，我們來看這張對照圖，上面是走 proxy 的流程，下面是沒有走的：
 
-（補圖）
+![](/img/cors/proxy2.png)
 
-不經過 proxy 的就會有之前提過的安全性問題，網站可以去拿你 localhost 或是其他網站的資料，所以瀏覽器要把它擋住。
+我們先來看下半部的，如果不經過 proxy 的話就會有之前提過的安全性問題，網站可以去拿你 localhost 或是其他網站的資料，所以瀏覽器要把它擋住。
 
-而 proxy 的話則不同，這邊有一點很重要，那就是如果走 proxy 的話，跟 localhost:3000 溝通的是誰？是 proxy server，所以網頁去抓的並不是「本機的 localhost:3000」，而是「proxy server 的 localhost:3000」，那這樣對你的電腦來說，就沒有安全性的問題（但是對 proxy server 可能有）。
+接著來看上半部，這邊有一點很重要，那就是如果走 proxy 的話，跟 localhost:3000 溝通的是誰？是 proxy server，所以網頁去抓的並不是「本機的 localhost:3000」，而是「proxy server 的 localhost:3000」，那這樣對你的電腦來說，就沒有安全性的問題（但是對 proxy server 可能有）。
 
 ## 總結
 
@@ -402,6 +403,10 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 若是後端 API 只提供 JSONP 形式的方式，那也可以用 JSONP 來做；只是在自己電腦上想測試東西又覺得 CORS 很煩的話，裝個擴充套件來解決這問題也是可以的，但要注意的是這只有在自己電腦上有用，換一台電腦就失效了。
 
 其實沒有說哪一種做法一定是對，哪一種一定是錯，畢竟不同的場合之下會有不同作法。但我之所以會說「請後端加上 CORS header 通常是最正確的解法」，是因為大部分人碰到跨來源請求問題可能都是在工作上。這時如果前後端都有經驗，其實加個 header 就沒事了，但如果兩方都經驗不足，可能就會繞遠路，讓前端自己去架個 proxy server，這就是對這個主題不夠熟造成的後果。
+
+或有些人會開始研究怎麼樣「透過純前端來解跨網域問題」，繞了一大圈發現怎麼這也不行那也不行，連看似最有希望的 `mode: no-cors` 也不行。看完這篇你就懂了，因為這本來就不是前端該解的，所以你當然沒辦法透過純前端解開。
+
+那 CORS 問題看完這篇就能夠完全解決了嗎？不一定。
 
 這篇文章只處理到「最簡單的情況」，還有兩個狀況我們沒有講到：
 
