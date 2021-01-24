@@ -29,7 +29,7 @@ categories:
 </head>
 
 <body>
-  <button id="btn">click me</buttin>
+  <button id="btn">click me</button>
   <script>
     // TODO: add click event listener to button
   </script>
@@ -74,9 +74,9 @@ document.getElementById('btn')
 這個行為是我幾年前在臉書的前端社群無意間得知的，那就是你在 HTML 裡面設定一個有 id 的元素之後，在 JS 裡面就可以直接存取到它：
 
 ``` html
-<button id="btn">click me</buttin>
+<button id="btn">click me</button>
 <script>
-  console.log(window.btn) // <button id="btn">click me</buttin>
+  console.log(window.btn) // <button id="btn">click me</button>
 </script>
 ```
 
