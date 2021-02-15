@@ -20,10 +20,10 @@ categories:
 這系列一共有五篇文章，分別是：
 
 * CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？
-* CORS 完全手冊（二）：如何解決 CORS 問題？
-* CORS 完全手冊（三）：CORS 詳解
-* CORS 完全手冊（四）：一起看規範
-* CORS 完全手冊（五）：其他 Cross Origin 系列規範
+* [CORS 完全手冊（二）：如何解決 CORS 問題？]()
+* [CORS 完全手冊（三）：CORS 詳解]()
+* [CORS 完全手冊（四）：一起看規範]()
+* [CORS 完全手冊（五）：其他 Cross Origin 系列規範]()
 
 會從 same-origin policy 開始講起，接著講到為什麼跨來源存取資源會有錯誤，再來會講如何錯誤地以及正確地解決 CORS 相關的問題，而第三篇會詳細講解跨來源請求的詳細流程，像是 preflight request 之類的東西。
 
@@ -62,7 +62,7 @@ categories:
 
 在前端用 XMLHttpRequest 或者是用 fetch 的時候，應該都有碰過這個錯誤。在串接後端或是網路上的 API 時，就是串不起來，而你也不知道是哪邊出了錯，甚至連這是前端還是後端要處理的可能都不太知道。
 
-因此，我在這邊要直接先跟你講答案：
+因此，我在這邊直接先跟你講答案：
 
 > 大部分情形下，CORS 都不是前端的問題，純前端是解決不了的。
 
@@ -96,7 +96,7 @@ categories:
 第五點是大家要特別注意的一點，domain 跟 subdomain 之間也是不同源的，所以 `api.huli.tw` 跟 `huli.tw` 不同源。有很多人常常會把這個跟 cookie 搞混，因為 `api.huli.tw` 跟 `huli.tw` 是可以共用 cookie 的。
 
 在這邊特別強調，cookie 比對的規則叫做：[Domain Matching
-](https://tools.ietf.org/html/rfc6265#section-5.1.3)，它是看 domain 而不是看我們這邊所定義的 origin，千萬不要搞混了（有關這點，會在之後的章節再詳細說明）。
+](https://tools.ietf.org/html/rfc6265#section-5.1.3)，它是看 domain 而不是看我們這邊所定義的 origin，千萬不要搞混了。
 
 從以上範例可以得知，其實要達成 same origin 滿困難的，如果只看網址的話，基本上要長得一模一樣，只有 path 跟後面的部分可以不一樣，例如說 `https://huli.tw/a/b/c/index.html?a=1` 跟 `https://huli.tw/show/cool/b.html` 他們都是在同一個 scheme + host + post 底下，origin 都會是`https://huli.tw`，因此這兩個網址是同源的。
 
@@ -106,7 +106,7 @@ categories:
 
 ## 為什麼不能跨來源呼叫 API？
 
-理解了同源的定義之後，我們可以來看剛剛的另一個問題，就是：「為麼不能跨來源呼叫 API？」。
+理解了同源的定義之後，我們可以來看剛剛的另一個問題，就是：「為什麼不能跨來源呼叫 API？」。
 
 但其實這個定義有點不清楚，更精確一點的說法是：「為什麼不能用 XMLHttpRequest 或是 fetch（或也可以簡單稱作 AJAX）獲取跨來源的資源？」
 
@@ -205,9 +205,9 @@ for (let port = 80; port < 10000; port++) {
 
 ### 第二題
 
-小明正在做的專案需要串接 API，而公司內部有一個 API 是拿來刪除文章的，只要把文章 id 用 POST 以 application/x-www-form-urlencoded 的 content type 帶過去即可刪除。
+小明正在做的專案需要串接 API，而公司內部有一個 API 是拿來刪除文章的，只要把文章 id 用 POST 以 `application/x-www-form-urlencoded` 的 content type 帶過去即可刪除。
 
-舉例來說：`POST https://lidemy.com/deletePost` 並帶上 id=13，就會刪除 id 是 13 的文章（沒有做任何權限檢查）。
+舉例來說：`POST https://lidemy.com/deletePost` 並帶上 id=13，就會刪除 id 是 13 的文章（後端沒有做任何權限檢查）。
 
 公司前後端的網域是不同的，而且後端並沒有加上 CORS 的 header，因此小明認為前端用 AJAX 會受到同源政策的限制，request 根本發不出去。
 
@@ -245,7 +245,7 @@ JavaScript 是一個程式語言，所以像 `var`、`if else`、`for`、`functi
 
 舉例來說，你今天去當兵，早上起床要折豆腐被，中午吃飯進餐廳要喊親愛精誠，看到長官要問好，講話開頭要加報告兩個字。為什麼？因為軍中是那樣規定的。
 
-可是如果你今天退伍了，不在軍營裡面，也不是阿兵哥了，你就自由了，就再也不用做上面那些事了。瀏覽器在這邊就像是軍營，它是一個限制器，有著諸多的規則，一但脫離它，就什麼規則都沒有了。
+可是如果你今天退伍了，不在軍營裡面，也不是阿兵哥了，你就自由了，就再也不用做上面那些事了。瀏覽器在這邊就像是軍營，它是一個限制器，有著諸多的規則，一旦脫離它，就什麼規則都沒有了。
 
 如果你有聽懂我在講什麼，大概就知道為什麼 proxy 一定可以解決 CORS 的問題，因為它是透過後端自己去拿資料，而不是透過瀏覽器（這之後會再詳細講）。
 
@@ -275,9 +275,11 @@ JavaScript 是一個程式語言，所以像 `var`、`if else`、`for`、`functi
 
 最後再補充一個觀念，前面有講說擋 CORS 是為了安全性，如果沒有擋的話，那攻擊者可以利用 AJAX 去拿內網的非公開資料，公司機密就外洩了。而這邊我又說「脫離瀏覽器就沒有 CORS 問題」，那不就代表就算有 CORS 擋住，我還是可以自己發 request 去同一個網站拿資料嗎？難道這樣就沒有安全性問題嗎？
 
-舉例來說，我自己用 curl 或是 Postman 或任何工具，不是就能不被 CORS 限制住嗎？
+舉例來說，我自己用 curl 或是 Postman 或任何工具，應該就能不被 CORS 限制住了不是嗎？
 
-會這樣想的人忽略了一個特點，這兩種有一個根本性的差異。假設今天我們的目標是某個公司的內網，網址是：http://internal.good-company.com
+會這樣想的人忽略了一個特點，這兩種有一個根本性的差異。
+
+假設今天我們的目標是某個公司的內網，網址是：http://internal.good-company.com
 
 如果我直接從我電腦上透過 curl 發 request，我只會得到一個錯誤，因為一來我不是在那間公司的內網所以沒有權限，二來我甚至連這個 domain 都有可能連不到，因為只有內網可以解析。
 
@@ -299,4 +301,4 @@ JavaScript 是一個程式語言，所以像 `var`、`if else`、`for`、`functi
 2. 今天會有 same-origin policy 跟 CORS，是因為我們「在瀏覽器上寫 JS」，所以受到執行環境的限制。如果我們今天寫的是 Node.js，就完全沒有這些問題，想拿什麼就拿什麼，不會有人擋我們
 3. 在瀏覽器上面，CORS 限制的其實是「拿不到 response」，而不是「發不出 request」。所以 request 其實已經發出去了，瀏覽器也拿到 response 了，只是它因為安全性考量不給你
 
-在釐清這些重要的觀念以後，就可以進入到我們的下一篇：CORS 完全手冊（二）：如何解決 CORS 問題？。
+在釐清這些重要的觀念以後，就可以進入到我們的下一篇：[CORS 完全手冊（二）：如何解決 CORS 問題？]()。
