@@ -25,7 +25,9 @@ categories:
 
 這一篇就讓我們一起來看一下 CORS 相關的規範，證明我前面幾篇沒有在唬爛你，講得都是有所根據的。因為規格還滿長的，所以底下就是我挑幾個我認為的重點講而已，想要理解所有的規格內容，還是需要自己去看才行。
 
-（此文章發佈是規格的版本為：Living Standard — Last Updated 14 January 2021）
+<!-- more -->
+
+（此文章發佈時所參考的規格的版本為：Living Standard — Last Updated 15 February 2021，最新的規格請參考：[Fetch](https://fetch.spec.whatwg.org/)）
 
 ## 先來點簡單的
 
@@ -49,11 +51,11 @@ categories:
 
 > At a high level, fetching a resource is a fairly simple operation. A request goes in, a response comes out. The details of that operation are however quite involved and used to not be written down carefully and differ from one API to the next.
 
-fetch 看起來很簡單，不過就是發個 request 然後接收 response 而已，但實際上其實水很深，以前沒有規格記錄下來導致每個 API 的實作都不一樣。這也是為什麼會有這個統一的 spec 誕生。
+fetch 看起來很簡單，不過就是發個 request 然後接收 response 而已，但實際上其實水很深，以前沒有規格記錄下來導致每個 API 的實作都不一樣，這也是為什麼會有這個統一的 spec 誕生。
 
 > Numerous APIs provide the ability to fetch a resource, e.g. HTML’s img and script element, CSS' cursor and list-style-image, the navigator.sendBeacon() and self.importScripts() JavaScript APIs. The Fetch Standard provides a unified architecture for these features so they are all consistent when it comes to various aspects of fetching, such as redirects and the CORS protocol.
 
-這邊提到了我在前面所說的，抓取資料或是跨網域抓取資源並不只侷限在 AJAX 上面，載入圖片或是 CSS 也是抓取資源的一種。而這份規格就是為了統一管理這些行為。
+這邊提到了我在前面所說的，抓取資料或是跨網域抓取資源並不只侷限在 AJAX 上面，載入圖片或是 CSS 也是抓取資源的一種，而這份規格就是為了統一管理這些行為。
 
 > The Fetch Standard also defines the fetch() JavaScript API, which exposes most of the networking functionality at a fairly low level of abstraction.
 
@@ -112,7 +114,7 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 
 這邊提到了「prevent leaking data from responses behind a firewall (intranets)」，其實就是我第一篇文章中所提到的案例。如果沒有 same-origin policy 的保護，在內網的資訊可能就會被輕易取得。
 
-而「for requests including credentials it needs to be opt-in」也是我們之前所提到的，如果 request 有包含 credentials（通常是 Cookie），就必須 opt-in，否則也會有資訊洩漏的風險。
+而「for requests including credentials it needs to be opt-in」也是我們之前所提到的，如果 request 有包含 credentials（通常是 cookie），就必須 opt-in，否則也會有資訊洩漏的風險。
 
 接著底下 3.2.1. General 的這一段也很重要：
 
@@ -120,7 +122,11 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 
 > For requests that are more involved than what is possible with HTML’s form element, a CORS-preflight request is performed, to ensure request’s current URL supports the CORS protocol.
 
-這邊提到了兩個重點，第一個是 CORS 是透過 header 來決定一個 response 是不是能被跨網域共享，第二個是如果一個 request 超過 HTML 的 form 元素可以表達的範圍，那就會有一個 CORS-preflight request。
+這邊提到了兩個重點，第一個是 CORS 是透過 header 來決定一個 response 是不是能被跨網域共享，這就是我在上一篇裡面所說的：
+
+> 說穿了，CORS 就是藉由一堆的 response header 來跟瀏覽器講說哪些東西是前端有權限存取的。
+
+第二個是如果一個 request 超過 HTML 的 form 元素可以表達的範圍，那就會有一個 CORS-preflight request。
 
 那到底怎樣叫做「超過 form 元素可以表達的範圍」？這個我們稍後再看，先來看底下這兩個部分：
 
@@ -151,7 +157,7 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 
 而 CORS-preflight request 就是利用 OPTIONS 來確認 server 是不是理解 CORS procotol。
 
-這邊有一點要特別提，就如同 MDN 上面寫的：
+這邊有一點要特別提，就如同 [MDN](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS) 上面寫的：
 
 > 部分請求不會觸發 CORS 預檢。這類請求在本文中被稱作「簡單請求（simple requests）」，雖然 Fetch 規範（其定義了 CORS）中並不使用這個述語
 
@@ -162,7 +168,7 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 1. Access-Control-Request-Method
 2. Access-Control-Request-Headers
 
-來說明之後的 CORS request 可能會用到的 method 跟 header。
+來說明之後的 CORS request 可能會用到的 method 跟 header，這我們在上一篇也有提過了。
 
 接著有關 response 的部分：
 
@@ -253,21 +259,21 @@ Indicates which headers can be exposed as part of the response by listing their 
 
 另外，上面的 header 對應的 value 中一定都要是合法字元，至於哪些是合法字元，每個 header 的定義都不同，這邊就不細講了。
 
-仔細想想其實會發現滿合理的，因為以 form 來說，可以填的 method 就只有 GET 跟 POST（還有一個 dialog 啦但是跟 HTTP 無關了），可以填的 enctype 也只有上面說的那三種，沒有填的話預設就是 application/x-www-form-urlencoded。
+仔細想想其實會發現滿合理的，因為以 form 來說，可以填的 method 就只有 GET 跟 POST（還有一個 dialog 啦但是跟 HTTP 無關了），可以填的 enctype 也只有上面說的那三種，沒有填的話預設就是 `application/x-www-form-urlencoded`。
 
-因此如果是表單的話，確實不會超過上面那樣子的定義。而如果在發出 request 的時候超過了這個範圍，就會送出 preflight request。
+因此如果是表單的話，確實不會超過上面那樣的定義。而如果在發出 request 的時候超過了這個範圍，就會送出 preflight request。
 
-所以想要 POST 送出 JSON 格式的資料也會觸發，除非你 content-type 用 text/plain，就可以繞過 preflight request（但不建議這樣做就是了）
+所以想要 POST 送出 JSON 格式的資料也會觸發，除非你 content-type 用 text/plain，就可以繞過 preflight request（但不建議這樣做就是了）。
 
 ## CORS check
 
 關於 request 的部分應該都看完了，接著來看一下 response 相關的部分。有一件我很好奇的事情，那就是該怎麼驗證 CORS 的結果是過關的？
 
-這邊可以看到 4.9. CORS check：
+這邊可以看到 4.10. CORS check：
 
-（補圖）
+![](/img/cors/cors-check.png)
 
-如果 Access-Control-Allow-Origin 裡的 origin 是 null 的話，就失敗（這邊特地強調是 null 而不是 "null"，這我們之後會再提到）。
+如果 `Access-Control-Allow-Origin` 裡的 origin 是 null 的話，就失敗（這邊特地強調是 null 而不是 "null"，這我們之後會再提到）。
 
 再來檢查如果 origin 是 * 而且 credentials mode 不是 include，就給過。
 
@@ -275,9 +281,101 @@ Indicates which headers can be exposed as part of the response by listing their 
 
 比對到這一步的時候 origin 相同了，接著再看一次 credentials mode，不是 inlcude 的話就給過。
 
-反之則檢查 Access-Control-Allow-Credentials，如果是 true 的話就給過，否則就回傳失敗。
+反之則檢查 `Access-Control-Allow-Credentials`，如果是 true 的話就給過，否則就回傳失敗。
 
 這一系列的檢查有種 early return 的味道在，可能是因為這樣比較好寫成條列式的，盡量把巢狀給壓平。
 
+以上差不多就是跟 CORS 有關的規格了，第六章節整個都在講 `fetch` API，第七章節在講 websocket。
 
-no-cors
+接著我們來關心一些我覺得也滿重要的一些內容。
+
+## 誤導人的 no-cors mode 與 fetch 的流程
+
+前面有提過 fetch 可以設定一個 `mode: no-cors`，接下來我們就來看一下從規格的角度，到底實際上會做一些什麼事情。
+
+因為這是 fetch request 的一個參數，所以要從 `5.4 Request class` 開始看起，裡面有一個段落是：`The new Request(input, init) constructor steps are:`
+
+在第 30 步的地方可以看到：
+
+![](/img/cors/fetch-01.png)
+
+如果 request 的 method 不是 GET、HEAD 或是 POST 的話，就丟一個 TypeError 出來。除此之外，也會把 `header's guard` 設成 `request-no-cors`。
+
+上面這只是新建一個 request 而已，接著可以看 `5.6. Fetch method` 來看實際送出 request 的流程：
+
+![](/img/cors/fetch-02.png)
+
+前面都只是在設定一些參數，真正做動作的是第十步：
+
+> Fetch request with processResponse given response being these substeps
+
+那個「Fetch」是個超連結，點下去可以連到 `4. Fetching` 的章節，而這邊我們關注的是最後一步：
+
+![](/img/cors/fetch-03.png)
+
+> 12. Run main fetch given fetchParams.
+
+main fetch 也是一個超連結，點了會跳到 `4.1. Main fetch` 去，這邊有一整段專門在處理 mode 是 no-cors 時的狀況：
+
+![](/img/cors/fetch-04.png)
+
+這邊有幾個值得注意的地方：
+
+1. 第二步把 request 的 response tainting 設成 opaque
+2. 第三步去執行了「scheme fetch」
+3. 第五步新建了一個 response，只有 status 跟 CSP list
+4. 底下的 warning
+
+這邊可以繼續往 scheme fetch 去追，就會跟剛剛一樣繼續追到各種不同的 fetch method，然後越追越深。不過這邊我已經幫大家追過了，再追下去其實沒什麼特別的，我們先假設第四步不成立好了，所以會執行到第五步：「Return a new response whose status is noCorsResponse’s status, and CSP list is noCorsResponse’s CSP list.」
+
+而 warning 的部分其實滿重要的：
+
+> This is only an effective defense against side channel attacks if noCorsResponse is kept isolated from the process that initiated the request.
+
+這邊之所以會新建一個 response，是因為不想回傳原本的 response，要讓原本的 response 跟發起這個 request 的 process 分開。為什麼要這樣做呢？這我們下一篇會提到。
+
+再來我們繼續往下看，可以看到第十四步：
+
+![](/img/cors/fetch-05.png)
+
+之前已經把 response tainting 設成 opaque，所以根據第二點，會把 response 設成 [opaque filtered response](https://fetch.spec.whatwg.org/#concept-filtered-response-opaque)。
+
+那這個 opaque filtered response 是什麼呢？
+
+> An opaque filtered response is a filtered response whose type is "opaque", URL list is the empty list, status is 0, status message is the empty byte sequence, header list is empty, and body is null.
+
+這就是我們之前用 `mode: 'no-cors'` 所拿到的 response，status 是 0，沒有 header，也沒有 body 的 response。
+
+從規格裡面我們證實了我前面所說的事情，一旦 mode 設成 no-cors，你就是拿不到 response，儘管後端有設定 header 也一樣。
+
+## 使用 CORS 與 cache 時的注意事項
+
+在規格裡面有一個段落：[CORS protocol and HTTP caches](https://fetch.spec.whatwg.org/#cors-protocol-and-http-caches) 特別在講這個。
+
+先假設一個情境好了，那就是 server 只會對有帶 origin 的 request 回覆 `Access-Control-Allow-Origin` 這個 header，沒有帶 origin 的話就不會回（Amazon S3 就是這樣做的）。然後這個 response 有設定快取，所以會被瀏覽器快取起來。
+
+然後假設我們現在要顯示一張圖片好了，這個圖片在 S3 上面，所以是跨來源的。
+
+我們在頁面上放 `<img src="https://s3.xxx.com/a.png">`，瀏覽器載入圖片，並且把 response 快取起來。因為是用 img 標籤的關係，所以瀏覽器不會帶 origin header，因此 response 自然而然也就沒有 `Access-Control-Allow-Origin`。
+
+但接下來我們在 JS 裡面也需要拿到這個圖片，因此我們用 fetch 去拿：`fetch('https://s3.xxx.com/a.png')`，這時候這就變成是 CORS request 了，因此 request header 會帶上 origin。
+
+可是呢，由於我們前面已經把這個 url 的 response 快取起來了，所以瀏覽器會直接使用之前還沒過期的 cached response。
+
+這時候悲劇就發生了，之前快取的 response 是沒有 `Access-Control-Allow-Origin` 這個 header 的，所以 CORS 驗證就失敗了，我們就拿不到圖片內容了。
+
+那要怎麼解決這個狀況呢？在 HTTP response header 裡面有一個 `Vary`，用來決定這個 response 的快取可能會跟著某些 request header 而不同。
+
+舉例來說，如果傳了 `Vary: Origin`，就代表如果我之後發的 request 裡的 origin header 不同，那就不應該沿用之前的快取。
+
+以前面講的狀況而已，設定這個 header 以後，我們用 fetch 發的 request 因為 Origin header 跟之前用 img 的不同，所以照理來說就不會沿用之前快取好的 response，而是會重新發出一個 request。
+
+而這個問題我本人還真的碰到過...請參考：[原來 CORS 沒有我想像中的簡單](https://blog.techbridge.cc/2018/08/18/cors-issue/)。
+
+## 總結
+
+在這篇裡面我們一起看了 fetch 的 spec，從規格的層面去看抓取資源這件事情，也從規格裡面證實了很多前面幾篇文章的說法。其實很推薦大家找一段空閒時間把 spec 稍微掃過一遍，至少會對很多東西有點印象，之後想找資料的時候會容易很多。
+
+除此之外，也能看到一些規格中比較有趣的部分，例如說最後提的那個快取的問題，我還就真的碰到過。如果有早一點看規格，碰到問題時應該就能更快想到解法。
+
+在看規格的時候也可以發現很多東西是出於安全性的考量而做的，接下來就讓我們來看看這個系列的倒數第二篇文章：[CORS 完全手冊（五）：跨來源的安全性問題]()。

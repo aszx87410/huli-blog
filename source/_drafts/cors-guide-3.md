@@ -9,25 +9,27 @@ categories:
 
 ## 前言
 
-在上一篇裡面我們提到了常見的 CORS 錯誤解法，以及大多數狀況的唯一正解：請後端加上 response header。
+在上一篇裡面我們提到了常見的 CORS 錯誤解法，以及大多數狀況下應該要選擇的解法：「請後端加上 response header」。
 
 但其實「跨網域請求」這個東西又可以再細分成兩種，簡單請求跟非簡單請求，簡單請求的話可以透過上一篇的解法來解，但非簡單請求的話就比較複雜一些了。
 
 除此之外，跨網域請求預設是不會把 cookie 帶上去的，需要在使用 xhr 或是 fetch 的時候多加一個設定，而後端也需要加一個額外的 header 才行。
 
-與 CORS 相關的 header 其實不少，有些你可能聽都沒聽過。原本這篇我想要把這些東西一一列出來講解，但仔細想了一下發覺這樣的話有點太無趣，而且大家應該看過去就忘記了。
+與 CORS 相關的 header 其實不少，有些你可能聽都沒聽過。原本這篇我想要把這些東西一一列出來講解，但仔細想了一下發覺這樣的話有點太無趣，而且大家應該看過就忘記了。
 
-那怎樣的方法會比較好嗎？大家都喜歡聽故事，因此這篇讓我們從故事的角度下手，為大家講述一段與 CORS 有關的故事。
+那怎樣的方法會比較好呢？大家都喜歡聽故事，因此這篇讓我們從故事的角度下手，為大家講述一段愛與 CORS 的故事。
+
+主角的名字大家都知道了，對，就是毫無新意的小明。
 
 <!-- more -->
 
 ## Day1：簡單的 CORS
 
-這是一段愛與 CORS 的故事。主角的名字大家都知道了，對，就是毫無新意的小明。小明任職於 MVP 科技公司，擔任菜鳥前端工程師。
+小明任職於某科技公司，擔任菜鳥前端工程師。
 
-而他的第一個任務，就是要做一個「聯絡我們」的表單，讓看到官網，對他們服務有興趣的潛在使用者能夠聯絡到公司的人，再讓公司去跟他們聯絡，洽談後續的合作事項。
+而他的第一個任務，就是要做一個「聯絡我們」的表單，讓看到官網，對他們服務有興趣的潛在使用者能夠聯絡到公司的人，再讓業務去跟他們聯絡，洽談後續的合作事項。
 
-而表單長這樣：
+而表單長這樣（雖然長得很像 Goolge 表單但是是小明自己做的）：
 
 ![](/img/cors/story/01-form.png)
 
@@ -91,7 +93,7 @@ fetch('http://localhost:3000')
   .then(res => console.log(res))
 ```
 
-打開了瀏覽器，發現可以成功拿掉選項了，也從 network tab 裡面看到了新增加的 header：
+打開了瀏覽器，發現可以成功拿到選項了，也從 network tab 裡面看到了新增加的 header：
 
 ![](/img/cors/story/04-acao.png)
 
@@ -105,7 +107,7 @@ fetch('http://localhost:3000')
 
 `Access-Control-Allow-Origin` 的值可以帶 `*`，代表 wildcard，任何 origin 都合法，也可以帶 origin 像是 `http://huli.tw`，代表只有這個 origin 是合法的。
 
-如果想帶多個的話呢？抱歉，沒有辦法，就是只能全部都給過或者是給一個 origin。因此也有後端會根據 request 的 origin 來決定 response 的 `Access-Control-Allow-Origin` 值會是多少。
+如果想帶多個的話呢？抱歉，沒有辦法，就是只能全部都給過或者是給一個 origin。因此也有後端會根據 request 的 origin 來決定 response 的 `Access-Control-Allow-Origin` 值會是多少，這個我們之後會提到。
 
 ## Day2：不簡單的 CORS
 
@@ -148,7 +150,7 @@ document.querySelector('.contact-us-form')
   })
 ```
 
-測試之後也沒有問題，正當小明要跟主管報告做好的時候，後端走過來跟小明說：「不好意思，我們之後要統一改成用 JSON 當作資料格式，所以你那邊也要改一下，送 JSON 過來而不是 urlencoded 的資料」
+測試之後也沒有問題，正當小明要跟主管報告做好的時候，後端走過來跟小明說：「不好意思，我們後端最近做了一些改動，未來要統一改成用 JSON 當作資料格式，所以你那邊也要改一下，要送 JSON 過來而不是 urlencoded 的資料」
 
 小明聽了之後心想：「這簡單嘛，不就是改一下資料格式嗎？」，於是改成這樣：
 
@@ -184,13 +186,13 @@ document.querySelector('.contact-us-form')
 
 切到 network tab 去看 request 的狀況，發現除了原本預期的 POST 以外，還多了一個 OPTIONS 的 request：
 
-![](/img/cors/06-preflight-tab.png)
+![](/img/cors/story/06-preflight-tab.png)
 
-小明上網用錯誤訊息給的關鍵字：`preflight request` 去找了一下資料，發現 CORS 沒有他想像中的簡單。
+小明上網用錯誤訊息給的關鍵字：`preflight request` 找了一下資料，發現 CORS 沒有他想像中的簡單。
 
 原來之前發送的那些請求都叫做「簡單請求」，只要 method 是 GET、POST 或是 HEAD 然後不要帶自訂的 header，Content-Type 也不要超出：`application/x-www-form-urlencoded`、`multipart/form-data` 或是 `text/plain` 這三種，基本上就可以被視為是「簡單請求」（更詳細的定義下一篇會說）。
 
-所以剛開始串 API 的時候沒有碰到錯誤，因為 Content-Type 是 `application/x-www-form-urlencoded`，所以被視為是簡單請求。後來改成 `application/json` 就不符合簡單請求的定義了，就變成是「非簡單請求」。
+一開始串 API 的時候沒有碰到錯誤，是因為 Content-Type 是 `application/x-www-form-urlencoded`，所以被視為是簡單請求。後來改成 `application/json` 就不符合簡單請求的定義了，就變成是「非簡單請求」。
 
 那非簡單請求會怎麼樣呢？會多送出一個東西，叫做 preflight request，中文翻作「預檢請求」。這個請求就是小明在 network tab 看到的那個 OPTIONS 的 request，針對這個 request，瀏覽器會幫忙帶上兩個 header：
 
@@ -202,7 +204,7 @@ document.querySelector('.contact-us-form')
 1. Access-Control-Request-Headers: content-type
 2. Access-Control-Request-Method: POST
 
-前者會帶上不屬於簡單請求的 header，後者會帶上 HTTP Method，來讓後端對前端想送出的 request 有更多的資訊。
+前者會帶上不屬於簡單請求的 header，後者會帶上 HTTP Method，讓後端對前端想送出的 request 有更多的資訊。
 
 如果後端願意放行，就跟之前一樣，回一個 `Access-Control-Allow-Origin` 就好了。知道這點以後，小明馬上請後端同事補了一下，後端程式碼變成：
 
@@ -210,7 +212,6 @@ document.querySelector('.contact-us-form')
 
 app.post('/form', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*')
-  // 省略寫到 db 的程式碼
   res.json({
     success: true
   })
@@ -254,7 +255,7 @@ app.options('/form', (req, res) => {
 
 ### Day2 總結
 
-CORS request 分成兩種：簡單請求與非簡單請求，無論是哪一種，後端都需要給 `Access-Control-Allow-Origin` 這個 header。而最大的差別在於非簡單請求除了這個以外，在發送正式的 request 之前，還會發送一個 preflight request。
+CORS request 分成兩種：簡單請求與非簡單請求，無論是哪一種，後端都需要給 `Access-Control-Allow-Origin` 這個 header。而最大的差別在於非簡單請求在發送正式的 request 之前，會先發送一個 preflight request，如果 preflight 沒有通過，是不會發出正式的 request 的。
 
 針對 preflight request，我們也必須給  `Access-Control-Allow-Origin` 這個 header 才能通過。
 
@@ -289,7 +290,7 @@ app.options('/form', (req, res) => {
 1. 相容性
 2. 安全性
 
-針對第一點，你可能有發現如果一個請求是非簡單請求，那你絕對不可能用 HTML 的 form 元素做出一樣的 request，反之亦然。因為 `<form>` 的 enctype 不支援 application/json，所以是非簡單請求。支援 multipart/form，所以這個 content type 屬於簡單請求。
+針對第一點，你可能有發現如果一個請求是非簡單請求，那你絕對不可能用 HTML 的 form 元素做出一樣的 request，反之亦然。舉例來說，`<form>` 的 enctype 不支援 `application/json`，所以這個 content type 是非簡單請求；enctype 支援 `multipart/form`，所以這個 content type 屬於簡單請求。
 
 對於那些古老的網站，甚至於是在 XMLHttpRequest 出現之前就存在的網站，他們的後端沒有預期到瀏覽器能夠發出 method 是 `DELETE` 或是 `PATCH` 的 request，也沒有預期到瀏覽器會發出 content-type 是 `application/json` 的 request，因為在那個時代 `<form>` 跟 `<img>` 等等的元素是唯一能發出 request 的方法。
 
@@ -357,21 +358,23 @@ app.options('/form', (req, res) => {
 
 ### Day3 總結
 
-如果你需要在發送 request 的時候帶上 cookie，那必須滿足兩個條件：
+如果你需要在發送 request 的時候帶上 cookie，那必須滿足三個條件：
 
 1. 後端 Response header 有 `Access-Control-Allow-Credentials: true`
 2. 後端 Response header 的 `Access-Control-Allow-Origin` 不能是 `*`，要明確指定
 3. 前端 fetch 加上 `credentials: 'include'`
 
-這兩個條件任何一個不滿足的話，都是沒辦法帶上 cookie 的。
+這三個條件任何一個不滿足的話，都是沒辦法帶上 cookie 的。
 
-除了這個之外還有一件事情要特別注意，那就是不只帶上 Cookie，連設置 Cookie 也是一樣的。後端可以用 `Set-Cookie` 這個 header 讓瀏覽器設置 cookie，但一樣要滿足上面這三個條件。如果這三個條件沒有同時滿足，那儘管有 `Set-Cookie` 這個 header，瀏覽器也不會幫你設置，這點要特別注意。
+除了這個之外還有一件事情要特別注意，那就是不只帶上 cookie，連設置 cookie 也是一樣的。後端可以用 `Set-Cookie` 這個 header 讓瀏覽器設置 cookie，但一樣要滿足上面這三個條件。如果這三個條件沒有同時滿足，那儘管有 `Set-Cookie` 這個 header，瀏覽器也不會幫你設置，這點要特別注意。
 
 事實上呢，無論有沒有想要存取 Cookie，都會建議  `Access-Control-Allow-Origin` 不要設定成 `*` 而是明確指定 origin，避免預期之外的 origin 跨站存取資源。若是你有多個 origin 的話，建議在後端有一個 origin 的清單，判斷 request header 內的 origin 有沒有在清單中，有的話就設定 `Access-Control-Allow-Origin`，沒有的話就不管它。
 
 ## Day4：存取自訂 header
 
-還記得我們一開始串的那一個 API 嗎？跟後端拿選項的 API。雖然之前順利完成了，不過隕石砸下來了，上面說要加一個新的需求。他們會對這個 API 本身的內容做版本控制，並且在 response header 裡面帶上 `X-List-Version`，用來確定這個選項的清單是哪一個版本。
+還記得我們一開始串的那一個 API 嗎？跟後端拿選項的 API。雖然之前已經順利完成，但沒想到有隕石砸下來了。今天早上上面說要加一個新的需求。
+
+這個需要是要對這個 API 的內容做版本控制，後端會在 response header 裡面多帶上一個 header：`X-List-Version`，來讓前端知道這個選項的清單是哪一個版本。
 
 而前端則是要拿到這個版本，並且把值放到表單裡面一起送出。
 
@@ -405,7 +408,7 @@ fetch('http://localhost:3000')
 
 此時，神奇的事情發生了。明明從 network tab 去看，確實有我們要的 response header，但是在程式裡面卻拿不到，輸出 null。小明檢查了幾遍，確定字沒打錯，而且沒有任何錯誤訊息，但就是拿不到。
 
-![](/img/cors/08-custom-header-error.png)
+![](/img/cors/story/08-custom-header-error.png)
 
 卡了一個小時之後，小明決定再次求助前輩小華。小華身為資深前輩，一看到這個狀況之後就說了：
 
@@ -441,7 +444,7 @@ app.get('/', (req, res) => {
 
 原本以為一切都很順利的小明又再次踢到了鐵板。這次是老闆那邊提出的需求，現在一送出表單之後就沒機會再更改了，若是使用者意識到哪邊有填錯，就只能重新再填一遍。而老闆覺得這樣的體驗不好，希望在使用者送出表單以後還有一次機會能夠挽回，可以編輯剛剛送出的表單。
 
-跟後端討論過後，在提交表單以後後端會給一個 token，前端只要帶著這個 token 去打 `PATCH /form` 這個 API，就能夠編輯剛剛表單的內容。
+跟後端討論過後，在送出表單之後後端會給一個 token，前端只要帶著這個 token 去打 `PATCH /form` 這個 API，就能夠編輯剛剛表單的內容。
 
 後端長得像這樣，一樣有把該加的 header 都加好：
 
@@ -537,7 +540,7 @@ app.options('/form', (req, res) => {
 
 一開始小明需要存取跨來源請求的 response，因此需要後端協助提供 `Access-Control-Allow-Origin`，證明這個 origin 是有權限的。
 
-再來因為要帶自訂的 header，所以後端要提供 `Access-Control-Allow-Headers`，寫明 client 可以帶哪些 header 上去。
+再來因為要帶自訂的 header，所以後端要提供 `Access-Control-Allow-Headers`，寫明 client 可以帶哪些 header 上去。同時也因為多了 preflight requset，後端要特別處理 `OPTIONS` 的 request。
 
 然後我們需要用到 cookie，所以 `Access-Control-Allow-Origin` 不能是 `*`，要改成單一的 origin。而後端也要多提供 `Access-Control-Allow-Credentials: true`。
 
@@ -553,4 +556,4 @@ app.options('/form', (req, res) => {
 
 希望透過這一篇，能讓大家理解 CORS 有哪些 response header，以及什麼是 preflight request，在哪些情形之下會觸發。理解這些以後，你對整個 CORS protocol 的理解大概就有八成了。
 
-在下一篇[CORS 完全手冊（四）：一起看規範]()中，我們會一起來看看規格，證明我所言非虛。
+在下一篇 [CORS 完全手冊（四）：一起看規範]()中，我們會一起來看看規格，更進一步理解 CORS protocol。
