@@ -333,9 +333,30 @@ Google 於 spectre 攻擊公開的一個月後，也就是 2018 年 2 月，在�
 
 因此 CORB 這個機制的目的就是：
 
-> 如果你想讀的資料類型根本不合理，那我根本不需要把它放到 render process，結果我直接丟掉就好！
+> 如果你想讀的資料類型根本不合理，那我根本不需要把讀到 render process，我直接把結果丟掉就好！
 
 延續上面的例子，那個 json 檔的 MIME type 如果是 application/json，代表它絕對不會是一張圖片，因此也不可能放到 img 標籤裡面，這就是我所說的「讀的資料類型不合理」。
 
+CORB 主要保護的資料類型有三種：HTML、XML 跟 JSON，那瀏覽器要怎麼知道是這三種類型呢？不如就從 response header 的 content type 判斷吧？
 
+很遺憾，沒辦法。原因是有很多網站的 content type 是設定錯誤的，有可能明明就是 JavaScript 檔案卻設成 `text/html`，就會被 CORB 擋住，網站就會壞掉。
+
+因此 Chrome 會根據內容來探測（[sniffing](https://mimesniff.spec.whatwg.org/)）檔案類型是什麼，再決定要不要套用 CORB。
+
+但這其實也有誤判的可能，所以如果你的伺服器給的 content type 都確定是正確的，可以傳一個 response header 是 `X-Content-Type-Options: nosniff`，Chrome 就會直接用你給的 content type 而不是自己探測。
+
+![CORB 的錯誤畫面](/img/cors/corb.png)
+
+總結一下，CORB 是個已經預設在 Chrome 裡的機制，會自動阻擋不合理的跨來源資源載入，像是用 `<img>` 來載入 json 或是用 `<script>` 載入 HTML 等等。而除了 Chrome 之外，Safari 跟 Firefox 好像都還沒實裝這個機制。
+
+更詳細的解釋可以參考：
+
+1. [Cross-Origin Read Blocking for Web Developers](https://www.chromium.org/Home/chromium-security/corb-for-developers)
+2. [Cross-Origin Read Blocking (CORB)](https://chromium.googlesource.com/chromium/src/+/master/services/network/cross_origin_read_blocking_explainer.md)
+
+## CORP（Cross-Origin Resource Policy）
+
+## COEP（Cross-Origin-Embedder-Policy）
+
+## COOP（Cross-Origin-Opener-Policy）
 
