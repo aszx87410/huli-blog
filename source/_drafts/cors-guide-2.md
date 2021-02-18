@@ -33,7 +33,7 @@ categories:
 
 把安全機制關掉以後，就可以順利拿到 response，瀏覽器也會跳一個提示出來：
 
-![](/img/cors/disable-browser.png)
+![](/img/cors/part2/disable-browser.png)
 
 問題是解決了，但為什麼我說這是治標不治本呢？因為只有在你電腦上沒問題而已，在其他人的電腦上面還是有問題。有些人會在開發時圖個方便把這個設置關起來，就不會碰到任何 CORS 的問題，但我認為這是比較不好的做法，因為你關掉的不只是 CORS，你連其他安全機制也一起關掉了。
 
@@ -73,7 +73,7 @@ fetch('http://localhost:3000', {
 
 改了程式碼之後重新執行，果真不會跳錯誤出來了！console 一片乾淨，只是印出來的值似乎怪怪的：
 
-![](/img/cors/opaque.png)
+![](/img/cors/part2/opaque.png)
 
 Response 的 status 是 0，body 的內容是空的，type 是一個叫做 `opaque` 的東西，看起來很奇怪。但如果我們打開 devtool 並且切到 Network 的那一個 tab 去看，會發現其實後端是有回傳 response 的。
 
@@ -367,7 +367,7 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 
 如果你想拿 A 網站的資料，但是它沒有提供 `Access-Control-Allow-Origin` 這個 header，你就自己寫個 server，從後端去拿 A 網站的資料，再把資料丟回給自己的前端就行了。因為自己的後端可以自己控制，所以你想加什麼 header 就加什麼 header，想拿什麼資料就拿什麼。
 
-![](/img/cors/proxy.png)
+![](/img/cors/part2/proxy.png)
 
 圖片中的數字代表以下流程：
 
@@ -390,7 +390,7 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 
 來，我們來看這張對照圖，上面是走 proxy 的流程，下面是沒有走的：
 
-![](/img/cors/proxy2.png)
+![](/img/cors/part2/proxy2.png)
 
 我們先來看下半部的，如果不經過 proxy 的話就會有之前提過的安全性問題，網站可以去拿你 localhost 或是其他網站的資料，所以瀏覽器要把它擋住。
 

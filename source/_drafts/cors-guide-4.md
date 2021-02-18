@@ -271,7 +271,7 @@ Indicates which headers can be exposed as part of the response by listing their 
 
 這邊可以看到 4.10. CORS check：
 
-![](/img/cors/cors-check.png)
+![](/img/cors/part4/cors-check.png)
 
 如果 `Access-Control-Allow-Origin` 裡的 origin 是 null 的話，就失敗（這邊特地強調是 null 而不是 "null"，這我們之後會再提到）。
 
@@ -297,13 +297,13 @@ Indicates which headers can be exposed as part of the response by listing their 
 
 在第 30 步的地方可以看到：
 
-![](/img/cors/fetch-01.png)
+![](/img/cors/part4/fetch-01.png)
 
 如果 request 的 method 不是 GET、HEAD 或是 POST 的話，就丟一個 TypeError 出來。除此之外，也會把 `header's guard` 設成 `request-no-cors`。
 
 上面這只是新建一個 request 而已，接著可以看 `5.6. Fetch method` 來看實際送出 request 的流程：
 
-![](/img/cors/fetch-02.png)
+![](/img/cors/part4/fetch-02.png)
 
 前面都只是在設定一些參數，真正做動作的是第十步：
 
@@ -311,13 +311,13 @@ Indicates which headers can be exposed as part of the response by listing their 
 
 那個「Fetch」是個超連結，點下去可以連到 `4. Fetching` 的章節，而這邊我們關注的是最後一步：
 
-![](/img/cors/fetch-03.png)
+![](/img/cors/part4/fetch-03.png)
 
 > 12. Run main fetch given fetchParams.
 
 main fetch 也是一個超連結，點了會跳到 `4.1. Main fetch` 去，這邊有一整段專門在處理 mode 是 no-cors 時的狀況：
 
-![](/img/cors/fetch-04.png)
+![](/img/cors/part4/fetch-04.png)
 
 這邊有幾個值得注意的地方：
 
@@ -336,7 +336,7 @@ main fetch 也是一個超連結，點了會跳到 `4.1. Main fetch` 去，這�
 
 再來我們繼續往下看，可以看到第十四步：
 
-![](/img/cors/fetch-05.png)
+![](/img/cors/part4/fetch-05.png)
 
 之前已經把 response tainting 設成 opaque，所以根據第二點，會把 response 設成 [opaque filtered response](https://fetch.spec.whatwg.org/#concept-filtered-response-opaque)。
 

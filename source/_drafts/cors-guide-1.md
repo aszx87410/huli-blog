@@ -24,7 +24,7 @@ categories:
 * [CORS 完全手冊（三）：CORS 詳解]()
 * [CORS 完全手冊（四）：一起看規範]()
 * [CORS 完全手冊（五）：跨來源的安全性問題]()
-* [CORS 完全手冊（六）：總結與後記]()
+* [CORS 完全手冊（六）：總結、後記與遺珠]()
 
 會從 same-origin policy 開始講起，接著講到為什麼跨來源存取資源會有錯誤，再來會講如何錯誤地以及正確地解決 CORS 相關的問題，而第三篇會詳細講解跨來源請求的詳細流程，像是 preflight request 之類的東西。
 
@@ -137,7 +137,7 @@ categories:
 
 這樣就有了安全性的問題，因為攻擊者可以拿到一些機密資料。
 
-![](/img/cors/p1.png)
+![](/img/cors/part1/p1.png)
 
 1. 目標打開惡意網站
 2. 惡意網站用 AJAX 抓取內部機密網站的資料
@@ -232,7 +232,7 @@ JavaScript 是一個程式語言，所以像 `var`、`if else`、`for`、`functi
 
 所以你的 JavaScript 是在瀏覽器上執行的，而這個執行環境會提供給你一些東西使用，例如說 DOM（document）、`console.log`、`setTimeout`、`XMLHttpRequest` 或是 `fetch`，這些其實都不是 JavsScript（或是更精確地說，ECMAScript）的一部分。這些是瀏覽器給我們使用的，所以我們只有在瀏覽器上面執行 JavaScript 時才用得到。
 
-![](/img/cors/p2.png)
+![](/img/cors/part1/p2.png)
 
 因此你可能有過類似的經驗，想說為什麼一樣的 code 搬到 Node.js 去就沒辦法執行。現在你知道了，那是因為 Node.js 並沒有提供這些東西，例如說 `fetch`，你沒辦法直接在 Node.js 裡面使用它（如果可以，那就代表你有用其它 library 或是 polyfill）。
 
@@ -286,7 +286,7 @@ JavaScript 是一個程式語言，所以像 `var`、`if else`、`for`、`functi
 
 而 CORS 是：「我寫了一個網站，讓內網使用者去開這個網站，並且發送 request 去拿資料」。這兩者最大的區別是「是從誰的電腦造訪網站」，前者是我自己，後者則是透過其他人（而且是可以連到內網的人）。
 
-![](/img/cors/internal.png)
+![](/img/cors/part1/internal.png)
 
 如圖所示，上半部是攻擊者自己去連那個網址，會連不進去，因為攻擊目標在內網裡。所以儘管沒有 same-origin policy，攻擊者依然拿不到想要的東西。
 

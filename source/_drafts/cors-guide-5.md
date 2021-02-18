@@ -484,7 +484,7 @@ Site Isolation 目前在 Chrome 是預設啟用的狀態，相對應的缺點是
 
 Site Isolation 的 "Site" 的定義就跟 same site 一樣，`http://a.example.com` 跟 `http://b.example.com` 是 same site，所以儘管在 Site Isolation 的狀況下，這兩個網頁還是會被放在同一個 process 裡面。
 
-而 cross-origin isolated state 應該是一種更強的隔離，只要不是 same origin 就隔離開來，就算是 same site 也一樣。因此 `http://a.example.com` 跟 `http://b.example.com` 是會被隔離開來的。
+而 cross-origin isolated state 應該是一種更強的隔離，只要不是 same origin 就隔離開來，就算是 same site 也一樣。因此 `http://a.example.com` 跟 `http://b.example.com` 是會被隔離開來的。而且 Site Isolation 隔離的對象是 process，cross-origin isolated 看起來是隔離 browsing context group，不讓跨來源的東西處在同一個 browsing context group。
 
 而這個 cross-origin isolated state 並不是預設的，你必須在你的網頁上設置這兩個 header 才能啟用：
 
@@ -591,7 +591,7 @@ app.use((req, res, next) => {
 1. 開啟的 window 要在同一個 origin
 2. 開啟的 window 的 response header 要有 COOP，而且值一定要是 `same-origin`
 
-只有符合這兩點，才能成功存取到完整的 window，否則的話就只能像 cross origin 那樣，存取到 location 之類的東西。
+只有符合這兩點，才能成功存取到完整的 window。而且有一點要特別注意，那就是一旦設定了這個 header 但是沒有符合規則，不只存取不到完整的 window，連之前那什麼 `openedWindow.close` 跟 `window.opener` 都會拿不到，兩個 window 之間就是徹徹底底沒關聯了。
 
 再來 `same-origin-allow-popups` 的條件比較寬鬆，只有：
 
@@ -643,5 +643,65 @@ app.use((req, res, next) => {
 })
 ```
 
-這樣就不行，
+這樣子就不行。
 
+所以稍微總結一下，假設現在有一個網頁 A 用 window.open 開啟了一個網頁 B：
+
+1. 如果 AB 是 cross-origin，瀏覽器本來就有限制，只能存取 `window.location` 或是 `window.close` 之類的方法。沒辦法存取 DOM 或其他東西
+2. 如果 AB 是 same-origin，那他們可以互相存取幾乎完整的 window，包括 DOM。
+3. 如果 A 加上 COOP header，而且值是 `same-origin`，代表針對第二種情況做了更多限制，只有 B 也有這個 header 而且值也是 `same-origin` 的時候才能互相存取 window。
+4. 如果 A 加上 COOP header，而且值是 `same-origin-allow-popups`，也是對第二種情況做限制只是比較寬鬆，只要 B 的 COOP header 不是 `same-origin` 就可以互相存取 window。
+
+總之呢，要「有機會互相存取 window」，一定要先是 same origin，這點是不會變的。實際上是不是存取的到，就要看有沒有設定 COOP header 以及 header 的值。而如果有設定 COOP header 但不符合規則，那 `window.opener` 會直接變成 null，你連 location 都拿不到（沒設定規則的話，就算是 cross origin 也拿得到）。
+
+其實根據 [spec](https://html.spec.whatwg.org/multipage/origin.html#cross-origin-opener-policies) 還有第四種：same-origin-plus-COEP，但看起來更複雜就先不研究了。
+
+## 再回到 cross-origin isolated state
+
+前面提到了 cross-origin isolated state 需要設置這兩個 header：
+
+1. Cross-Origin-Embedder-Policy: require-corp
+2. Cross-Origin-Opener-Policy: same-origin
+
+為什麼呢？因為一旦設置了，就代表頁面上所有的跨來源資源都是你有權限存取的，如果沒有權限的話會出錯。所以如果設定而且通過了，就代表跨來源資源也都允許你存取，就不會有安全性的問題。
+
+在網站上可以用：
+
+``` js
+self.crossOriginIsolated
+```
+
+來判定自己是不是進入 cross-origin isolated state。是的話就可以用一些被封印（？）的功能，因為瀏覽器知道你很安全。
+
+另外，如果進入了這個狀態，一開始講過的透過修改 `document.domain` 繞過 same-origin policy 的招數就不管用了，瀏覽器就不會讓你修改這個東西了。
+
+想知道更多 COOP 與 COEP 還有 cross-origin isolated state，可以參考：
+
+1. [Making your website "cross-origin isolated" using COOP and COEP](https://web.dev/coop-coep/)
+2. [Why you need "cross-origin isolated" for powerful features](https://web.dev/why-coop-coep/)
+3. [COEP COOP CORP CORS CORB - CRAP that's a lot of new stuff!](https://scotthelme.co.uk/coop-and-coep/)
+4. [Making postMessage() work for SharedArrayBuffer (Cross-Origin-Embedder-Policy) #4175](https://github.com/whatwg/html/issues/4175)
+5. [Restricting cross-origin WindowProxy access (Cross-Origin-Opener-Policy) #3740](https://github.com/whatwg/html/issues/3740)
+6. [Feature: Cross-Origin Resource Policy](https://www.chromestatus.com/feature/4647328103268352)
+
+## 總結
+
+這篇其實講了不少東西，都是圍繞著安全性在打轉。一開始我們講了 CORS 設定錯誤會造成的結果以及防禦方法，接著講了透過修改 `document.cookie` 讓 same-site 變成 same-origin（要兩個網站都同意這樣做才行），最後則是這篇的重頭戲：
+
+1. CORB（Cross-Origin Read Blocking）
+2. CORP（Cross-Origin Resource Policy）
+3. COEP（Cross-Origin-Embedder-Policy）
+4. COOP（Cross-Origin-Opener-Policy）
+
+在找資料的時候花了不少時間，因為名字太像而且功能有些其實有點類似，但看久了其實就會發現差滿多的，每一個 policy 所注重的地方都不同。希望我整理過後的脈絡有幫助大家更好理解這些東西。
+
+如果要用一段話總結這四個東西的話，或許是：
+
+1. CORB：瀏覽器預設的機制，主要是防止載入不合理的資源，像是用 img 載入 HTML
+2. CORP：是一個 HTTP response header，決定這個資源可以被誰載入，可以防止 cross-origin 載入圖片、影片或任何資源
+3. COEP：是一個 HTTP response header，確保頁面上所有的資源都是合法載入的
+4. COOP：是一個 HTTP response header，幫 same-origin 加上更嚴格的 window 共享設定
+
+相對於其他幾篇，我對這篇的內容沒有這麼熟悉，如果有哪邊有講錯麻煩不吝指教，感謝。
+
+再來，下一篇就是是這系列文的最後一篇了：[CORS 完全手冊（六）：總結、後記與遺珠]()
