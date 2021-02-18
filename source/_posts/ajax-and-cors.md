@@ -24,7 +24,7 @@ categories:
 
 那我們先假設今天要做的是一個可以瀏覽現在 Twitch 實況列表的網頁好了，如下圖。
 
-![](http://blog.techbridge.cc/img/huli/twitch.png)
+![](/img/ajax/twitch.png)
 
 如果這個網頁不跟後端拿資料，就代表說網頁的內容都是固定的，無論什麼時候看都一樣。可是這樣的話就不對了嘛，因為這個網頁的目標是顯示出「現在有在開實況的頻道」，所以內容是會跟著改變的。
 
@@ -73,7 +73,7 @@ API 也是這樣，只是變成程式跟程式之間的串接。例如說今天�
 
 剛剛前面有提過檔案存取的例子，其實這個比較像是呼叫作業系統或是程式語言的函式庫提供的 Function，而這些 Function 你通常都可以在官方文件上查到更詳細的說明，例如說 Node.js 的讀取檔案：
 
-![](http://blog.techbridge.cc/img/huli/fs.png)
+![](/img/ajax/fs.png)
 
 （來源：https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback）
 
@@ -85,7 +85,7 @@ API 的串接也是一樣，一定要有文件你才知道怎麼串，不然根�
 
 裡面說明了你必須要有一個`Client ID`，然後 API Root 的 URL 是 `https://api.twitch.tv/kraken` 等等，這些都是與 API 相關的基本資訊。如果你在左側欄隨便點一個 API，會看到個別 API 的詳細資訊：
 
-![](http://blog.techbridge.cc/img/huli/twitch2.png)
+![](/img/ajax/twitch2.png)
 
 這邊就有寫說網址是什麼，你應該傳的參數是什麼等等，下面還有附上參考範例，這就是一個很完整的 API 文件。
 
@@ -200,7 +200,7 @@ request.send();
 
 正當你以為自己已經對串接 API 駕輕就熟，想說去串接別的 API 試試看好了的時候，才發現一串就出問題了：
 
-![](http://blog.techbridge.cc/img/huli/cors1.png)
+![](/img/ajax/cors1.png)
 
 ```
 XMLHttpRequest cannot load 
@@ -263,7 +263,7 @@ Timing-Allow-Origin: https://www.twitch.tv
 
 還記得 Twitch 的 API 文件嗎？裡面需要帶一個`client-id`的參數，而文件裡面寫說你可以帶在 GET 的參數上面，也可以帶在 Header 裡，我們來試試看帶在 Header 裡會怎樣吧！打開 Devtool，你會看到一個神奇的現象：
 
-![](http://blog.techbridge.cc/img/huli/cors2.png)
+![](/img/ajax/cors2.png)
 
 咦？我明明只發了一個 Request，怎麼變兩個了？而且第一個的 Method 居然是`OPTIONS`。只是多加了一個 Header 就多了一個 Request，是為什麼呢？
 

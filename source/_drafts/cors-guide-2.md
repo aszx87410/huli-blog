@@ -1,7 +1,7 @@
 ---
 title: CORS 完全手冊（二）：如何解決 CORS 問題？
 catalog: true
-date: 2020-07-24 23:07:47
+date: 2021-02-19 00:17:13
 tags: [Ajax,JavaScript,Front-end,CORS]
 categories:
   - Front-end
@@ -9,7 +9,7 @@ categories:
 
 ## 前言
 
-在上一篇 [CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？]()裡面，我們理解了為什麼瀏覽器要有 same-origin policy，以及跨來源請求擋的其實是 response 而不是 request。在釐清了一些錯誤的觀念以及對 CORS 有基本的認知以後，就可以來講講怎麼樣解決 CORS 的問題。
+在上一篇 [CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？](/2021/02/19/cors-guide-1)裡面，我們理解了為什麼瀏覽器要有 same-origin policy，以及跨來源請求擋的其實是 response 而不是 request。在釐清了一些錯誤的觀念以及對 CORS 有基本的認知以後，就可以來講講怎麼樣解決 CORS 的問題。
 
 先跟大家預告一下，這篇會提到的解決問題的方法並不完整。事實上，跨來源請求分成兩種，簡單請求跟非簡單請求，這一篇只會針對「簡單請求」，至於到底怎麼分簡單還是非簡單，以及非簡單的要如何處理，這些都會在下一篇提到。
 
@@ -413,4 +413,4 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 1. 非簡單請求（像是其他 HTTP method 與自定義 header）
 2. 傳送 Cookie（如何讓跨來源請求也支援 cookie）
 
-這些都會在下一篇：[CORS 完全手冊（三）：CORS 詳解]()裡面跟大家說明。
+這些都會在下一篇：[CORS 完全手冊（三）：CORS 詳解](/2021/02/19/cors-guide-3)裡面跟大家說明。

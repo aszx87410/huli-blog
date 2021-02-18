@@ -1,7 +1,7 @@
 ---
 title: CORS 完全手冊（五）：跨來源的安全性問題
 catalog: true
-date: 2020-08-24 23:07:47
+date: 2021-02-19 00:20:13
 tags: [Ajax,JavaScript,Front-end,CORS]
 categories:
   - Front-end
@@ -16,11 +16,11 @@ categories:
 3. COEP（Cross-Origin-Embedder-Policy）
 4. COOP（Cross-Origin-Opener-Policy）
 
-是不是光是看到這一系列很類似的名詞就已經頭昏眼花了？對，我也是。在整理這些資料的過程中，發現跨來源相關的安全性問題比我想像中水還來的深，不過花點時間整理之後發現還是有脈絡可循，因此這篇會以我覺得應該比較好理解的脈絡，去理解為什麼會有這些東西出現。
+是不是光看到這一系列很類似的名詞就已經頭昏眼花了？對，我也是。在整理這些資料的過程中，發現跨來源相關的安全性問題比我想像中還來得複雜，不過花點時間整理之後發現還是有脈絡可循，因此這篇會以我覺得應該比較好理解的脈絡，去講解為什麼會有這些東西出現。
 
 除了上面這些 COXX 的各種東西，還有其他我想提的跨來源相關安全性問題，也會在這篇一併提到。
 
-在繼續下去之後先提醒一下大家，這篇在講的是「跨來源的安全性問題」，而不單單只是「CORS 的安全性問題」。CORS protocol 所保護的東西跟內容在之前都介紹過了，這篇要談的其實已經有點偏離大標題「CORS」完全手冊，因為這跟 CORS 協定關係不大，而是把層次再往上拉高，談談「跨來源」這件事情。
+在繼續下去之前先提醒一下大家，這篇在講的是「跨來源的安全性問題」，而不單單只是「CORS 的安全性問題」。CORS protocol 所保護的東西跟內容在之前都介紹過了，這篇要談的其實已經有點偏離大標題「CORS」完全手冊，因為這跟 CORS 協定關係不大，而是把層次再往上拉高，談談「跨來源」這件事情。
 
 所以在看底下的東西的時候，不要把它跟 CORS 搞混了。除了待會要講的第一個東西，其他的跟 CORS 關係都不大。
 
@@ -28,7 +28,7 @@ categories:
 
 ## CORS misconfiguration
 
-如果你還記得的話，前面我有提到過如果你的跨來源請求想要帶 cookie，那 `Access-Control-Allow-Origin` 就不能是 `*`，而是必須指定單一的 origin，否則瀏覽器就不會給過。
+如果你還記得的話，前面我有提到過如果跨來源請求想要帶上 cookie，那 `Access-Control-Allow-Origin` 就不能是 `*`，而是必須指定單一的 origin，否則瀏覽器就不會給過。
 
 但現實的狀況是，我們不可能只有一個 origin。我們可能有許多的 origin，例如說 `buy.example.com`、`social.example.com`、`note.example.com`，都需要去存取 `api.example.com`，這時候我們就沒辦法寫死 response header 裡的 origin，而是必須動態調整。
 
@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 })
 ```
 
-為了方便起見，所以直接反射 request header 裡面的 origin。這樣做的話，其實就代表任何一個 origin 的能夠通過 CORS 檢查。
+為了方便起見，所以直接映射 request header 裡面的 origin。這樣做的話，其實就代表任何一個 origin 都能夠通過 CORS 檢查。
 
 這樣做會有什麼問題呢？
 
@@ -80,7 +80,7 @@ fetch('http://api.example.com/me', {
 2. 網站採用 cookie 進行身份驗證，而且沒有設定 SameSite
 3. 使用者要主動點擊釣魚網站並且是登入狀態
 
-針對第一點，可能沒有人會像我上面那樣子寫，直接反射 request header 的 origin。比較有可能的做法是這樣：
+針對第一點，可能沒有人會像我上面那樣子寫，直接用 request header 的 origin。比較有可能的做法是這樣：
 
 ``` js
 app.use((req, res, next) => {
@@ -152,7 +152,7 @@ setTimeout(() => {
 
 因為 `a.example.com` 跟 `b.example.com` 是 cross origin，所以沒辦法存取到 window。這個規範其實也十分合理，因為如果能存取到 window 的話其實可以做滿多事情的，所以限制在 same origin 底下才能拿到 window。
 
-不過就算是 cross origin，仍然有一些操作是允許的，例如說：
+不過「沒辦法存取 window」這個說法不太精確，因為就算是 cross origin，仍然有一些操作是允許的，例如說：
 
 ``` js
 var win = window.open('http://b.example.com')
@@ -166,6 +166,8 @@ setTimeout(() => {
   }, 2000)
 }, 2000)
 ```
+
+可以改變開啟的 window 的 location，也可以關閉開啟的視窗。
 
 相對地，身為被開啟的那個視窗（`b.example.com`），也可以用 `window.opener` 拿到開啟它的網頁（`a.example.com`）的 window，不過一樣只有部分操作是被允許的。
 
@@ -214,9 +216,9 @@ window.secret = 12345
 
 在 2018 年 1 月 3 號，Google 的 Project Zeror 對外發布了一篇名為：[Reading privileged memory with a side-channel](https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html) 的文章，裡面講述了三種針對 CPU data cache 的攻擊：
 
-1. Variant 1: bounds check bypass (CVE-2017-5753)
-2. Variant 2: branch target injection (CVE-2017-5715)
-3. Variant 3: rogue data cache load (CVE-2017-5754)
+* Variant 1: bounds check bypass (CVE-2017-5753)
+* Variant 2: branch target injection (CVE-2017-5715)
+* Variant 3: rogue data cache load (CVE-2017-5754)
 
 而前兩種又被稱為 Spectre，第三種被稱為是 Meltdown。如果你有印象的話，在當時這可是一件大事，因為問題是出在 CPU，而且並不是個容易修復的問題。
 
@@ -237,7 +239,7 @@ unsigned int array1_size = 16;
 
 void run(size_t x) {
   if(x < array1_size) {
-	  uint8_t y = array2[array1[x]];
+    uint8_t y = array2[array1[x]];
   }
 }
 
@@ -271,7 +273,7 @@ uint8_t y = array2[array1[1]];
 
 一樣是為了增進執行的效率，在預測執行的時候會把一些結果放到 CPU cache 裡面，增進之後讀取資料的效率。
 
-假設現在有 ABC 三個東西，一個在 CPU cache 裡面，其他兩個都不在，我們要怎麼知道到底是哪一個在？
+假設現在有 ABC 三個東西，一個在 CPU cache 裡面，其他兩個都不在，我們要怎麼知道是哪一個在？
 
 答案是，透過存取這三個東西的時間！因為在 CPU cache 裡面的東西讀取一定比較快，所以如果讀取 A 花了 10ms，B 花了 10ms，C 只花了 1ms，我們就知道 C 一定是在 CPU cache 裡面。這種透過其他線索來得知資訊的攻擊方法，叫做 side-channel attack，從其他管道來得知資訊。
 
@@ -286,7 +288,7 @@ unsigned int array1_size = 16;
 
 void run(size_t x) {
   if(x < array1_size) {
-	  uint8_t y = array2[array1[x]];
+    uint8_t y = array2[array1[x]];
   }
 }
 
@@ -381,15 +383,15 @@ CORB 是瀏覽器內建的機制，自動保護了 HTML、XML 與 JSON，不讓�
 
 > Cross-Origin Read Blocking (CORB) automatically protects against Spectre attacks that load cross-origin, cross-type HTML, XML, and JSON resources, and is based on the browser’s ability to distinguish resource types. We think CORB is a good idea. From-Origin would offer servers an opt-in protection beyond CORB.
 
-如果你自己知道該保護哪些資源，那就可以用 CORP 這個 header，指定這些資源只能被哪些來源載入。CORP 的 內容有三種：
+如果你自己知道該保護哪些資源，那就可以用 CORP 這個 header，指定這些資源只能被哪些來源載入。CORP 的內容有三種：
 
-1. Cross-Origin-Resource-Policy: same-site
-2. Cross-Origin-Resource-Policy: same-origin
-3. Cross-Origin-Resource-Policy: cross-origin
+1. Cross-Origin-Resource-Policy: `same-site`
+2. Cross-Origin-Resource-Policy: `same-origin`
+3. Cross-Origin-Resource-Policy: `cross-origin`
 
 第三種的話就跟沒有設定是差不多的（但其實跟沒設還是有差，之後會解釋），就是所有的跨來源都可以載入資源。接下來我們實際來看看設定這個之後會怎樣吧！
 
-我們先用 express 起一個簡單的 server，加上 CORP 的 header 然後放一張圖片，圖片網址是：`http://b.example.com/logo.jpg`：
+我們先用 express 起一個簡單的 server，加上 CORP 的 header 然後放一張圖片，圖片網址是 `http://b.example.com/logo.jpg`：
 
 ``` js
 app.use((req, res, next) => {
@@ -411,7 +413,7 @@ app.use(express.static('public'));
 
 如果把 header 改成 `same-site` 或是 `cross-origin`，就可以看到圖片正確被載入。
 
-所以這個 header 其實就是：「資源版的 CORS」，原本 CORS 比較像是 API 或是「資料」間存取的協議，跨來源存取資料需要許可。而資源的載入像是 `<img>` 或是 `<script>`，如果你要阻止跨來源載入的話，應該是只能透過 server side 自行去判斷 `Origin` 或是 `Referer` 之類的值，並且動態決定要回傳什麼。
+所以這個 header 其實就是「資源版的 CORS」，原本的 CORS 比較像是 API 或是「資料」間存取的協議，讓跨來源存取資料需要許可。而資源的載入例如說使用 `<img>` 或是 `<script>`，想要阻止跨來源載入的話，應該是只能透過 server side 自行去判斷 `Origin` 或是 `Referer` 之類的值，動態決定是否回傳資料。
 
 而 CORP 這個 header 出現之後，提供了阻止「任何跨來源載入」的方法，只要設定一個 header 就行了。所以這不只是安全性的考量而已，安全性只是其中一點，重點是你可以阻止別人載入你的資源。
 
@@ -466,7 +468,9 @@ Spectre 攻擊出現之後瀏覽器做了兩件事：
 
 先講一下 `SharedArrayBuffer` 這東西好了，這東西可以讓你 document 的 JS 跟 web worker 共用同一塊記憶體，共享資料。所以在 web worker 裡面你可以做一個 counter 一直累加，然後在 JS 裡面讀取這個 counter，就達成了計時器的功能。
 
-所以 Spectre 出現之後，瀏覽器就做了這兩個調整，從「防止攻擊源頭」的角度下手。而另一條路就是不讓惡意網站拿到跨來源網站的資訊，就是前面所提到的 CORB，以及現在要介紹的：Site Isolation。
+所以 Spectre 出現之後，瀏覽器就做了這兩個調整，從「防止攻擊源頭」的角度下手，這是第一條路。
+
+而另一條路則是不讓惡意網站拿到跨來源網站的資訊，就是前面所提到的 CORB，以及現在要介紹的：Site Isolation。
 
 先來一段來自 [Site Isolation for web developers](https://developers.google.com/web/updates/2018/07/site-isolation) 的介紹：
 
@@ -512,7 +516,7 @@ COEP（Cross-Origin-Embedder-Policy）這個 header 有兩個值：
 
 接著我們在 b 那邊傳送正確的 header：
 
-```
+``` js
 app.use((req, res, next) => {
   res.header('Cross-Origin-Resource-Policy', 'cross-origin')
   next()
@@ -521,15 +525,17 @@ app.use((req, res, next) => {
 
 如此一來就達成了第一步。
 
+另外，前面我有講過 CORP 沒有設跟設定成 `cross-origin` 有一個細微的差異，就是差在這邊。上面的範例如果 b 那邊沒有送這個 header，那 Embedder Policy 就不算通過。
+
 ## COOP（Cross-Origin-Opener-Policy）
 
 而第二步則是這個 COOP（Cross-Origin-Opener-Policy）的 header，在上面的時候我有說過當你用 `window.open` 開啟一個網頁的時候，你可以操控那個網頁的 location；而開啟的網頁也可以用 `window.opener` 來操控你的網頁。
 
 而這樣子讓 window 之間有關連，就不符合跨來源的隔離。因此 COOP 這個 header 就是來規範 window 跟 opener 之間的關係，一共有三個值：
 
-1. Cross-Origin-Opener-Policy: unsafe-none
-2. Cross-Origin-Opener-Policy: same-origin
-3. Cross-Origin-Opener-Policy: same-origin-allow-popups 
+1. Cross-Origin-Opener-Policy: `unsafe-none`
+2. Cross-Origin-Opener-Policy: `same-origin`
+3. Cross-Origin-Opener-Policy: `same-origin-allow-popups` 
 
 第一個就是預設值，不解釋，因為沒什麼作用。
 
@@ -559,7 +565,9 @@ page2.html 的內容如下：
 </script>
 ```
 
-如果 page1 成功輸出 5566，代表兩個之間有共享 window。如果不加任何 header 的話，由於這兩個是 same origin，因此確實可以共享 window，成功印出 5566。
+測驗的方式很簡單，如果 page1 成功輸出 5566，代表兩個之間有共享 window。否之則否。
+
+先來試試看不加任何 header 吧！由於這兩個是 same origin，因此本來就可以共享 window，成功印出了 5566。
 
 接下來我們把 server 端的程式碼改成這樣：
 
@@ -704,4 +712,4 @@ self.crossOriginIsolated
 
 相對於其他幾篇，我對這篇的內容沒有這麼熟悉，如果有哪邊有講錯麻煩不吝指教，感謝。
 
-再來，下一篇就是是這系列文的最後一篇了：[CORS 完全手冊（六）：總結、後記與遺珠]()
+再來，下一篇就是是這系列文的最後一篇了：[CORS 完全手冊（六）：總結、後記與遺珠](/2021/02/19/cors-guide-6)

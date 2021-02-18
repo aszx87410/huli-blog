@@ -1,7 +1,7 @@
 ---
 title: CORS 完全手冊（三）：CORS 詳解
 catalog: true
-date: 2020-07-24 23:07:47
+date: 2021-02-19 00:18:13
 tags: [Ajax,JavaScript,Front-end,CORS]
 categories:
   - Front-end
@@ -556,4 +556,4 @@ app.options('/form', (req, res) => {
 
 希望透過這一篇，能讓大家理解 CORS 有哪些 response header，以及什麼是 preflight request，在哪些情形之下會觸發。理解這些以後，你對整個 CORS protocol 的理解大概就有八成了。
 
-在下一篇 [CORS 完全手冊（四）：一起看規範]()中，我們會一起來看看規格，更進一步理解 CORS protocol。
+在下一篇 [CORS 完全手冊（四）：一起看規範](/2021/02/19/cors-guide-4)中，我們會一起來看看規格，更進一步理解 CORS protocol。

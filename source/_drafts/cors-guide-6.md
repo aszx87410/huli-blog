@@ -1,7 +1,7 @@
 ---
 title: CORS 完全手冊（六）：總結、後記與遺珠
 catalog: true
-date: 2020-08-25 23:07:47
+date: 2021-02-19 00:21:13
 tags: [Ajax,JavaScript,Front-end,CORS]
 categories:
   - Front-end
@@ -12,6 +12,13 @@ categories:
 這篇技術含量比較少一點，來跟大家分享一下寫這系列文的過程以及寫完之後的一些感想。
 
 如果你還沒看這系列文的話，傳送門如下：
+
+* <a target="_blank" href="/2021/02/19/cors-guide-1">CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？</a>
+* <a target="_blank" href="/2021/02/19/cors-guide-2">CORS 完全手冊（二）：如何解決 CORS 問題？</a>
+* <a target="_blank" href="/2021/02/19/cors-guide-3">CORS 完全手冊（三）：CORS 詳解</a>
+* <a target="_blank" href="/2021/02/19/cors-guide-4">CORS 完全手冊（四）：一起看規範</a>
+* <a target="_blank" href="/2021/02/19/cors-guide-5">CORS 完全手冊（五）：跨來源的安全性問題</a>
+* <a target="_blank" href="/2021/02/19/cors-guide-6">CORS 完全手冊（六）：總結、後記與遺珠</a>
 
 <!-- more -->
 
@@ -33,9 +40,9 @@ CORS 最常見的錯誤大概就那些，包括：
 
 ## 後記
 
-但幸好我有寫完。因為從寫文章的過程中我也收穫很多，花了不少時間在理解一些細節，像是 Spectre 的攻擊我就研究了一段時間，雖然最後還是沒有很懂就是了，想要完全理解要把作業系統相關的知識補齊才行。而第五篇那些 COXX 的 header 也花了許多時間，找了很多資料，把當初提案的 issue 都稍微看了一下，會更理解這個 policy 提出的原因。
+但幸好我有寫完。因為從寫文章的過程中我也收穫很多，花了不少時間在理解一些細節，像是 Spectre 的攻擊我就研究了一段時間，雖然最後還是沒有很懂就是了，想要完全理解要把作業系統相關的知識補齊才行。而第五篇那些 COXX 的 header 也花了許多時間，找了很多資料，把當初提案的 issue 都稍微看了一下，會更理解這些 policy 提出的原因。
 
-在研究的過程中會發現許多安全性有關的東西其實是扣在一起的，例如說：
+在研究的過程中也發現許多安全性有關的東西其實是扣在一起的，例如說：
 
 1. Same-origin policy
 2. window.open
@@ -43,7 +50,7 @@ CORS 最常見的錯誤大概就那些，包括：
 4. CSP
 5. SameSite cookie
 
-在研究的時候會發現可以看到不少重疊的地方，尤其是 SameSite cookie，越想越覺得這東西真的很重要，而且可以防止不少攻擊。對了，在寫這篇文的時候參考資料其實大多都來自於 Google Chrome，所以文中有許多使用「瀏覽器」的地方，有可能現在其實只有 Chrome 有實作而已，其他瀏覽器還沒跟進。
+在找資料的過程中可以看到不少重疊的地方，尤其是 SameSite cookie，越想越覺得這東西真的很重要，而且可以防止滿多的攻擊。對了，在寫這篇文的時候參考資料其實大多都來自於 Google Chrome，所以文中有許多使用「瀏覽器」的地方，有可能現在其實只有 Chrome 有實作而已，其他瀏覽器還沒跟進。
 
 不過 Chrome 確實資源最多，而且常常會 po 一些技術好文在部落格上面，都是很值得參考的資源。
 
@@ -67,7 +74,7 @@ CORS 最常見的錯誤大概就那些，包括：
 
 在使用 CORS 的時候其實我們花了許多時間在 preflight request 上面，先假設沒有快取而且都是非簡單請求的話，那跨來源跟同來源比起來，多了一倍的 request，因為每一個 request 都會額外再附加一個 preflight request。
 
-可是網站對於 CORS 的規則其實應該都是一致的，那為什麼不先寫好一個設定檔讓瀏覽器來讀呢？這樣瀏覽器就會知道某個來源是不是被允許的，就不需要一直發送 preflight request 了。
+可是網站對於 CORS 的規則大部分都是一致的，那為什麼不先寫好一個設定檔讓瀏覽器來讀呢？這樣瀏覽器就會知道某個來源是不是被允許的，就不需要一直發送 preflight request 了。
 
 這個想法的源頭來自：[RFC: a mechanism to bypass CORS preflight #210](https://github.com/whatwg/fetch/issues/210)，有空的話可以看一下裡面的討論。
 
@@ -84,7 +91,7 @@ CORS 最常見的錯誤大概就那些，包括：
 
 只要這樣就可以了：
 
-```
+``` html
 <img src=xxx crossorigin>
 ```
 
@@ -94,11 +101,11 @@ CORS 最常見的錯誤大概就那些，包括：
 2. anonymous
 3. use-credentials
 
-前兩種是一樣的，而後者就像是 fetch 裡面那個 `credentials: 'include'` 一樣。總之呢，只要加上 `crossorigin`，對於跨來源的檔案，後端就必須跟 CORS 一樣，加上 Access-Control-Allow-Origin，前端才能正確存取圖片。
+前兩種是一樣的，而後者就像是 fetch 裡面那個 `credentials: 'include'` 一樣。總之呢，只要加上 `crossorigin`，對於跨來源的檔案，後端就必須跟 CORS 一樣，加上 `Access-Control-Allow-Origin`，前端才能正確存取圖片。
 
 那圖片好端端的，為什麼一定要用 CORS 來載入呢？兩個理由，第一個理由是上一篇我提到說：「如果把 COEP 設成 require-corp 的話，就代表告訴瀏覽器說：『頁面上所有我載入的資源，都必須有 CORP 這個 header 的存在（或是 CORS），而且是合法的』」。
 
-假設你現在把 COEP 設成 require-corp，如果你的網站是用 `<img src=xxx>` 來載入圖片，那這個圖片一定要有 CORP 的 header 才行。如果真的沒有呢？
+假設你現在把 COEP 設成 require-corp，如果你的網站是用 `<img src=xxx>` 來載入圖片，那這個圖片一定要有 CORP 的 header 才行。那真的沒有的話怎麼辦呢？
 
 那你可以用跨來源的方式載入圖片，也就是：`<img src=xxx crossorigin>`，在這個方式底下，圖片不需要有 CORP 的 header，只需要有 `Access-Control-Allow-Origin` 的 header 就行了，因為這是用 CORS 的模式在載入圖片。
 

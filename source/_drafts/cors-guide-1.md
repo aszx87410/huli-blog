@@ -1,7 +1,7 @@
 ---
 title: CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？
 catalog: true
-date: 2020-07-22 22:16:13
+date: 2021-02-19 00:16:13
 tags: [Ajax,JavaScript,Front-end,CORS]
 categories:
   - Front-end
@@ -19,16 +19,16 @@ categories:
 
 這系列一共有六篇文章，分別是：
 
-* CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？
-* [CORS 完全手冊（二）：如何解決 CORS 問題？]()
-* [CORS 完全手冊（三）：CORS 詳解]()
-* [CORS 完全手冊（四）：一起看規範]()
-* [CORS 完全手冊（五）：跨來源的安全性問題]()
-* [CORS 完全手冊（六）：總結、後記與遺珠]()
+* <a target="_blank" href="/2021/02/19/cors-guide-1">CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？</a>
+* <a target="_blank" href="/2021/02/19/cors-guide-2">CORS 完全手冊（二）：如何解決 CORS 問題？</a>
+* <a target="_blank" href="/2021/02/19/cors-guide-3">CORS 完全手冊（三）：CORS 詳解</a>
+* <a target="_blank" href="/2021/02/19/cors-guide-4">CORS 完全手冊（四）：一起看規範</a>
+* <a target="_blank" href="/2021/02/19/cors-guide-5">CORS 完全手冊（五）：跨來源的安全性問題</a>
+* <a target="_blank" href="/2021/02/19/cors-guide-6">CORS 完全手冊（六）：總結、後記與遺珠</a>
 
 會從 same-origin policy 開始講起，接著講到為什麼跨來源存取資源會有錯誤，再來會講如何錯誤地以及正確地解決 CORS 相關的問題，而第三篇會詳細講解跨來源請求的詳細流程，像是 preflight request 之類的東西。
 
-基礎的部分看前三篇就夠了，接下來會比較深一點。第四篇會帶你一起看 spec，證明前面幾篇不是我在虎爛的，而第五篇則是帶大家看看 CORB（Cross-Origin Read Blocking）、COEP（Cross-Origin Embedder Policy）或是 COOP（Cross-Origin-Opener-Policy）之類的跨來源相關規定，以及相關的安全性問題，最後一篇則是一些與技術沒有太大關係的心得感想。
+基礎的部分看前三篇就夠了，接下來會比較深一點。第四篇會帶你一起看 spec，證明前面幾篇不是我在虎爛的，而第五篇則是帶大家看看 CORB（Cross-Origin Read Blocking）、COEP（Cross-Origin Embedder Policy）或是 COOP（Cross-Origin-Opener-Policy）之類的跨來源相關規定，以及相關的安全性問題，最後一篇則是一些比較零散的主題以及心得感想。
 
 身為系列文的第一篇，就是要帶大家去思考為什麼要有 same-origin policy 的存在，為什麼跨來源存取資源會錯誤。如果不知道這個問題的答案，那通常都不是真的理解 CORS 到底在規範什麼，也很有可能會用一些錯誤的解法去解這個問題。
 
@@ -302,4 +302,4 @@ JavaScript 是一個程式語言，所以像 `var`、`if else`、`for`、`functi
 2. 今天會有 same-origin policy 跟 CORS，是因為我們「在瀏覽器上寫 JS」，所以受到執行環境的限制。如果我們今天寫的是 Node.js，就完全沒有這些問題，想拿什麼就拿什麼，不會有人擋我們
 3. 在瀏覽器上面，CORS 限制的其實是「拿不到 response」，而不是「發不出 request」。所以 request 其實已經發出去了，瀏覽器也拿到 response 了，只是它因為安全性考量不給你
 
-在釐清這些重要的觀念以後，就可以進入到我們的下一篇：[CORS 完全手冊（二）：如何解決 CORS 問題？]()。
+在釐清這些重要的觀念以後，就可以進入到我們的下一篇：[CORS 完全手冊（二）：如何解決 CORS 問題？](/2021/02/19/cors-guide-2)。
