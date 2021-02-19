@@ -11,11 +11,11 @@ categories:
 
 在上一篇裡面我們提到了常見的 CORS 錯誤解法，以及大多數狀況下應該要選擇的解法：「請後端加上 response header」。
 
-但其實「跨網域請求」這個東西又可以再細分成兩種，簡單請求跟非簡單請求，簡單請求的話可以透過上一篇的解法來解，但非簡單請求的話就比較複雜一些了。
+但其實「跨來源請求」這個東西又可以再細分成兩種，簡單請求跟非簡單請求，簡單請求的話可以透過上一篇的解法來解，但非簡單請求的話就比較複雜一些了。
 
-除此之外，跨網域請求預設是不會把 cookie 帶上去的，需要在使用 xhr 或是 fetch 的時候多加一個設定，而後端也需要加一個額外的 header 才行。
+除此之外，跨來源請求預設是不會把 cookie 帶上去的，需要在使用 xhr 或是 fetch 的時候多加一個設定，而後端也需要加一個額外的 header 才行。
 
-與 CORS 相關的 header 其實不少，有些你可能聽都沒聽過。原本這篇我想要把這些東西一一列出來講解，但仔細想了一下發覺這樣的話有點太無趣，而且大家應該看過就忘記了。
+與 CORS 相關的 header 其實不少，有些你可能聽都沒聽過。原本這篇我想要把這些東西一一列出來講解，但仔細想了一下覺得這樣有點太無趣，而且大家應該看過就忘記了。
 
 那怎樣的方法會比較好呢？大家都喜歡聽故事，因此這篇讓我們從故事的角度下手，為大家講述一段愛與 CORS 的故事。
 
@@ -37,7 +37,7 @@ categories:
 
 因此表單上的「怎麼知道我們公司的？」就會希望能夠動態調整欄位，在活動期間加一個「透過在 1/10 舉辦的技術分享會」的選項，而活動結束後大概兩個禮拜把這個選項撤掉。之所以要能動態調整，主管說是因為不想讓後續維護的工再回到開發這端，如果一開始就能做成動態的，那未來只要他們自己維護就行了，讓他們能夠透過後台自己去控制。
 
-所以後端開了一個 API 出來，要小明去接這個 API 然後把內容 render 出來變成選項，為了方便測試，後端工程師先把整個 API service 打包成 docker image，然後讓小明跑在自己電腦上，網址是：`http://localhost:3000`。
+所以後端開了一個 API 出來，要小明去接這個 API 然後把內容 render 出來變成選項。為了方便測試，後端工程師先把整個 API service 打包成 docker image，然後讓小明跑在自己電腦上，網址是：`http://localhost:3000`。
 
 小明接到這個任務之後，想說先把 API 內容抓下來看看好了，於是就寫了這樣一段程式碼：
 
@@ -107,8 +107,7 @@ fetch('http://localhost:3000')
 
 `Access-Control-Allow-Origin` 的值可以帶 `*`，代表 wildcard，任何 origin 都合法，也可以帶 origin 像是 `http://huli.tw`，代表只有這個 origin 是合法的。
 
-如果想帶多個的話呢？抱歉，沒有辦法，就是只能全部都給過或者是給一個 origin。因此也有後端會根據 request 的 origin 來決定 response 的 `Access-Control-Allow-Origin` 值會是多少，這個我們之後會提到。
-
+如果想帶多個的話呢？抱歉，沒有辦法，就是只能全部都給過或者是給一個 origin。因此也有後端會根據 request 的 origin 來決定 response 的 `Access-Control-Allow-Origin` 值會是多少，這個我們之後會再提到。
 ## Day2：不簡單的 CORS
 
 隔了一天之後，主管跟小明說更上層的人不滿意這個使用者體驗，送出表單之後要等個一兩秒才能看到成功的畫面，而且這中間也沒有 loading 什麼的，體驗不好，希望能改成 AJAX 的做法送出表單而不是換頁，就可以改善使用者體驗。
@@ -273,7 +272,7 @@ fetch('http://localhost:3000/form', {
       .then(res => console.log(res))
 ```
 
-當你這樣做以後，後端也必須要新增 `Access-Control-Allow-Headers`，才能通過 preflight：
+當你這樣做以後，後端也必須新增 `Access-Control-Allow-Headers`，才能通過 preflight：
 
 ``` js
 app.options('/form', (req, res) => {
@@ -283,7 +282,7 @@ app.options('/form', (req, res) => {
 })
 ```
 
-簡單來說，preflight 就是一個驗證機制，確保後端知道前端要送出的 request 是預期的，瀏覽器才會放行。
+簡單來說，preflight 就是一個驗證機制，確保後端知道前端要送出的 request 是預期的，瀏覽器才會放行。我之前所說的「跨來源請求擋的是 response 而不是 request」，只適用於簡單請求。對於有 preflight 的非簡單請求來說，你真正想送出的 request 確實會被擋下來。
 
 那為什麼會需要 preflight request 呢？這邊可以從兩個角度去思考：
 
@@ -304,7 +303,7 @@ app.options('/form', (req, res) => {
 
 ## Day3：帶上 Cookie
 
-昨天改的那版受到上層的激勵讚賞，主管也請小明跟小華喝了手搖飲來慶祝。只是正當他們開心之時，行銷部門的人跑來了，問說：「為什麼這些 request 都沒有 cookie？我們需要使用者的 cookie 來做分析，請把這些 cookie 帶上」。
+昨天改的那版受到上層的極力讚賞，主管也請小明跟小華喝了手搖飲來慶祝。只是正當他們開心之時，行銷部門的人跑來了，問說：「為什麼這些 request 都沒有 cookie？我們需要使用者的 cookie 來做分析，請把這些 cookie 帶上」。
 
 此時小明才突然想起來：「對欸，跨來源的請求，預設是不會帶 cookie 的」，查了一下 MDN 之後，發現只要帶：`credentials: 'include'` 應該就行了：
 
@@ -395,7 +394,7 @@ app.get('/', (req, res) => {
 
 由於這一個 API 的內容本來就是公開的，所以沒有允許特定的 origin 也沒有關係，可以安心使用 wildcard。
 
-小明把之前的程式碼改了一下，試著把 header 先列出來看看：
+小明把之前的程式碼改了一下，試著把 header 先列印出來看看：
 
 ``` js
 fetch('http://localhost:3000')
@@ -419,7 +418,7 @@ fetch('http://localhost:3000')
 ``` js
 app.get('/', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Expose-Headers', 'X-List-Version')
+  res.header('Access-Control-Expose-Headers', 'X-List-Version') // 加這個
   res.header('X-List-Version', '1.3')
   res.json({
     data: [

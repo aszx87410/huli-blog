@@ -55,7 +55,7 @@ fetch 看起來很簡單，不過就是發個 request 然後接收 response 而�
 
 > Numerous APIs provide the ability to fetch a resource, e.g. HTML’s img and script element, CSS' cursor and list-style-image, the navigator.sendBeacon() and self.importScripts() JavaScript APIs. The Fetch Standard provides a unified architecture for these features so they are all consistent when it comes to various aspects of fetching, such as redirects and the CORS protocol.
 
-這邊提到了我在前面所說的，抓取資料或是跨網域抓取資源並不只侷限在 AJAX 上面，載入圖片或是 CSS 也是抓取資源的一種，而這份規格就是為了統一管理這些行為。
+這邊提到了我在前面所說的，抓取資料或是跨來源抓取資源並不只侷限在 AJAX 上面，載入圖片或是 CSS 也是抓取資源的一種，而這份規格就是為了統一管理這些行為。
 
 > The Fetch Standard also defines the fetch() JavaScript API, which exposes most of the networking functionality at a fairly low level of abstraction.
 
@@ -108,7 +108,7 @@ CORS 的部分在 3.2. CORS protocol 的地方。開頭的介紹非常重要。
 
 > To allow sharing responses cross-origin and allow for more versatile fetches than possible with HTML’s form element, the CORS protocol exists. It is layered on top of HTTP and allows responses to declare they can be shared with other origins.
 
-CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可以抓取跨網域資源的方法。然後這個 procotol 是建立在 HTTP 之上的。
+CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可以抓取跨來源資源的方法。然後這個 procotol 是建立在 HTTP 之上的。
 
 > It needs to be an opt-in mechanism to prevent leaking data from responses behind a firewall (intranets). Additionally, for requests including credentials it needs to be opt-in to prevent leaking potentially-sensitive data.
 
@@ -122,7 +122,7 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 
 > For requests that are more involved than what is possible with HTML’s form element, a CORS-preflight request is performed, to ensure request’s current URL supports the CORS protocol.
 
-這邊提到了兩個重點，第一個是 CORS 是透過 header 來決定一個 response 是不是能被跨網域共享，這就是我在上一篇裡面所說的：
+這邊提到了兩個重點，第一個是 CORS 是透過 header 來決定一個 response 是不是能被跨來源共享，這就是我在上一篇裡面所說的：
 
 > 說穿了，CORS 就是藉由一堆的 response header 來跟瀏覽器講說哪些東西是前端有權限存取的。
 
@@ -138,7 +138,7 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 
 為了驗證這個行為，我建立了一個簡單的表單：
 
-``` html
+``` js
 <form action="/test" method="POST">
   <input name="a" />
   <input type="submit" />
@@ -182,9 +182,7 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 > `Access-Control-Allow-Credentials`  
 >Indicates whether the response can be shared when request’s credentials mode is "include".
 
-這兩個是針對 CORS request 可以返回的 response header，已經在上一篇文章裡面提到過了。
-
-前者用來決定哪些 origin 合法，後者決定是不是允許帶上 cookie 以及設置 cookie。
+這兩個是針對 CORS request 可以返回的 response header，已經在上一篇文章裡面提到過了。前者用來決定哪些 origin 合法，後者決定是不是允許帶上 cookie 以及設置 cookie。
 
 > An HTTP response to a CORS-preflight request can include the following headers:
 > 
@@ -368,7 +366,7 @@ main fetch 也是一個超連結，點了會跳到 `4.1. Main fetch` 去，這�
 
 舉例來說，如果傳了 `Vary: Origin`，就代表如果我之後發的 request 裡的 origin header 不同，那就不應該沿用之前的快取。
 
-以前面講的狀況而已，設定這個 header 以後，我們用 fetch 發的 request 因為 Origin header 跟之前用 img 的不同，所以照理來說就不會沿用之前快取好的 response，而是會重新發出一個 request。
+以前面講的狀況而言，設定這個 header 以後，我們用 fetch 發的 request 因為 Origin header 跟之前用 img 的不同，所以照理來說就不會沿用之前快取好的 response，而是會重新發出一個 request。
 
 而這個問題我本人還真的碰到過...請參考：[原來 CORS 沒有我想像中的簡單](https://blog.techbridge.cc/2018/08/18/cors-issue/)。
 
