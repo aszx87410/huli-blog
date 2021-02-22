@@ -112,7 +112,7 @@ categories:
 
 會特別講這個更精確的定義，是因為去拿一個「跨來源的資源」其實很常見，例如說 `<img src="https://another-domain.com/bg.png" />`，這其實就是跨來源去抓取資源，只是這邊我們抓取的目標是圖片而已。
 
-或者是：`<scripr src="https://another-domain.com/script.js" />`，這也是跨來源請求，去抓一個 JS 檔案回來並且執行。
+或者是：`<script src="https://another-domain.com/script.js" />`，這也是跨來源請求，去抓一個 JS 檔案回來並且執行。
 
 但以上兩種狀況你有碰到過問題嗎？基本上應該都沒有，而且你已經用得很習慣了，完全沒有想到可能會出問題。
 
