@@ -1,7 +1,7 @@
 ---
 layout: "recommend"
 title: "推薦閱讀"
-date: 2020-04-22 04:48:33
+date: 2021-05-01 04:48:33
 ---
 
 如果你想看一些比較輕鬆卻又有點深度的文章，我推薦：
@@ -31,7 +31,18 @@ date: 2020-04-22 04:48:33
 4. [AWS Lambda + GitHub API + Google Sheet = 自動化簽到系統](https://blog.huli.tw/2018/09/14/aws-lambda-and-github-api/)
 5. [利用 Github Classroom 加 Travis CI 打造改作業系統](https://blog.huli.tw/2018/02/03/github-classroom-and-travis-ci/)
 
-想要找到更多類似的文章可以參考文章分類。除此之外，底下有兩個系列文，在寫的時候就已經規劃好了，會比較有系統性一點，也可以參考看看。
+想要找到更多類似的文章可以參考文章分類。除此之外，底下有幾個系列文，在寫的時候就已經規劃好了，會比較有系統性一點，也可以參考看看。
+
+## CORS 完全手冊
+
+花了不少時間才完成的系列文，希望能成為 CORS 系列的經典之一。
+
+1. [CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？](/2021/02/19/cors-guide-1/)
+2. [CORS 完全手冊（二）：如何解決 CORS 問題？](/2021/02/19/cors-guide-2/)
+3. [CORS 完全手冊（三）：CORS 詳解](/2021/02/19/cors-guide-3/)
+4. [CORS 完全手冊（四）：一起看規範](/2021/02/19/cors-guide-4/)
+5. [CORS 完全手冊（五）：跨來源的安全性問題](/2021/02/19/cors-guide-5/)
+6. [CORS 完全手冊（六）：總結、後記與遺珠](/2021/02/19/cors-guide-6/)
 
 ## JavaScript 五講
 
