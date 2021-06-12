@@ -8,6 +8,10 @@ categories:
 
 # 前言
 
+2021-06-09 補充：
+
+感謝讀者 blackr1234 留言，此文章為 2018 年 11 月發表，底下程式碼輸出結果大概是以 Node.js v8.17.0 為準，因此對於一些狀況的輸出可能會跟現在不太一樣。例如說存取宣告前的 let 變數，當初的結果為：`ReferenceError: a is not defined`，現在用 Node.js v14 的結果則是：`ReferenceError: Cannot access 'a' before initialization`。 
+
 這陣子我在忙一些教學相關的東西，稍微準備一些資料之後教了學生們 JavaScript 裡面的 hoisting，也就是「提升」這個觀念，例如說以下程式碼：
 
 ``` js
