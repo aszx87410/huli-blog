@@ -397,7 +397,7 @@ window.onload = function() {
 再舉最後一個範例：
 
 ``` js
-setTimeout(2000, tick)
+setTimeout(tick, 2000)
 function tick() {
   alert('時間到！')
 }
@@ -410,7 +410,7 @@ function tick() {
 舉例來說，標準錯誤範例會長得像這樣：
 
 ``` js
-setTimeout(2000, tick())
+setTimeout(tick(), 2000)
 function tick() {
   alert('時間到！')
 }
@@ -426,20 +426,20 @@ function load() {
 
 ``` js
 // 錯誤範例
-setTimeout(2000, tick())
+setTimeout(tick(), 2000)
 function tick() {
   alert('時間到！')
 }
   
 // 上面的錯誤範例等同於
 let fn = tick()
-setTimeout(2000, fn)
+setTimeout(fn, 2000)
 function tick() {
   alert('時間到！')
 }
 ```
 
-由於 tick 執行後會回傳 undefined，所以 setTimeout 那行可以看成：`setTimeout(2000, undefined)`，一點作用都沒有。
+由於 tick 執行後會回傳 undefined，所以 setTimeout 那行可以看成：`setTimeout(undefined, 2000)`，一點作用都沒有。
 
 把 function 誤寫成 function call 以後，會產生的結果就是，畫面還是跳出「時間到！」三個字，可是兩秒還沒過完。因為這樣寫就等於是你先執行了 tick 這個 function。
 
