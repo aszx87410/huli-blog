@@ -23,7 +23,7 @@ categories:
 要理解原型鍊，可以先從這兩篇我覺得很棒的切入角度開始：
 
 1. [Javascript继承机制的设计思想](http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html)
-2. [从设计初衷解释 JavaScript 原型链](http://www.jasonsi.com/2017/03/15/36/)
+2. [从设计初衷解释 JavaScript 原型链](https://www.jianshu.com/p/a97863b59ef7)
 
 這兩篇講到為什麼當初 JavaScript 的機制是這樣設計的，我認為從這個角度開始理解，會是一個比較好的開始。（強烈建議先看過這兩篇之後再往下看，會幫助你更瞭解原型鍊到底是什麼東西）
 
