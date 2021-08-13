@@ -2,6 +2,7 @@
 title: 防止 XSS 可能比想像中困難
 catalog: true
 date: 2021-05-25 21:59:58
+canonical: https://tech-blog.cymetrics.io/posts/huli/prevent-xss-might-be-harder-than-you-thought/
 tags: [Security, Front-end]
 categories:
   - Security
