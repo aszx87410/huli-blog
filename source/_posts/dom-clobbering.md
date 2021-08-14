@@ -433,6 +433,25 @@ console.log(window.TEST_MODE + '')
 
 但現實生活中應該也不會到這麼深的層級啦，所以四層頂多五層就已經很夠用了。
 
+2021-08-14 補充：
+感謝朋友的告知，用這樣就可以無限多層了
+
+``` html
+<iframe name=a srcdoc="
+  <iframe name=b srcdoc=&quot
+    <iframe name=c srcdoc=&amp;quot;
+      <iframe name=d srcdoc=&amp;amp;quot;
+        <iframe name=e srcdoc=&amp;amp;amp;quot;
+          <iframe name=f srcdoc=&amp;amp;amp;amp;quot;
+            <div id=g>123</div>
+          &amp;amp;amp;amp;quot;></iframe>
+        &amp;amp;amp;quot;></iframe>
+      &amp;amp;quot;></iframe>
+    &amp;quot;></iframe>
+  &quot></iframe>
+"></iframe>
+```
+
 ## 實際案例研究：Gmail AMP4Email XSS
 
 在 2019 年的時候 Gmail 有一個漏洞就是透過 DOM clobbering 來攻擊的，完整的 write up 在這邊：[XSS in GMail’s AMP4Email via DOM Clobbering](https://research.securitum.com/xss-in-amp4email-dom-clobbering/)，底下我就稍微講一下過程（內容都取材自上面這篇文章）。

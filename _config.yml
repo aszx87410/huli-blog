@@ -91,7 +91,7 @@ sitemap:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/aszx87410/blog.huli.tw.git
+  repository: git@github.com:aszx87410/blog.huli.tw.git
   branch: master
 
 # RSS
