@@ -7,6 +7,8 @@ categories: [Security]
 canonical: https://tech-blog.cymetrics.io/posts/huli/learn-from-intigriti-xss-0721/
 ---
 
+（原文發佈於 Cymetrics Tech Blog：[Intigriti 七月份 XSS 挑戰：突破層層關卡](https://tech-blog.cymetrics.io/posts/huli/learn-from-intigriti-xss-0721/)）
+
 ## 前言
 
 [Intigriti](https://www.intigriti.com/) 這個網站每個月都會有 XSS 挑戰，給你一週的時間去解一道 XSS 的題目，目標是成功執行 `alert(document.domain)`。

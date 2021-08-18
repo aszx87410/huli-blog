@@ -8,6 +8,8 @@ categories:
   - Security
 ---
 
+（原文發佈於 Cymetrics Tech Blog：[防止 XSS 可能比想像中困難](https://tech-blog.cymetrics.io/posts/huli/prevent-xss-might-be-harder-than-you-thought/)）
+
 ## 前言
 
 如果你不知道什麼是 XSS（Cross-site Scripting），簡單來說就是駭客可以在你的網站上面執行 JavaScript 的程式碼。既然可以執行，那就有可能可以把使用者的 token 偷走，假造使用者的身份登入，就算偷不走 token，也可以竄改頁面內容，或是把使用者導到釣魚網站等等。

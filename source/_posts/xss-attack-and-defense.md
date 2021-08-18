@@ -8,6 +8,8 @@ categories:
   - Security
 ---
 
+（原文發佈於 Cymetrics Tech Blog：[淺談 XSS 攻擊與防禦的各個環節](https://tech-blog.cymetrics.io/posts/huli/xss-attack-and-defense/)）
+
 ## 前言
 
 談到 XSS（Cross-site scripting），許多人可能都只想到「就是網站上被攻擊者植入程式碼」，但若是仔細去想的話，會發現這之中其實還有很多環節都可以再深入探討。
