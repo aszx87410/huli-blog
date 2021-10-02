@@ -612,7 +612,7 @@ JS 引擎：bar scope，我這裡有個對 d 的 RHS 引用，你有看過它嗎
 JS 引擎：global scope，我這裡有個對 d 的 RHS 引用，你有看過它嗎？  
 執行結果：global scope 說沒有，所以返回錯誤 `ReferenceError: d is not defined`
 
-以上就是 JS 引擎的運作流程，想更詳細了解的話可參考：[You Don't Know JS: Scope & Closures](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch1.md#enginescope-conversation)、[Chapter 4: Hoisting](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch4.md#the-compiler-strikes-again)、[Hoisting in JavaScript](https://john-dugan.com/hoisting-in-javascript/)。
+以上就是 JS 引擎的運作流程，想更詳細了解的話可參考：[You Don't Know JS: Scope & Closures](https://github.com/getify/You-Dont-Know-JS/tree/2nd-ed/scope-closures)、[Chapter 4: Hoisting](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/scope-closures/ch5.md)、[Hoisting in JavaScript](https://john-dugan.com/hoisting-in-javascript/)。
 
 # 中場總結
 
@@ -855,8 +855,7 @@ JavaScript 常考的幾個點大家都耳熟能詳：this、prototype、clousre 
 5. [danbev/learning-v8](https://github.com/danbev/learning-v8)
 6. [Why is there a “temporal dead zone” in ES6?](http://2ality.com/2015/10/why-tdz.html)
 7. [exploringjs: Variables and scoping #](http://exploringjs.com/es6/ch_variables.html#_the-temporal-dead-zone)
-8. [ES6 中的 TDZ（temporal dead zone）及函数作用域](https://sanster.xyz/2017/01/21/ES6-%E4%B8%AD%E7%9A%84-temporal-dead-zone/)
-9. [由阮一峰老师的一条微博引发的 TDZ 思考](https://www.jianshu.com/p/ebc51ce05416)
+9. [由阮一峰老师的一条微博引发的 TDZ 思考](https://juejin.cn/post/6844903461511774221)
 10. [理解ES6中的暂时死区(TDZ)](https://segmentfault.com/a/1190000008213835)
 11. [TEMPORAL DEAD ZONE (TDZ) DEMYSTIFIED](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
 12. [MDN: let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Another_example_of_temporal_dead_zone_combined_with_lexical_scoping)
