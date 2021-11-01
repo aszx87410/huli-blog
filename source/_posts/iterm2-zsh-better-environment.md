@@ -42,7 +42,7 @@ PROMPT='%{$fg_no_bold[yellow]%}[%*] %{$fg_no_bold[cyan]%}%n%{$fg_no_bold[red]%} 
 
 介紹到這邊就差不多了，剩下都是個人設定微調的部份，或是裝一些自己覺得實用的 plugin
 附上一張我的 iTerm2 截圖當做結尾
-![螢幕快照 2016-01-03 下午2.59.15.jpg](http://user-image.logdown.io/user/7013/blog/6977/post/402147/fEGlo1qnSLOxyKl8Lcv0_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-01-03%20%E4%B8%8B%E5%8D%882.59.15.jpg)
+![螢幕快照 2016-01-03 下午2.59.15.jpg](/img/old-articles/iterm.jpg)
 
 
 

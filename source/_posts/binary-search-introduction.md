@@ -31,7 +31,7 @@ function linear_search(array, target){
 ```
 
 或是可以參考這個簡單的動畫，錄自[Algorithm Visualizations](https://www.cs.usfca.edu/~galles/visualization/Search.html)
-![線性搜尋法動畫](http://i.imgur.com/JkRIHFb.gif)
+![線性搜尋法動畫](/img/old-articles/binary-p1.gif)
 
 # 二分搜尋法
 
@@ -75,7 +75,7 @@ R 代表的是：最右邊有可能的值，假如有答案，一定在 <=R 的�
 可以參考一樣從 [Algorithm Visualizations](https://www.cs.usfca.edu/~galles/visualization/Search.html) 錄製的簡單動畫
 
 （藍色是 L，黃色是 R，綠色是 M，要找的數字是 180）
-![二分搜尋法動畫](http://i.imgur.com/Bi6YcqA.gif)
+![二分搜尋法動畫](/img/old-articles/binary-p2.gif)
 
 ``` javascript
 function binary_search(array, target) {

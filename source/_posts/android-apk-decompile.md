@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
 ```
 
 安裝到手機上之後，會看到這樣的畫面：
-![device-2016-03-20-152510.png](http://user-image.logdown.io/user/7013/blog/6977/post/661513/uVN5gnA0QC6PEdujMIZg_device-2016-03-20-152510.png)
+![device-2016-03-20-152510.png](/img/old-articles/android-p1.png)
 
 ## 實際動手
 好，這個就是我們要拿來測試的 apk 了
@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
 `dex2jar`可以把 apk 轉成 jar，再用`jd-gui`檢視 java code
 
 接著我們開啟 terminal，到剛剛那個示範 apk 的目錄底下，執行`apktool d APKNAME.apk`
-![螢幕快照 2016-03-20 下午3.32.47.png](http://user-image.logdown.io/user/7013/blog/6977/post/661513/Ahk6ZkFOQm7ECISEyxMI_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-03-20%20%E4%B8%8B%E5%8D%883.32.47.png)
+![螢幕快照 2016-03-20 下午3.32.47.png](/img/old-articles/android-p2.png)
 
 執行以後，會自動生成一個`APKNAME`的資料夾，裡面就是反編譯出來的東西了
 
@@ -190,7 +190,7 @@ invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSeque
 `jarsigner -verbose -digestalg SHA1 -keystore ~/KEY.keystore APK_NAME.apk KEY_ALIAS`
 
 安裝完以後就會看到這樣的畫面：
-![device-2016-03-20-160501.png](http://user-image.logdown.io/user/7013/blog/6977/post/661513/RNKaPElHQA2BJ02proFr_device-2016-03-20-160501.png)
+![device-2016-03-20-160501.png](/img/old-articles/android-p3.png)
 
 沒錯！就是這麼簡單，一個 apk 就這樣被修改了
 
@@ -202,7 +202,7 @@ invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSeque
 `dex2jar`下載下來之後會有一堆的 shell script，`dex2jar`就是我們想要的那個
 `./d2j-dex2jar.sh app.apk`
 執行完之後會有一個 jar，用 jd-gui 打開，會看到你的程式碼一覽無遺
-![螢幕快照 2016-03-20 下午4.10.15.png](http://user-image.logdown.io/user/7013/blog/6977/post/661513/zrnTKCQgT0OeIPbkkfp8_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-03-20%20%E4%B8%8B%E5%8D%884.10.15.png)
+![螢幕快照 2016-03-20 下午4.10.15.png](/img/old-articles/android-p4.png)
 
 ## 總結
 沒接觸過反編譯的人可能會很驚訝：什麼！要改掉一個 apk 居然這麼簡單！

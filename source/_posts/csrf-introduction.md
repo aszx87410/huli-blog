@@ -20,7 +20,7 @@ CSRF 是一種 Web 上的攻擊手法，全稱是 Cross Site Request Forgery，�
 ## 偷懶的刪除功能
 以前我有做個一個簡單的後台頁面，就想成是一個部落格吧！可以發表、刪除以及編輯文章，介面大概長得像這樣：
 
-<img src="http://blog.techbridge.cc/img/huli/csrf1.png" alt="delete" />
+![](/img/csrf/csrf1.png)
 
 可以看到刪除的那個按鈕，點下去之後就可以把一篇文章刪掉。當初因為偷懶，想說如果我把這個功能做成 GET，我就可以直接用一個連結完成刪除這件事，在前端幾乎不用寫到任何程式碼：
 
@@ -118,10 +118,6 @@ CSRF 就是在不同的 domain 底下卻能夠偽造出「使用者本人發出�
 ```
 
 但這邊值得注意的一點是，`form`能夠帶的 content type 只有三種：`application/x-www-form-urlencoded`, `multipart/form-data` 跟 `text/plain`。在上面的攻擊中我們用的是最後一種，`text/plain`，如果你在你的後端 Server 有檢查這個 content type 的話，是可以避免掉上面這個攻擊的。
-
-只是，上面這幾個攻擊我們都還沒講到一種情況：如果你的 api 接受 cross origin 的 request 呢？
-
-意思就是，如果你的 api 的 `Access-Control-Allow-Origin` 設成 `*` 的話，代表任何 domain 都可以發送 ajax 到你的 api server，這樣無論你是改成 json，或甚至把 method 改成 PUT, DELETE 都沒有用。
 
 我們舉的例子是刪除文章，這你可能覺得沒什麼，那如果是銀行轉帳呢？攻擊者只要在自己的網頁上寫下轉帳給自己帳號的 code，再把這個網頁散佈出去就好，就可以收到一大堆錢。
 
