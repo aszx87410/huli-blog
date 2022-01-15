@@ -1,14 +1,16 @@
 ---
 layout: "about"
 title: "關於我"
-date: 2021-05-25 22:30:00
+date: 2022-01-14 22:30:00
 ---
 
-原本是個前端工程師，2021 年 5 月開始默默轉做資安相關的研究，還很菜。
+原本是個前端工程師，2021 年 5 月開始轉做資安相關的研究，也因為這個背景，對於前端相關的資安議題（XSS、CORS 以及 XSLeaks）特別感興趣。
 
 重度拖延症患者，興趣是光想不做，有很多想做的事，卻一件都沒有執行。無聊的時候喜歡寫寫文章，發現自己好像有把事情講得比其他人清楚的能力，相信分享與交流可以讓世界更美好。
 
 喜歡把常見問題寫成文章，就不用每次被問就回答一次，就跟寫 code 的時候要順便記得重構一樣。
+
+很多想寫的主題都擱置著，因此我把這些主題放在[這個地方](https://github.com/aszx87410/blog/discussions)，有想看到我寫哪個主題的可以按個 upvote 或是留言。
 
 如果你對我怎麼學程式以及相關背景有興趣，可以閱讀：
 
@@ -42,7 +44,7 @@ date: 2021-05-25 22:30:00
 4. [四個月過去了，來找我學程式的學生們怎麼樣了？](https://medium.com/hulis-blog/mentor-program-2nd-review-e7c15f24dfb8)
 5. [Lidemy 鋰學院](https://lidemy.com)
 
-想看更多相關文章可以參考[我的 Medium 文章列表](https://github.com/aszx87410/blog/blob/master/medium.md)，想聯絡我的話可以透過 Email：aszx87410@gmail.com，網頁右上角也可以找到我的推特及臉書。
+想看更多相關文章可以參考[我的 Medium 文章列表](https://github.com/aszx87410/blog/blob/master/medium.md)，想聯絡我的話可以透過 Email：aszx87410@gmail.com，網頁右上角也可以找到我的臉書。
 
 ## 關於部落格
 
