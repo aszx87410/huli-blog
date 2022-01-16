@@ -40,7 +40,7 @@ Origin 的話就是：scheme + port + host，三者加起來就是 origin。
 1. `https://huli.tw/abc` 跟 `https://huli.tw/hello/yo` 是 same origin，因為 scheme、port 跟 host 都一樣，path 不影響結果
 2. `https://huli.tw` 跟 `http://huli.tw` 不是 same origin，因為 scheme 不一樣
 3. `http://huli.tw` 跟 `http://huli.tw:8080` 不是 same origin，因為 port 不一樣
-4. `https://huli.tw` 跟 `http://blog.huli.tw` 不是 same origin，因為 host 不一樣
+4. `https://huli.tw` 跟 `https://blog.huli.tw` 不是 same origin，因為 host 不一樣
 
 從上面幾個範例可以看出 same origin 的條件相當嚴苛，基本上除了 path 以外的部分都要一樣，才能叫做 same origin。
 
@@ -319,7 +319,7 @@ Same origin 看的是：
 
 `document.domain` 就是改變 origin tuple 中 domain 這個屬性用的。
 
-在上面的範例中，我們兩個網頁 `https://alice.example.com:5555` 跟 `https://bob.example.com:5555` 都將自己的 domain 改成 `example.com`，所以是 same origin-domain。
+在上面的範例中，我們兩個網頁 `http://alice.example.com:5555` 跟 `http://bob.example.com:5555` 都將自己的 domain 改成 `example.com`，所以是 same origin-domain。
 
 底下我們來看看三個有趣的案例。
 
