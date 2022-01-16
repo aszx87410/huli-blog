@@ -51,8 +51,8 @@ Origin 的話就是：scheme + port + host，三者加起來就是 origin。
 1. `https://huli.tw/abc` 跟 `https://huli.tw/hello/yo` 是 same site，因為 scheme 跟 host 都一樣
 2. `https://huli.tw` 跟 `http://huli.tw` 不是 same site，因為 scheme 不一樣
 3. `http://huli.tw` 跟 `http://huli.tw:8080` 是 same site，因為 port 不影響結果
-4. `https://huli.tw` 跟 `http://blog.huli.tw` 是 same site，因為 huli.tw 跟 blog.huli.tw 都在同一個 domain huli.tw 底下
-5. `https://abc.huli.tw` 跟 `http://blog.huli.tw` 也是 same site，因為 abc.huli.tw 跟 blog.huli.tw 都在同一個 domain huli.tw 底下
+4. `https://huli.tw` 跟 `https://blog.huli.tw` 是 same site，因為 huli.tw 跟 blog.huli.tw 都在同一個 domain huli.tw 底下
+5. `https://abc.huli.tw` 跟 `https://blog.huli.tw` 也是 same site，因為 abc.huli.tw 跟 blog.huli.tw 都在同一個 domain huli.tw 底下
 
 跟 same origin 比起來，same site 顯然更為寬鬆，port 不同也是 same site，host 的部分只要隸屬於同個 parent domain 基本上也是 same site。
 
