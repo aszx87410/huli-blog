@@ -19,6 +19,8 @@ Same site 跟 same origin 雖然看起來有點像，但其實差別不小，而
 
 （開始之前先回答一個疑問。是的，標題的靈感來自於忍者哈特利）
 
+2022-01-20：修改「細究 same site」段落，補充 scheme 相關歷史，感謝 [@littlegoodjack](https://twitter.com/littlegoodjack)
+
 <!-- more -->
 
 ## 初探 origin 與 site
@@ -107,7 +109,7 @@ site 的定義也在同一份 spec 裡面，寫說：
 
 所以 site 可以是 opaque origin，或者是 scheme-and-host。
 
-而 spec 中又把 same site 分成兩種，一種是 schemelessly same site，另一種就是我們認知中的 same site，差別也很明顯，schemelessly 不看 scheme。
+在 spec 中可以發現除了 same site 以外，還有另外一個名詞叫做「schemelessly same site」，這兩個的差別也很明顯，same site 會看 scheme，而 schemelessly same site 則不看 scheme。
 
 因此，在判斷兩個 origin A 跟 B 是否是 same site 時，演算法是這樣的：
 
@@ -118,9 +120,25 @@ site 的定義也在同一份 spec 裡面，寫說：
 
 如果 A 跟 B 是 same site，要嘛他們都是 opaque origin，要嘛兩個有著同樣的 scheme 而且兩個是 schemelessly same site。
 
-所以 same site 是會看 scheme 的，http 跟 https 的兩個網址不會是 same site，但有可能是 schemelessly same site。
+所以 same site 是會看 scheme 的，http 跟 https 的兩個網址絕對不會是 same site，但有可能是 schemelessly same site。
 
-接著就來看一下最重要的 schemelessly same site 是如何判斷的：
+這邊其實有一小段歷史，那就是 same site 剛出來的時候，其實是不看 scheme 的，是到後來才把 scheme 納入考量。
+
+在這份 2016 的 [RFC: Same-site Cookies](https://datatracker.ietf.org/doc/html/draft-west-first-party-cookies-07#section-2.1) 中，可以看到對於 same site 的判斷並沒有 scheme，所以那時候 `https://huli.tw` 跟 `http://huli.tw` 是 same site。
+
+一直到 2019 年 6 月的時候，才開始在討論是否要把 scheme 列入考量，詳情可參考：[Treat http://foo.com -> https://foo.com requests as Sec-Fetch-Site: cross-site. #34](https://github.com/w3c/webappsec-fetch-metadata/issues/34)。
+
+那時 same site 的 spec 並不是定義在我們今天看的 HTML spec 裡面，而是另外一份 URL spec，所以後來討論被移到那邊去：[Consider introducing a "same-site" concept that includes scheme. #448](https://github.com/whatwg/url/issues/448)，接著在 2019 年 9 月，就有了這個 PR：[Tighten 'same site' checks to include 'scheme'. #449](https://github.com/whatwg/url/pull/449)，才正式在規格中把 scheme 列入考量，將 same site 定義成「會看 scheme」，而不看 scheme 的則引入了一個新的名詞：schemelessly same site。
+
+接著過了兩個月，相關的 spec 從 URL 移到 HTML，可參考這兩個 PR：[Let HTML handle the "same site" definition #457](https://github.com/whatwg/url/pull/457)、[Define (schemelessly) same site for origins #5076](https://github.com/whatwg/html/pull/5076)
+
+Spec 歸 spec，有時候規格修正不代表瀏覽器就會馬上跟上，那瀏覽器目前的實作為何呢？
+
+Chrome 在 2020 年 11 月時有寫了一篇文章：[Schemeful Same-Site](https://web.dev/schemeful-samesite/)，看來在那時瀏覽器還是把不同 scheme 也當作是 same site，但從 [Chrome platform status:  Feature: Schemeful same-site](https://chromestatus.com/feature/5096179480133632) 中我們可以得知，Chrome 從 89 以後就把 scheme 也列入考慮了。
+
+至於 Firefox 的話，從這個 issue：[[meta] Enable cookie sameSite schemeful](https://bugzilla.mozilla.org/show_bug.cgi?id=1651119) 的狀態看來，似乎還沒有把這個行為當作是預設值，如果沒有特別調整設定，scheme 不同也會被看作是 same site。
+
+看完了歷史，接著就來看一下最重要的 schemelessly same site 是如何判斷的：
 
 ![schemelessly same site](/img/same-site-to-same-origin/p1-schemelessly-same-site.png)
 
