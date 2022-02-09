@@ -163,6 +163,49 @@ wrapper('I am flag')
 
 第二個是 `arguments.callee.caller` 這個操作我自己在兩年前就寫過：[覺得 JavaScript function 很有趣的我是不是很奇怪](https://blog.huli.tw/2020/04/18/javascript-function-is-awesome/)。
 
+2022-02-09 補充：
+
+補充一下另一個我覺得很帥氣的解法，來自這邊：[DiceCTF 2022 WriteUps by maple3142](https://blog.maple3142.net/2022/02/07/dicectf-2022-writeups/#undefined)
+
+這邊用了 Node.js 可以拿到 structuredStackTrace 的 feature，簡單的 POC 長這樣：
+
+``` js
+function CustomError() {
+  const oldStackTrace = Error.prepareStackTrace
+  try {
+    Error.prepareStackTrace = (err, structuredStackTrace) => structuredStackTrace
+    Error.captureStackTrace(this)
+    this.stack
+  } finally {
+    Error.prepareStackTrace = oldStackTrace
+  }
+}
+function trigger() {
+  const err = new CustomError()
+  for (const x of err.stack) {
+    console.log(x.getFunction()+"")
+  }
+}
+trigger()
+```
+
+我們可以用 `x.getFunction()` 拿到上層的 function，就是 Node.js 幫忙加上 wrapper 的那個，再一樣用 `arugments` 去拿到參數，官方有個文件在講 [Stack trace API](https://v8.dev/docs/stack-trace-api)。
+
+然後還有一點我覺得很酷，就是上面 POC 中如果放到 undefined 這題，我們是沒有 `Error` 可以用的，那怎麼辦呢？
+
+writeup 的作者用了這招：
+
+``` js
+try {
+	null.f()
+} catch (e) {
+	TypeError = e.constructor
+}
+Error = TypeError.prototype.__proto__.constructor
+```
+
+沒錯啊！既然拿不到 Error，就先自己製造一個 TypeError，再利用 TypeError 是繼承自 Error 的特性，就可以不依靠 global 拿到 Error constructor 了，這招好帥。
+
 ## web/blazingfast(75 solves)
 
 這題的敘述是：
