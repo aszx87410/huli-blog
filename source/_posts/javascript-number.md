@@ -302,7 +302,7 @@ console.log(Math.abs(3.3 - (1.1 + 1.1 + 1.1)) < Number.EPSILON) // false
 在 JavaScript 中，當你對數字做一些「不是數字」的操作時，就會產生一個叫做 NaN 的東西：
 
 ``` js
-console.log(String('abc')) // NaN
+console.log(Number('abc')) // NaN
 console.log(500/undefined) // NaN
 ```
 
