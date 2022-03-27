@@ -214,6 +214,8 @@ $'\151\144'
 
 靠這樣就可以繞開限制，不用到字母，bash 真是博大精深。
 
+在 Discord 看到有人貼這串，值得參考跟筆記一下：[好讀版](https://threadreaderapp.com/thread/1023682809368653826.html)，推特原串：https://twitter.com/DissectMalware/status/1023682809368653826
+
 ## online library(19 solves)
 
 這是個可以讀取特定檔案範圍的網頁，重點在這一段：
