@@ -170,6 +170,12 @@ def query_params(self) -> QueryParams:
 
 這真的是要看 source code 才會發現這種差異。
 
+2022-03-29 補充：
+
+感謝 @Zedd 提醒，把 `;` 當作 `&` 來看的行為跟 Python 版本有關，因為會引起 cache poisoning 的關係，在較新的版本中都已經修復了，而挑戰時使用的版本是 3.9.0，所以才有這問題，而我在本機重現時用的也是還沒修復的版本。
+
+漏洞編號為 CVE-2021-23336，詳情可看這裡：[urllib parse_qsl(): Web cache poisoning - semicolon as a query args separator](https://python-security.readthedocs.io/vuln/urllib-query-string-semicolon-separator.html)。
+
 ## bb(27 solves)
 
 程式碼很短：
