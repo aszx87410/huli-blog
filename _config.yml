@@ -6,7 +6,7 @@
 title: Huli
 subtitle: Learning by sharing
 author: Huli
-language: zh-tw
+language: ['zh-tw', 'en']
 timezone:
 
 # URL
