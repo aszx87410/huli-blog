@@ -6,6 +6,8 @@ tags: [Security, Front-end]
 categories: [Security]
 ---
 
+<img src="/img/javascript-magic-of-string-and-regexp/cover-en.png" style="display:none;">
+
 It's a blog post about a few magical features that I have encountered recently. It is not interesting to say it directly. Let’s start with a few small challenges:
 
 <!-- more -->
