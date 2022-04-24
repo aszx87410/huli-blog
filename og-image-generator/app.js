@@ -35,7 +35,7 @@ try {
 }
 
 const template = fs.readFileSync(getPath('resources/template.html'), 'utf8')
-  .replace(/{{title}}/g, postMeta.attributes.title)
+  .replace(/{{title}}/g, escape(postMeta.attributes.title))
   .replace(/{{publishedDate}}/g, postMeta.attributes.date.toISOString().substr(0, 10))
 
 
