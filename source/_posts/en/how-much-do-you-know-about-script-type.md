@@ -1,52 +1,52 @@
 ---
-title: script type 知多少？
+title: How much do you know about script type?
 date: 2022-04-24 10:20:16
 tags: [Security]
 categories: [Security]
 ---
 
-<img src="/img/script-type/cover.png" style="display:none">
+<img src="/img/how-much-do-you-know-about-script-type/cover-en.png" style="display:none">
 
-前陣子剛好玩到不少跟 content type 有關的題目，寫一篇來記錄一下。
+A while ago, I happened to play a lot of topics related to content type, so I decided to wrote an article about it.
 
 <!-- more -->
 
-老樣子，直接講答案不有趣，開頭先來三個問題：
+As usual, it’s not interesting to talk about the answer directly, so let’s start with three questions:
 
-### 問題一
+### Question one
 
-請問底下的程式碼中，`a.js` 的 content type 要是什麼才會成功載入程式碼？（先假設 MIME type sniffing 是關閉的）
+In the code below, what is the content type for `a.js` to successfully load the code? (Assume MIME type sniffing is off)
 
-例如說 `text/javascript` 就是一個答案，還有嗎？
+For example, `text/javascript` is one answer, what else?
 
 ``` html
 <script src="https://example.com/a.js">
 ```
 
-### 問題二
+### Question two
 
-請問底下的 "???" 中可以填入哪些值？例如說 `text/javascript` 就是一個答案，`module` 也是一個答案。
+What values ​​can be filled in the "???"? For example, `text/javascriptis` and `module` are both correct answer, what else?
 
 ``` html
 <script type="???">
 </script>
 ```
 
-### 問題三
+### Question three
 
-現在你有個網頁 `/test`，請問 response 中的 content-type 如果設定成哪些，瀏覽器載入後就能夠執行 JS 程式碼？
+Now that you have a web page. In order to let browser run script after loaded, what should be the content type in the response?
 
-例如說 `text/html` 就是一個，`text/xml` 也是一個。
+For example, `text/html` and `text/xml` are both correct, what else?
 
 ***  
 
-底下就讓我們來看一下答案。
+Let's take a look at the answer below.
 
-## 問題一：<script&gt; 能接受的 content type
+## Question 1: Acceptable content type for <script&gt;
 
-會開始思考這個問題以及答案，是來自於 [@ankursundara](https://twitter.com/ankursundara/status/1460810934713081862) 在去年年底出的一個 XSS 挑戰：https://twitter.com/ankursundara/status/1460810934713081862
+I start thinking about this question because of an XSS challenge made by [@ankursundara](https://twitter.com/ankursundara/status/1460810934713081862) last year: https://twitter.com/ankursundara/status/1460810934713081862
 
-部分程式碼如下：
+Part of the code is as follows:
 
 ``` py
 @app.post('/upload')
@@ -86,27 +86,29 @@ def headers(response):
     return response
 ```
 
-簡單來說，你可以上傳任意檔案，但如果檔案的 MIME type 有 `script` 的話，就會變成 `application/octet-stream`。
+Simply put, you can upload any file, but if the file's MIME type has `script`, it will be `application/octet-stream`.
 
-然後 `X-Content-Type-Options` 有設置成 `nosniff`，所以 MIME type 設置什麼就是什麼了。
+`X-Content-Type-Optionsit` is set to `nosniff`, so we can't abuse MIME type sniffing.
 
-目標的話則是順利執行 XSS。
+The goal is to successfully execute XSS.
 
-從上面的程式碼不難看出，可以上傳一個 HTML 檔案，但因為 CSP 有 `script-src 'self'` 的關係，因此就算能上傳 HTML，也不能用 inline script，只能用 `<script src="/uploads/xxx">` 這種方式引入。
+It is not difficult to see from the above code that an HTML file can be uploaded, but because of `script-src 'self'` CSP, even if HTML can be uploaded, inline script cannot be used.
 
-而如果 `/uploads/xxx` 的 content type 是 `application/octet-stream` 的話，Chrome 會直接噴錯給你看：
+We can only import script this way: `<script src="/uploads/xxx">`.
+
+But, if the content type of `/uploads/xxx` is `application/octet-stream`, Chrome will throw following error:
 
 > Refused to execute script from 'https://uploader.c.hc.lc/uploads/xxx' because its MIME type ('application/octet-stream') is not executable, and strict MIME type checking is enabled.
 
-所以這題的目標很明確，要找到一個沒有包含 script 但是瀏覽器又可以成功載入的 MIME type。
+So the goal of this question is very clear, to find a MIME type that does not contain `script` but can be successfully loaded by the browser.
 
-看到這題以後，我先去找了 Chromium 的原始碼來看，可以用 Google search 的方式搭配剛剛的錯誤訊息會比較好找：`"strict MIME type checking is enabled" site:https://chromium.googlesource.com/`
+After seeing this challenge, my first idea is to check the source code of Chromium, it's easier to find the related part by googling the error message:`"strict MIME type checking is enabled" site:https://chromium.googlesource.com/`
 
-透過搜尋結果，可以直接定位到這個檔案：https://chromium.googlesource.com/chromium/blink/+/refs/heads/main/Source/core/dom/ScriptLoader.cpp
+We can find this related file through the search results: https://chromium.googlesource.com/chromium/blink/+/refs/heads/main/Source/core/dom/ScriptLoader.cpp
 
-不過這檔案已經很舊了，但至少我們知道它屬於 blink 的一部份，因此可以到 Chromium 的 [blink](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/103.0.5012.1/third_party/blink) 裡面去找類似的檔案，可以找到 [third_party/blink/renderer/core/script/script_loader.cc](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/103.0.5012.1/third_party/blink/renderer/core/script/script_loader.cc)
+This file is very old and deprecated, but at least we know it's part of blink, so we can find a similiar file in the latest codebase, what I found is: [third_party/blink/renderer/core/script/script_loader.cc](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/103.0.5012.1/third_party/blink/renderer/core/script/script_loader.cc)
 
-把新舊稍微對照之後，可以找到 `IsValidClassicScriptTypeAndLanguage` 這個函式：
+You can find this function: `IsValidClassicScriptTypeAndLanguage` 
 
 ``` cpp
 // <specdef href="https://html.spec.whatwg.org/C/#prepare-a-script">
@@ -162,7 +164,7 @@ bool IsValidClassicScriptTypeAndLanguage(
 }
 ```
 
-接著拿 `IsSupportedJavaScriptMIMEType` 再去搜尋一波，就可以找到 [third_party/blink/common/mime_util/mime_util.cc](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/103.0.5012.1/third_party/blink/common/mime_util/mime_util.cc)，裡面就能看到支援的 MIME type：
+Then, we can search this keyword:`IsSupportedJavaScriptMIMEType` and find this file: [third_party/blink/common/mime_util/mime_util.cc](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/103.0.5012.1/third_party/blink/common/mime_util/mime_util.cc)
 
 ``` js
 //  Support every script type mentioned in the spec, as it notes that "User
@@ -188,19 +190,21 @@ const char* const kSupportedJavascriptTypes[] = {
 };
 ```
 
-從註解中也能看到 spec 的位置，給出的列表是一樣的，而這個列表基本上就是第一題的答案，上面這些 MIME type 都可以被載入為 script。
+You can also see the URL of the spec from the comments. The list given is the same, and this list is basically the answer to the first question. The above MIME types can be loaded as script.
 
-不過我們可以發現一件事情，那就是每一個 MIME type 都有包含 script。
+But we can find one thing, that is, every MIME type contains `script`.
 
-當時做到這邊我就卡住了，後來作者有釋出提示，叫做 `Origin trials`，循線可以找到一個正在實驗中的功能叫做 [Web Bundles](https://web.dev/web-bundles/)，這個就是這題的解答。
+At that time, I got stuck at this point. Later, the author released a hint: `Origin Trials`. Follow the hint I found a feature called [Web Bundles](https://web.dev/web-bundles/). This is the answer to the XSS challenge.
 
-什麼是 Web Bundles 呢？
+What is Web Bundles?
 
-簡單來說呢，Web Bundle 就是把一堆資料（HTML, CSS, JS...）打包在一起，變成一個 .wbn 的檔案，上面的文章有講到一個範例，例如說你朋友在沒有網路的環境下想分享一個單機版的網頁遊戲給你，一般來說是做不到的（先不考慮你在自己電腦上架個 server 之類的）。
+To put it simply, Web Bundles is a feature that you can package a bunch of data (HTML, CSS, JS...) together into a .wbn file. The above article mentions an example that your friend wants to share with a web game with you, but he can't do it because there is no internet connection.
 
-但透過 Web Bundle，它可以把遊戲打包成一個 .wbn 檔再傳給你，你收到以後只要丟到瀏覽器裡面就可以打開了，就像一個 app 的那種感覺。
+But through the Web Bundles, he can package the web game into a .wbn file and send it to you. After you receive it via bluetooth or airdrop, you can just open it in the browser, just like an app.
 
-除了載入整個 app 以外，也可以從 Web Bundle 中載入特定資源，這邊有完整的介紹：[Explainer: Subresource loading with Web Bundles](https://github.com/WICG/webpackage/blob/main/explainers/subresource-loading.md)，範例長這樣：
+In addition to loading the entire app, you can also load specific resources from the Web Bundle. You can find the detail here:[Explainer: Subresource loading with Web Bundles](https://github.com/WICG/webpackage/blob/main/explainers/subresource-loading.md).
+
+Here is the example from the article:
 
 ``` html
 <script type="webbundle">
@@ -211,15 +215,15 @@ const char* const kSupportedJavascriptTypes[] = {
 </script>
 ```
 
-透過這樣的方式，當你在網頁中載入 `https://example.com/dir/a.js` 的時候，瀏覽器就會先去 subresources.wbn 當中尋找這個資源，而不是直接去 server 下載。
+When you load `https://example.com/dir/a.js` , the browser will first go to subresources.wbn to find this resource, instead of reaching to the server to download it directly.
 
-所以開頭提到的那題 XSS 挑戰，答案就是這個，你把想要載入的 JS 包到 web bundle 裡面去，它的 MIME type 是 `application/webbundle`，所以不會被擋下來。
+So, for the XSS challenge I mentioned in the beginning, the answer is to bundle the JavaScript into a web bundle file, and then load it. It's MIME type is `application/webbundle`, so it's allow.
 
-接著像上面那樣載入，從 web bundle 裡面載入的 JS 檔案 MIME type 會是正確的，所以可以成功執行。
+After web bundle is loaded, we can load script from it.
 
-不過，為什麼我們剛剛在看 Chromium 程式碼的時候沒看到這個功能呢？
+But why didn't we see this feature when we looked at the Chromium code?
 
-這是因為我們太執著在 MIME type 這件事情，所以只看 `IsValidClassicScriptTypeAndLanguage`，但其實要看的應該是呼叫它的 [GetScriptTypeAtPrepare](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/103.0.5012.1/third_party/blink/renderer/core/script/script_loader.cc)：
+This is because we are too focus on MIME type, so we only look at`IsValidClassicScriptTypeAndLanguage`, but we should see another function who call it: [GetScriptTypeAtPrepare](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/103.0.5012.1/third_party/blink/renderer/core/script/script_loader.cc)：
 
 ``` C++
 ScriptLoader::ScriptTypeAtPrepare ScriptLoader::GetScriptTypeAtPrepare(
@@ -253,38 +257,40 @@ ScriptLoader::ScriptTypeAtPrepare ScriptLoader::GetScriptTypeAtPrepare(
 }
 ```
 
-可以看到呼叫 `IsValidClassicScriptTypeAndLanguage` 只是第一步，後面還有其他步驟，可以傳入其他 type，而這剛好就是問題二的解答。
+Calling `IsValidClassicScriptTypeAndLanguage` is just the first step, there are other `type` as well, and it's the answer to question two.
 
-## 問題二：<script&gt; 能接受的 type
+## Question 2: Acceptable types of <script&gt;
 
-會思考這題是因為 PlaidCTF 2022 裡面有一題 YACA，就是在考這個點，官方解答在這：https://github.com/zwade/yaca/tree/master/solution
+Like previous question, it's also about a CTF challenge. There is a challenge called YACA in PlaidCTF 2022, here is the offical writeup: https://github.com/zwade/yaca/tree/master/solution
 
-在做這題的時候我完全忘記以前做過 Web Bundle 那題，所以沒有往這方向去找。但總之呢，從剛剛貼的程式碼可以看出這題的答案就是第一題的答案（那一堆 MIME type）加上底下四個 type：
+We know from the code I just posted that  the answer to this question is the answer to the first question (that pile of MIME types) plus the following four types:
 
 1. module
 2. importmap
 3. speculationrules
 4. webbundle
 
-module 這個沒什麼好講的，webbundle 剛剛也提過了，底下我們來看看 importmap 跟 speculationrules 這兩個東西。
+We already know `module` and `webbundle`, so let's take a look at importmap and specificationrules.
 
-import map 的規格在這：https://github.com/WICG/import-maps
+The specification of import map is here: https://github.com/WICG/import-maps
 
-簡單來說呢，import map 想解決的問題很簡單，就是現在雖然瀏覽器已經支援 module 跟 import 了，但你還是沒辦法在瀏覽器上這樣做：
+What is the problem import map wants to solve?
+
+Although the browser already supports module and import, you still can't do this on the browser:
 
 ``` js
 import moment from "moment";
 import { partition } from "lodash";
 ```
 
-你只能寫一個路徑之類的：
+You can only write like this:
 
 ``` js
 import moment from "/node_modules/moment/src/moment.js";
 import { partition } from "/node_modules/lodash-es/lodash.js";
 ```
 
-而 import map 的解法是引入一個對照表，就可以只用名稱來引入：
+import map want to solve this problem by introducing a mapping table:
 
 ``` html
 <script type="importmap">
@@ -297,7 +303,7 @@ import { partition } from "/node_modules/lodash-es/lodash.js";
 </script>
 ```
 
-而開頭提到的題目就是利用這點，用對照表來替代載入的檔案，像這樣：
+The challenge we mentioned can be solve by changing the file like this:
 
 ``` html
 
@@ -310,9 +316,9 @@ import { partition } from "/node_modules/lodash-es/lodash.js";
 </script>
 ```
 
-接著我們來看 speculationrules，規格在這：https://github.com/WICG/nav-speculation
+Let's take a look at speculationrules, here is the spec: https://github.com/WICG/nav-speculation
 
-這個功能主要是想解決 pre-rendering 所造成的一些問題，我還沒有深入研究，但用起來像是這樣：
+This feature is mainly to solve some problems caused by pre-rendering, I haven't delved into it. It works like this:
 
 ``` html
 <script type="speculationrules">
@@ -330,29 +336,29 @@ import { partition } from "/node_modules/lodash-es/lodash.js";
 </script>
 ```
 
-就是用 JSON 的方式來制定 pre-render 的規則，跟以前用 `<link rel="prerender">` 的方式滿不一樣的。
+It uses a JSON file for the pre-render rule, quite different from `<link rel="prerender">`.
 
+## Question 3: content type
 
+It's from a challenge called [PlanetSheet](https://ctf.zeyu2001.com/2022/securinets-ctf-quals-2022/planetsheet) in Securinets CTF Quals 2022. When the content type is `text/xsl` , we can run script via `<x:script>`.
 
-## 問題三
+This classic research is mentioned in each writeup: [Content-Type Research
+](https://github.com/BlackFan/content-type-research/blob/master/XSS.md), you can find the detail in it.
 
-靈感一樣來自於 CTF，Securinets CTF Quals 2022 的 [PlanetSheet](https://ctf.zeyu2001.com/2022/securinets-ctf-quals-2022/planetsheet)，當 content type 是 `text/xsl` 的時候，可以用 `<x:script>` 來執行 XSS。
-
-每篇 writeup 中都有提到這個經典的研究：[Content-Type Research
-](https://github.com/BlackFan/content-type-research/blob/master/XSS.md)，細節可以點進去看，底下這五個 content type 在所有瀏覽器下都可以執行 XSS：
+The following five content types can execute XSS in all browsers:
 
 1. text/html	
 2. application/xhtml+xml	
 3. application/xml	
 4. text/xml	
-5. image/svg+xml	
+5. image/svg+xml
 
-我好奇去找了一下 Chromium 的程式碼，發現還有另外兩個 content type 總是跟其他的被放在一起：
+I was curious about this behavior, so I checked the source code of Chromium a bit, and found other two content types that are always put together with the others:
 
 1. application/rss+xml
 2. application/atom+xml
 
-程式碼：[xsl_style_sheet_resource.cc](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/103.0.5012.1/third_party/blink/renderer/core/loader/resource/xsl_style_sheet_resource.cc#45)
+Code: [xsl_style_sheet_resource.cc](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/103.0.5012.1/third_party/blink/renderer/core/loader/resource/xsl_style_sheet_resource.cc#45)
 
 ``` c++
 static void ApplyXSLRequestProperties(FetchParameters& params) {
@@ -370,7 +376,7 @@ static void ApplyXSLRequestProperties(FetchParameters& params) {
 }
 ```
 
-不過這兩個並不會被當做 XML 載入，於是我找了一下，找到這個 bug：[Issue 104358: Consider allowing more types to parse as XML](https://bugs.chromium.org/p/chromium/issues/detail?id=104358)，裡面提到了這個 2009 就新增的 [commit](https://chromium.googlesource.com/chromium/src/+/b4599a15c90a853930187cc751c951beb819c02d%5E%21/#F0)，新增了底下的程式碼：
+However, these two will not be loaded as XML, so I searched and found this bug: [Issue 104358: Consider allowing more types to parse as XML](https://bugs.chromium.org/p/chromium/issues/detail?id=104358), which mentioned a [commit](https://chromium.googlesource.com/chromium/src/+/b4599a15c90a853930187cc751c951beb819c02d%5E%21/#F0) in 2009:
 
 ``` c++
 if (mime_type == "application/rss+xml" ||
@@ -387,7 +393,7 @@ if (mime_type == "application/rss+xml" ||
 }
 ```
 
-因為 RSS feed 有可能會包含第三方的東西，如果直接當 XML 來 render 的話會用 XSS 的風險，所以這兩個就被強制關掉了。
+Because the RSS feed may contain third-party cotnent, it's vulnerable to XSS if it is rendered as XML, so these two are forcibly turned off.
 
-最後筆記一下一個可以幫忙搜尋原始碼的工具，超好用：https://sourcegraph.com/search
+By the way, there is a awesome tool for searching source code: https://sourcegraph.com/search
 
