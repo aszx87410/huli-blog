@@ -383,7 +383,7 @@ Atomic CSS 保留了 inline style 的好處，也就是 scope 很小，同時也
 
 在原本 ACSS 的寫法下，其實 class name 的長度不會比本來大多少。
 
-舉例來說，原本叫做 `profile__image-background`，改寫之後可能是 `D-ib Bgc(#ff0010)` 之類的。根據他們自己做的統計，Yahoo! 自己的網站平均的 class name 長度是 22，而其他沒有用 ACSS 寫法的 Twitter 平均是 28，USA today 是 38，衛報網站是 36，只有特別對 class name 做了 uglify 的 Facebookg 是 18，些微勝出而已。
+舉例來說，原本叫做 `profile__image-background`，改寫之後可能是 `D-ib Bgc(#ff0010)` 之類的。根據他們自己做的統計，Yahoo! 自己的網站平均的 class name 長度是 22，而其他沒有用 ACSS 寫法的 Twitter 平均是 28，USA today 是 38，衛報網站是 36，只有特別對 class name 做了 uglify 的 Facebook 是 18，些微勝出而已。
 
 而且，除了 class name 並沒有明顯變長以外，ACSS 還有一個好處是重複字元很多，所以 gzip 的壓縮率會比較高。官網有給了一個數據是說他們自己經過測試後，semantic classes 可以降 35% 大小，而 ACSS 可以降 48%。
 
@@ -494,7 +494,7 @@ Atomic CSS 是在維護大型專案的時空背景之下誕生的，如果你沒
 
 （[daisyUI](https://daisyui.com/) 是靠著把 HTML 一起開放出來，藉此達成客製化，我上面指的案例比較像是寫一個 React component，把實作細節包在裡面的那種）
 
-每個專案都有不同適合的技術棧，在做選擇時應該先了解每個專案的需求，以及每一項技術的優缺點，才能挑到相對合適的技術。
+每個專案都有不同適合的技術與工具，在做選擇時應該先了解每個專案的需求，以及每一項技術的優缺點，才能挑到相對合適的技術。
 
 最後，從 Atomic CSS 的歷史中，我覺得最值得學習的其實是「Tools, not rules」那一段。以前的最佳實踐不一定適用於現在的狀況，以前的 class name 不是這樣用的，不代表現在就不行。我們不該墨守成規，不該執著在那些規則上面；如果別的做法有顯而易見的好處，那為何不呢？
 
