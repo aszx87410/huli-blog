@@ -51,7 +51,7 @@ def get_user():
     return user
 ```
 
-會從 cookie 去斷你是哪一個 user，序列化跟反序列化的程式碼如下：
+會從 cookie 去判斷你是哪一個 user，序列化跟反序列化的程式碼如下：
 
 ``` py
 def serialize_user(user_string):
