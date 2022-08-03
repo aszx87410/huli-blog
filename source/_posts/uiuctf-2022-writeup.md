@@ -1,5 +1,5 @@
 ---
-title: uiuctf-2022-writeup
+title: UIUCTF 2022 筆記
 catalog: true
 date: 2022-08-01 20:31:10
 tags: [Security]
