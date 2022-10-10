@@ -423,7 +423,7 @@ div::-webkit-scrollbar:vertical {
 5. 載入有連字 aca 的字體，沒事發生
 6. 載入有連字 acb 的字體，沒事發生
 7. 載入有連字 acc 的字體，成功 render，scrollbar 出現，傳送結果給 server
-8. server 知道畫面上有 aca
+8. server 知道畫面上有 acc
 
 透過連字結合 scrollbar，我們可以一個字元一個字元，慢慢 leak 出畫面上所有的字，甚至連 JavaScript 的程式碼都可以！
 
