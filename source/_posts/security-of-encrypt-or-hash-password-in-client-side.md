@@ -292,6 +292,12 @@ API 網址：https://account.proton.me/api/auth/info
 }
 ```
 
+補充：討論串有人提醒後發現這是一個叫做 SRP（Secure Remote Password）的協議，Proton 有提供一個 [ProtonMail Security Features and Infrastructure](https://proton.me/static/9f5e7256429a2f674c943c5825257b82/protonmail_authentication_excerpt.pdf)，裡面有記錄他們的安全措施，就有講到這個機制。
+
+看起來滿複雜要花不少時間研究，先放著，有興趣的可以參考：[SRP — 更健全的登入及資料傳輸保護協議](https://blog.amis.com/srp-1f28676aa525)
+
+雖然更安全，但成本應該又更高了。
+
 ### 交易所與銀行
 
 看完上面案例發現有做的是少數，因此我好奇更注重安全的加密貨幣交易所與傳統銀行有沒有做。
