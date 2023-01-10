@@ -278,7 +278,7 @@ API 網址：https://account.proton.me/api/auth/info
 }
 ```
 
-接著輸入密碼登入時，把密碼用剛剛的 key 加密過後傳輸：
+接著輸入密碼登入時，會送出如下的 request，看起來也很複雜：
 
 ```
 {
@@ -292,7 +292,7 @@ API 網址：https://account.proton.me/api/auth/info
 }
 ```
 
-補充：討論串有人提醒後發現這是一個叫做 SRP（Secure Remote Password）的協議，Proton 有提供一個 [ProtonMail Security Features and Infrastructure](https://proton.me/static/9f5e7256429a2f674c943c5825257b82/protonmail_authentication_excerpt.pdf)，裡面有記錄他們的安全措施，就有講到這個機制。
+補充：經討論串有人提醒後發現這是一個叫做 SRP（Secure Remote Password）的協議，Proton 有提供一個 [ProtonMail Security Features and Infrastructure](https://proton.me/static/9f5e7256429a2f674c943c5825257b82/protonmail_authentication_excerpt.pdf)，裡面有記錄他們的安全措施，就有講到這個機制。
 
 看起來滿複雜要花不少時間研究，先放著，有興趣的可以參考：[SRP — 更健全的登入及資料傳輸保護協議](https://blog.amis.com/srp-1f28676aa525)
 
