@@ -3,11 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Huli
+title: Huli's blog
 subtitle: Learning by sharing
 author: Huli
 language: ['zh-tw', 'en']
 timezone:
+
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
