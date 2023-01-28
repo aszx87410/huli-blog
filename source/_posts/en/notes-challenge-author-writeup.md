@@ -417,10 +417,12 @@ Here is the final payload for the intended solution:
   <div class="g-recaptcha" data-sitekey="B" data-error-callback="loadData" data-size="invisible"></div>
   
   <div data-ng-app data-ng-csp>
-    ｛{ "abc".encode.call().alert("abc".encode.call().document.domain) }}
+    [["abc".encode.call().alert("abc".encode.call().document.domain)]]
   </div>
 </div>
 ```
+
+Note: somehow hexo throw error if I used `}{`, so I changed to `[[]]`
 
 ## Unintended
 
