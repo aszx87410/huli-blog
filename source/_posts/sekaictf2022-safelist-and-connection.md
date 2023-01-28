@@ -3,8 +3,8 @@ title: SekaiCTF 2022 筆記與 concurrent limit
 date: 2022-10-08 09:43:37
 tags: [Security]
 categories: [Security]
+photos: /img/sekaictf2022-safelist-and-connection/cover.png
 ---
-<img src="/img/sekaictf2022-safelist-and-connection/cover.png" style="display:none">
 
 上個假日隨意地玩了一下 SekaiCTF 2022，不得不說視覺風格滿讚的，看得出來花了滿多心思在這個上面，很有遊戲的感覺。
 

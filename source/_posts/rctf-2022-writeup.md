@@ -4,9 +4,8 @@ catalog: true
 date: 2022-12-14 20:10:44
 tags: [Security]
 categories: [Security]
+photos: /img/rctf-2022-writeup/cover.png
 ---
-
-<img src="/img/rctf-2022-writeup/cover.png" style="display:none">
 
 簡單記一些自己有打的題目，沒有打的就不記了。
 

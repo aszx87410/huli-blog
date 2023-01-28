@@ -3,8 +3,8 @@ title: Hack. lu CTF 2022 筆記
 date: 2022-10-31 20:05:37
 tags: [Security]
 categories: [Security]
+photos: /img/hacklu-ctf-2022-writeup/cover.png
 ---
-<img src="/img/hacklu-ctf-2022-writeup/cover.png" style="display:none">
 
 被 web 題電得亂七八糟，基本上什麼都沒解出來。題目的品質都很不錯，學到很多新東西，值得記錄一下。
 

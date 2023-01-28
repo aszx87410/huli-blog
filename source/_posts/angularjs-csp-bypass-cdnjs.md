@@ -4,9 +4,8 @@ catalog: true
 date: 2022-09-01 19:31:10
 tags: [Security]
 categories: [Security]
+photos: /img/angularjs-csp-bypass-cdnjs/cover.png
 ---
-
-<img src="/img/angularjs-csp-bypass-cdnjs/cover.png" style="display:none">
 
 在我之前的文章：[從 cdnjs 的漏洞來看前端的供應鏈攻擊與防禦](https://blog.huli.tw/2021/08/22/cdnjs-and-supply-chain-attack/)裡面有提過可以藉由 cdnjs 來繞過 CSP，而有其中一種繞過手法必須搭配 prototype.js 才能成功。
 

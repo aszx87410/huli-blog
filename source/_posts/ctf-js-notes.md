@@ -4,9 +4,8 @@ catalog: true
 date: 2022-12-08 20:10:44
 tags: [Security]
 categories: [Security]
+photos: /img/ctf-js-notes/cover.png
 ---
-
-<img src="/img/ctf-js-notes/cover.png" style="display:none">
 
 前陣子有幾個 CTF 都很不錯，像是 SECCON 跟 HITCON，但可惜我前陣子剛好出國玩了，回來以後就懶得寫完整 writeup 了。原本其實連記下來都懶得記，可是一旦時間久了，要找相關的資料就會變得很難找，所以還是決定簡單記一下。
 

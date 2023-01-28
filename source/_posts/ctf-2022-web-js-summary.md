@@ -4,9 +4,8 @@ catalog: true
 date: 2022-12-26 20:10:44
 tags: [Security]
 categories: [Security]
+photos: /img/ctf-2022-web-js-summary/cover.png
 ---
-
-<img src="/img/ctf-2022-web-js-summary/cover.png" style="display:none">
 
 今年認真跟著 Water Paddler 打了一整年的 CTF，看到有人整理出了一篇 [CTF: Best Web Challenges 2022](https://blog.arkark.dev/2022/12/17/best-web-challs/)，發現裡面的題目大多數我都有打過，就想說那不如我來寫一篇整理吧，整理一下我自己打過覺得有學到新東西的題目。
 

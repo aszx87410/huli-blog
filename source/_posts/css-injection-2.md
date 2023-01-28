@@ -6,7 +6,7 @@ tags: [Security]
 categories: [Security]
 ---
 
-<img src="/img/css-injection-2/cover.png" style="display:none">
+<img src="/img/css-injection-2/cover.png" style="display:none" loading="lazy">
 
 在[上集](/2022/09/29/css-injection-1)裡面，我們知道了基本的 CSS 偷資料原理，並且以 HackMD 作為實際案例示範，成功偷到了 CSRF token，而這篇則是要深入去看 CSS injection 的一些細節，解決以下問題：
 

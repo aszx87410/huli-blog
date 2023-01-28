@@ -4,9 +4,8 @@ catalog: true
 date: 2023-01-10 09:10:44
 tags: [Security]
 categories: [Security]
+photos: /img/security-of-encrypt-or-hash-password-in-client-side/cover.png
 ---
-
-<img src="/img/security-of-encrypt-or-hash-password-in-client-side/cover.png" style="display:none">
 
 最近有人在臉書前端交流社群發了一則[貼文](https://www.facebook.com/groups/f2e.tw/posts/5689037364466915)，內容是他看到了一個問題：[請問登入api傳賬號、密碼json明碼會有問題嗎?](https://ithelp.ithome.com.tw/questions/10211642)，想知道大家對這個問題的看法。
 

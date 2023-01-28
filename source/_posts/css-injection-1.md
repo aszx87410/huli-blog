@@ -6,7 +6,7 @@ tags: [Security]
 categories: [Security]
 ---
 
-<img src="/img/css-injection-1/cover.png" style="display:none">
+<img src="/img/css-injection-1/cover.png" style="display:none" loading="lazy">
 
 在講到針對網頁前端的攻擊時，你我的心中浮現的八成會是 XSS，但如果你沒辦法在網頁上執行 JavaScript，有沒有其他的攻擊手法呢？例如說，假設可以插入 style 標籤，你能夠做些什麼？
 

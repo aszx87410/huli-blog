@@ -4,9 +4,8 @@ catalog: true
 date: 2022-08-01 20:31:10
 tags: [Security]
 categories: [Security]
+photos: /img/uiuctf-ctf-2022-writeup/cover.png
 ---
-
-<img src="/img/uiuctf-ctf-2022-writeup/cover.png" style="display:none">
 
 其實沒有參加這一次的 CTF，但有稍微看到兩題跟 content type 有關的題目覺得有趣，來記一下解法。
 
