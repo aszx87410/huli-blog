@@ -1,8 +1,17 @@
 ---
 layout: "recommend"
 title: "推薦閱讀"
-date: 2021-05-01 04:48:33
+date: 2023-01-29 04:48:33
 ---
+
+對資安有興趣的話，可以看看：
+
+1. [防止 XSS 可能比想像中困難](http://localhost:4000/2021/05/25/prevent-xss-is-not-that-easy/)
+2. [淺談 XSS 攻擊與防禦的各個環節](http://localhost:4000/2021/06/19/xss-attack-and-defense/)
+3. [利用 Cookie 特性進行的 DoS 攻擊：Cookie 炸彈](http://localhost:4000/2021/07/10/cookie-bomb/)
+4. [不識廬山真面目：Clickjacking 點擊劫持攻擊](http://localhost:4000/2021/09/26/what-is-clickjacking/)
+5. [在做跳轉功能時應該注意的問題：Open Redirect](http://localhost:4000/2021/09/26/what-is-open-redirect/)
+6. [基於 JS 原型鏈的攻擊手法：Prototype Pollution](http://localhost:4000/2021/09/29/prototype-pollution/)
 
 如果你想看一些比較輕鬆卻又有點深度的文章，我推薦：
 
