@@ -1,0 +1,3 @@
+[submodule "themes/minos-custom"]
+	path = themes/minos-custom
+	url = git@github.com:aszx87410/hexo-theme-minos.git
