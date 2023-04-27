@@ -3,7 +3,6 @@ title: 從監視攝影機理解 Log4j 跟 Log4Shell 漏洞
 date: 2021-12-18 13:00:00
 tags: [Security]
 categories: [Security]
-canonical: https://tech-blog.cymetrics.io/posts/huli/what-is-log4j-and-log4shell/
 ---
 
 2021 年末資安界最大的新聞莫過於 Log4j 的漏洞，編號為 CVE-2021-44228，又被稱為 Log4Shell，甚至被一些人形容為「核彈級漏洞」，可見這個漏洞的影響程度之深遠。

@@ -4,10 +4,9 @@ catalog: true
 date: 2021-08-22 15:27:31
 tags: [Security, Front-end]
 categories: [Security]
-canonical: https://tech-blog.cymetrics.io/posts/huli/front-end-supply-chain-attack-cdnjs/
 ---
 
-## 前言s
+## 前言
 
 Supply chain attack，中文翻成供應鏈攻擊，這個手法瞄準了上游的漏洞進行攻擊，因為只要污染了上游，下游也會一併被污染。
 

@@ -2,7 +2,6 @@
 title: 在做跳轉功能時應該注意的問題：Open Redirect
 catalog: true
 date: 2021-09-26 10:04:55
-canonical: https://tech-blog.cymetrics.io/posts/huli/open-redirect/
 tags: [Security, Front-end, Back-end]
 categories: [Security]
 ---

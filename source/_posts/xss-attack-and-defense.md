@@ -2,13 +2,11 @@
 title: 淺談 XSS 攻擊與防禦的各個環節
 catalog: true
 date: 2021-06-19 11:23:27
-canonical: https://tech-blog.cymetrics.io/posts/huli/xss-attack-and-defense/
+canonical: https://blog.huli.tw/2021/06/19/xss-attack-and-defense/
 tags: [Security, Front-end]
 categories:
   - Security
 ---
-
-（原文發佈於 Cymetrics Tech Blog：[淺談 XSS 攻擊與防禦的各個環節](https://tech-blog.cymetrics.io/posts/huli/xss-attack-and-defense/)）
 
 ## 前言
 

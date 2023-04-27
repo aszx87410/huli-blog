@@ -4,10 +4,7 @@ catalog: true
 date: 2021-08-06 20:43:13
 tags: [Security, Front-end]
 categories: [Security]
-canonical: https://tech-blog.cymetrics.io/posts/huli/learn-from-intigriti-xss-0721/
 ---
-
-（原文發佈於 Cymetrics Tech Blog：[Intigriti 七月份 XSS 挑戰：突破層層關卡](https://tech-blog.cymetrics.io/posts/huli/learn-from-intigriti-xss-0721/)）
 
 ## 前言
 

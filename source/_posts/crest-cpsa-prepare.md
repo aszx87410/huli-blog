@@ -3,7 +3,6 @@ title: CPSA(CREST Practitioner Security Analyst) 資安分析師考試心得
 date: 2021-12-15 13:00:00
 tags: [Security]
 categories: [Security]
-canonical: https://tech-blog.cymetrics.io/posts/huli/crest-cpsa-prepare/
 ---
 
 CREST 這個組織與 CPSA 這張證照在網路上可以找到的中文資料極少，在台灣算是比較冷門的一張證照，我是看了這篇：[ECSA v10 等效申請CREST CPSA 資安分析師證照教學 / ECSA with CPSA Equivalency Recognition Step](https://medium.com/blacksecurity/crestcpsa-5a07e25e7da3) 才對這個組織以及這張證照有基本的理解。

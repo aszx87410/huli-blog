@@ -2,7 +2,6 @@
 title: 不識廬山真面目：Clickjacking 點擊劫持攻擊
 catalog: true
 date: 2021-09-26 09:55:26
-canonical: https://tech-blog.cymetrics.io/posts/huli/clickjacking-intro/
 tags: [Security, Front-end]
 categories: [Security]
 ---
