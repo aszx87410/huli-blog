@@ -28,7 +28,22 @@ photos: /img/android-apk-decompile-intro/cover4.png
 
 有一套叫做 Objection 的工具是以 Frida 為基礎開發的，建議可以直接裝這個，因為會順便連 Frida 一起裝好，安裝教學可參考：https://github.com/sensepost/objection/wiki/Installation
 
-雖然說 Frida 這種東西感覺就是要 root 才能使用，但其實它有兩種方法可以跑，一種確實需要 root，另外一種不需要 root
+要用 Frida 的話，除了手機上要安裝以外，電腦也要安裝，至於如何安裝可直接參考官方網站的指示：https://frida.re/docs/installation/
+
+另外提醒一下，如果是手機裡面已經有了但是換一台電腦，要記得安裝的版本要一致，步驟是：
+
+1. 先去手機裡面看 frida 版本：`frida-server --version`，假設是 15.1.14 好了
+2. 到這邊找 frida-tools 的版本號 https://github.com/frida/frida/releases/tag/15.1.14
+3. 在電腦上安裝這兩個：
+
+```
+pip install frida==15.1.14
+pip install frida-tools==10.4.1
+```
+
+主要是版本號要對，不然會出現一堆錯誤。
+
+另外，雖然說 Frida 這種東西感覺就是要 root 才能使用，但其實它有兩種方法可以跑，一種確實需要 root，另外一種不需要 root
 
 需要 root 的要在手機上安裝 frida-server，詳情可參考官網：https://frida.re/docs/android/
 

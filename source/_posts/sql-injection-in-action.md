@@ -13,6 +13,8 @@ photos: /img/sql-injection-in-action/cover.png
 
 （Heroku 沒了QQ）
 
+<!-- more -->
+
 原本的案例是類似訂房網站的東西，所以這兩個挑戰其實也都是訂房網站會有的功能，第一個是搜尋功能，第二個則是訂房查詢的功能。
 
 第一個挑戰需要從指定的 table 中拿出 flag，第二個挑戰的 flag 隱藏在其他 table 中，請找出那張 table 並且把 flag 取出，flag 格式為：`cymetrics{a-z_}`
@@ -414,7 +416,7 @@ while True:
           break
 
 print(f"time: {time.time() - start}s")
-``` 
+```
 
 執行的結果如圖：
 
