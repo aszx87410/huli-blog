@@ -1,10 +1,12 @@
 ---
 layout: "about"
 title: "關於我"
-date: 2023-01-29 16:30:00
+date: 2023-06-11 16:30:00
 ---
 
 想關注部落格文章的話，除了 RSS 以外也可以考慮追蹤這個粉絲專頁：[Huli 隨意聊](https://www.facebook.com/huli.blog)
+
+想看更多相關文章可以參考[我的 Medium 文章列表](https://github.com/aszx87410/blog/blob/master/medium.md)，想聯絡我的話可以透過 Email：aszx87410@gmail.com，網頁右上角也可以找到我的臉書。
 
 原本是個前端工程師，2021 年 5 月開始轉做資安相關的研究，也因為這個背景，對於前端相關的資安議題（XSS、CORS 以及 XSLeaks）特別感興趣。
 
@@ -45,8 +47,6 @@ date: 2023-01-29 16:30:00
 3. [Lidemy 新課程上架以及課程說明](https://medium.com/@hulitw/lidemy-courses-fda610c7ff9b)
 4. [四個月過去了，來找我學程式的學生們怎麼樣了？](https://medium.com/hulis-blog/mentor-program-2nd-review-e7c15f24dfb8)
 5. [Lidemy 鋰學院](https://lidemy.com)
-
-想看更多相關文章可以參考[我的 Medium 文章列表](https://github.com/aszx87410/blog/blob/master/medium.md)，想聯絡我的話可以透過 Email：aszx87410@gmail.com，網頁右上角也可以找到我的臉書。
 
 ## 演講與投影片
 
