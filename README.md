@@ -17,6 +17,12 @@ npx hexo g
 npx hexo d
 ```
 
+## og image
+
+```
+npm run og-image -- "redos-regular-expression-denial-of-service"
+```
+
 ## 版本
 
 用 v12.18.1 可以跑
