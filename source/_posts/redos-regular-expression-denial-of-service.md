@@ -68,7 +68,7 @@ const IMAGE_URL_REGEXP = new RegExp( String( /^(http(s)?:\/\/)?[\w-]+(\.[\w-]+)+
     /\.(jpg|jpeg|png|gif|ico|webp|JPG|JPEG|PNG|GIF|ICO|WEBP)\??[\w._~:/#[\]@!$&'()*+,;=%-]*$/.source ) );
 
 console.time('test');
-IMAGE_URL_REGEXP.test('a.' + 'a'.repeat('100000'))
+IMAGE_URL_REGEXP.test('a.' + 'a'.repeat(100000))
 console.timeLog('test')
 // test: 6231.137939453125 ms
 ```
@@ -81,7 +81,7 @@ const IMAGE_URL_REGEXP = new RegExp( String( /^(http(s)?:\/\/)?[\w-]+\.[\w._~:/?
     /\.(jpg|jpeg|png|gif|ico|webp|JPG|JPEG|PNG|GIF|ICO|WEBP)(\?[\w._~:/#[\]@!$&'()*+,;=%-]*)?$/.source ) );
 
 console.time('test');
-IMAGE_URL_REGEXP.test('a.' + 'a'.repeat('100000'))
+IMAGE_URL_REGEXP.test('a.' + 'a'.repeat(100000))
 console.timeLog('test')
 // test: 0.570068359375 ms
 ```
