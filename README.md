@@ -25,7 +25,7 @@ npm run og-image -- "redos-regular-expression-denial-of-service"
 
 ## 版本
 
-用 v12.18.1 可以跑
+已升級到最新版本，Node.js v20 可以跑
 
 
 
