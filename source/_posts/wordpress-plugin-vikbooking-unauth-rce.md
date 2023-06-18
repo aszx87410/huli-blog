@@ -14,6 +14,8 @@ photos: /img/wordpress-plugin-vikbooking-unauth-rce/cover.png
 漏洞編號：[CVE-2022-27862
  WordPress VikBooking Hotel Booking Engine & PMS plugin <= 1.5.3 - Arbitrary File Upload leading to RCE](https://patchstack.com/database/vulnerability/vikbooking/wordpress-vikbooking-hotel-booking-engine-pms-plugin-1-5-3-arbitrary-file-upload-leading-to-rce)
 
+<!-- more -->
+
 ## VikBooking 簡介與漏洞細節
 
 [VikBooking](https://wordpress.org/plugins/vikbooking/) 是個 WordPress 的訂房外掛，官網的 demo 長這樣：

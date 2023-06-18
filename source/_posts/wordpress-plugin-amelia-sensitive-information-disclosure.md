@@ -19,6 +19,8 @@ photos: /img/wordpress-plugin-amelia-sensitive-information-disclosure/cover.png
 
 底下我會簡單介紹一下 Amelia 的架構以及這三個漏洞的細節。
 
+<!-- more -->
+
 ## Amelia 基本介紹
 
 安裝好 Amelia 以後，你可以新增一個預約頁面，大概是長這樣：
