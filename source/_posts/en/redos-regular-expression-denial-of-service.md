@@ -7,7 +7,7 @@ categories: [Security]
 photos: /img/redos-regular-expression-denial-of-service/cover.png
 ---
 
-Regular expressions, also known as "正規表達式" or "正規表示式" in Chinese (hereinafter referred to as regexp), are mainly used for string matching. After writing a pattern, it can be used to match text that meets the rules.
+Regular expressions (hereinafter referred to as regexp), are mainly used for string matching. After writing a pattern, it can be used to match text that meets the rules.
 
 Whether it's a phone number, email, or ID number, regexp can be used to perform basic format validation to ensure that the string format matches specific rules.
 
