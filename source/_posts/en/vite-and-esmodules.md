@@ -179,8 +179,6 @@ export default css
 
 Turn CSS into a string and then call the `updateStyle` function. As long as Vite is loaded on the client, `/vite/client` utils will be automatically loaded together, which will handle things like HMR or loading CSS. For example, the `updateStyle` above is in this file.
 
-Okay, here's the translation:
-
 Alright, by now we have a general understanding of what Vite is. Why is it faster? Because webpack needs to bundle, but Vite doesn't, so it doesn't need to package all of your source code together. It only needs to start a local server so that your `import` can fetch the correct files. Without the need for packaging, the speed is naturally much faster, and this is the power of Native ESM.
 
 ## How about production?

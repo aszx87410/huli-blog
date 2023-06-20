@@ -258,10 +258,6 @@ But it seems to be useless, and the order of the pictures should not be higher t
 
 Finally, I thought of when @lbrnli1234 was solving an XSS question I gave before, he also encountered a race condition and then added a lot of iframes to increase the success rate. See: [Notes XSS Challenge Author Writeup](https://blog.huli.tw/2022/04/13/en/notes-challenge-author-writeup/)
 
-I will now translate the Markdown content to English:
-
----
-
 I did the same thing and stuffed a bunch of iframes:
 
 ``` html

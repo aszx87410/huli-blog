@@ -107,8 +107,6 @@ After one second, the first timer is triggered, set open to false, and then trig
 
 ![](/img/react-1/tb-snackbar-01.gif)
 
-Here's the translation of the Markdown content:
-
 To this point, an auto-hide Snackbar has been created, but there is still room for improvement.
 
 When using Ant Design, I was deeply influenced by a usage that renders components using function calls instead of using render. For example, if you want to display a message, you can do it like this:

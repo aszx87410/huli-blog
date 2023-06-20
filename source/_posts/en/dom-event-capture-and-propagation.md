@@ -88,8 +88,6 @@ When the DOM event propagates, it starts from the root node and goes down to the
 
 Finally, the event is propagated back up from the child node to the root node, and this is called the `BUBBLING_PHASE`, which is also the more familiar bubbling phase.
 
-Here's the translation of the Markdown content:
-
 You may find it confusing to understand the text, so I'll directly quote a [w3c diagram about event flow](https://www.w3.org/TR/DOM-Level-3-Events/#event-flow), which should make it clear for everyone.
 
 ![](http://blog.techbridge.cc/img/huli/event/eventflow.png)
@@ -429,5 +427,3 @@ Reference materials (the latter original materials are more recommended):
 5. [What is event bubbling and capturing?](https://stackoverflow.com/questions/4616694/what-is-event-bubbling-and-capturing)
 6. [Event order](https://www.quirksmode.org/js/events_order.html)
 7. [Document Object Model Events](https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-flow-capture)
-
-Please paste the Markdown content you want me to translate.

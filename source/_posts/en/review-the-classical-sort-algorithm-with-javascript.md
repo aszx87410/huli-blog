@@ -430,5 +430,3 @@ The testing process is also quite interesting. I found that some ES6 syntax (suc
 4. [JS Algorithm: Heap Sort Using Heap Sort](https://my.oschina.net/wanglihui/blog/701263)
 5. [JS-Sorting-Algorithm/7.heapSort.md](https://github.com/hustcc/JS-Sorting-Algorithm/blob/master/7.heapSort.md)
 6. [Learning Data Structures and Algorithms with JavaScript: Sorting and Searching](http://blog.kdchang.cc/2016/09/27/javascript-data-structure-algorithm-sort-and-search/)
-
-Please paste the Markdown content you want me to translate.

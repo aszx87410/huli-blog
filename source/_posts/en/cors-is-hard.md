@@ -55,10 +55,6 @@ The following figure shows the items that Lighthouse will check:
 
 ![lh](https://user-images.githubusercontent.com/2755720/49351838-31a0b600-f6f0-11e8-8a9d-6260a0cdc60d.png)
 
-Okay, here's the translation:
-
----
-
 Alright, the preface is over, let's get to the point.
 
 We've done everything we need to do for our PWA, including registering the service worker and implementing offline functionality. However, there's one thing that keeps failing in Lighthouse's tests: registering the service worker.

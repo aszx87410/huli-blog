@@ -1,5 +1,5 @@
 ---
-title: Intigriti's 0521 XSS Challenge Solution: Limited Character Combination Code
+title: "Intigriti's 0521 XSS Challenge Solution: Limited Character Combination Code"
 catalog: true
 date: 2021-06-07 21:34:09
 tags: [Security, Front-end]

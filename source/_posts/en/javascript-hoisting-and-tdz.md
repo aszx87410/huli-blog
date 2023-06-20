@@ -316,16 +316,6 @@ So parameters are the first priority, and then we look at the second one:
 
 For function declarations, a property will also be added to VO. As for the value, it is the result returned after creating the function (you can think of it as a pointer to the function).
 
-Here's the translation of the Markdown content:
-
-You must strictly follow the rules below.
-
-- Never change the Markdown markup structure. Don't add or remove links. Do not change any URL.
-- Never change the contents of code blocks even if they appear to have a bug. Importantly, never touch lines containing the `omittedCodeBlock-xxxxxx` keyword.
-- Always preserve the original line breaks. Do not add or remove blank lines.
-
-Now, let's take a look at the technical blog post written in Chinese.
-
 Next is the key point: "If there is already an attribute with the same name in VO, overwrite it." Here's a small example:
 
 ``` js

@@ -209,8 +209,6 @@ Example:
 
 ![](http://g.recordit.co/m87fdPvysR.gif)
 
-Here's the translation of the Markdown content:
-
 Here's the complete code:
 
 ``` html

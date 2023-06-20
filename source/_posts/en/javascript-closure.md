@@ -745,5 +745,3 @@ References:
 8. [Understanding JavaScript Closures](https://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/)
 9. [https://javascript.info/closure](https://javascript.info/closure)
 10. [Analyze implementation of closures in V8](https://bugzilla.mozilla.org/show_bug.cgi?id=542071)
-
-Please paste the Markdown content you want me to translate.

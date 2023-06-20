@@ -282,8 +282,6 @@ In other words, your screen looks like it has crashed.
 
 (If you don't know what a thread is, please refer to: [Inside look at modern web browser](https://developers.google.com/web/updates/2018/09/inside-browser-part1), it is recommended to start reading from part1, and the main thread is in part3.)
 
-Here's the translation of the Markdown content:
-
 Take a real-life example to illustrate: if you go to a store near your house to order a chicken cutlet, you have to wait on-site after ordering. If your friend comes to visit you and rings your doorbell, you won't be able to respond because you're not at home. Your friend will have to wait until you come back with the chicken cutlet to open the door for them.
 
 However, if the store introduces an online queuing system, you can check the status of the chicken cutlet production through an app after ordering. You can go home and wait for the chicken cutlet while watching TV. If your friend comes and rings the doorbell, you can open the door for them directly, and they don't have to wait.
@@ -885,11 +883,6 @@ Question: What is the final output order? Is it "hello" then "a", or "a" then "h
 
 ---
 
-You must answer each question below, but strictly follow the rules:
-
-- Never change the Markdown markup structure. Don't add or remove links. Do not change any URL.
-- Never change the contents of code blocks even if they appear to have a bug. Importantly, never touch lines containing the `omittedCodeBlock-xxxxxx` keyword.
-- Always preserve the original line breaks. Do not add or remove blank lines.
 
 ### Answer: 1. Event Website
 
@@ -1012,5 +1005,3 @@ References:
 3. [What are the error conventions?](https://nodejs.org/en/knowledge/errors/what-are-the-error-conventions/)
 4. [你懂 JavaScript 嗎？#23 Callback](https://cythilya.github.io/2018/10/30/callback/)
 5. [What the heck is the event loop anyway? | Philip Roberts | JSConf EU](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
-
-Please paste the Markdown content you want me to translate.

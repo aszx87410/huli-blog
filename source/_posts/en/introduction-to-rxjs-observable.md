@@ -343,9 +343,6 @@ If you think about it carefully, you will find that it is quite reasonable, beca
 
 ![flat](https://user-images.githubusercontent.com/2755720/49350879-c8b73f00-f6eb-11e8-852d-14e96c9d9fed.png)
 
-Okay, here's the translation:
-
----
 
 Alright, so what should we do? What I actually want is not Observable itself, but the things inside this Observable! Currently, the situation is that there is an Observable inside another Observable, with two layers. However, I just want it to be one layer. What should I do?
 

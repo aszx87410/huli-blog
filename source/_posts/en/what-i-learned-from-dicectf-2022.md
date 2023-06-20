@@ -322,8 +322,6 @@ But because all characters will be converted to uppercase, we need to find an XS
 <img src=x onerror="&#97;&#108;&#101;&#114;&#116;(1)" />
 ```
 
-Here's the translation:
-
 ## web/no-cookies(5 solves)
 
 This question is quite interesting. The description is:
@@ -1054,10 +1052,6 @@ Later, because no one solved this question for a long time, the organizers relea
 After seeing this, I went to Google: `non-standard css properties`, and found this: [Non-standard and Obsolete CSS Properties](https://gist.github.com/ryboe/bb95223148e486acbe7a), and actually tried several properties in it, but they were not helpful.
 
 At this point, I suddenly became curious about which CSS properties Chrome actually supports, so I went directly to the source code to see it and found this: https://chromium.googlesource.com/chromium/blink/+/refs/heads/main/Source/core/css/CSSProperties.in
-
-I will now translate the Markdown content you provided:
-
----
 
 I looked through the CSS properties one by one, and found `-webkit-user-modify`, which led me to MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/user-modify
 

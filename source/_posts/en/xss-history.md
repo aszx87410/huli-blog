@@ -1,5 +1,5 @@
 ---
-title: XSS from scratch: history and origin
+title: "XSS from scratch: history and origin"
 date: 2021-10-11
 tags: [Security, Front-end]
 categories: [Security]

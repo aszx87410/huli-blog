@@ -363,4 +363,3 @@ This time I wrote a topic that is easy to provoke debate, but I also think it's 
 15. [Java is Pass-by-Value, Dammit!](http://www.javadude.com/articles/passbyvalue.htm)
 16. [11.2. By Value Versus by Reference](https://docstore.mik.ua/orelly/webprog/jscript/ch11_02.htm)
 
-Please paste the Markdown content you want me to translate.

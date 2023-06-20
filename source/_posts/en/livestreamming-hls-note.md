@@ -138,10 +138,6 @@ Therefore, the delay of general live streaming websites using HLS is usually wit
 
 Finally, let's take a look at the options for playing on a webpage. Because it is now an era where flash is dying, if possible, the preferred choice is of course HTML5. If the browser support is not high enough, then fallback to flash.
 
-Let me translate the Markdown content for you:
-
----
-
 Let's first introduce some commercial licensed players, such as [jwplayer](https://www.jwplayer.com/) or [flowplayer](https://flowplayer.org/), which are both good options. Especially when open source solutions have problems that you can't fix, you will hope that the company can spend money to buy a commercial player to solve all the problems.
 
 The open source solution is probably only [videojs](http://videojs.com) left. I don't know if there are any other emerging players. If there are, please recommend them.

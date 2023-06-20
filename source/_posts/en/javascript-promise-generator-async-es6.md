@@ -296,5 +296,3 @@ Ref:
 [JavaScript Promises](http://www.html5rocks.com/zh/tutorials/es6/promises/)
 [拥抱Generator，告别异步回调](https://cnodejs.org/topic/542953d42ca9451e1bf3c251)
 [深入浅出ES6（三）：生成器 Generators](http://www.infoq.com/cn/articles/es6-in-depth-generators)
-
-Please paste the Markdown content you want me to translate.

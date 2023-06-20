@@ -117,8 +117,6 @@ The preflight request in the CORS protocol includes these two headers:
 
 to indicate the method and headers that may be used in the subsequent CORS request, as we mentioned in the previous article.
 
-Here's the translation:
-
 Moving on to the section about responses:
 
 > 3.2.3. HTTP responses

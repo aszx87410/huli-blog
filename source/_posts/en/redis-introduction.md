@@ -154,5 +154,3 @@ Through the help of Redis, the problem of heavy database load that may be slow o
 If you have a project with a lot of users or need to return information quickly but are afraid that the database cannot handle it, consider using Redis or other caching services. In many cases, if caching is used properly, it can reduce the burden on the database and speed up response times. 
 
 If you are interested in Redis, you can refer to the website [Redis Design and Implementation](http://redisbook.com/).
-
-Please paste the Markdown content you want me to translate.

@@ -538,10 +538,6 @@ First, let me talk about my thoughts after seeing this question. Because CSS inj
 
 This way, as long as the first character of the flag is `U+006A`, the specified font will be applied, but the font is restricted by CSP and cannot be loaded, so this trick cannot pass.
 
-Here's the translation of the Markdown content:
-
----
-
 Another trick I thought of is to use `size-adjust` with a local font:
 
 ``` css

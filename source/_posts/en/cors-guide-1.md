@@ -233,8 +233,6 @@ Conversely, when you execute JavaScript with Node.js, you can use `process` or `
 
 Sometimes, different runtime environments will also provide the same things, such as `console.log` and `setTimeout`, which are available in both the browser and Node.js. But even though they look the same, the internal implementation is completely different, and the behavior may also be different. For example, the browser's `console.log` will output to the console of devtool, while `Node.js` will output to your terminal. The implementation of `setTimeout` in both is also different, so there may be differences in details.
 
-Returning the translated text:
-
 Returning to the topic, when we want to use AJAX to access a cross-origin resource on the browser, we are blocked. Who is blocking us? The browser.
 
 In other words, if we are not using a browser, if we are not running the program on a browser, then there is no same-origin policy, and we don't have to worry about CORS.

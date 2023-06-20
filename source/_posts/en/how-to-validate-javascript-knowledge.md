@@ -117,8 +117,6 @@ Next, let's take a look at the syntax of comments. Searching for comments will f
 
 We can see how ECMAScript represents syntax from top to bottom. Comments are divided into two types, MultiLineComment and SingleLineComment, and there are definitions for each below. MultiLineComment is `/* MultiLineCommentChars */`, and the yellow small font "opt" means optional, which means that MultiLineCommentChars can be omitted, such as `/**/`, and the definition continues below.
 
-Here's the translation of the Markdown content:
-
 For single-line comments, it looks like this:
 
 ![](/img/how-to-validate-javascript-knowledge/ecma-comment2.png)

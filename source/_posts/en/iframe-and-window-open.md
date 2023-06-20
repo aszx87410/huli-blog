@@ -611,5 +611,3 @@ References:
 4. https://www.html5rocks.com/en/tutorials/security/sandboxed-iframes/
 5. https://googlechrome.github.io/samples/allow-popups-to-escape-sandbox/
 6. https://xsleaks.dev/
-
-Please paste the Markdown content you want me to translate.

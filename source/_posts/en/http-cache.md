@@ -299,5 +299,3 @@ Finally, I hope this article can help beginners better understand the HTTP cachi
 7. [rfc2616](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.1)
 8. [Google Web Fundamentals](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-tw)
 9. [HTTP 1.0 spec](https://www.w3.org/Protocols/HTTP/1.0/spec.html)
-
-Please paste the Markdown content you want me to translate.

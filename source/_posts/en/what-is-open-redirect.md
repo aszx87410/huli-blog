@@ -1,5 +1,5 @@
 ---
-title: Issues to be aware of when implementing redirect functionality: Open Redirect
+title: "Issues to be aware of when implementing redirect functionality: Open Redirect"
 catalog: true
 date: 2021-09-26 10:04:55
 tags: [Security, Front-end, Back-end]

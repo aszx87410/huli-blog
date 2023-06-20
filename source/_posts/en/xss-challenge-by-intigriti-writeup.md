@@ -217,10 +217,6 @@ The dead end I mentioned earlier is "forging messages by postMessage from elsewh
 
 As long as the second step is successful, the whole process can be connected. But the problem is, how do I know what the identifier is? Since the hint says "one byte after another", I guess it should leak out one character at a time, so I can start thinking from one character.
 
-Here's my translation of the Markdown content:
-
----
-
 At this point, I thought of this: `<img src=x onerror=identifier<'1'?is_zero:keep_trying>`. We can use the ternary operator with `<` to determine the first character of the identifier. Although we cannot use strings, `'1'` can be replaced with `<div id=n1>1</div>` + `n1.innerText` to avoid single and double quotes. And the ternary operator can be nested indefinitely, like this:
 
 ``` js

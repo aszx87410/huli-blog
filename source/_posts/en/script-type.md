@@ -389,5 +389,3 @@ if (mime_type == "application/rss+xml" ||
 Because RSS feeds may contain third-party content, if they are rendered directly as XML, there is a risk of XSS, so these two are forcibly turned off.
 
 Finally, note a tool that can help search for source code, which is super useful: https://sourcegraph.com/search
-
-Please paste the Markdown content you want me to translate.

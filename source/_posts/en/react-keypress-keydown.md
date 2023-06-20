@@ -433,5 +433,3 @@ This time, I happened to delve into it because I wanted to help someone, and I d
 When it comes to React source code, what most people think of is the rendering mechanism or component handling, which is very complex and requires a certain understanding of the overall architecture to understand. 
 
 This article chose to start with keyboard events to see how React handles them. I believe everyone can understand the code and it doesn't seem particularly difficult. I just want to tell you that if you want to study other people's source code, you don't necessarily have to understand the whole project, you can start with some small parts. You can learn a lot from it.
-
-Please paste the Markdown content you want me to translate.

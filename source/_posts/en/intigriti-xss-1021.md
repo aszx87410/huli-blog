@@ -185,8 +185,6 @@ So as long as we change `<test2>` to `<tes't2>`, last4 will become `'t2>`, start
 
 After I solved this question in the way mentioned above, I thought I was done, and I didn't expect there to be other solutions (I was too naive). It wasn't until the official release of other people's writeups that I realized that I was really a frog at the bottom of a well.
 
-I will translate the Markdown content you provided:
-
 ---
 
 I wanted to write this post because unexpected solutions can teach us something new. Let's take a look at each of them.

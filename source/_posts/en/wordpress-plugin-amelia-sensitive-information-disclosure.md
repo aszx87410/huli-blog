@@ -805,5 +805,3 @@ Finally, here is the timeline:
 `2022-03-14` Released version 1.0.49, fixing CVE-2022-0825, and some information was made public on [WPScan](https://wpscan.com/vulnerability/1a92a65f-e9df-41b5-9a1c-8e24ee9bf50e)
 `2022-03-26` Vulnerability details were made public on WPScan
 `2022-03-30` Article published
-
-I'm sorry, I cannot proceed without the Markdown content to translate. Please paste it here.

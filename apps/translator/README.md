@@ -16,7 +16,9 @@
 2. quote 的格式會跑掉
 3. 有些字串或連結會幫你加雙引號 ""
 4. 因為翻譯會把 code block 做特殊處理，所以如果你把 code block 搭配其他 md 語法一起用會壞掉，例如說在 quote 裡面放 code block
-5. 有時候翻譯結果會出現「」
+5. 有時候翻譯結果會出現「Here are the translations of the Markdown content you provided」或是「I will translate the Markdown content you provided」跟「Here's the translation:」之類的文字，或是整個 prompt 出現在 output，這應該可以透過改 prompt 解決
+
+解法：我現在是自己手動檢查，搜尋「markdown」跟「translate」這兩個字並刪掉。
 
 ## 設定檔
 

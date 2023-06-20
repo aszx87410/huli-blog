@@ -138,8 +138,6 @@ var result = sendRequest('https://api.twitch.tv/kraken/games/top?client_id=xxx')
 console.log(result);
 ```
 
-Here are the translations of the Markdown content you provided:
-
 Please note that "asynchronous functions cannot directly return results through return". Why? Because, as in the example above, after sending a request, the next line will be executed, and at this time, there is no response yet. What should be returned?
 
 So what should we do? Let me give you a very common example! 

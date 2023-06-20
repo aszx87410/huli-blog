@@ -77,8 +77,6 @@ The second part, TERMINOLOGY, defines the usage of some technical terms, which c
 
 This section describes how to use HTTP requests and responses to create a stateful session. Currently, HTTP servers respond to each client request independently, without relating it to previous or subsequent requests. This method allows servers and clients that want to exchange state information to place HTTP requests and responses in a larger context, which is called a "session". This context can be used to create a shopping cart, for example, where user selections can be aggregated before purchase, or a magazine browsing system, where a user's previous reading affects which offerings are presented.
 
-Here's the translation of the Markdown content:
-
 Here, the definition of Session is just as I mentioned earlier, Session is a "period with state", or "context", which means that the Request and Response in this context can be viewed together, and thus they have a state.
 
 > There are, of course, many different potential contexts and thus many different potential types of session.  The designers' paradigm for sessions created by the exchange of cookies has these key attributes:
