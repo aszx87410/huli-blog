@@ -3,6 +3,7 @@ title: Intigriti 0422 XSS Challenge Author Writeup
 date: 2022-04-25 08:20:16
 tags: [Security]
 categories: [Security]
+translator: huli
 ---
 
 <img src="/img/intigriti-0422-xss-challenge-author-writeup/cover-en.png" style="display:none">

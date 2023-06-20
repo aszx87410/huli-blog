@@ -3,6 +3,7 @@ title: Revenge of Intigriti 0422 Challenge Author Writeup
 date: 2022-05-02 08:20:16
 tags: [Security]
 categories: [Security]
+translator: huli
 ---
 
 <img src="/img/intigriti-revenge-challenge-author-writeup/cover-en.png" style="display:none">

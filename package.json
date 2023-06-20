@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "og-image": "node og-image-generator/app.js"
+    "og-image": "node apps/og-image-generator/app.js"
   },
   "hexo": {
     "version": "6.3.0"
@@ -27,6 +27,7 @@
     "hexo-server": "^3.0.0",
     "hexo-toc": "^1.1.0",
     "markdown-it-named-headings": "^1.1.0",
+    "node-fetch": "^3.3.1",
     "puppeteer": "^20.7.2"
   }
 }

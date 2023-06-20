@@ -3,6 +3,7 @@ title: "Intigriti 0123 Challenge Writeup - Second Order MongoDB JS Injection"
 date: 2023-01-23 10:43:37
 tags: [Security]
 categories: [Security]
+translator: huli
 ---
 <img src="/img/intigriti-0123-second-order-injection/cover-en.png" style="display:none" loading="lazy">
 

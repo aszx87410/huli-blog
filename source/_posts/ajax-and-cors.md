@@ -6,7 +6,7 @@ tags: [Ajax,JavaScript,Front-end]
 categories:
   - Front-end
 ---
-# 前言
+## 前言
 
 一般來說在學習寫網頁的時候，最先碰到的會是 HTML 與 CSS，負責把版面刻出來以及美化版面，當基礎打穩之後，會開始學習 JavaScript，試著做出一點互動性的效果。而「互動」除了使用者跟瀏覽器的互動以外，別忘了還有 Client 端跟 Server 端的互動，也就是必須要學會從瀏覽器用 JavaScript 跟後端 Server 拿資料，否則你的網頁資料都只能是寫死的。
 
@@ -14,7 +14,7 @@ categories:
 
 <!-- more -->
 
-# 先從舉例開始
+## 先從舉例開始
 
 在開始之前，我們可以先想想一個問題：
 
@@ -39,7 +39,7 @@ categories:
 
 那第二個問題，要怎麼拿資料呢？就必須透過 Twitch API 了。
 
-# API
+## API
 
 什麼是 API？你可能已經聽過很多次這個名詞，但還是不知道是什麼。先來講講它的全名吧，它的全名是「Application Programming Interface」，中文翻作應用程式介面。
 
@@ -67,7 +67,7 @@ API 也是這樣，只是變成程式跟程式之間的串接。例如說今天�
 2. Google 要開放讓其他 App 也能用 Google 登入驗證，所以 Google 要提供「Google 登入 API」
 3. 我要抓 Twitch 上面現在有哪些頻道，所以要串 Twitch API
 
-# API Documentation
+## API Documentation
 
 既然已經知道 API 是什麼了，也知道要串接 API，那下一個問題就是「那要怎麼串呢？」
 
@@ -97,7 +97,7 @@ API 的串接也是一樣，一定要有文件你才知道怎麼串，不然根�
 
 我們已經把問題的範圍一步步給縮小了，一開始是「要怎麼跟 Twitch 拿資料」，現在則更細的切分為：「要怎麼利用 JavaScript 發送 Reuqest」
 
-# Ajax
+## Ajax
 
 要在瀏覽器上面發送 Request，必須應用到一種技術叫做 Ajax，全名是「Asynchronous JavaScript and XML」，重點在於`Asynchronous`這個單字，非同步。
 
@@ -171,7 +171,7 @@ sendRequest('https://api.twitch.tv/kraken/games/top?client_id=xxx', function (re
 
 現在你就知道為什麼網路的操作是非同步，以及什麼是 callback function 了。
 
-# XMLHttpRequest
+## XMLHttpRequest
 
 方才提到 Ajax、非同步以及 callback function 的概念，但還是沒講到要怎麼發送 Request，只寫了一個假的`sendRequest`函式當作參考而已。
 
@@ -196,7 +196,7 @@ request.send();
 
 才怪。
 
-# Same Origin Policy
+## Same Origin Policy
 
 正當你以為自己已經對串接 API 駕輕就熟，想說去串接別的 API 試試看好了的時候，才發現一串就出問題了：
 
@@ -223,7 +223,7 @@ requested resource. Origin 'null' is therefore not allowed access.
 
 好，既然剛剛說了不同源會被擋下來，那 Twitch API 不是也不同源嗎，是怎麼串接成功的？
 
-# CORS
+## CORS
 
 大家都知道其實在不同源之間互相傳輸資料是很常有的事情，像我們串接 Twitch API 就是，我們怎麼可能跟 Twitch API 在同一個 Domain 底下呢？
 
@@ -259,7 +259,7 @@ Timing-Allow-Origin: https://www.twitch.tv
 
 總結一下，如果你想要發起跨來源 HTTP 請求並且順利收到回應的話，需要確保 Server 端有加上`Access-Control-Allow-Origin`，不然 Response 會被瀏覽器給擋下來並且顯示出錯誤訊息。
 
-# Preflight Request
+## Preflight Request
 
 還記得 Twitch 的 API 文件嗎？裡面需要帶一個`client-id`的參數，而文件裡面寫說你可以帶在 GET 的參數上面，也可以帶在 Header 裡，我們來試試看帶在 Header 裡會怎樣吧！打開 Devtool，你會看到一個神奇的現象：
 
@@ -291,7 +291,7 @@ Timing-Allow-Origin: https://www.twitch.tv
 
 先用一個 OPTIONS 的請求去確認之後的 Request 能不能送出，這就是 Preflight Request 的目的。
 
-# JSONP
+## JSONP
 
 最後來講一下 JSONP，這是跨來源請求除了 CORS 以外的另外一種方法，全名叫做：JSON with Padding。
 
@@ -377,7 +377,7 @@ receiveData({"_total":1067,"_links":{"self":"https://api.twitch.tv/kraken/games/
 
 如果能用 CORS 的話，還是應該優先考慮 CORS。
 
-# 總結
+## 總結
 
 今天這篇文章的內容就是從抓資料這件事情開始，一步步告訴你應該去哪裡抓？應該怎麼抓？用 API 抓，那什麼是 API？怎麼在 JavaScript 裡面呼叫 Web API？怎麼樣存取跨來源的資料？
 

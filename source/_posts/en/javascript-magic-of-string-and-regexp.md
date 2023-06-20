@@ -4,6 +4,7 @@ catalog: true
 date: 2022-04-14 20:29:17
 tags: [Security, Front-end]
 categories: [Security]
+translator: huli
 ---
 
 <img src="/img/javascript-magic-of-string-and-regexp/cover-en.png" style="display:none;">

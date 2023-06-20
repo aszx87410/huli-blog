@@ -3,6 +3,7 @@ title: SSRF and Account Takeover via XSS in ERPNext
 date: 2022-04-06
 tags: [Security]
 categories: [Security]
+translator: huli
 ---
 
 <!-- summary -->

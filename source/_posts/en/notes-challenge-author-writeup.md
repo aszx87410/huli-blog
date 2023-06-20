@@ -3,6 +3,7 @@ title: Notes XSS Challenge Author Writeup
 date: 2022-04-13 15:43:37
 tags: [Security]
 categories: [Security]
+translator: huli
 ---
 
 Last month, I created an XSS challenge and hosted it on my GitHub: https://aszx87410.github.io/xss-challenge/notes/
