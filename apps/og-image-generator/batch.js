@@ -37,8 +37,22 @@ async function main() {
       let postMeta = frontMatter(postContent)
       if (postMeta.attributes.photos) {
         if (postMeta.attributes.photos.includes('cover-en')) continue
-        console.log('fix:', coverPath)
-        
+        console.log('Need to fix:', coverPath)
+      } else {
+        // automatically add photos
+        const photoString = 'photos: ' + coverPath
+        let lines = postContent.split('\n')
+        let result = [lines[0]]
+        let found = false
+        for(let i=1; i<= lines.length; i++) {
+          if (lines[i].startsWith('---') && !found) {
+            found = true
+            result.push(photoString)
+          } 
+          result.push(lines[i])
+        }
+
+        fs.writeFileSync(postPath, result.join('\n'), 'utf8')
       }
 
       continue

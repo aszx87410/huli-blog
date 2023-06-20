@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Android App Reverse Engineering Part 1: Decompiling and Rebuilding APKs"
+title: "Android App Reverse Engineering Part 1: Decompiling and Rebuilding APKs"
 catalog: true
 date: 2023-04-27 14:10:44
 tags: [Security]
