@@ -6,6 +6,7 @@ subtitle: Should have moved earlier...
 tags: [Others]
 categories:
   - Others
+photos: /img/moving-from-logdown-to-hexo/cover-en.png
 ---
 
 # Preface

@@ -4,6 +4,7 @@ catalog: true
 date: 2022-03-14 21:02:51
 tags: [JavaScript]
 categories: [JavaScript]
+photos: /img/javascript-number/cover-en.png
 ---
 
 Among the various data types in JavaScript, Number is a very commonly used one, and there are some small details that need to be paid special attention to, otherwise it is easy to write code with bugs.

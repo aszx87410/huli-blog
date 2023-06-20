@@ -5,6 +5,7 @@ date: 2020-10-31 09:20:32
 tags: [React, Front-end]
 categories:
   - React
+photos: /img/i-dont-know-react-1/cover-en.png
 ---
 
 ## Preface

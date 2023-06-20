@@ -5,6 +5,7 @@ date: 2022-09-01 19:31:10
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/angularjs-csp-bypass-cdnjs/cover-en.png
 ---
 
 <img src="/img/angularjs-csp-bypass-cdnjs/cover-en.png" style="display:none">

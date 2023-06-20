@@ -4,6 +4,7 @@ date: 2022-07-11 19:43:37
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/googlectf-2022-horkos-writeup/cover-en.png
 ---
 <img src="/img/googlectf-2022-horkos-writeup/cover-en.png" style="display:none">
 

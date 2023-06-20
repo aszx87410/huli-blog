@@ -3,6 +3,7 @@ title: Understanding the Log4j and Log4Shell Vulnerabilities through Surveillanc
 date: 2021-12-18 13:00:00
 tags: [Security]
 categories: [Security]
+photos: /img/what-is-log4j-and-log4shell/cover-en.png
 ---
 
 The biggest news in the cybersecurity industry at the end of 2021 is undoubtedly the Log4j vulnerability, also known as CVE-2021-44228 or Log4Shell. Some even describe it as a "nuclear-level vulnerability," highlighting the far-reaching impact of this vulnerability.

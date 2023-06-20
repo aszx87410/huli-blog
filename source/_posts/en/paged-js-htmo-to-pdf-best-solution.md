@@ -4,6 +4,7 @@ catalog: true
 date: 2021-06-12 15:10:26
 tags: [Front-end]
 categories: [Front-end]
+photos: /img/paged-js-htmo-to-pdf-best-solution/cover-en.png
 ---
 
 ## Introduction

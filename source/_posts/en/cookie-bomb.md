@@ -4,6 +4,7 @@ catalog: true
 date: 2021-07-10 08:51:38
 tags: [Security]
 categories: [Security]
+photos: /img/cookie-bomb/cover-en.png
 ---
 
 ## Introduction

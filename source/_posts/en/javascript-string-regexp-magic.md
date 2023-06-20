@@ -4,6 +4,7 @@ catalog: true
 date: 2022-04-14 20:29:17
 tags: [Security, Front-end]
 categories: [Security]
+photos: /img/javascript-string-regexp-magic/cover-en.png
 ---
 
 Here are a few magical features that I recently encountered. Let's start with a few challenges:

@@ -4,6 +4,7 @@ catalog: true
 date: 2022-06-14 22:27:28
 tags: [Security]
 categories: [Security]
+photos: /img/justctf-2022-writeup/cover-en.png
 ---
 
 <img src="/img/justctf-2022-writeup/cover.png" style="display:none">

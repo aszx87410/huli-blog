@@ -5,6 +5,7 @@ tags: [Security]
 categories: [Security]
 translator: huli
 description: In July 2021, we found 4 vulnerabilities in Glints. If a malicious actor exploits the vulnerabilities, they could have stolen your resume.
+photos: /img/how-i-hacked-glints-and-your-resume-en/cover-en.png
 ---
 
 

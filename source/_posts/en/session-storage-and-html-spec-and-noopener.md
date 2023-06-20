@@ -4,6 +4,7 @@ date: 2020-09-05 10:27:57
 tags: [Web, Front-end]
 categories:
   - Web
+photos: /img/session-storage-and-html-spec-and-noopener/cover-en.png
 ---
 
 ## Introduction

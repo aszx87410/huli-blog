@@ -5,6 +5,7 @@ date: 2020-08-07 23:21:12
 tags: [JavaScript, Front-end]
 categories:
   - Front-end
+photos: /img/vite-and-esmodules/cover-en.png
 ---
 
 ## Introduction

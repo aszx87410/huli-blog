@@ -5,6 +5,7 @@ date: 2021-03-20 22:27:27
 tags: [Front-end]
 categories:
   - Front-end
+photos: /img/eslint-plugin/cover-en.png
 ---
 
 ## Introduction

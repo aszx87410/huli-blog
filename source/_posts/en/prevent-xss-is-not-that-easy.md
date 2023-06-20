@@ -5,6 +5,7 @@ date: 2021-05-25 21:59:58
 tags: [Security, Front-end]
 categories:
   - Security
+photos: /img/prevent-xss-is-not-that-easy/cover-en.png
 ---
 
 ## Preface

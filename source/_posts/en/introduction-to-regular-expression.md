@@ -5,6 +5,7 @@ header-img: /img/header_img/article-bg.png
 date: 2020-05-16 15:47:05
 tags: [Others]
 categories: [Others]
+photos: /img/introduction-to-regular-expression/cover-en.png
 ---
 
 ## Introduction

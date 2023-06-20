@@ -4,6 +4,7 @@ date: 2020-06-15 22:19:37
 tags: [Front-end,React]
 categories:
   - React
+photos: /img/react-function-class-hook-useeffect/cover-en.png
 ---
 
 ## Introduction

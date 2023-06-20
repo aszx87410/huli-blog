@@ -4,6 +4,7 @@ catalog: true
 date: 2022-01-15 10:29:19
 tags: [JavaScript, Front-end]
 categories: [JavaScript]
+photos: /img/js-history/cover-en.png
 ---
 
 I believe that to truly understand JavaScript, we must start from its history. Why? Because by understanding its history, we can know why certain parts are designed in a certain way and why there are seemingly strange behaviors. Although some ancient knowledge may not have much practical use, it is very interesting to me.

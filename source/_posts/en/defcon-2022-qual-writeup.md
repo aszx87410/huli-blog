@@ -4,6 +4,7 @@ catalog: true
 date: 2022-06-02 23:27:28
 tags: [Security]
 categories: [Security]
+photos: /img/defcon-2022-qual-writeup/cover-en.png
 ---
 
 <img src="/img/defcon-2022-qual-writeup/cover.png" style="display:none">

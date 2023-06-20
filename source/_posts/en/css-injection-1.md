@@ -4,6 +4,7 @@ catalog: true
 date: 2022-09-29 21:31:10
 tags: [Security]
 categories: [Security]
+photos: /img/css-injection-1/cover-en.png
 ---
 
 <img src="/img/css-injection-1/cover.png" style="display:none" loading="lazy">

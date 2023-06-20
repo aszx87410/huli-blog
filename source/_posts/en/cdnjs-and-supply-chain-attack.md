@@ -4,6 +4,7 @@ catalog: true
 date: 2021-08-22 15:27:31
 tags: [Security, Front-end]
 categories: [Security]
+photos: /img/cdnjs-and-supply-chain-attack/cover-en.png
 ---
 
 ## Introduction

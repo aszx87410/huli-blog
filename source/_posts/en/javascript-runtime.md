@@ -4,6 +4,7 @@ catalog: true
 date: 2022-02-09 21:10:50
 tags: [Front-end, JavaScript]
 categories: [JavaScript]
+photos: /img/javascript-runtime/cover-en.png
 ---
 
 I believe that in order to understand the JavaScript programming language, it is important to understand the concept of the "execution environment" or "runtime". Many people are not aware of this concept, which can lead to differences in understanding of JavaScript or other technologies. Therefore, in this article, let's talk about the execution environment.

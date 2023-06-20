@@ -5,6 +5,7 @@ date: 2021-02-19 00:20:13
 tags: [Ajax,JavaScript,Front-end,CORS]
 categories:
   - Front-end
+photos: /img/cors-guide-5/cover-en.png
 ---
 
 ## Introduction

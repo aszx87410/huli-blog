@@ -7,6 +7,7 @@ subtitle:
 tags: [webpack]
 categories:
   - Front-end
+photos: /img/webpack-newbie-tutorial/cover-en.png
 ---
 
 ## Introduction

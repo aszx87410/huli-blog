@@ -4,6 +4,7 @@ date: 2022-10-05 20:43:37
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/sekaictf2022-safelist-xsleak/cover-en.png
 ---
 <img src="/img/sekaictf2022-safelist-xsleak/cover-en.png" style="display:none">
 

@@ -5,6 +5,7 @@ date: 2019-11-26 14:33:14
 tags: [Web, Others]
 categories:
   - Web
+photos: /img/dont-break-web-smooshgate-and-keygen/cover-en.png
 ---
 
 ## Introduction

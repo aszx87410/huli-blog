@@ -5,6 +5,7 @@ date: 2020-04-18 10:56:48
 tags: [Front-end,JavaScript]
 categories:
   - JavaScript
+photos: /img/javascript-function-is-awesome/cover-en.png
 ---
 
 ## Introduction

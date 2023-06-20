@@ -6,6 +6,7 @@ date: 2020-03-23 22:58:31
 tags: [Others]
 categories:
   - Others
+photos: /img/build-your-own-online-judge-system/cover-en.png
 ---
 
 ## Introduction

@@ -4,6 +4,7 @@ date: 2022-08-21 13:43:37
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/corctf-2022-modern-blog-writeup/cover-en.png
 ---
 <img src="/img/corctf-2022-modern-blog-writeup/cover-en.png" style="display:none">
 

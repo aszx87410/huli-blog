@@ -4,6 +4,7 @@ date: 2020-12-26 20:54:01
 tags: [JavaScript, Front-end]
 categories:
   - JavaScript
+photos: /img/javascript-date-time-and-timezone/cover-en.png
 ---
 
 ## Introduction

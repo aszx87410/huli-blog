@@ -4,6 +4,7 @@ date: 2021-10-25
 tags: [Security, Front-end]
 author: huli
 categories: [Security]
+photos: /img/learn-frontend-from-security-pov/cover-en.png
 ---
 
 This article is the text version of my presentation "Discovering the Depth of Front-end through Cybersecurity" at Modern Web 2021. The video of the talk is not yet available, but if you want to see the slides, you can find them here: [slides](https://speakerdeck.com/aszx87410/jie-chu-zi-an-cai-fa-xian-qian-duan-de-shui-zhen-shen-modern-web-2021)

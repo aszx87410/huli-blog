@@ -4,6 +4,7 @@ catalog: true
 date: 2021-11-30 23:08:40
 tags: [Security]
 categories: [Security]
+photos: /img/hitcon2021-devcore-wargame-writeup/cover-en.png
 ---
 
 HITCON 2021 DEVCORE organized a wargame, which can be found here: https://hackmd.io/@d3vc0r3/hitcon2021

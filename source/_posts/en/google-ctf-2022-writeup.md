@@ -4,6 +4,7 @@ catalog: true
 date: 2022-07-09 17:36:24
 tags: [Security]
 categories: [Security]
+photos: /img/google-ctf-2022-writeup/cover-en.png
 ---
 
 <img src="/img/google-ctf-2022-writeup/cover.png" style="display:none">

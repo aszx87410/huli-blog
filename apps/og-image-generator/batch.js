@@ -44,7 +44,7 @@ async function main() {
         let lines = postContent.split('\n')
         let result = [lines[0]]
         let found = false
-        for(let i=1; i<= lines.length; i++) {
+        for(let i=1; i< lines.length; i++) {
           if (lines[i].startsWith('---') && !found) {
             found = true
             result.push(photoString)

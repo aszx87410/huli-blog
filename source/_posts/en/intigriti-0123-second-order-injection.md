@@ -4,6 +4,7 @@ date: 2023-01-23 10:43:37
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/intigriti-0123-second-order-injection/cover-en.png
 ---
 <img src="/img/intigriti-0123-second-order-injection/cover-en.png" style="display:none" loading="lazy">
 

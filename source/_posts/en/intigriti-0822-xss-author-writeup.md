@@ -4,6 +4,7 @@ date: 2022-08-29 07:43:37
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/intigriti-0822-xss-author-writeup/cover-en.png
 ---
 <img src="/img/intigriti-0822-xss-author-writeup/cover-en.png" style="display:none">
 

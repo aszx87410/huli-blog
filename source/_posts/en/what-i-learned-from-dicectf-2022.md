@@ -4,6 +4,7 @@ catalog: true
 date: 2022-02-08 20:58:50
 tags: [Security, Front-end, JavaScript]
 categories: [Security]
+photos: /img/what-i-learned-from-dicectf-2022/cover-en.png
 ---
 
 If you don't know what CTF is, you can refer to my previous article: [How to Get Started with Web Challenges in CTF?](https://blog.techbridge.cc/2021/02/20/web-ctf-is-fun/), which briefly introduces what CTF is and some basic types of challenges.

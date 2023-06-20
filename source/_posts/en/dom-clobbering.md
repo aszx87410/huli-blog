@@ -5,6 +5,7 @@ date: 2021-01-23 13:34:51
 tags: [Web,JavaScript,Front-end,Security]
 categories:
   - Security
+photos: /img/dom-clobbering/cover-en.png
 ---
 
 ## Introduction

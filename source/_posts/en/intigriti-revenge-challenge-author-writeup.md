@@ -4,6 +4,7 @@ date: 2022-05-02 08:20:16
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/intigriti-revenge-challenge-author-writeup/cover-en.png
 ---
 
 <img src="/img/intigriti-revenge-challenge-author-writeup/cover-en.png" style="display:none">

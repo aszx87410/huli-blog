@@ -5,6 +5,7 @@ catalog: true
 tags: [JavaScript,Algorithm]
 categories:
   - Algorithm
+photos: /img/before-start-leetcode/cover-en.png
 ---
 
 ## Introduction

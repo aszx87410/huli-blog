@@ -4,6 +4,7 @@ catalog: true
 date: 2021-11-14 15:20:49
 tags: [Front-end, Security]
 categories: [Security]
+photos: /img/intigriti-xss-1021/cover-en.png
 ---
 
 ## Introduction

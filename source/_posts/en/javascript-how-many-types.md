@@ -4,6 +4,7 @@ catalog: true
 date: 2022-02-25 23:02:51
 tags: [JavaScript]
 categories: [JavaScript]
+photos: /img/javascript-how-many-types/cover-en.png
 ---
 
 How many data types are there in JavaScript? And what are they?

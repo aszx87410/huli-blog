@@ -6,6 +6,7 @@ tags:
 - JavaScript
 categories:
 - JavaScript
+photos: /img/write-conosle-log-1-without-alphanumeric/cover-en.png
 ---
 
 ## Introduction

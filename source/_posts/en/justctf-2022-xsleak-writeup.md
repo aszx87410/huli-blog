@@ -4,6 +4,7 @@ date: 2022-06-14 20:43:37
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/justctf-2022-xsleak-writeup/cover-en.png
 ---
 <img src="/img/justctf-2022-xsleak-writeup/cover-en.png" style="display:none">
 

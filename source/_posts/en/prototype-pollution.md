@@ -3,6 +3,7 @@ title: "Prototype Pollution: An Attack Technique Based on JS Prototype Chain"
 date: 2021-09-29
 tags: [Security, Front-end]
 categories: [Security]
+photos: /img/prototype-pollution/cover-en.png
 ---
 
 ## Introduction

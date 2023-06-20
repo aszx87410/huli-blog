@@ -4,6 +4,7 @@ catalog: true
 date: 2022-04-10 12:03:34
 tags: [Security]
 categories: [Security]
+photos: /img/picoctf-2022-writeup/cover-en.png
 ---
 
 There were two difficult Web questions this time. I solved one, and the other one was unsolvable, but the solution is worth a look. Here's a brief summary.

@@ -4,6 +4,7 @@ date: 2022-04-06
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/erpnext-ssrf-and-xss-to-account-takeover/cover-en.png
 ---
 
 <!-- summary -->

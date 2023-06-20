@@ -4,6 +4,7 @@ catalog: true
 date: 2022-05-23 19:07:10
 tags: [Front-end]
 categories: [Front-end]
+photos: /img/atomic-css-and-tailwind-css/cover-en.png
 ---
 
 <img src="/img/atomic-css-and-tailwind-css/cover.png" style="display:none">

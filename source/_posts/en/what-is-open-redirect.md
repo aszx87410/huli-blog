@@ -4,6 +4,7 @@ catalog: true
 date: 2021-09-26 10:04:55
 tags: [Security, Front-end, Back-end]
 categories: [Security]
+photos: /img/what-is-open-redirect/cover-en.png
 ---
 
 ## Introduction

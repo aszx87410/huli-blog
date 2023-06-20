@@ -7,6 +7,7 @@ subtitle:
 tags: [nand2tetris]
 categories:
   - Others
+photos: /img/nand2tetris-introduction/cover-en.png
 ---
 
 ## Introduction

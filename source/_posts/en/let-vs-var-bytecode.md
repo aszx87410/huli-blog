@@ -6,6 +6,7 @@ date: 2020-02-20 22:49:59
 tags: [JavaScript]
 categories:
   - JavaScript
+photos: /img/let-vs-var-bytecode/cover-en.png
 ---
 
 ## Introduction

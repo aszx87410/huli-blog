@@ -4,6 +4,7 @@ catalog: true
 date: 2022-04-07 22:02:57
 tags: [Security, Front-end]
 categories: [Security]
+photos: /img/iframe-and-window-open/cover-en.png
 ---
 
 If you want to generate a new window on a webpage, there are probably only two options: one is to embed resources on the same page using tags such as `iframe`, `embed`, and `object`, and the other is to use `window.open` to open a new window.

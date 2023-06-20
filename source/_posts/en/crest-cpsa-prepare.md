@@ -3,6 +3,7 @@ title: CPSA (CREST Practitioner Security Analyst) Exam Experience
 date: 2021-12-15 13:00:00
 tags: [Security]
 categories: [Security]
+photos: /img/crest-cpsa-prepare/cover-en.png
 ---
 
 There is very little information available in Chinese about CREST, the organization, and CPSA, the certification. In Taiwan, it is considered a relatively obscure certification. I gained a basic understanding of this organization and certification after reading this article: [ECSA v10 Equivalent Application CREST CPSA Security Analyst Certification Tutorial / ECSA with CPSA Equivalency Recognition Step](https://medium.com/blacksecurity/crestcpsa-5a07e25e7da3).

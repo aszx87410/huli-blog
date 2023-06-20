@@ -4,6 +4,7 @@ date: 2022-04-25 08:20:16
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/intigriti-0422-xss-challenge-author-writeup/cover-en.png
 ---
 
 <img src="/img/intigriti-0422-xss-challenge-author-writeup/cover-en.png" style="display:none">

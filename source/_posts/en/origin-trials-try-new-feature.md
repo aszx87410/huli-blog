@@ -4,6 +4,7 @@ catalog: true
 date: 2022-02-02 19:27:06
 tags: [Front-end]
 categories: [Front-end]
+photos: /img/origin-trials-try-new-feature/cover-en.png
 ---
 
 If your website wants to experience new features that have not yet been officially launched by the browser, what should you do?

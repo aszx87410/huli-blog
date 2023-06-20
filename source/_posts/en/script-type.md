@@ -3,6 +3,7 @@ title: What do you know about script type?
 date: 2022-04-24 10:20:16
 tags: [Security]
 categories: [Security]
+photos: /img/script-type/cover-en.png
 ---
 
 <img src="/img/script-type/cover.png" style="display:none">

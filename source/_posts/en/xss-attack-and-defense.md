@@ -6,6 +6,7 @@ canonical: https://blog.huli.tw/2021/06/19/xss-attack-and-defense/
 tags: [Security, Front-end]
 categories:
   - Security
+photos: /img/xss-attack-and-defense/cover-en.png
 ---
 
 ## Introduction

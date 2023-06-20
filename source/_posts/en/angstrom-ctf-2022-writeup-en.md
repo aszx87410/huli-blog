@@ -4,6 +4,7 @@ date: 2022-05-05 17:43:37
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/angstrom-ctf-2022-writeup-en/cover-en.png
 ---
 <img src="/img/angstrom-ctf-2022-writeup-en/cover-en.png" style="display:none">
 

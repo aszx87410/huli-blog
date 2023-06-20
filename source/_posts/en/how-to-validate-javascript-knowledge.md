@@ -4,6 +4,7 @@ catalog: true
 date: 2022-01-30 17:32:14
 tags: [JavaScript]
 categories: [JavaScript]
+photos: /img/how-to-validate-javascript-knowledge/cover-en.png
 ---
 
 After discussing the history and baggage of JavaScript, let's talk about JavaScript itself.

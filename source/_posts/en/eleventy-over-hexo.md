@@ -4,6 +4,7 @@ catalog: true
 date: 2021-08-22 15:43:37
 tags: [Others]
 categories: [Others]
+photos: /img/eleventy-over-hexo/cover-en.png
 ---
 
 ## Introduction

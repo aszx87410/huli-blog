@@ -5,6 +5,7 @@ date: 2021-06-07 21:34:09
 tags: [Security, Front-end]
 categories:
   - Security
+photos: /img/xss-challenge-by-intigriti-writeup-may/cover-en.png
 ---
 
 ## Introduction

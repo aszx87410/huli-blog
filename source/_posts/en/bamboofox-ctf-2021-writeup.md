@@ -5,6 +5,7 @@ date: 2021-01-24 22:27:27
 tags: [Security]
 categories:
   - Security
+photos: /img/bamboofox-ctf-2021-writeup/cover-en.png
 ---
 
 ## Preface

@@ -4,6 +4,7 @@ catalog: true
 date: 2022-05-05 20:36:04
 tags: [Security]
 categories: [Security]
+photos: /img/angstrom-ctf-2022-writeup/cover-en.png
 ---
 
 <img src="/img/angstrom-ctf-2022-writeup/cover.png" style="display:none">

@@ -3,6 +3,7 @@ title: "XSS from scratch: history and origin"
 date: 2021-10-11
 tags: [Security, Front-end]
 categories: [Security]
+photos: /img/xss-history/cover-en.png
 ---
 
 I have written some articles about XSS before, mainly discussing the implementation of prevention and defense details:

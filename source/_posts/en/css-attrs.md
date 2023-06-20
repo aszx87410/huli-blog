@@ -5,6 +5,7 @@ date: 2021-04-17 22:27:27
 tags: [Front-end]
 categories:
   - Front-end
+photos: /img/css-attrs/cover-en.png
 ---
 
 ## Introduction

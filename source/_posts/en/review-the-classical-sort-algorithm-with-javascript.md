@@ -5,6 +5,7 @@ catalog: true
 tags: [Front-end,JavaScript,Algorithm]
 categories:
   - Algorithm
+photos: /img/review-the-classical-sort-algorithm-with-javascript/cover-en.png
 ---
 # Introduction
 

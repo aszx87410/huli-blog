@@ -4,6 +4,7 @@ catalog: true
 date: 2021-09-26 09:55:26
 tags: [Security, Front-end]
 categories: [Security]
+photos: /img/what-is-clickjacking/cover-en.png
 ---
 
 ## Introduction

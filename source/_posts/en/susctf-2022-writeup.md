@@ -4,6 +4,7 @@ catalog: true
 date: 2022-03-01 21:54:15
 tags: [Security]
 categories: [Security]
+photos: /img/susctf-2022-writeup/cover-en.png
 ---
 
 This holiday there were several CTFs, and I participated in SUSCTF 2022 with team SU. This post briefly records my experience with several of the challenges I participated in.

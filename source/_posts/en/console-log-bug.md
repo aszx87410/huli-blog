@@ -6,6 +6,7 @@ date: 2020-03-23 23:08:32
 tags: [Web]
 categories:
   - Web
+photos: /img/console-log-bug/cover-en.png
 ---
 
 ## Preface

@@ -3,6 +3,7 @@ title: LINE CTF 2022 Notes
 date: 2022-03-27 15:15:47
 tags: [Security]
 categories: [Security]
+photos: /img/linectf-2022-writeup/cover-en.png
 ---
 
 I participated in LINE CTF 2022 with the team [Water Paddler](https://twitter.com/Water_Paddler) and we ranked seventh with the help of my teammates. I only contributed to one question, while the others were solved by my teammates or stuck. This article briefly summarizes the solutions to each question, most of which are referenced from [LINE CTF 2022 Writeups by maple3142](https://blog.maple3142.net/2022/03/27/line-ctf-2022-writeups).

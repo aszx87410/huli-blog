@@ -4,6 +4,7 @@ catalog: true
 date: 2022-05-21 16:14:14
 tags: [Security]
 categories: [Security]
+photos: /img/m0lecon-ctf-2022-writeup/cover-en.png
 ---
 
 <img src="/img/m0lecon-ctf-2022-writeup/cover.png" style="display:none;">

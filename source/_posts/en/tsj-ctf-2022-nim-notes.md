@@ -4,6 +4,7 @@ catalog: true
 date: 2022-03-02 22:02:11
 tags: [Security]
 categories: [Security]
+photos: /img/tsj-ctf-2022-nim-notes/cover-en.png
 ---
 
 Last weekend, in addition to the SUSCTF 2022 I wrote about in my previous post, there was also another TSJ CTF with many good challenges. Due to time constraints, I only chose the ones that interested me more, and this is the Nim Notes challenge mentioned in the title. I didn't manage to solve it in the end (I was far from it), but the solution was very interesting, so I'm writing this post to record the official solution.

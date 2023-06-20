@@ -4,6 +4,7 @@ catalog: true
 date: 2022-01-16 11:21:29
 tags: [JavaScript, Front-end]
 categories: [Front-end]
+photos: /img/same-site-to-same-origin-document-domain/cover-en.png
 ---
 
 Although Same Site and Same Origin may seem similar, they are actually quite different. This difference affects how the browser perceives the relationship between these two websites and the permissions it grants.

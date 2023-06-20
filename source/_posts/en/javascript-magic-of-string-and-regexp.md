@@ -5,6 +5,7 @@ date: 2022-04-14 20:29:17
 tags: [Security, Front-end]
 categories: [Security]
 translator: huli
+photos: /img/javascript-magic-of-string-and-regexp/cover-en.png
 ---
 
 <img src="/img/javascript-magic-of-string-and-regexp/cover-en.png" style="display:none;">
