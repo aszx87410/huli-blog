@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "og-image": "node og-image-generator/app.js"
+    "og-image": "node apps/og-image-generator/app.js"
   },
   "hexo": {
     "version": "6.3.0"

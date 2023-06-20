@@ -6,6 +6,7 @@ const frontMatter = require('front-matter')
 
 const app = express()
 const PORT = process.env.PORT || 3000
+const BASE_PATH = path.join(__dirname, '../../')
 
 const getPath = name => path.join(__dirname, name)
 
@@ -22,7 +23,7 @@ if (!post) {
 }
 
 // get post 
-const postPath = path.join(__dirname, '../', 'source', '_posts', lang, post + '.md')
+const postPath = path.join(BASE_PATH, 'source', '_posts', lang, post + '.md')
 console.log(`Path: ${postPath}`)
 
 let postMeta
@@ -74,7 +75,7 @@ async function main(){
   });
 
   // create folder if not exist
-  const postImgDir = path.join(__dirname, '../', 'source', 'img', post)
+  const postImgDir = path.join(BASE_PATH, 'source', 'img', post)
   if (!fs.existsSync(postImgDir)) {
     fs.mkdirSync(postImgDir)
     console.log('Create folder');
