@@ -4,7 +4,7 @@ catalog: true
 date: 2022-12-26 20:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/ctf-2022-web-js-summary/cover.png
+photos: /img/ctf-2022-web-js-summary/cover-en.png
 ---
 
 This year, I seriously followed Water Paddler to play CTF for a whole year. I saw someone organizing a [CTF: Best Web Challenges 2022](https://blog.arkark.dev/2022/12/17/best-web-challs/) and found that I had played most of the challenges inside. So I thought it would be better for me to write a summary, organizing the challenges that I personally felt I had learned something new from.

@@ -3,7 +3,7 @@ title: SekaiCTF 2022 Notes and Concurrent Limit
 date: 2022-10-08 09:43:37
 tags: [Security]
 categories: [Security]
-photos: /img/sekaictf2022-safelist-and-connection/cover.png
+photos: /img/sekaictf2022-safelist-and-connection/cover-en.png
 ---
 
 I casually played SekaiCTF 2022 last weekend and I have to say that the visual style is pretty cool. You can tell that a lot of effort was put into it, and it feels like a game.

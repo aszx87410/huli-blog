@@ -4,7 +4,7 @@ catalog: true
 date: 2022-03-30 12:00:00
 tags: [Security]
 categories: [Security]
-photos: /img/wordpress-plugin-amelia-sensitive-information-disclosure/cover.png
+photos: /img/wordpress-plugin-amelia-sensitive-information-disclosure/cover-en.png
 ---
 
 [Amelia](https://tw.wordpress.org/plugins/ameliabooking/) is a WordPress plugin developed by TMS that allows you to easily add a booking system to your WordPress website, such as for clinics, hair salons, or tutoring, making it ideal for setting up a simple reservation system. According to official WordPress statistics, approximately 40,000 websites have installed this plugin.

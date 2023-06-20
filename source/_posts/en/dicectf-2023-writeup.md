@@ -4,7 +4,7 @@ catalog: true
 date: 2023-03-26 09:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/dicectf-2023-writeup/cover.png
+photos: /img/dicectf-2023-writeup/cover-en.png
 ---
 
 Although it's been almost two months, I'm still going to take some notes. [Last year](/2022/02/08/what-i-learned-from-dicectf-2022/), I was electrocuted badly. I thought it would be better this year since it's been a year, but I still got electrocuted.

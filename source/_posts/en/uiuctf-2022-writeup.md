@@ -4,7 +4,7 @@ catalog: true
 date: 2022-08-01 20:31:10
 tags: [Security]
 categories: [Security]
-photos: /img/uiuctf-ctf-2022-writeup/cover.png
+photos: /img/uiuctf-ctf-2022-writeup/cover-en.png
 ---
 
 I didn't participate in this CTF, but I found two interesting problems related to content type and I want to write down the solutions.

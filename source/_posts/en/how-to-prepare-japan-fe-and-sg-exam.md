@@ -4,7 +4,7 @@ catalog: true
 date: 2023-04-14 15:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/how-to-prepare-japan-fe-and-sg-exam/cover.png
+photos: /img/how-to-prepare-japan-fe-and-sg-exam/cover-en.png
 ---
 
 Recently, as a beginner in Zero-Day Japanese, I started studying and passed Japan's Basic Information Technology and Information Security Management exams. In this post, I will share how I prepared and what exam techniques I used.

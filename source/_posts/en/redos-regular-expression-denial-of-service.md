@@ -4,7 +4,7 @@ catalog: true
 date: 2023-06-12 14:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/redos-regular-expression-denial-of-service/cover.png
+photos: /img/redos-regular-expression-denial-of-service/cover-en.png
 ---
 
 Regular expressions (hereinafter referred to as regexp), are mainly used for string matching. After writing a pattern, it can be used to match text that meets the rules.

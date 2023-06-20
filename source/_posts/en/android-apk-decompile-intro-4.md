@@ -4,7 +4,7 @@ catalog: true
 date: 2023-04-27 15:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/android-apk-decompile-intro/cover4.png
+photos: /img/android-apk-decompile-intro-4/cover-en.png
 ---
 
 In the previous articles, we talked about static analysis, which means we didn't actually run the app. Instead, we studied the logic of the app's operation through decompiled code and modified the code before repackaging and executing it.

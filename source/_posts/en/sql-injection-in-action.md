@@ -4,7 +4,7 @@ catalog: true
 date: 2022-01-19 14:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/sql-injection-in-action/cover.png
+photos: /img/sql-injection-in-action/cover-en.png
 ---
 
 Recently, during a penetration test, our team discovered an interesting SQL injection case. Due to some features, we couldn't directly use existing tools to retrieve data. We had to modify the tools or write scripts to effectively utilize them. Therefore, this article will share two practical cases and my own solutions.

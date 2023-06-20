@@ -4,7 +4,6 @@ catalog: true
 date: 2023-04-27 14:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/android-apk-decompile-intro/cover1.png
 ---
 
 Five years ago, I wrote an article titled [[Android] Everyone Can Reverse Engineer APKs](https://blog.huli.tw/2016/03/20/android-apk-decompile/). At that time, I was an Android engineer who, due to work requirements, researched basic Android reverse engineering with my colleagues. Our goal was to achieve a fully automated process: upload an APK, automatically decompile it, insert some strange things, and then repackage it.

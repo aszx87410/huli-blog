@@ -5,6 +5,7 @@ catalog: true
 tags: [Front-end]
 categories:
   - Front-end
+photos: /img/an-interesting-styled-components-bug/cover-en.png
 ---
 
 ## Introduction

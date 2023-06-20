@@ -85,7 +85,7 @@ async function main(){
   await takeScreenshot(page, screenshotPath)
 
   await browser.close();
-  console.log("Done, you can find image at: " + screenshotPath)
+  console.log("Done, you can find image at: " + screenshotPath + '.png')
   process.exit(0)
 }
 

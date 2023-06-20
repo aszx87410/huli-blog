@@ -4,7 +4,7 @@ catalog: true
 date: 2023-04-27 14:12:44
 tags: [Security]
 categories: [Security]
-photos: /img/android-apk-decompile-intro/cover2.png
+photos: /img/android-apk-decompile-intro-2/cover-en.png
 ---
 
 In the first part, we learned the basics of using Apktool to decompile an APK, modify its resources, reassemble it, and install the aligned and signed APK on a device.

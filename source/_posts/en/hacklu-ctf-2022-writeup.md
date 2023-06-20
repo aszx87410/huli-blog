@@ -3,7 +3,7 @@ title: Hack.lu CTF 2022 Notes
 date: 2022-10-31 20:05:37
 tags: [Security]
 categories: [Security]
-photos: /img/hacklu-ctf-2022-writeup/cover.png
+photos: /img/hacklu-ctf-2022-writeup/cover-en.png
 ---
 
 I was completely lost with the web problems and didn't solve anything. The quality of the problems was good and I learned a lot of new things, so it's worth recording.

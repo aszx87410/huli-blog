@@ -4,6 +4,7 @@ date: 2022-03-30
 tags: [Security]
 categories: [Security]
 translator: huli
+photos: /img/amelia-wordpress-plugin-sensitive-data-exposure-detail/cover-en.png
 ---
 
 <!-- summary -->

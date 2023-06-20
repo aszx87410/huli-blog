@@ -4,7 +4,7 @@ catalog: true
 date: 2023-01-10 09:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/security-of-encrypt-or-hash-password-in-client-side/cover.png
+photos: /img/security-of-encrypt-or-hash-password-in-client-side/cover-en.png
 ---
 
 Recently, someone posted a [post](https://www.facebook.com/groups/f2e.tw/posts/5689037364466915) in the Facebook frontend exchange community, which he saw a problem: [Is there a problem with passing account and password json plaintext when logging in to the API?](https://ithelp.ithome.com.tw/questions/10211642), and wanted to know everyone's opinion on this issue.

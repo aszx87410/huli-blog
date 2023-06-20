@@ -4,7 +4,7 @@ catalog: true
 date: 2022-05-20 12:00:00
 tags: [Security]
 categories: [Security]
-photos: /img/wordpress-plugin-vikbooking-unauth-rce/cover.png
+photos: /img/wordpress-plugin-vikbooking-unauth-rce/cover-en.png
 ---
 
 Recently, I was looking at some WordPress plugins and found that it was a good place to practice because there are many plugins there, and each one has source code that can be viewed. You can do black-box or white-box testing, and installation is also very convenient.

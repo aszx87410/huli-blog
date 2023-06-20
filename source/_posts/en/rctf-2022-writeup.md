@@ -4,7 +4,7 @@ catalog: true
 date: 2022-12-14 20:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/rctf-2022-writeup/cover.png
+photos: /img/rctf-2022-writeup/cover-en.png
 ---
 
 Here are some notes on the challenges I solved during RCTF 2022. I won't be including those I didn't attempt.

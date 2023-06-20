@@ -4,7 +4,7 @@ catalog: true
 date: 2023-04-27 14:20:44
 tags: [Security]
 categories: [Security]
-photos: /img/android-apk-decompile-intro/cover3.png
+photos: /img/android-apk-decompile-intro-3/cover-en.png
 ---
 
 I remember when I first started working with Android, it was easy to see which requests an app was sending. All I had to do was install [Charles](https://www.charlesproxy.com/) on my computer, set up the Wi-Fi on my phone to proxy to my computer, and then download the certificate provided by Charles by entering a specific URL. Once installed, I was good to go.

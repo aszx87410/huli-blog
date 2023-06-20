@@ -5,6 +5,7 @@ date: 2020-09-09 19:28:40
 tags: [React, Front-end]
 categories:
   - React
+photos: /img/about-react-state-and-hooks-use-effect/cover-en.png
 ---
 
 ## Introduction

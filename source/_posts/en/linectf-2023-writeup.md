@@ -4,7 +4,7 @@ catalog: true
 date: 2023-03-27 09:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/linectf-2023-writeup/cover.png
+photos: /img/linectf-2023-writeup/cover-en.png
 ---
 
 This year, Water Paddler got second place, solving 8 out of 9 web challenges (I contributed to 2 of them). Overall, I think the web challenges were easier than last year, and there were fewer participants.

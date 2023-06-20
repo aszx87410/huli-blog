@@ -4,7 +4,7 @@ catalog: true
 date: 2022-12-08 20:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/ctf-js-notes/cover.png
+photos: /img/ctf-js-notes/cover-en.png
 ---
 
 Recently, there were several CTF challenges that were quite good, such as SECCON and HITCON, but unfortunately, I was traveling abroad at that time and was too lazy to write complete writeups after returning. Originally, I was even too lazy to take notes, but once time passed, it became difficult to find related information, so I decided to write a brief summary.
