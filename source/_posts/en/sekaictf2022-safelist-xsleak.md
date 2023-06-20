@@ -3,6 +3,7 @@ title: SekaiCTF 2022 - safelist writeup
 date: 2022-10-05 20:43:37
 tags: [Security]
 categories: [Security]
+translator: huli
 ---
 <img src="/img/sekaictf2022-safelist-xsleak/cover-en.png" style="display:none">
 

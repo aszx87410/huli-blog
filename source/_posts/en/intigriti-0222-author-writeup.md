@@ -4,6 +4,7 @@ catalog: true
 date: 2022-02-14 15:43:37
 tags: [Security]
 categories: [Security]
+translator: huli
 ---
 
 In May 2021, I solved my first Intigriti XSS challenge. Since then, I play every XSS challenge afterward, and solved most of them. Sometimes it's painful when you try everything you know but still can't solve it, however, the moment you made it, the pain is gone, replaced with joy and happiness.

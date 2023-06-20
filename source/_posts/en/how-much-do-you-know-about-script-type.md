@@ -3,6 +3,7 @@ title: How much do you know about script type?
 date: 2022-04-24 10:20:16
 tags: [Security]
 categories: [Security]
+translator: huli
 ---
 
 <img src="/img/how-much-do-you-know-about-script-type/cover-en.png" style="display:none">

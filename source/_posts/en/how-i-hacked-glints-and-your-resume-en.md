@@ -3,6 +3,7 @@ title: Story of critical security flaws I found in Glints
 date: 2022-02-08
 tags: [Security]
 categories: [Security]
+translator: huli
 description: In July 2021, we found 4 vulnerabilities in Glints. If a malicious actor exploits the vulnerabilities, they could have stolen your resume.
 ---
 

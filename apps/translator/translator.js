@@ -112,7 +112,7 @@ const translate = async ({
     console.log(`${i}. ${fragments[i].slice(0, 30)}...`)
   }
   console.log('\n')
-  
+
   const printStatus = () => {
     process.stdout.write("\x1b[1A\x1b[2K") // clear previous line
     console.log(statusToText(status))

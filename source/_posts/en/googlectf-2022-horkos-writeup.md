@@ -3,6 +3,7 @@ title: "Insecure Deserialization in JavaScript: GoogleCTF 2022 Web/HORKOS Writeu
 date: 2022-07-11 19:43:37
 tags: [Security]
 categories: [Security]
+translator: huli
 ---
 <img src="/img/googlectf-2022-horkos-writeup/cover-en.png" style="display:none">
 
