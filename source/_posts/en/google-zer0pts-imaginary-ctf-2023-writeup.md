@@ -4,7 +4,7 @@ catalog: true
 date: 2023-07-28 14:10:44
 tags: [Security]
 categories: [Security]
-photos: /img/google-zer0pts-imaginary-ctf-2023-writeup/cover.png
+photos: /img/google-zer0pts-imaginary-ctf-2023-writeup/cover-en.png
 ---
 
 A while ago, I was busy traveling and didn't have much time for CTFs. Even if I did participate, I was too lazy to write a writeup, so my last writeup was back in March. I felt it was a shame to break the streak, so I quickly wrote another one to make up for it.
