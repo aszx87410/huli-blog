@@ -23,6 +23,13 @@ npx hexo d
 npm run og-image -- "redos-regular-expression-denial-of-service"
 ```
 
+## 翻譯
+
+```
+OPENAI_API_KEY=sk-xxx
+npm run translate
+```
+
 ## 版本
 
 已升級到最新版本，Node.js v20 可以跑
