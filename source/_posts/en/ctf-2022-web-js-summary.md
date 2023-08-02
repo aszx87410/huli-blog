@@ -1,5 +1,5 @@
 ---
-title: Summary of CTF Web Frontend and JS Questions in 2022
+title: Summary of CTF Web Frontend and JS Challenges in 2022
 catalog: true
 date: 2022-12-26 20:10:44
 tags: [Security]
@@ -7,9 +7,9 @@ categories: [Security]
 photos: /img/ctf-2022-web-js-summary/cover-en.png
 ---
 
-This year, I seriously followed Water Paddler to play CTF for a whole year. I saw someone organizing a [CTF: Best Web Challenges 2022](https://blog.arkark.dev/2022/12/17/best-web-challs/) and found that I had played most of the challenges inside. So I thought it would be better for me to write a summary, organizing the challenges that I personally felt I had learned something new from.
+This year, I seriously followed Water Paddler to play CTF for a whole year. I saw someone wrote a [CTF: Best Web Challenges 2022](https://blog.arkark.dev/2022/12/17/best-web-challs/) and found that I had played most of the challenges inside. So I thought it would be better for me to write a summary, documenting the challenges that I personally felt I had learned something new from.
 
-Because of my personal interest, the challenges that I will specifically remember are related to frontend and JS. Challenges related to backend (PHP, Java, etc.) are not included.
+Because of my personal interest, the challenges that I played were related to frontend and JS. Challenges related to backend (PHP, Java, etc.) are not included.
 
 Also, the techniques or solutions recorded in this article do not represent the first appearance in CTF. They are just the first time I saw them or thought they were worth recording, so I wrote them down.
 
@@ -41,11 +41,11 @@ The last line has a DOM-based XSS, but the pwd you want to steal is inside the b
 
 The key is the seemingly inconspicuous RegExp, which has a magical property called `RegExp.input`, which will remember the last thing tested. Therefore, you can use this to get the pwd.
 
-Detailed writeup: https://blog.huli.tw/2022/02/08/what-i-learned-from-dicectf-2022/#webno-cookies5-solves
+Detailed writeup: https://blog.huli.tw/2022/02/08/en/what-i-learned-from-dicectf-2022/#webx2fno-cookies5-solves
 
 ### PlaidCTF 2022 - YACA
 
-The core concept of the challenge is similar to this (but I remember it was an unexpected solution):
+The core concept of the challenge is similar to this (but I remember it was an unintended solution):
 
 ``` js
 var tmpl = '<input type="submit" value="{{value}}">'
@@ -55,7 +55,7 @@ tmpl = tmpl.replace('{{value}}', value)
 document.body.innerHTML = tmpl
 ```
 
-`>"` is all replaced, and it seems impossible to escape the attribute. But the key is that the parameter of tmpl replace can be controlled. At this time, you can use [special replacement pattern](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_string_as_the_replacement) to retrieve your tag:
+`>"` is all replaced, and it seems impossible to escape the attribute. But the key is that the parameter of tmpl replace can be controlled. At this time, you can use [special replacement pattern](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_string_as_the_replacement) to get the tag:
 
 ``` js
 var tmpl = '<input type="submit" value="{{value}}">'
@@ -66,23 +66,23 @@ console.log(tmpl)
 // <input type="submit" value=""><style onload=alert(1) ">
 ```
 
-Complete writeup: https://blog.huli.tw/2022/04/14/javascript-string-regexp-magic/
+Full writeup: https://blog.huli.tw/2022/04/14/en/javascript-string-regexp-magic/
 
 ### ångstromCTF 2022 - CaaSio PSE
 
 In short, use `with()` to bypass the restriction that `.` cannot be used.
 
-Complete writeup: https://blog.huli.tw/2022/05/05/angstrom-ctf-2022-writeup/#misccaasio-pse
+Complete writeup: https://blog.huli.tw/2022/05/05/en/angstrom-ctf-2022-writeup/#miscx2fcaasio-pse
 
 ### GoogleCTF 2022 - HORKOS
 
-I call this challenge "JS deserialization". In short, there are also some magic methods in JS that will be executed secretly.
+I call this challenge "JS deserialization". In short, there are also some magic methods in JS that will be executed automatically.
 
-For example, when you return something in an async function, if this thing is a Promise, it will be resolved before returning, so `then` will be called secretly.
+For example, when you return something in an async function, if this thing is a Promise, it will be resolved before returning, so `then` will be called automatically.
 
 Similarly, some implicit type conversions will also call `toString` or `valueOf`, and `toJSON` will be called when converted to JSON.
 
-Complete writeup: https://blog.huli.tw/2022/07/09/google-ctf-2022-writeup/#horkos-10-solves
+Complete writeup: https://blog.huli.tw/2022/07/11/en/googlectf-2022-horkos-writeup/
 
 ### corCTF 2022 - sbxcalc
 
@@ -96,7 +96,7 @@ How to get the original object protected by Proxy?
 
 The answer is `Object.getOwnPropertyDescriptor(p, 'flag')`
 
-Writeup: https://blog.huli.tw/2022/12/08/ctf-js-notes/#corctf-2022-sbxcalc
+Writeup: https://blog.huli.tw/2022/12/08/en/ctf-js-notes/#corctf-2022-sbxcalc
 
 ## Node.js related
 
@@ -110,7 +110,7 @@ delete global.global;
 process = undefined;
 {
   let Array=undefined;let __dirname=undefined;let Int8Array=undefined;
-  // ... 省略一大堆 undefined
+  // ... a lot of similar statements to make things undefined
   
   console.log(eval(input));
 }
@@ -124,7 +124,7 @@ There are three solutions:
 2. Using `arguments.callee.caller.arguments` can get the overwritten arguments of the upper layer (a layer automatically wrapped by Node.js).
 3. Using try-catch can get the instance of Error.
 
-Detailed writeup: https://blog.huli.tw/2022/02/08/what-i-learned-from-dicectf-2022/#miscundefined55-solves
+Detailed writeup: https://blog.huli.tw/2022/02/08/en/what-i-learned-from-dicectf-2022/#miscx2fundefined55-solves
 
 ### corCTF 2022 - simplewaf
 
@@ -153,7 +153,7 @@ console.log(fs.readFileSync({
   hostname: '',
   pathname: '/etc/passw%64'
 }).toString())
-// 等同於 readFileSync(new URL("file:///etc/passw%64"))
+// equals to readFileSync(new URL("file:///etc/passw%64"))
 ```
 
 Author's writeup: https://brycec.me/posts/corctf_2022_challenges#simplewaf
@@ -212,7 +212,7 @@ Object.prototype.env = {
 require('./usage.js')
 ```
 
-Details can be found in the complete writeup: https://blog.huli.tw/2022/12/08/ctf-js-notes#balsn-ctf-2022-2linenodejs
+Details can be found in the complete writeup: https://blog.huli.tw/2022/12/08/en/ctf-js-notes/#balsn-ctf-2022-2linenodejs
 
 ## XSleaks
 
@@ -226,15 +226,15 @@ In Chrome, the number of sockets is limited, generally 255, and headless is 99. 
 
 Since there is only one socket left, the time from reqMeasure sending the request to receiving the response is `the time reqSearch takes + the time reqMeasure takes`. If the time reqMeasure takes is about the same, then we can easily measure the time reqSearch takes.
 
-Detailed writeup: https://blog.huli.tw/2022/02/08/what-i-learned-from-dicectf-2022/#webcarrot1-solves
+Detailed writeup: https://blog.huli.tw/2022/02/08/en/what-i-learned-from-dicectf-2022/#webx2fcarrot1-solves
 
 ### TSJ CTF 2022 - Nim Notes
 
-In this problem, you can achieve CRLF injection, but the position is at the bottom, so you cannot cover CSP and cannot XSS. How to steal the content of the page?
+In this problem, you can achieve CRLF injection, but the position is at the bottom, so you cannot override CSP and XSS. How to steal the content of the page?
 
 Assuming that the content to be stolen is in `<script>`, you can use the header [Content-Security-Policy-Report-Only](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only), because when it violates the rules, it will send a JSON to the specified location, which will include the first 40 characters of the script.
 
-Complete writeup: https://blog.huli.tw/2022/03/02/tsj-ctf-2022-nim-notes/
+Complete writeup: https://blog.huli.tw/2022/03/02/en/tsj-ctf-2022-nim-notes/
 
 ### ångstromCTF 2022 - Sustenance
 
@@ -246,7 +246,7 @@ There are two solutions. One is to use fetch to measure whether it is in the cac
 
 The second is to use cookie tossing with other same site domains to construct a cookie bomb. When the search is successful, the payload will be too large (because there are a few more characters in the URL), and there will be no problem when it fails, thus measuring the difference.
 
-Complete writeup: https://blog.huli.tw/2022/05/05/angstrom-ctf-2022-writeup/#websustenance
+Complete writeup: https://blog.huli.tw/2022/05/05/en/angstrom-ctf-2022-writeup/#webx2fsustenance
 
 ### justCTF 2022 - Ninja
 
@@ -254,7 +254,7 @@ A new xsleak that uses `:target` with `:before` to load images.
 
 For details, please refer to: [New technique of stealing data using CSS and Scroll-to-Text Fragment feature.](https://www.secforce.com/blog/new-technique-of-stealing-data-using-css-and-scroll-to-text-fragment-feature/)
 
-Complete writeup: https://blog.huli.tw/2022/06/14/justctf-2022-writeup#ninja1-solves
+Complete writeup: https://blog.huli.tw/2022/06/14/en/justctf-2022-writeup/#ninja1-solves
 
 ### SekaiCTF 2022 - safelist
 
@@ -262,7 +262,7 @@ Use lazy-loading images to send requests to the server to slow down the server s
 
 You can also use the connection pool or other elements mentioned earlier to solve it.
 
-Writeup: https://blog.huli.tw/2022/10/08/sekaictf2022-safelist-and-connection/
+Writeup: https://blog.huli.tw/2022/10/08/en/sekaictf2022-safelist-and-connection/
 
 ## Front-end DOM/BOM related knowledge
 
@@ -276,7 +276,7 @@ But the final solution is:
 2. Use `window.find` to find the content
 3. Use `document.execCommand` to insert HTML and use svg to get the node
 
-Detailed writeup: https://blog.huli.tw/2022/02/08/what-i-learned-from-dicectf-2022/#webshadow0-solves
+Detailed writeup: https://blog.huli.tw/2022/02/08/en/what-i-learned-from-dicectf-2022/#webx2fshadow0-solves
 
 ### LINE CTF 2022 - Haribote Secure Note
 
@@ -296,7 +296,7 @@ There are three solutions:
 
 Here is a great article: [Eliminating XSS from WebUI with Trusted Types](https://microsoftedge.github.io/edgevr/posts/eliminating-xss-with-trusted-types)
 
-Complete writeup: https://blog.huli.tw/2022/03/27/linectf-2022-writeup/#haribote-secure-note7-solves
+Complete writeup: https://blog.huli.tw/2022/03/27/en/linectf-2022-writeup/#haribote-secure-note7-solves
 
 ### m0leCon CTF 2022 - ptMD
 
@@ -309,7 +309,7 @@ Leak URL using `meta` combination:
 
 In a strict CSP state, meta can be used as a breakthrough technique. These meta tags, like the ones above, work even if they are not placed inside the head tag, and even after they are removed.
 
-Full writeup: https://blog.huli.tw/2022/05/21/m0lecon-ctf-2022-writeup#ptmd
+Full writeup: https://blog.huli.tw/2022/05/21/en/m0lecon-ctf-2022-writeup/
 
 ### corCTF 2022 - modernblog
 
@@ -333,7 +333,7 @@ a[href^="/post/1"] {
 
 And since we are currently on the `/posts/:id` page, we cannot get the content of the `/home` page, so we cannot do this.
 
-The key point of this question is a very interesting application of DOM clobbering. Nowadays, React apps basically use [react-router](https://reactrouter.com/en/main) to do routing. This lib will go to `document.defaultView.history` to see what the URL is and decide which page to render.
+The key point of this question is a very interesting usage of DOM clobbering. Nowadays, React apps basically use [react-router](https://reactrouter.com/en/main) to do routing. This lib will use `document.defaultView.history` to see what the URL is and decide which page to render.
 
 And `document.defaultView` can be affected by DOM clobbering, like this:
 
@@ -379,7 +379,7 @@ It will output 1 first and then 2, and it will take effect without inserting it 
 
 Related discussion: https://twitter.com/terjanq/status/1421093136022048775
 
-Writeup: https://blog.huli.tw/2022/12/08/ctf-js-notes/#hitcon-ctf-2022
+Writeup: https://blog.huli.tw/2022/12/08/en/ctf-js-notes/#hitcon-ctf-2022
 
 ### SekaiCTF 2022 - Obligatory Calc
 
@@ -394,7 +394,7 @@ Two key points:
 
 This question is related to the order in which the browser executes things, as well as site isolation and other things. Through these things, you can construct an iframe-related race condition.
 
-Full writeup: https://blog.huli.tw/2022/07/09/google-ctf-2022-writeup/#postviewer-10-solves
+Full writeup: https://blog.huli.tw/2022/07/09/en/google-ctf-2022-writeup/#postviewer-10-solves
 
 ### UIUCTF 2022 - modernism
 
@@ -419,15 +419,15 @@ The solution is to add a BOM at the beginning, and the browser will read the ent
 
 The solution to this problem basically requires knowledge of how the browser reads.
 
-Full writeup: https://blog.huli.tw/2022/08/01/uiuctf-2022-writeup/
+Full writeup: https://blog.huli.tw/2022/08/01/en/uiuctf-2022-writeup/
 
 ### UIUCTF 2022 - precisionism
 
-An extension of the previous question, only adding `Enjoy your flag!` at the end, so the trick mentioned above cannot be used.
+An extension of the previous challenge, only adding `Enjoy your flag!` at the end, so the trick mentioned above cannot be used.
 
-The expected solution is to make the response into ICO format, put the part to be leaked into the width, and it is possible to get the width of the image cross-originally, so you can take out the data byte by byte.
+The expected solution is to make the response into ICO format, put the part to be leaked into the width, and it is possible to get the width of the image cross-originally, so you can leak the data byte by byte.
 
-Full writeup: https://blog.huli.tw/2022/08/01/uiuctf-2022-writeup#precisionism3-solves
+Full writeup: https://blog.huli.tw/2022/08/01/en/uiuctf-2022-writeup/#precisionism3-solves
 
 ### SECCON CTF 2022 Quals - spanote
 
@@ -450,17 +450,17 @@ Although it is a GET, it will check the custom header, so theoretically it canno
 
 But using bfcache, it can be solved like this:
 
-1. Open `/api/notes/id` with a browser, and an error screen will appear
+1. Open `/api/notes/id` in a new window, and an error screen will appear
 2. Go to the homepage with the same tab. At this time, the homepage will use fetch to fetch `/api/notes/id` with a custom header, and the browser will store the result in the disk cache
 3. Go back one page, and the screen will display the cached result
 
-You can directly browse the cached response with the browser, bypassing the custom header restriction.
+You can directly browse the cached response in the browser, bypassing the custom header restriction.
 
-Full writeup: https://blog.huli.tw/2022/12/08/ctf-js-notes/#seccon-ctf-2022-quals-spanote
+Full writeup: https://blog.huli.tw/2022/12/08/en/ctf-js-notes/#seccon-ctf-2022-quals-spanote
 
-## Special feature: Introduction of characters
+## Bonus: Authors of Great Web Challenges
 
-There were already several people who left a deep impression on me, so I thought I would organize these people since I have already organized the questions.
+It takes a lot of time and effort to make a good CTF challenge, so I thought I would wrote a bit about these authors since I have already wrote about the challenges.
 
 The first is [Ankur Sundara](https://twitter.com/ankursundara), a member of the dicegang team. He created the UIUCTF questions mentioned above, and he also created a question related to content type before. I feel that he must have read the Chromium source code related parts before producing those questions.
 
@@ -470,18 +470,18 @@ The second is [terjanq](https://twitter.com/terjanq), who works at Google. He cr
 
 He occasionally plays CTF with the justCatTheFish team, and if there are only one or two teams that solve some frontend Web questions, there is a high probability that justCatTheFish is one of them.
 
-The third is [strellic](https://twitter.com/Strellic_), also from dicegang. He has created a lot of questions and the quality is very good. The writeups are also very detailed. I learned a lot of skills and new ideas from him. He always combines previous skills and develops new techniques. He is really amazing.
+The third is [strellic](https://twitter.com/Strellic_), also from dicegang. He has created a lot of questions and the quality is very good. The writeups are also very detailed. I learned a lot of skills and new ideas from him. He always combines old or known technique and develops a new one.
 
 Of course, there are other impressive people, but I'm too lazy to introduce them one by one XD
 
-For example, the author of the article mentioned at the beginning [@arkark_](https://twitter.com/arkark_), [@zwad3](https://twitter.com/zwad3), who created a question that still amazes me, frequent solver [@parrot409](https://twitter.com/parrot409), and [@maple3142](https://twitter.com/maple3142), who are all very active in CTF.
+For example, the author of the article mentioned at the beginning [@arkark_](https://twitter.com/arkark_), [@zwad3](https://twitter.com/zwad3), who created a challenge that still amazes me, frequent solver [@parrot409](https://twitter.com/parrot409), and [@maple3142](https://twitter.com/maple3142), who are all very active in CTF.
 
 ## Summary
 
-After organizing, I found that I have attempted many questions (although I couldn't solve many of them), and some of the questions, although the concepts are not difficult, are quite troublesome to implement.
+After writing, I found that I have attempted many challenges (although I couldn't solve many of them), and some of the challenges, although the concepts are not difficult, are quite troublesome to implement.
 
-In addition, it can be seen that many questions require looking at the source code of the lib to solve. Personally, I like this kind of question, which gives a real-world feeling. It's something you use every day, but you don't know how it works behind the scenes. CTF forces you to understand it. Although it has nothing to do with the web, there were also two or three questions related to Git this year, which required understanding the operation behind Git to solve.
+In addition, it can be seen that many challenges require looking at the source code of the lib to solve. Personally, I like this kind of question, which gives a real-world feeling. It's something you use every day, but you don't know how it works behind the scenes. CTF forces you to understand it. Although it has nothing to do with the web, there were also two or three challenges related to Git this year, which required understanding how Git works to solve.
 
 I learned a lot of techniques that I had no idea about before this year. I feel that my understanding of JS and browsers has improved a bit, but I can foresee that I will still be challenged next year, and there will be more things that I don't know.
 
-Finally, I would like to thank each question setter. It is because of these question setters who share their research through questions that others can learn these novel techniques. I personally think that it is harder to set a good question than to solve it. If you are solving a question, you know that there is an answer somewhere, and you just need to find it. To set a good question, you need to discover something new by yourself, which is really difficult. Once again, I salute every question setter.
+Finally, I would like to thank each challenge author. It is because of these challenge authors who share their research through challenges that others can learn these novel techniques. I personally think that it is harder to make a good challenge than to solve it. If you are solving a challenge, you know that there is an solution somewhere, and you just need to find it. To make a good challenge, you need to discover something new by yourself, which is really difficult. Once again, kudos to every challenge maker.

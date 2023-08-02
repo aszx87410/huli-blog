@@ -287,7 +287,7 @@ Finally, I solved it. First blood.
 
 ## ptMD
 
-This was the hardest challenge, but it was solved by everyone.
+This was the hardest challenge, only 1 solve.
 
 First, here's the author's writeup: https://github.com/xatophi/m0leconteaser2022-ptMD/blob/main/writeup.md
 
