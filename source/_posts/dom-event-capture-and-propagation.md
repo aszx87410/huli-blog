@@ -9,6 +9,8 @@ categories:
 ---
 # 前言
 
+2021-05-25 補充：文中所提到的在 target phase 會依照加上 event listener 的順序觸發，在新版的 Chrome 似乎更改了這個行為，請參考：[Chrome 89 更新事件触发顺序，导致99%的文章都错了（包括MDN）](https://juejin.cn/post/6965682915141386254)
+
 （補充：感謝 othree 前輩的指點，指出這其實是在講 DOM 裡面事件傳遞的順序，因此把標題以及內文修正，原標題為：JavaScript 的事件傳遞機制：捕獲與冒泡）
 
 今天為大家帶來的內容是 DOM 裡面的事件傳遞機制，而與這些事件相關的程式碼，相信大家應該不太陌生，就是`addEventListener`, `preventDefault`跟`stopPropagation`。
@@ -46,7 +48,7 @@ categories:
 
 DOM 畫成圖大概是長這樣：
 
-![](http://blog.techbridge.cc/img/huli/event/event_p1.png)
+![](/img/dom-event-capture-and-propagation/event_p1.png)
 
 
 有了這一個簡單的 HTML 結構之後，就可以很清楚的說明 DOM 的事件傳遞機制了。
@@ -90,7 +92,7 @@ DOM 的事件在傳播時，會先從根節點開始往下傳遞到`target`，�
 
 這邊用文字你可能會覺得霧煞煞，我直接引用一張[ w3c 講 event flow 的圖](https://www.w3.org/TR/DOM-Level-3-Events/#event-flow)，相信大家就清楚了。
 
-![](http://blog.techbridge.cc/img/huli/event/eventflow.png)
+![](/img/dom-event-capture-and-propagation/eventflow.png)
 
 你在點擊那一個`td`的時候，這一個點擊的事件會先從`window`開始往下傳，一直傳到`td`為止，到這邊就叫做`CAPTURING_PHASE`，捕獲階段。
 
@@ -112,7 +114,7 @@ DOM 的事件在傳播時，會先從根節點開始往下傳遞到`target`，�
 
 大概知道事件的傳遞機制之後，我們拿上面寫好的那一個簡單範例來示範一下，一樣先附上事件傳遞的流程圖（假設我們點擊的對象是`#list_item_link`）
 
-![](http://blog.techbridge.cc/img/huli/event/event_p2.png)
+![](/img/dom-event-capture-and-propagation/event_p2.png)
 
 接著，來試試看幫每一個元素的每一個階段都添加事件，看一看結果跟想像中的是否一樣：
 
