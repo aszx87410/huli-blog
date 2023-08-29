@@ -5,7 +5,7 @@ const path = require('path')
 const frontMatter = require('front-matter')
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3301
 const BASE_PATH = path.join(__dirname, '../../')
 
 const getPath = name => path.join(__dirname, name)
