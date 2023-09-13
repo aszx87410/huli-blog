@@ -6,6 +6,12 @@ date: 2023-06-11 16:30:00
 
 想關注部落格文章的話，除了 RSS 以外也可以考慮追蹤這個粉絲專頁：[Huli 隨意聊](https://www.facebook.com/huli.blog)
 
+RSS 的話本站提供三個版本，可以自行選擇想要的版本：
+
+1. 中文版：https://blog.huli.tw/atom-ch.xml
+2. 英文版：https://blog.huli.tw/atom-en.xml
+3. 中英雙語版：https://blog.huli.tw/atom.xml
+
 想看更多相關文章可以參考[我的 Medium 文章列表](https://github.com/aszx87410/blog/blob/master/medium.md)，想聯絡我的話可以透過 Email：aszx87410@gmail.com，網頁右上角也可以找到我的臉書。
 
 原本是個前端工程師，2021 年 5 月開始轉做資安相關的研究，也因為這個背景，對於前端相關的資安議題（XSS、CORS 以及 XSLeaks）特別感興趣。
