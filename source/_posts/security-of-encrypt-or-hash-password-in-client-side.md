@@ -475,7 +475,7 @@ ENCRYPTED_PIN_BLOCK=A8C48B7572A1A53C5A66E9B43365027C7FBF14BF461F480A46781E49648A
 
 1. 無論如何，一定要先用 HTTPS
 2. 可以的話，能用 Passkeys 當然是最好，少掉傳統密碼的一些問題
-3. 如果你想要用很安全的方式驗證密碼，並且確保在 Server 端不會處理到明文密碼，請參考 [SRP（Secure Remote Password）](https://www.cryptologie.net/article/503/user-authentication-with-passwords-whats-srp/)協定，或是留言裡面有其他讀者提到的 [OPAQUE](https://blog.cloudflare.com/opaque-oblivious-passwords/)
+3. 如果你想要用很安全的方式驗證密碼，並且確保在 Server 端不會處理到明文密碼，請參考 [SRP（Secure Remote Password）](https://www.cryptologie.net/article/503/user-authentication-with-passwords-whats-srp/)協定，或是留言裡面讀者 yoyo930021 提到的 [OPAQUE](https://blog.cloudflare.com/opaque-oblivious-passwords/)
 4. 若是上述都沒有資源做的話，那在前端先把密碼做加密或是 hash 後再傳送，確實能夠增加一點安全性，但同時還是會帶來額外成本
 5. 如果你是銀行或需要較高的安全性，再來考慮要不要做這個，否則極大多數的狀況下，你不需要這個機制就夠安全了，資源投入在其他地方的效益會更大
 
