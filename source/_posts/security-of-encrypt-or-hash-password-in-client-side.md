@@ -38,7 +38,7 @@ photos: /img/security-of-encrypt-or-hash-password-in-client-side/cover.png
 
 使用者可能會在多個服務使用同一組密碼，當使用者在你網站的密碼被偷走，影響到的不只是他在這邊的帳號，還有可能影響到其他服務，這就是為什麼我們在討論「保護密碼」。
 
-最後呢，我這邊的情境是「加密密碼」而非 hash，這是因為我覺得 hash 的狀況比較複雜，我自己想先用加密來舉例，而且這個加密是「非對稱式加密」。
+最後呢，我這邊的情境是「加密密碼」而非 hash，這是因為我覺得 hash 的狀況比較複雜，我自己想先用加密來舉例，而且這個加密是「非對稱式加密」（放心，文章後半段還是會提到 hash 的做法）。
 
 也就是我們可以想像已經有一把 public key 存在於 client 端（當然，每個人都可以拿得到），在送出 request 以前，會先使用 JavaScript 把密碼用 public key 加密以後再送出，而 server 使用 private key 解密，拿到密碼以後 hash 過再存入資料庫中。
 
@@ -163,6 +163,8 @@ photos: /img/security-of-encrypt-or-hash-password-in-client-side/cover.png
 > Have the client computer hash the password using a cryptographically secure algorithm and a unique salt provided by the server. When the password is received by the server, hash it again with a different salt that is unknown to the client. Be sure to store both salts securely. If you are using a modern and secure hashing algorithm, repeated hashing does not reduce entropy.
 
 看起來是還好，問題不大。
+
+（感謝 HowardCsie 的留言補充，並不是所有的 hash 演算法都不會有問題，可參考：[Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html) 與 [Security Issue: Combining Bcrypt With Other Hash Functions](https://blog.ircmaxell.com/2015/03/security-issue-combining-bcrypt-with.html) 這兩篇文章）
 
 總之呢，看起來最安全的但也更複雜的解法就是 client side 先 hash 一次，然後丟到 server 的時候再 hash 一次存進資料庫，如此一來就可以保證：
 
@@ -299,7 +301,7 @@ API 網址：https://account.proton.me/api/auth/info
 
 補充：經討論串有人提醒後發現這是一個叫做 SRP（Secure Remote Password）的協議，Proton 有提供一個 [ProtonMail Security Features and Infrastructure](https://proton.me/static/9f5e7256429a2f674c943c5825257b82/protonmail_authentication_excerpt.pdf)，裡面有記錄他們的安全措施，就有講到這個機制。
 
-看起來滿複雜要花不少時間研究，先放著，有興趣的可以參考：[SRP — 更健全的登入及資料傳輸保護協議](https://blog.amis.com/srp-1f28676aa525)
+看起來滿複雜要花不少時間研究，先放著，有興趣的可以參考：[SRP—更健全的登入及資料傳輸保護協議](https://blog.amis.com/srp-1f28676aa525)
 
 雖然更安全，但成本應該又更高了。
 
@@ -469,7 +471,7 @@ ENCRYPTED_PIN_BLOCK=A8C48B7572A1A53C5A66E9B43365027C7FBF14BF461F480A46781E49648A
 
 我自己認為一位優秀的工程師不能只給得出最佳實踐，而是必須針對有限資源的狀況之下，給出各種不同的解法，因此這篇討論的問題不是毫無意義的。把這個問題整理過一輪之後，自然而然就會出現許多成本不同，效益也不同的解法。
 
-有多少資源，就做多少事。
+有多少資源，就做多少事。不過話說回來，了解最佳實踐是什麼還是滿重要的，這樣你才能知道該做多少取捨。
 
 最後，如果你需要一個條列式的簡單結論，會是：
 
