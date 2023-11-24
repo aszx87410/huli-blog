@@ -194,6 +194,38 @@ new Date('2020/02/10')
 
 但總之只要把握一個原則就對了，就是用標準的格式來溝通，就不會有這些問題了。
 
+### 2023-11-25 更新
+
+感謝底下留言區的讀者 Glenn8119 留言，Safari 已經修正了上述的行為，我去查了一下發現其實還修了更多東西。
+
+上面有提到 Safari 跟 Chrome 不同的兩點：
+
+1. `2020-02-02 13:00:00` 會回傳 invalid date
+2. `2020-02-02T13:00:00` 會當成 +0 時間
+
+這兩個現在都已經修復囉！
+
+第一個 invalid date 的問題是在 2022 年修好的：[Bug 235468: [JSC] Relax Date.parse requirement](https://bugs.webkit.org/show_bug.cgi?id=235468)，修改了 parse 的邏輯，新增了對於空格以及小寫 t 的支援：
+
+``` diff
+diff --git a/Source/WTF/wtf/DateMath.cpp b/Source/WTF/wtf/DateMath.cpp
+index ebd69a4c76cd7acb0a233be552071158ca2171ca..01976e039682c467765ef77d54925dd84a4b7da1 100644
+--- a/Source/WTF/wtf/DateMath.cpp
++++ b/Source/WTF/wtf/DateMath.cpp
+@@ -645,7 +645,7 @@ double parseES5DateFromNullTerminatedCharacters(const char* dateString, bool& is
+         return std::numeric_limits<double>::quiet_NaN();
+     // Look for a time portion.
+     // Note: As of ES2016, when a UTC offset is missing, date-time forms are local time while date-only forms are UTC.
+-    if (*currentPosition == 'T') {
++    if (*currentPosition == 'T' || *currentPosition == 't' || *currentPosition == ' ') {
+         // Parse the time HH:mm[:ss[.sss]][Z|(+|-)(00:00|0000|00)]
+         currentPosition = parseES5TimePortion(currentPosition + 1, hours, minutes, seconds, milliseconds, isLocalTime, timeZoneSeconds);
+         if (!currentPosition)
+```
+
+而第二個時區的問題更早，在 2020 年就被修復了（不過修復是一回事，deploy 是一回事，我不確定什麼時候 deploy 的）：[Bug 89071: JavaScript: Invalid date parse for ISO 8601 strings when no timezone given](https://bugs.webkit.org/show_bug.cgi?id=89071)，對修改有興趣的話可以看這個 commit：https://github.com/WebKit/WebKit/commit/2148a43f377e67c60b167f5730c7b5c5c21b202d
+
+
 ## 最後來談時區的顯示
 
 前面講了這麼多，終於可以來談開頭講的時區的問題了。在處理時間這一塊，比較多人應該都是挑一個順眼的 library 來用，例如說 moment、date-fns、dayjs 或是 luxon 之類的，這些 library 如果沒有正確使用的話，會跟你想像的結果不同。
