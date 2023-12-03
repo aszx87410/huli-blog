@@ -1,13 +1,13 @@
 ---
 layout: "about"
 title: "About"
-date: 2023-06-19 22:30:00
+date: 2023-12-02 22:30:00
 translator: huli
 ---
 
 ## Me
 
-Hey, I am Huli from Taiwan. I was a Front-end engineer before, and now a Security Engineer interested in web. 
+Hey, I am Huli from Taiwan. I enjoy front-end web development and have a passion for cybersecurity. I particularly relish the fusion of both. Hence, at times, I'm a security engineer, while other times, I'm a front-end engineer.
 
 I love coding, teaching and writing blog posts, and I believe sharing can make the world a better place. I also play CTF sometimes with [Water Paddler](https://twitter.com/Water_Paddler).
 
