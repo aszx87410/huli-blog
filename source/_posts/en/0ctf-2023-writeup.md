@@ -196,7 +196,7 @@ fs.writeFileSync('exp2.css', payload2, 'utf-8');
 fs.writeFileSync('exp3.css', payload3, 'utf-8');
 ```
 
-Then publish the completed file to npm, and there will be a URL on unpkg.
+Then publish the completed file to npm to get a URL on unpkg.
 
 ### Exploit
 
