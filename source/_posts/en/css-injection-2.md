@@ -9,7 +9,7 @@ photos: /img/css-injection-2/cover-en.png
 
 <img src="/img/css-injection-2/cover.png" style="display:none" loading="lazy">
 
-In [Part 1](/2022/09/29/css-injection-1), we learned the basic principle of stealing data with CSS and successfully stole the CSRF token as a practical example using HackMD. This article will delve into some details of CSS injection and address the following issues:
+In [Part 1](/2022/09/29/en/css-injection-1), we learned the basic principle of stealing data with CSS and successfully stole the CSRF token as a practical example using HackMD. This article will delve into some details of CSS injection and address the following issues:
 
 1. Since HackMD can load new styles without refreshing the page, how can we steal the second character and beyond on other websites?
 2. If we can only steal one character at a time, will it take a long time? Is this feasible in practice?

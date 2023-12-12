@@ -7,11 +7,11 @@ categories: [Security]
 photos: /img/css-injection-1/cover-en.png
 ---
 
-<img src="/img/css-injection-1/cover.png" style="display:none" loading="lazy">
+<img src="/img/css-injection-1/cover-en.png" style="display:none" loading="lazy">
 
 When it comes to attacks on web front-ends, most people think of XSS. But what if you can't execute JavaScript on the web page? Are there other attack methods? For example, what can you do if you can insert a style tag?
 
-In 2018, I wrote an article about [CSS keylogger: attack and defense](https://blog.huli.tw/2018/03/12/css-keylogger/) after seeing related discussions on Hacker News. I spent some time researching it.
+In 2018, I wrote an article about [CSS keylogger: attack and defense](https://blog.huli.tw/2018/03/12/en/css-keylogger/) after seeing related discussions on Hacker News. I spent some time researching it.
 
 Now, four years later, I have re-examined this attack technique from a security perspective and plan to write one or two articles to explain CSS injection in detail.
 
@@ -90,7 +90,7 @@ Now that we have confirmed that CSS can steal attribute values, there are two qu
 
 Let's first discuss the first question. What can be stolen? Usually, you want to steal some sensitive data, right?
 
-The most common target is the CSRF token. If you don't know what CSRF is, you can first take a look at this article I wrote before: [Let's talk about CSRF](https://blog.huli.tw/2017/03/12/csrf-introduction/) (by the way, I plan to write a new CSRF series, it's in progress, if you want to read it, you can leave a message to urge me).
+The most common target is the CSRF token. If you don't know what CSRF is, you can first take a look at this article I wrote before: [Let's talk about CSRF](https://blog.huli.tw/2017/03/12/en/csrf-introduction/) (by the way, I plan to write a new CSRF series, it's in progress, if you want to read it, you can leave a message to urge me).
 
 Simply put, if the CSRF token is stolen, it may be vulnerable to CSRF attacks. In short, just think of this token as very important. And this CSRF token is usually placed in a hidden input, like this:
 
@@ -360,4 +360,4 @@ However, there are still some questions that we have not answered, such as:
 
 We will answer these questions one by one in the next article.
 
-Link to the next article: https://blog.huli.tw/2022/09/29/css-injection-2
+Link to the next article: https://blog.huli.tw/2022/09/29/en/css-injection-2
