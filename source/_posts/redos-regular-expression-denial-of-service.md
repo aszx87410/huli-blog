@@ -145,13 +145,36 @@ console.timeEnd('CTF{t');
 
 最後簡單提一下防禦方式，最根本的解決方法就是不要寫出有缺陷的 regexp，先去學習哪一些 pattern 應該盡量少用，就能掌握到大概的方向。除此之外，似乎也有人做了一些自動化的工具幫忙掃 code 裡面出現的 regexp，這也是一種在出事前先預防的方法。
 
+## 為了防止 ReDoS 而出現的另一種問題
+
+底下這段 PHP 的程式碼會檢查輸入是否為 PHP 的格式，如果不是的話才進行後續操作，你有辦法繞過正規表達式嗎？
+
+``` php
+<?php
+function is_php($data){  
+    return preg_match('/<\?.*[(`;?>].*/is', $data);  
+}
+
+if(!is_php($input)) {
+    // fwrite($f, $input); ...
+}
+```
+
+答案是有辦法，但繞過的並不是正規表達式本身，而是利用了 PHP 的一個機制。
+
+PHP 為了防止 ReDoS 的發生，設有回朔次數的上限，如果超過了上限，就會回傳 `false`，而非原本預期的 0 或是 1。雖然 PHP 的[文件](https://www.php.net/manual/en/function.preg-match.php#refsect1-function.preg-match-returnvalues)裡面有就有提到這點，但老實說會乖乖去看文件的還是少數，因此我相信有不少開發者都不知道這個行為。
+
+因此，只需要構造出一個與 ReDoS 類似的結構觸發上限，就會讓 `preg_match` 回傳 `false`，進而繞過檢查。
+
+上面的範例來自於 phith0n 在 2018 年發表的文章：[PHP利用PCRE回溯次数限制绕过某些安全限制](https://www.leavesongs.com/PENETRATION/use-pcre-backtrack-limit-to-bypass-restrict.html)，而 2019 年的 Facebook CTF 中也有一題是相同的原理，可以參考 balsn 的 [writeup](https://balsn.tw/ctf_writeup/20190603-facebookctf/#rceservice)。
+
+甚至於這個漏洞在 2023 年也出現在現實世界中：[MyBB Admin Panel RCE CVE-2023-41362](https://blog.sorcery.ie/posts/mybb_acp_rce/)。
+
 ## 總結
 
 我自己覺得 ReDoS 是一個滿有趣的攻擊方式，以前沒想過靠著 regexp 還可以做出這種效果。
 
 以前第一次知道這個攻擊，似乎是還在當開發者的時候，偶爾會看到使用到的 library 有這個漏洞，不過當初沒有很在意就是了。後來在資安裡面再度碰到這東西，才覺得好像挺有趣的。
-
-
 
 這篇比較像是我的個人筆記，只是想趁著記憶猶新的時候把一些 payload 記下來，以後比較好找。
 
