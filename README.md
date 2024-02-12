@@ -13,21 +13,21 @@ npx hexo s
 ## 部署
 
 ```
-npx hexo g
-npx hexo d
+npm run build
+npm run deploy
 ```
 
 ## og image
 
 ```
 npm run og-image -- "redos-regular-expression-denial-of-service"
+npm run og-image -- "redos-regular-expression-denial-of-service" en
 ```
 
 ## 翻譯
 
 ```
-OPENAI_API_KEY=sk-xxx
-npm run translate
+OPENAI_API_KEY=sk-xxx npm run translate
 ```
 
 ## 版本
