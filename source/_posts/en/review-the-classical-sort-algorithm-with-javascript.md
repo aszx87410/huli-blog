@@ -29,7 +29,7 @@ I think selection sort is the easiest sorting algorithm to understand because it
 
 After you finish the first round, you will find the minimum value of the entire array, and then you change the search range from 0 ~ n-1 to 1 ~ n-1 and repeat the same thing. Or, you can also think of it as: find the minimum value, the second smallest value, the third smallest value... the n-th smallest value.
 
-![](http://blog.techbridge.cc/img/huli/sorting/selection.jpg)
+![selection sort](/img/review-the-classical-sort-algorithm-with-javascript/p1.jpg)
 (Image source: http://cheetahonfire.blogspot.sg/2009/05/selection-sort-vs-insertion-sort.html)
 
 ``` js
@@ -69,7 +69,7 @@ Bubble sort should be the first sorting algorithm that many people come into con
 
 It is the process of exchanging like this that makes it called "bubble" sort, because the elements are like "floating" up.
 
-![](http://blog.techbridge.cc/img/huli/sorting/bubble.png)
+![bubble sort](/img/review-the-classical-sort-algorithm-with-javascript/p2.png)
 (Image source: http://www.opentechguides.com/how-to/article/c/51/bubble-sort-c.html)
 
 ``` js
@@ -132,7 +132,7 @@ Insertion Sort is a sorting algorithm that I think is quite intuitive. In short:
 
 It's just constantly inserting cards into the appropriate position, but when you play cards, you may insert many cards at once, while Insertion Sort inserts one card at a time.
 
-![](http://blog.techbridge.cc/img/huli/sorting/insertion.gif)
+![insertion sort](/img/review-the-classical-sort-algorithm-with-javascript/p3-insert.gif)
 (Image source: https://commons.wikimedia.org/wiki/File:Insertion-sort-example.gif)
 
 What is worth noting here is the algorithm for insertion. Continuously find the appropriate position and move the elements while finding, so you can insert directly when you find it.
@@ -309,7 +309,7 @@ When you scan the array and find an element smaller than the pivot, swap this el
 
 You can refer to the gif below or go to [VISUALGO](https://visualgo.net/en) to see it.
 
-![](http://blog.techbridge.cc/img/huli/sorting/quick.gif)
+![quick sort](/img/review-the-classical-sort-algorithm-with-javascript/p5-quick.gif)
 (Source: https://github.com/hustcc/JS-Sorting-Algorithm/blob/master/6.quickSort.md)
 
 ``` js
@@ -349,7 +349,7 @@ Heap is a data structure, and there are two types: max heap and min heap. The pr
 
 Let's take a look at a picture of max heap:
 
-![](http://blog.techbridge.cc/img/huli/sorting/heap.jpg)
+![head](/img/review-the-classical-sort-algorithm-with-javascript/p6-heap.jpg)
 (Source: https://www.tutorialspoint.com/data_structures_algorithms/heap_data_structure.htm)
 
 You can see that the max heap satisfies two properties:
@@ -358,7 +358,7 @@ You can see that the max heap satisfies two properties:
 
 It is also easy to represent the heap using an array, like this:
 
-![](http://blog.techbridge.cc/img/huli/sorting/heap2.png)
+![heap array](/img/review-the-classical-sort-algorithm-with-javascript/p7-heap2.png)
 (Source: http://notepad.yehyeh.net/Content/Algorithm/Sort/Heap/Heap.php)
 
 So heap sort uses this data structure for sorting, and the process is simple:

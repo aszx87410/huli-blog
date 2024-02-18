@@ -28,7 +28,7 @@ categories:
 
 當你第一輪跑完之後，你就找到整個陣列的最小值了，然後你把尋找範圍從 0 ~ n-1 變成 1 ~ n-1，重複做一樣的事情就可以了。或是，你也可以想成是：找到最小值，第二小值，第三小值...第 n 小值。
 
-![](http://blog.techbridge.cc/img/huli/sorting/selection.jpg)
+![selection sort](/img/review-the-classical-sort-algorithm-with-javascript/p1.jpg)
 （圖片來源：http://cheetahonfire.blogspot.sg/2009/05/selection-sort-vs-insertion-sort.html ）
 
 ``` js
@@ -68,7 +68,7 @@ const selectionSort = (arr) => {
 
 就是這樣交換的過程，才讓它稱為「泡沫」排序法，因為元素很像「浮」了上來。
 
-![](http://blog.techbridge.cc/img/huli/sorting/bubble.png)
+![bubble sort](/img/review-the-classical-sort-algorithm-with-javascript/p2.png)
 （圖片來源：http://www.opentechguides.com/how-to/article/c/51/bubble-sort-c.html ）
 
 ``` js
@@ -131,7 +131,7 @@ function optimzedBubbleSort = (arr) => {
 
 就是不斷把撲克牌插入到適合的位置嘛，只是你玩牌的時候可能一次插入好多牌，而插入排序法是一次插入一張牌。
 
-![](http://blog.techbridge.cc/img/huli/sorting/insertion.gif)
+![insertion sort](/img/review-the-classical-sort-algorithm-with-javascript/p3-insert.gif)
 （圖片來源：https://commons.wikimedia.org/wiki/File:Insertion-sort-example.gif ）
 
 這邊比較值得注意的是在插入時候的演算法，不斷往前找到適合的位置，並且在邊找的時候就邊挪動元素了，所以等找到的時候就可以直接插入。
@@ -175,7 +175,7 @@ const insertionSort = (arr) => {
 
 談合併排序法的時候我喜歡先談合併這個步驟，其實就是把兩個各自排序好的陣列合併成一個。這一步其實也滿簡單，因為兩邊都已經排序好了嘛，所以就是不斷看兩邊的第一個元素，誰小就抓誰下來，接著左邊抓完就抓右邊，反之亦然。
 
-![](http://blog.techbridge.cc/img/huli/sorting/merge.png)
+![merge sort](/img/review-the-classical-sort-algorithm-with-javascript/p4-merge.png)
 （圖片來源：http://www.java2novice.com/java-sorting-algorithms/merge-sort/ ）
 
 我自己之前在看合併排序的時候，發現可以寫成一個比較好懂，但是空間耗費比較多的版本：
@@ -312,7 +312,7 @@ function mergeSort = (arr) => {
 
 可以參考下面的 gif，或是直接去[VISUALGO](https://visualgo.net/en)看看。
 
-![](http://blog.techbridge.cc/img/huli/sorting/quick.gif)
+![quick sort](/img/review-the-classical-sort-algorithm-with-javascript/p5-quick.gif)
 （來源：https://github.com/hustcc/JS-Sorting-Algorithm/blob/master/6.quickSort.md ）
 
 ``` js
@@ -352,7 +352,7 @@ Heap 是一種資料結構，並且有分兩種：max heap 跟 min heap，兩種
 
 先讓大家看一張 max heap 的圖片：
 
-![](http://blog.techbridge.cc/img/huli/sorting/heap.jpg)
+![heap](/img/review-the-classical-sort-algorithm-with-javascript/p6-heap.jpg)
 （資料來源：https://www.tutorialspoint.com/data_structures_algorithms/heap_data_structure.htm ）
 
 大家可以發現，max heap 滿足了兩個性質：
@@ -361,7 +361,8 @@ Heap 是一種資料結構，並且有分兩種：max heap 跟 min heap，兩種
 
 而要用陣列表示 heap 也很簡單，會像這樣：
 
-![](http://blog.techbridge.cc/img/huli/sorting/heap2.png)
+![heap array](/img/review-the-classical-sort-algorithm-with-javascript/p7-heap2.png)
+
 （資料來源：http://notepad.yehyeh.net/Content/Algorithm/Sort/Heap/Heap.php ）
 
 所以 heap sort 就是利用這個資料結構做排序，流程很簡單：

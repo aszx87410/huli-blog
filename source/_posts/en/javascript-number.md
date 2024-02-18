@@ -35,7 +35,7 @@ No, it's not. It's just that my colleague is not so familiar with the Number dat
 
 ## Numbers with Ranges
 
-In the previous article [Counting All Data Types in JavaScript](https://blog.huli.tw/2022/02/25/javascript-how-many-types/), we mentioned that JavaScript numbers are stored using 64 bits and follow the IEEE 754-2019 specification.
+In the previous article [Counting All Data Types in JavaScript](https://blog.huli.tw/2022/02/26/en/javascript-how-many-types/), we mentioned that JavaScript numbers are stored using 64 bits and follow the IEEE 754-2019 specification.
 
 Since it is stored using 64 bits, it means that the amount of data that can be represented is limited, but numbers are infinite, so naturally, 64 bits cannot store all numbers, so there must be a limit and a safe range.
 

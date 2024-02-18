@@ -110,7 +110,7 @@ You can also use syntax like `> 1%` to let it grab the usage rate of browsers th
 
 How do you use this tool with styled components?
 
-In styled components, there is something called [StyleSheetManager](StyleSheetManager), which added two parameters in v5:
+In styled components, there is something called StyleSheetManager, which added two parameters in v5:
 
 1. disableVendorPrefixes
 2. stylisPlugins

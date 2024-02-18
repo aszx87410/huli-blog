@@ -111,7 +111,7 @@ not IE_Mob 11
 
 那這套要怎麼跟 styled components 合在一起用呢？
 
-styled components 裡面有一個東西叫做 [StyleSheetManager](StyleSheetManager)，在 v5 裡面新增了兩個參數：
+styled components 裡面有一個東西叫做 StyleSheetManager，在 v5 裡面新增了兩個參數：
 
 1. disableVendorPrefixes
 2. stylisPlugins

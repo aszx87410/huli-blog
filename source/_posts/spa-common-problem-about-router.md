@@ -137,7 +137,7 @@ hello!
 
 結果長這樣：
 
-![](http://g.recordit.co/O8QvkguuDo.gif)
+![spa](/img/spa-common-problem-about-router/p1.gif)
 
 [範例在這邊](https://aszx87410.github.io/spa-problem-demo/spa-hash.html#about)，底下是完整程式碼：
 
@@ -207,7 +207,7 @@ hello!
 
 範例如下：
 
-![](http://g.recordit.co/m87fdPvysR.gif)
+![spa2](/img/spa-common-problem-about-router/p2.gif)
 
 完整程式碼在這邊：
 

@@ -23,7 +23,7 @@ It's simple, because it saves traffic, time, or more macroscopically, reduces re
 
 For example, the homepage of an e-commerce website may have many products. If you retrieve all the data from the database every time a visitor visits the homepage, it will be a huge burden on the database.
 
-However, in fact, these information on the homepage will not change in the short term. The price of a product cannot be one thousand yuan one second and two thousand yuan the next second. Therefore, these infrequently changing data are suitable for storage, which is what we call Cache. In Taiwan, it is called "快取" and in China, it is called "緩存".
+However, in fact, these information on the homepage will not change in the short term. The price of a product cannot be one thousand yuan one second and two thousand yuan the next second. Therefore, these infrequently changing data are suitable for storage, which is what we call Cache. 
 
 In the above example, the information on the homepage can be retrieved once and stored somewhere, such as Redis, which is actually stored in the form of a simple Key-Value Pair. Then, whenever this information is used, it can be retrieved at an extremely fast speed, instead of recalculating it in the database.
 
@@ -45,7 +45,7 @@ After the browser receives this Response, it will Cache this resource. When the 
 
 If you open the Chrome dev tool, you will see that it says: "Status code 200 (from disk cache)", which means that this Request did not actually go out, and the Response was directly retrieved from the disk cache.
 
-![](http://blog.techbridge.cc/img/huli/cache/p1.png)
+![disk cache](/img/http-cache/p1-disk.png)
 
 However, this will actually encounter a problem, because the browser checks the expiration time of this Expires using the "computer's own time". What if I like to live in the future and change the time of my computer to 2100?
 
@@ -59,7 +59,7 @@ One usage is: `Cache-Control: max-age=30`, which means that the expiration time 
 
 But if the user refreshes the page after 60 seconds, the browser will send a new request.
 
-![](http://blog.techbridge.cc/img/huli/cache/p2.png)
+![new cache](/img/http-cache/p2-new.png)
 
 If you carefully observe the response header of the Google Logo file, you will find that its `max-age` is set to `31536000` seconds, which means 365 days. As long as you visit this website within a year, no request will be sent for the Google logo image, and the browser will directly use the cached response, which is `Status code 200 (from memory cache)` written here.
 
@@ -109,7 +109,7 @@ If the file has indeed been updated, the browser will receive a new file. If the
 
 Assuming there are no updates, the server will return a `Status code: 304 (Not Modified)`, indicating that you can continue to use the cached file.
 
-![](http://blog.techbridge.cc/img/huli/cache/p3.png)
+![304 not modified](/img/http-cache/p3-304.png)
 
 # Etag and If-None-Match
 
@@ -129,8 +129,9 @@ When returning the Response, the server brings the `Etag` to indicate the unique
 
 The process can refer to the following figure on the Google website:
 
-![](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/images/http-cache-control.png?hl=zh-tw)
-(Image source: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/images/http-cache-control.png?hl=zh-tw)
+![etag](/img/http-cache/p4-etag.png)
+
+（source: https://web.dev/articles/http-cache ）
 
 # Intermission
 
@@ -277,9 +278,9 @@ The principle is to adopt different caching strategies for different files and f
 
 You can also refer to the picture provided by Google:
 
-![](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/images/http-cache-hierarchy.png?hl=zh-tw)
+![resource](/img/http-cache/p5-resource.png)
 
-(Source: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-tw)
+（source: https://web.dev/articles/http-cache ）
 
 # Conclusion
 

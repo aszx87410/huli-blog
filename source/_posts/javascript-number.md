@@ -34,7 +34,7 @@ categories: [JavaScript]
 
 ## 有範圍的數字
 
-在上一篇[來數數 JavaScript 的所有資料型別](https://blog.huli.tw/2022/02/25/javascript-how-many-types/)中我們有提過，JavaScript 的數字是用 64 bit 來存，而且遵循的規格是 IEEE 754-2019。
+在上一篇[來數數 JavaScript 的所有資料型別](https://blog.huli.tw/2022/02/26/javascript-how-many-types/)中我們有提過，JavaScript 的數字是用 64 bit 來存，而且遵循的規格是 IEEE 754-2019。
 
 既然是用 64 bit 來存，就代表可以表示的資料量是有限的，可是數字是無限的，所以理所當然地，64 bit 不可能儲存所有的數字，因此一定就會有可儲存的上限跟安全範圍。
 

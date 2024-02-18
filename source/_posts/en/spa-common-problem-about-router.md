@@ -137,7 +137,7 @@ For example, it was `index.html`, and switching to the list page becomes `index.
 
 The result looks like this:
 
-![](http://g.recordit.co/O8QvkguuDo.gif)
+![spa](/img/spa-common-problem-about-router/p1.gif)
 
 [Example here](https://aszx87410.github.io/spa-problem-demo/spa-hash.html#about), the complete code is as follows:
 
@@ -207,7 +207,7 @@ The key is this sentence: "but it will not cause the browser to load bar.html." 
 
 Example:
 
-![](http://g.recordit.co/m87fdPvysR.gif)
+![spa2](/img/spa-common-problem-about-router/p2.gif)
 
 Here's the complete code:
 

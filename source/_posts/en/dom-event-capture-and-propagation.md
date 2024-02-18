@@ -46,7 +46,7 @@ In this example, there is an outermost `ul`, followed by `li`, and finally a hyp
 
 The DOM diagram looks like this:
 
-![](http://blog.techbridge.cc/img/huli/event/event_p1.png)
+![](/img/dom-event-capture-and-propagation/event_p1.png)
 
 
 With this simple HTML structure, we can clearly explain the event propagation mechanism in the DOM.
@@ -90,7 +90,7 @@ Finally, the event is propagated back up from the child node to the root node, a
 
 You may find it confusing to understand the text, so I'll directly quote a [w3c diagram about event flow](https://www.w3.org/TR/DOM-Level-3-Events/#event-flow), which should make it clear for everyone.
 
-![](http://blog.techbridge.cc/img/huli/event/eventflow.png)
+![](/img/dom-event-capture-and-propagation/eventflow.png)
 
 When you click on a `td`, the click event will start from the `window` and propagate down to the `td`, which is called the `CAPTURING_PHASE`. 
 

@@ -24,7 +24,7 @@ categories:
 
 當然，你也可以直接從 Stack Overflow 找答案然後複製貼上，覆蓋這張牌結束這回合。可是工作久了你會發現，不是所有問題都可以從那上面找到解答。
 
-舉例來說，我一年前寫的[我遇過的最難的 Cookie 問題](https://blog.techbridge.cc/2017/03/24/difficult-problem-of-cookie/)對我來說就是一個很好的學習機會。
+舉例來說，我一年前寫的[我遇過的最難的 Cookie 問題](https://blog.huli.tw/2017/08/27/a-cookie-problem/)對我來說就是一個很好的學習機會。
 
 好，那這次我又是遇到什麼 Bug 呢？
 

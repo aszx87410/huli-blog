@@ -30,7 +30,7 @@ categories:
 
 ## 悲劇的開始
 
-在一個月前我寫了一篇跟 CSRF 有關的文章（[讓我們來談談 CSRF](http://blog.techbridge.cc/2017/02/25/csrf-introduction/)），正是因為工作上需要實作 CSRF 的防禦，所以趁機研究了一下。簡單來說，就是要在 Cookie 設置一個 `csrftoken`。
+在一個月前我寫了一篇跟 CSRF 有關的文章（[讓我們來談談 CSRF](https://blog.huli.tw/2017/03/12/csrf-introduction/)），正是因為工作上需要實作 CSRF 的防禦，所以趁機研究了一下。簡單來說，就是要在 Cookie 設置一個 `csrftoken`。
 
 可是那天我卻發現，我怎麼寫都寫不進去。
 

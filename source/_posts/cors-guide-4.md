@@ -368,7 +368,7 @@ main fetch 也是一個超連結，點了會跳到 `4.1. Main fetch` 去，這�
 
 以前面講的狀況而言，設定這個 header 以後，我們用 fetch 發的 request 因為 Origin header 跟之前用 img 的不同，所以照理來說就不會沿用之前快取好的 response，而是會重新發出一個 request。
 
-而這個問題我本人還真的碰到過...請參考：[原來 CORS 沒有我想像中的簡單](https://blog.techbridge.cc/2018/08/18/cors-issue/)。
+而這個問題我本人還真的碰到過...請參考：[原來 CORS 沒有我想像中的簡單](https://blog.huli.tw/2018/08/18/cors-is-hard/)。
 
 ## 總結
 

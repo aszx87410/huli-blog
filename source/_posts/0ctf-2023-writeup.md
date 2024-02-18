@@ -105,7 +105,7 @@ await page.close();
 
 由於 nonce 的可能性有太多種，所以一個字元一個字元偷是最快的方法，但這種做法要利用 `@import` 加上 blocking 的方式，這一題的外部連結只能到 unpkg，是靜態檔案，沒辦法。
 
-另一種做法剛好前陣子才看過但還沒更新到文章：[Code Vulnerabilities Put Proton Mails at Risk](mails-in-proton-mail/#splitting-the-url-into-smaller-chunks)
+另一種做法剛好前陣子才看過但還沒更新到文章：[Code Vulnerabilities Put Proton Mails at Risk](https://www.sonarsource.com/blog/code-vulnerabilities-leak-emails-in-proton-mail/#splitting-the-url-into-smaller-chunks)
 
 這做法滿聰明的，把一段字切成很多小字串，每個字串有三個字元，我們對 a-zA-Z0-9 做三個字的全排列組合，像這樣：
 

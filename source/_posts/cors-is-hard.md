@@ -10,14 +10,13 @@ categories:
 
 CORS（Cross-Origin Resource Sharing，跨來源資源共享）在前端一直是個很經典的問題，簡單來說就是因為瀏覽器的一些安全考量，你在載入其他網域的資源時會受到一些限制，解決方法也很簡單，就是在 Server 那邊加上一些 response header 例如說 `Access-Control-Allow-Origin`，有了這個 header 之後瀏覽器就會認為你是有經過驗證的，就沒什麼問題了。
 
-針對這個問題，我以前也有寫過一篇：[輕鬆理解 Ajax 與跨來源請求](https://blog.techbridge.cc/2017/05/20/api-ajax-cors-and-jsonp/)，裡面把碰到的問題與解法寫得十分詳細。
+針對這個問題，我以前也有寫過一篇：[輕鬆理解 Ajax 與跨來源請求](https://blog.huli.tw/2017/08/27/ajax-and-cors/)，裡面把碰到的問題與解法寫得十分詳細。
 
 我以為自從我上次深入研究過這個問題之後，從此以後 CORS 再也難不倒我，再也不會看到 console 跳出禁止跨來源存取的錯誤。
 
 但是我錯了。
 
-這次我在一個特定的使用場景之下摔了一跤，但也因此學到不少。而這次的經驗也讓我想起我以前寫的：[我遇過的最難的 Cookie 問題
-](https://blog.techbridge.cc/2017/03/24/difficult-problem-of-cookie/)。
+這次我在一個特定的使用場景之下摔了一跤，但也因此學到不少。而這次的經驗也讓我想起我以前寫的：[我遇過的最難的 Cookie 問題](https://blog.huli.tw/2017/08/27/a-cookie-problem/)。
 
 太好了，又有東西可以跟大家分享了！
 

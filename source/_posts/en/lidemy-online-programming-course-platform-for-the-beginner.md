@@ -3,7 +3,7 @@ title: 'Lidemy Lithium Academy: An Online Programming Course Platform for Beginn
 date: 2017-06-24 08:33
 catalog: true
 header-img: "/img/header_img/article-bg.png"
-tags: [story]
+tags: [Story]
 categories:
   - Others
 ---

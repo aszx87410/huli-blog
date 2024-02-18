@@ -45,7 +45,7 @@ Expires: Wed, 21 Oct 2017 07:28:00 GMT
 
 若是打開 Chrome dev tool，就會看到它寫著：「Status code 200 (from disk cache)」，代表這個 Request 其實沒有發出去，Response 是直接從 disk cache 裡面拿的。
 
-![](http://blog.techbridge.cc/img/huli/cache/p1.png)
+![disk cache](/img/http-cache/p1-disk.png)
 
 可是這樣其實會碰到一個問題，因為瀏覽器檢視這個 Expires 的時間是用「電腦本身的時間」，那如果我喜歡活在未來，把電腦的時間改成 2100 年，會怎樣呢？
 
@@ -59,7 +59,7 @@ Expires 其實是 HTTP 1.0 就存在的 Header，而為了解決上面 Expires �
 
 但假如使用者是過 60 秒之後才重新整理，瀏覽器就會發送新的 Request。
 
-![](http://blog.techbridge.cc/img/huli/cache/p2.png)
+![new cache](/img/http-cache/p2-new.png)
 
 仔細觀察 Google Logo 檔案的 Response header，你會發現它的`max-age`設定成`31536000`秒，也就是 365 天的意思。只要你在一年之內造訪這個網站，都不會對 Google logo 這張圖片送出 Request，而是會直接使用瀏覽器已經快取住的 Response，也就是這邊寫的`Status code 200 (from memory cache)`。
 
@@ -109,7 +109,7 @@ If-Modified-Since: 2017-01-01 13:00:00
 
 假設沒有更新的話，Server 就會回一個`Status code: 304 (Not Modified)`，代表你可以繼續沿用快取的這份檔案。
 
-![](http://blog.techbridge.cc/img/huli/cache/p3.png)
+![304 not modified](/img/http-cache/p3-304.png)
 
 # Etag 與 If-None-Match
 
@@ -129,8 +129,9 @@ Server 在回傳 Response 的時候帶上`Etag`表示這個檔案獨有的 hash�
 
 流程可以參考 Google 網站上的下圖：
 
-![](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/images/http-cache-control.png?hl=zh-tw)
-（圖片來源：https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/images/http-cache-control.png?hl=zh-tw）
+![etag](/img/http-cache/p4-etag.png)
+
+（圖片來源：https://web.dev/articles/http-cache ）
 
 # 中場休息
 
@@ -277,9 +278,9 @@ B 網站的話，我們假設前九次網站都沒有更新，一直到第十次
 
 這邊也可以參考 Google 提供的圖片：
 
-![](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/images/http-cache-hierarchy.png?hl=zh-tw)
+![resource](/img/http-cache/p5-resource.png)
 
-（來源：https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-tw）
+（圖片來源：https://web.dev/articles/http-cache ）
 
 # 總結
 

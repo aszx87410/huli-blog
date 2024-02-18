@@ -105,7 +105,7 @@ I had previously researched using CSS to steal data: [Stealing Data with CSS - C
 
 Due to the large number of possible nonces, the fastest way is to steal them character by character. However, this approach requires using `@import` with a blocking method. In this challenge, external links are limited to unpkg, which only hosts static files and does not support this method.
 
-Another method I recently came across but haven't updated in my article yet is: [Code Vulnerabilities Put Proton Mails at Risk](mails-in-proton-mail/#splitting-the-url-into-smaller-chunks)
+Another method I recently came across but haven't updated in my article yet is: [Code Vulnerabilities Put Proton Mails at Risk](https://www.sonarsource.com/blog/code-vulnerabilities-leak-emails-in-proton-mail/#splitting-the-url-into-smaller-chunks)
 
 This approach is quite clever, dividing a piece of text into many small substrings, each containing three characters. We generate all permutations of three characters from a-zA-Z0-9, like this:
 
