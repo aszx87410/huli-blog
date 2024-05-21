@@ -1,5 +1,5 @@
 ---
-title: iframe and window.open black magic
+title: iframe and window.open magic
 catalog: true
 date: 2022-04-07 22:02:57
 tags: [Security, Front-end]
@@ -25,7 +25,7 @@ Let's take a look at the basic use of iframes. You can use the `<iframe>` tag to
 
 But if you think about it carefully, if your web page can be embedded by anyone, there may be a risk of clickjacking.
 
-Therefore, if you don't want your web page to be embedded or want to set only specific origins that can be embedded, you can use `Content-Security-Policy` and `X-Frame-Options`. I have mentioned these in [What is Clickjacking](https://blog.huli.tw/2021/09/26/what-is-clickjacking/), so I won't go into detail here.
+Therefore, if you don't want your web page to be embedded or want to set only specific origins that can be embedded, you can use `Content-Security-Policy` and `X-Frame-Options`. I have mentioned these in [What is Clickjacking](https://blog.huli.tw/2021/09/26/en/what-is-clickjacking/), so I won't go into detail here.
 
 Some websites that allow posting or commenting usually open up a certain degree of HTML elements and do not completely block them. For example, at least harmless elements such as bold (`<b>`) and italic (`<i>`) will be opened, and some websites will also support the iframe tag to support functions such as YouTube players.
 
@@ -41,7 +41,7 @@ However, the impact of this is limited, and it involves a bit of social engineer
 <iframe src="javascript:alert(1)"></iframe>
 ```
 
-Yes, the src of the iframe can be in the format of `javascript:` at the beginning, and JavaScript code can be executed directly to achieve XSS. By the way, the action of `<form>` and the href of `<a>` can also be placed. I mentioned this in [Learn Frontend from Security POV](https://blog.huli.tw/2021/10/25/learn-frontend-from-security-pov/).
+Yes, the src of the iframe can be in the format of `javascript:` at the beginning, and JavaScript code can be executed directly to achieve XSS. By the way, the action of `<form>` and the href of `<a>` can also be placed. I mentioned this in [Discovering My Lack of Front-end Knowledge through Cybersecurity](https://blog.huli.tw/2021/10/25/en/learn-frontend-from-security-pov/).
 
 Moreover, the things in HTML attributes can be encoded, and there are three ways to encode them, using the `&` character as an example:
 
@@ -91,7 +91,7 @@ Most of the others are readable properties, such as `closes`, `frames`, `length`
 
 The few writable properties are `location.href`, which can be used to redirect the webpage to another location using `location.href = 'https://huli.tw'` as long as you can access the window.
 
-By the way, there is another way to execute JavaScript through the location + javascript protocol, like this: `location.href = 'javascript:alert(1)'`, which I mentioned in [What is Open Redirect](https://blog.huli.tw/2021/09/26/what-is-open-redirect/) .
+By the way, there is another way to execute JavaScript through the location + javascript protocol, like this: `location.href = 'javascript:alert(1)'`, which I mentioned in [What is Open Redirect](https://blog.huli.tw/2021/09/26/en/what-is-open-redirect/) .
 
 At this point, you may wonder if the iframe src + data URI mentioned earlier can bypass the null origin restriction and perform XSS on the parent window using this method? Like this:
 
@@ -428,13 +428,13 @@ After talking about iframes, let's continue to look at the `window.open` method,
 ``` js
 var win = window.open('https://blog.huli.tw', 'huliblog')
 
-// 要先等 window 載入好
+// need to wait for window to load
 setTimeout(() => {
   win.postMessage("hello", '*')
 }, 2000)
 ```
 
-The newly opened window can be accessed by `window.opener`. I mentioned this feature before in [Starting a spec journey from SessionStorage](https://blog.huli.tw/2020/09/05/session-storage-and-html-spec-and-noopener/).
+The newly opened window can be accessed by `window.opener`. I mentioned this feature before in [Starting a spec journey from SessionStorage](https://blog.huli.tw/2020/09/05/en/session-storage-and-html-spec-and-noopener/).
 
 Then, the second parameter passed to `window.open` will be the name of this new window. For example, if I execute `console.log(window.name)` in the newly opened window, it will print `huliblog`.
 
