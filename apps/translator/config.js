@@ -7,7 +7,7 @@ const config = {
   debug: false,
   apiKey: process.env.OPENAI_API_KEY,
   promptFile: path.resolve(__dirname, "prompt.md"),
-  model: 'gpt-3.5-turbo',
+  model: 'gpt-4o-mini',
   temperature: 0.1,
   fragmentSize: 2048,
   apiCallInterval: 5,
