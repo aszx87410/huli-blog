@@ -176,7 +176,7 @@ Knowing this premise, we can look at a situation:
 
 ``` html
 <body>
-  <iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())<\/script>"></iframe>
+  <iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
   <button onclick="loadTest2()">load test2</button>
 </body>
 <script>
@@ -205,7 +205,7 @@ The previous situation involved changing the sandbox and loading a new src, then
 
 ``` html
 <body>
-  <iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())<\/script>"></iframe>
+  <iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
   <button onclick="loadTest2()">load test2</button>
   <button onclick="location = 'a.html'">top level navigation</button>
 </body>
@@ -238,7 +238,7 @@ After all, it's called bfcache, so it will completely retain the previous state 
 What if there is no bfcache? Logically, the webpage should reload, so the expected situation would be as it was at the very beginning:
 
 ```html
-<iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())<\/script>"></iframe>
+<iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
 ```
 
 
@@ -256,7 +256,7 @@ If we reverse the process, it becomes a kind of iframe sandbox bypass:
 
 ``` html
 <body>
-  <iframe id=f src="data:text/html,test1:<script>document.writeln(Math.random())<\/script>"></iframe>
+  <iframe id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
   <button onclick="loadTest2()">load test2</button>
   <button onclick="location = 'a.html'">top level navigation</button>
 </body>
@@ -304,7 +304,7 @@ Next, let's try something similar to what we just did:
 1. Confirm that there is a CSP on the page.
 2. Confirm that the script in srcdoc cannot execute.
 3. Press top-level navigation to go to another page.
-4. Update the file and remove the CSP from the head.
+4. Update the file and remove the CSP from the head manually.
 5. Press back.
 
 Assuming there is no bfcache, what will happen when I return to this webpage? The expected behavior should be: "Just like the first load," so the scripts on the page and the scripts in the srcdoc should have no CSP and should be able to execute code.

@@ -176,7 +176,7 @@ function openNoOpener(url, name) {
 
 ``` html
 <body>
-  <iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())<\/script>"></iframe>
+  <iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
   <button onclick="loadTest2()">load test2</button>
 </body>
 <script>
@@ -205,7 +205,7 @@ function openNoOpener(url, name) {
 
 ``` html
 <body>
-  <iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())<\/script>"></iframe>
+  <iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
   <button onclick="loadTest2()">load test2</button>
   <button onclick="location = 'a.html'">top level navigation</button>
 </body>
@@ -238,7 +238,7 @@ function openNoOpener(url, name) {
 那如果沒有 bfcache 呢？照理來說網頁應該要重新載入一次才對，所以預期的狀況會是最剛開始的樣子：
 
 ```html
-<iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())<\/script>"></iframe>
+<iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
 ```
 
 也就是一個 sandbox 的 iframe 載入 test1。
@@ -255,7 +255,7 @@ function openNoOpener(url, name) {
 
 ``` html
 <body>
-  <iframe id=f src="data:text/html,test1:<script>document.writeln(Math.random())<\/script>"></iframe>
+  <iframe id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
   <button onclick="loadTest2()">load test2</button>
   <button onclick="location = 'a.html'">top level navigation</button>
 </body>
@@ -303,7 +303,7 @@ function openNoOpener(url, name) {
 1. 確認頁面上有 CSP
 2. 確認 srcdoc 的 script 無法執行
 3. 按下 top level navigation，去到別的頁面
-4. 更新檔案，把 head 裡的 CSP 刪掉
+4. 更新檔案，把 head 裡的 CSP 刪掉（你要自己手動做）
 5. 按下上一頁
 
 一樣假設在沒有 bfcache 的狀況下，當我又回到這個網頁時，會是什麼狀況？預期中的行為應該是：「就跟第一次載入一樣」，因此頁面上的 script 跟 srcdoc 裡的 script 都沒有 CSP，都可以執行程式碼。
