@@ -111,7 +111,6 @@ require('./usage.js')
 Writeups by others:
 
 1. https://ctf.zeyu2001.com/2022/balsnctf-2022/2linenodejs
-2. [Node.js require() RCE复现](https://hujiekang.top/2022/10/11/NodeJS-require-RCE/)
 
 ### corCTF 2022 - sbxcalc
 
@@ -133,7 +132,7 @@ Author's writeup: https://brycec.me/posts/corctf_2022_challenges#sbxcalc
 
 ### SECCON CTF 2022 Quals - spanote
 
-There is a cache in Chrome called back/forward cache, abbreviated as bfcache, which I heard for the first time: https://web.dev/i18n/en/bfcache/
+There is a cache in Chrome called back/forward cache, abbreviated as bfcache, which I heard for the first time: http://web.dev/articles/bfcache
 
 The second disk cache should be more familiar to everyone, and fetched resources will be stored in it.
 

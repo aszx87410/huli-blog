@@ -507,7 +507,7 @@ Finally, these two articles mainly introduce the CSS injection attack method. Th
 References:
 
 1. [CSS Injection Attacks](https://vwzq.net/slides/2019-s3_css_injection_attacks.pdf)
-2. [CSS Injection Primitives](https://x-c3ll.github.io/posts/CSS-Injection-Primitives/)
+2. [CSS Injection Primitives](https://web.archive.org/web/20240324012538/https://x-c3ll.github.io/posts/CSS-Injection-Primitives/)
 3. [HackTricks - CSS Injection](https://book.hacktricks.xyz/pentesting-web/xs-search/css-injection)
 4. [Stealing Data in Great style – How to Use CSS to Attack Web Application.](https://research.securitum.com/stealing-data-in-great-style-how-to-use-css-to-attack-web-application/)
 5. [Data Exfiltration via CSS + SVG Font](https://mksben.l0.cm/2021/11/css-exfiltration-svg-font.html)

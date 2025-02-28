@@ -37,7 +37,7 @@ According to the answer to [Why were Javascript `atob()` and `btoa()` named like
 
 Although in JavaScript, both `atob` and `btoa` accept strings as parameters and there is no binary involved, the explanation above makes sense if you broaden your perspective beyond JavaScript.
 
-For example, base64 can convert any binary data to a string, which is its most valuable feature. For example, you may have used [data URI](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Basics_of_HTTP/Data_URIs), which is a way to encode images as base64 strings.
+For example, base64 can convert any binary data to a string, which is its most valuable feature. For example, you may have used data URI, which is a way to encode images as base64 strings.
 
 Therefore, `btoa` stands for binary to ASCII, which means encoding anything using base64. The output will be a base64-encoded string. `atob`, on the other hand, means ASCII to binary, which is to convert a base64-encoded string back to its original form.
 

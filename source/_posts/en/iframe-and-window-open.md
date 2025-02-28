@@ -299,7 +299,7 @@ For example, if I have an `iframe.html` with only this content: `<script>alert(1
 
 You will find that the newly opened `iframe.html` page cannot execute `alert(1)` because it inherits the sandbox, and the sandbox does not have the `allow-modals` property.
 
-Another example: we can find a webpage that uses JS to render the page content on the internet, like this calculator: https://ahfarmer.github.io/calculator/
+Another example: we can find a webpage that uses JS to render the page content on the internet, like this calculator: `https://ahfarmer.github.io/calculator/`
 
 It works fine when opened directly, but if we open it with a sandboxed iframe:
 

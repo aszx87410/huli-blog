@@ -51,7 +51,7 @@ The nested array is flattened, which means it is similar to the [flatten](https:
 
 For detailed usage, please refer to [MDN](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/flat), which has an additional parameter called depth that allows you to specify the depth of the expansion.
 
-[flatMap](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap) is to map first and then flatten, which should be familiar to friends who are familiar with RxJS (also known as mergeMap in RxJS, and mergeMap is more commonly used. Interested friends can also refer to this article: [concatAll and concatMap rather than flatten and flatMap](https://github.com/tc39/proposal-flatMap/issues/60)).
+flatMap is to map first and then flatten, which should be familiar to friends who are familiar with RxJS (also known as mergeMap in RxJS, and mergeMap is more commonly used. Interested friends can also refer to this article: [concatAll and concatMap rather than flatten and flatMap](https://github.com/tc39/proposal-flatMap/issues/60)).
 
 Well, this proposal seems good, but what are the problems?
 
@@ -170,8 +170,6 @@ In summary, the #SmooshGate incident is:
 
 Some people may be confused about the second point and wonder why MooTools, which is so old, couldn't just break. This is where the principle of "Don't break the web" comes in.
 
-This website, [Space Jam](https://www.spacejam.com/archive/spacejam/movie/jam.htm), has been running smoothly for 22 years because when developing new web standards, the principle of "Don't break the web" is always taken into account.
-
 If you think about it carefully, you may realize that there are no breaking changes in the web domain. The JS syntax you could use before is still available, with some new additions, rather than changing or removing old things.
 
 Because once a breaking change occurs, websites may suffer, with bugs or even complete breakdowns. In fact, many websites have not been maintained for years, but we should not let them break. If a new standard with breaking changes is established today, the users will be the ones who suffer. They will only know that the website is broken, but not why.
@@ -194,7 +192,7 @@ Out of curiosity, I looked up some related information.
 
 Raise your hand if you've heard of `<keygen>`? Those who raised their hands, please give them a round of applause. You're amazing and are now crowned the king of obscure HTML tags.
 
-Even after looking at the examples on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/keygen), I still don't really understand what this tag does. I only know that it is a tag that can be used in forms and, as its name suggests, is used to generate keys related to certificates.
+Even after looking at the examples on MDN, I still don't really understand what this tag does. I only know that it is a tag that can be used in forms and, as its name suggests, is used to generate keys related to certificates.
 
 From the information provided by MDN in [Non-conforming features](https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features), we can find other deprecated tags, such as:
 
@@ -452,7 +450,7 @@ var elements = [
 ];
 ```
 
-For elements like applet, bgsound, blink, etc., [HTMLUnknownElement](https://developer.mozilla.org/zh-TW/docs/Web/API/HTMLUnknownElement) should be returned.
+For elements like applet, bgsound, blink, etc., HTMLUnknownElement should be returned.
 
 ## Conclusion
 

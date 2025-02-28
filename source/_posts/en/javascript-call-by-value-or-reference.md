@@ -25,7 +25,7 @@ Let's go!
 As mentioned earlier, my decision to research parameter passing was a beautiful mistake. I was originally planning to write about shallow and deep copying.
 
 While researching, I came across this article: [[Javascript] 關於 JS 中的淺拷貝和深拷貝
-](http://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/). After reading it, I realized that if I wanted to talk about deep copying, I would have to first explain why we need deep copying, which would require discussing the differences between objects and other primitive types.
+](https://web.archive.org/web/20200220061943/http://larry850806.github.io/2016/09/20/shallow-vs-deep-copy//). After reading it, I realized that if I wanted to talk about deep copying, I would have to first explain why we need deep copying, which would require discussing the differences between objects and other primitive types.
 
 At this point, I thought of an old question: Is JavaScript's object passed by value or by reference?
 
@@ -346,7 +346,7 @@ But don't forget, the point is not in this, but to understand what behavior occu
 This time I wrote a topic that is easy to provoke debate, but I also think it's quite interesting. If you have a different opinion on this issue, or if you think I made a mistake somewhere, please feel free to correct me. Thank you.
 
 # References
-1. [[Javascript] About shallow copy and deep copy in JS](http://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/)
+1. [[Javascript] About shallow copy and deep copy in JS](https://web.archive.org/web/20200220061943/http://larry850806.github.io/2016/09/20/shallow-vs-deep-copy//)
 2. [[Note] Talking about the important concepts of by reference and by value in JavaScript](https://pjchender.blogspot.com/2016/03/javascriptby-referenceby-value.html)
 3. [Reacquaint with JavaScript: Day 05 Is JavaScript "pass by value" or "pass by reference"?](https://ithelp.ithome.com.tw/articles/10191057)
 4. [Re: [Question] What is passing by reference?](https://www.ptt.cc/bbs/C_and_CPP/M.1245595402.A.2A1.html)
@@ -354,7 +354,6 @@ This time I wrote a topic that is easy to provoke debate, but I also think it's 
 6. [A simple introduction to JavaScript parameter passing](https://www.slideshare.net/YiTaiLin/java-script-63031051)
 7. [Is JavaScript pass-by-value or pass-by-reference?](https://github.com/nodejh/nodejh.github.io/issues/32)
 8. [Values vs References semantics #160](https://github.com/getify/You-Dont-Know-JS/issues/160)
-9. [You Don't Know JS: Types & Grammar Chapter 2: Values](https://github.com/getify/You-Dont-Know-JS/blob/master/types%20%26%20grammar/ch2.md#value-vs-reference)
 10. [Parameter passing in Java - by reference or by value?](http://www.yoda.arachsys.com/java/passing.html)
 11. [Is Java "pass-by-reference" or "pass-by-value"?](https://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value)
 12. [Pass by value](https://openhome.cc/Gossip/Java/PassByValue.html)

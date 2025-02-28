@@ -292,4 +292,4 @@ This is the only other solution I can think of under the condition that the orig
 
 ### CSS injection
 
-If CSP is relaxed, the script part is still blocked, but other style-related parts such as style-src, font-src, and img-src are not blocked, then there may be a chance to use [CSS injection](https://x-c3ll.github.io/posts/CSS-Injection-Primitives/) to slowly leak the flag.
+If CSP is relaxed, the script part is still blocked, but other style-related parts such as style-src, font-src, and img-src are not blocked, then there may be a chance to use [CSS injection](https://web.archive.org/web/20240324012538/https://x-c3ll.github.io/posts/CSS-Injection-Primitives/) to slowly leak the flag.

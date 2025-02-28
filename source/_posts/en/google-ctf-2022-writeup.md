@@ -831,7 +831,7 @@ In this way, when the main thread is free to do something, our iframe has alread
 
 ### GPUSHOP2 (7 solves)
 
-This problem was modified from last year's version, and the solution from last year can be found here: https://github.com/ComdeyOverFlow/Google_CTF_2021/blob/main/gpushop.md
+This problem was modified from last year's version.
 
 I didn't look at it very carefully, but it should be caused by URL encoding a certain path, which leads to the proxy not matching the path.
 

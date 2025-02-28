@@ -223,7 +223,6 @@ In short, this article is to introduce this thing to readers, hoping that everyo
 2. [Stop syncing value attribute for controlled inputs #11896](https://github.com/facebook/react/issues/11896)
 3. [maxchehab/CSS-Keylogging](https://github.com/maxchehab/CSS-Keylogging)
 4. [Content-Security-Policy - HTTP Headers Security Issues (2)](https://devco.re/blog/2014/04/08/security-issues-of-http-headers-2-content-security-policy/)
-5. [Stealing Data With CSS: Attack and Defense](https://www.mike-gualtieri.com/posts/stealing-data-with-css-attack-and-defense)
 6. [Bypassing Browser Security Warnings with Pseudo Password Fields](https://www.troyhunt.com/bypassing-browser-security-warnings-with-pseudo-password-fields/)
 7. [CSS Keylogger (and why you shouldn’t worry about it)](https://www.bram.us/2018/02/21/css-keylogger-and-why-you-shouldnt-worry-about-it/)
 8. [Mixpanel JS library has been harvesting passwords ](https://www.reddit.com/r/analytics/comments/7ukw4n/mixpanel_js_library_has_been_harvesting_passwords/)

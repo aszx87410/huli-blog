@@ -409,9 +409,8 @@ After reading this article, I suggest you take a look at the reference materials
 
 ## Reference Materials
 
-1. [JavaScript深入之从原型到原型链](https://github.com/mqyqingfeng/Blog/blob/master/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8B%E4%BB%8E%E5%8E%9F%E5%9E%8B%E5%88%B0%E5%8E%9F%E5%9E%8B%E9%93%BE.md)
+1. [JavaScript深入之从原型到原型链](https://github.com/mqyqingfeng/blog/issues/2)
 2. [JS原型链图解教程](https://www.talkingcoder.com/article/6360227501704156372)
 3. [理解JavaScript的原型链和继承](https://blog.oyanglul.us/javascript/understand-prototype.html)
 4. [从__proto__和prototype来深入理解JS对象和原型链](https://github.com/creeperyang/blog/issues/9)
-5. [Javascript 原型链](http://zencode.in/2.Javascript%E5%8E%9F%E5%9E%8B%E9%93%BE.html)
 6. [彻底理解JavaScript原型](http://www.imooc.com/article/2088)

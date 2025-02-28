@@ -286,7 +286,7 @@ Although the pre-steps may sound a bit complicated, it is indeed a feasible atta
 
 Suppose there is a social networking site that boasts extremely high privacy. You cannot see who your friends' friends are, cannot see mutual friends, so you don't know who is friends with whom, only know who your friends are.
 
-You and David, whose user id is 123, are good friends, so when you click on his profile page: http://example.com/users/123, you will see a "Send Message" button, and the id of the button is message:
+You and David, whose user id is 123, are good friends, so when you click on his profile page: `http://example.com/users/123`, you will see a "Send Message" button, and the id of the button is message:
 
 ![](/img/learn-frontend-from-security-pov/p7-id1.png)
 
@@ -298,7 +298,7 @@ This sounds reasonable, and the implementation of elements with id on the webpag
 
 The browser has a user-friendly feature that you may or may not have noticed. When you add `#id` to the end of a URL, the browser automatically jumps to the paragraph with that id and focuses on the element (if it can be focused). The anchor function of the article relies on this to jump to a specific paragraph.
 
-Therefore, when I connect to http://example.com/users/123#message, if I am friends with the person with id 123, the "Send Message" button will appear on the page, and the browser will jump to the button and focus on it. What if I am not friends with 123? Then nothing will happen. So we can use this difference to know whether the person with id 123 is a friend of the current user.
+Therefore, when I connect to `http://example.com/users/123#message`, if I am friends with the person with id 123, the "Send Message" button will appear on the page, and the browser will jump to the button and focus on it. What if I am not friends with 123? Then nothing will happen. So we can use this difference to know whether the person with id 123 is a friend of the current user.
 
 The method is similar to the search and download just now. We need to embed the target webpage in an iframe. If this id exists, the iframe will focus, and the original body will blur:
 

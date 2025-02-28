@@ -178,7 +178,7 @@ Let's start with FAANG!
 
 #### Facebook
 
-API URL: https://zh-tw.facebook.com/login
+API URL: `https://zh-tw.facebook.com/login`
 
 Request content:
 
@@ -191,22 +191,22 @@ Unexpectedly, Facebook is a website that implements front-end encryption! The Ba
 
 #### Amazon
 
-API URL: https://www.amazon.com/ap/signin
+API URL: `https://www.amazon.com/ap/signin`
 Request Content: `email=test@test.com&password=1234`
 
 #### Apple
 
-API URL: https://idmsa.apple.com/appleauth/auth/signin
+API URL: `https://idmsa.apple.com/appleauth/auth/signin`
 Request Content: `{"accountName":"test@test.com","password":"1234"}`
 
 #### Netflix
 
-API URL: https://www.netflix.com/tw/login
+API URL: `https://www.netflix.com/tw/login`
 Request Content: `userLoginId=test@test.com&password=1234`
 
 #### Google
 
-API URL: https://accounts.google.com/v3/signin/_/AccountsSignInUi/data/batchexecute
+API URL: `https://accounts.google.com/v3/signin/_/AccountsSignInUi/data/batchexecute`
 
 Request Content:
 ```
@@ -219,17 +219,17 @@ Then I suddenly became curious about whether other commonly used services have i
 
 #### GitHub
 
-API URL: https://github.com/session
+API URL: `https://github.com/session`
 Request Content: `login=test@test.com&password=1234`
 
 #### Microsoft
 
-API URL: https://login.live.com/ppsecure/post.srf
+API URL: `https://login.live.com/ppsecure/post.srf`
 Request Content: `login=test@test.com&passwd=1234`
 
 #### IBM Cloud
 
-API URL: https://cloud.ibm.com/login/doLogin
+API URL: `https://cloud.ibm.com/login/doLogin`
 Request Content: `{"username":"test@test.com","password":"1234"}`
 
 It seems that only a few have implemented it. What about cybersecurity companies? Do they have their own implementations?
@@ -238,17 +238,17 @@ It seems that only a few have implemented it. What about cybersecurity companies
 
 #### Kaspersky
 
-API URL: https://eu.uis.kaspersky.com/v3/logon/proceed
+API URL: `https://eu.uis.kaspersky.com/v3/logon/proceed`
 Request Content: `{"login":"test@test.com","password":"12345678"}`
 
 #### Trend Micro
 
-API URL: https://sso1.trendmicro.com/api/usersigninauth 
+API URL: `https://sso1.trendmicro.com/api/usersigninauth`
 Request Content: `{"email":"test@test.com","password":"12345678"}`
 
 #### Tenable
 
-API URL: https://cloud.tenable.com/session
+API URL: `https://cloud.tenable.com/session`
 Request Content: `{"username":"test","password":"1234"}`
 
 #### Proton 
@@ -257,7 +257,7 @@ This may not be a cybersecurity company, but I suddenly became curious about how
 
 When logging in, the username is sent first, and some things that look like keys are obtained.
 
-API URL: https://account.proton.me/api/auth/info
+API URL: `https://account.proton.me/api/auth/info`
 
 ```
 {"Username":"test@test.com"}
@@ -288,7 +288,7 @@ Then, when entering the password to log in, a request like the following is sent
 }
 ```
 
-Supplement: After being reminded by someone in the discussion thread, I found out that this is a protocol called SRP (Secure Remote Password), and Proton provides a [ProtonMail Security Features and Infrastructure](https://proton.me/static/9f5e7256429a2f674c943c5825257b82/protonmail_authentication_excerpt.pdf), which records their security measures and mentions this mechanism.
+Supplement: After being reminded by someone in the discussion thread, I found out that this is a protocol called SRP (Secure Remote Password), and Proton provides a [ProtonMail Security Features and Infrastructure](https://proton.me/support/infrastructure-and-threat-model), which records their security measures and mentions this mechanism.
 
 It looks quite complicated and will take some time to study. For those interested, you can refer to: [SRP — A More Robust Login and Data Transmission Protection Protocol](https://blog.amis.com/srp-1f28676aa525)
 
@@ -300,7 +300,7 @@ After reading the above cases, I found that only a few have implemented it, so I
 
 #### Binance
 
-API URL: https://accounts.binance.com/bapi/accounts/v2/public/authcenter/login
+API URL: `https://accounts.binance.com/bapi/accounts/v2/public/authcenter/login`
 
 Request Content:
 
@@ -315,7 +315,7 @@ Request Content:
 
 #### Coinbase
 
-API URL: https://login.coinbase.com/api/v1/authenticate-credentials
+API URL: `https://login.coinbase.com/api/v1/authenticate-credentials`
 
 Request Body:
 
@@ -325,7 +325,7 @@ Request Body:
 
 #### Kraken
 
-API URL: https://www.kraken.com/api/internal/account/settings/tfa
+API URL: `https://www.kraken.com/api/internal/account/settings/tfa`
 
 Request Body:
 
@@ -335,7 +335,7 @@ Request Body:
 
 #### Esun Bank
 
-API URL: https://ebank.esunbank.com.tw/fco/fco08001/FCO08001_Home.faces
+API URL: `https://ebank.esunbank.com.tw/fco/fco08001/FCO08001_Home.faces`
 
 Request Body:
 
@@ -348,7 +348,7 @@ loginform:pxsswd=8,lIRnuUxw/yStOt9QIYG2U3Gn2XkG03x4Ey/UU6JGtsbUxfRXoAv9CjE3EWerD
 
 #### Cathay United Bank
 
-API URL: https://www.cathaybk.com.tw/MyBank/Quicklinks/Home/NormalSignin
+API URL: `https://www.cathaybk.com.tw/MyBank/Quicklinks/Home/NormalSignin`
 
 Request Body:
 
@@ -360,7 +360,7 @@ Password=8cf5e1977f149ed0362629007a7f91d0efc7b12cb1895ba701c528a12b38d12f8148ca0
 
 #### CTBC Bank
 
-API URL: https://www.ctbcbank.com/IB/api/adapters/IB_Adapter/resource/preLogin
+API URL: `https://www.ctbcbank.com/IB/api/adapters/IB_Adapter/resource/preLogin`
 
 Request Body:
 
@@ -376,7 +376,7 @@ Request Body:
 
 #### Bank of America
 
-API URL: https://m.globalcard.bankofamerica.com/pkmslogin.form
+API URL: `https://m.globalcard.bankofamerica.com/pkmslogin.form`
 
 Request Body:
 
@@ -387,7 +387,7 @@ password=12345678
 
 #### DBS Bank (Singapore)
 
-API URL: https://internet-banking.dbs.com.sg/IB/Welcome
+API URL: `https://internet-banking.dbs.com.sg/IB/Welcome`
 
 Request Body:
 

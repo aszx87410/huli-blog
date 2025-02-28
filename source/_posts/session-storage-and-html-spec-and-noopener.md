@@ -198,7 +198,7 @@ LocalStorage 跟 sessionStorage 都屬於 Web Storage 的一種，Web Storage �
 
 這邊值得注意的是雖然常見用法是 `storage.setItem` 或是 `storage.getItem`，但其實直接 `storage[key] = value` 以及 `storage[key]` 也都行得通，刪除的話直接 `delete storage[key]` 也可以。
 
-然後如果寫不進去的話，會丟一個 `QuotaExceededError` 出來，Chrome 的這份文件：[chrome.storage](https://developer.chrome.com/apps/storage) 有提到相關的一些數字。
+然後如果寫不進去的話，會丟一個 `QuotaExceededError` 出來。
 
 再來還有一段很常出現：
 

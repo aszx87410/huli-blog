@@ -111,7 +111,6 @@ require('./usage.js')
 別人寫的 writeup：
 
 1. https://ctf.zeyu2001.com/2022/balsnctf-2022/2linenodejs
-2. [Node.js require() RCE复现](https://hujiekang.top/2022/10/11/NodeJS-require-RCE/)
 
 ### corCTF 2022 - sbxcalc
 
@@ -133,7 +132,7 @@ var p = new Proxy({flag: window.flag || 'flag'}, {
 
 ### SECCON CTF 2022 Quals - spanote
 
-Chrome 裡面有一種 cache 叫做 back/forward cache，簡稱 bfcache，這詞我還是第一次聽到：https://web.dev/i18n/en/bfcache/
+Chrome 裡面有一種 cache 叫做 back/forward cache，簡稱 bfcache，這詞我還是第一次聽到：http://web.dev/articles/bfcache
 
 第二個 disk cache 應該大家都比較熟悉了，fetched resourced 會存在裡面。
 

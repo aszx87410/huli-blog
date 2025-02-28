@@ -393,7 +393,6 @@ frida -U --no-pause -l ssl.js -f "com.example"
 
 1. [《FRIDA操作手册》](https://github.com/hookmaster/frida-all-in-one)
 2. [翻译——N种脱壳安卓恶意软件的方式](https://www.giantbranch.cn/2019/10/25/%E7%BF%BB%E8%AF%91%E2%80%94%E2%80%94N%E7%A7%8D%E8%84%B1%E5%A3%B3%E5%AE%89%E5%8D%93%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%96%B9%E5%BC%8F/)
-3. [frida hook java](https://kevinspider.github.io/fridahookjava/)
 4. [这恐怕是学习Frida最详细的笔记了](https://juejin.cn/post/6847902219757420552#heading-39)
 5. [frida-snippets](https://github.com/iddoeldor/frida-snippets#class-description)
 6. [Frida Tutorial](https://book.hacktricks.xyz/mobile-apps-pentesting/android-app-pentesting/frida-tutorial)

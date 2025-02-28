@@ -45,7 +45,7 @@ Because I am not familiar with this area, I first Googled some Chinese articles,
 2. [Actually, the Heart of CSS Still Lives in Print](https://ithelp.ithome.com.tw/articles/10198913)
 3. [It turns out that front-end web page printing is not just window.print()](https://medium.com/unalai/%E5%8E%9F%E4%BE%86%E5%89%8D%E7%AB%AF%E7%B6%B2%E9%A0%81%E5%88%97%E5%8D%B0-%E4%B8%8D%E6%98%AF%E5%8F%AA%E8%A6%81-window-print-%E5%B0%B1%E5%A5%BD%E4%BA%86-7af44cacf43e)
 4. [@media print, who are you?](https://tsengbatty.medium.com/media-print-%E4%BD%A0%E6%98%AF%E8%AA%B0-ae093fab85b8)
-5. [About @media print](https://kakadodo.github.io/2018/03/13/css-media-print-setting/)
+5. [About @media print](https://kakadodo.github.io/CSS/css-media-print-setting)
 6. [Setting Web Page Printing Styles via CSS Print](https://penghuachen.github.io/2020/12/10/%E9%80%8F%E9%81%8E-CSS-%E5%88%97%E5%8D%B0-print-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E9%A0%81%E5%88%97%E5%8D%B0%E6%99%82%E7%9A%84%E6%A8%A3%E5%BC%8F/)
 
 The key is to use CSS `@media print` to do the settings, and then you can set when to change pages, and remember to check some settings to display the background.

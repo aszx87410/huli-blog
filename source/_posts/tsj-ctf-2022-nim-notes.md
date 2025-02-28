@@ -293,5 +293,5 @@ app.listen(3000, () => {
 
 ### CSS injection
 
-假如 CSP 放寬，script 的部分一樣擋住，但是其他 style 相關的像是 style-src、font-src 跟 img-src 之類的都不擋的話，那在第三階段似乎有機會用 [CSS injection](https://x-c3ll.github.io/posts/CSS-Injection-Primitives/) 的方式把 flag 慢慢 leak 出來。
+假如 CSP 放寬，script 的部分一樣擋住，但是其他 style 相關的像是 style-src、font-src 跟 img-src 之類的都不擋的話，那在第三階段似乎有機會用 [CSS injection](https://web.archive.org/web/20240324012538/https://x-c3ll.github.io/posts/CSS-Injection-Primitives/) 的方式把 flag 慢慢 leak 出來。
 

@@ -8,7 +8,7 @@ categories:
 
 ## 前言
 
-前陣子我為了幫自己的學生們更熟悉 HTTP 以及 API 的串接，寫出了一個小遊戲：[Lidemy HTTP Challenge](https://lidemy-http-challenge.herokuapp.com/start)，需要根據每一關的說明取得正確的 token，一共有十五關，前十關基本，後五關進階。
+前陣子我為了幫自己的學生們更熟悉 HTTP 以及 API 的串接，寫出了一個小遊戲：Lidemy HTTP Challenge，需要根據每一關的說明取得正確的 token，一共有十五關，前十關基本，後五關進階。
 
 經過了一些朋友的測試之後，慢慢調整、改善，最後讓學生測試發現反應都不錯，於是就在[前端社群](https://www.facebook.com/groups/f2e.tw/permalink/2153812321322788/)正式對外公開這個遊戲，讓大家也能一起參與。
 
@@ -69,7 +69,6 @@ custom header 常常會來帶一些額外資訊，或是最常做的就是驗證
 
 接著就讓我們先來看看前十關每一關的內容吧！
 
-再次強調，如果你還沒破完，強烈建議不要觀看！趕快先去玩：[Lidemy HTTP Challenge](https://lidemy-http-challenge.herokuapp.com/start)。
 
 ## 第一關
 

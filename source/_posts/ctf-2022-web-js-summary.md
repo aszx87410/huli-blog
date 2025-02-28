@@ -434,7 +434,7 @@ def index():
 
 ### SECCON CTF 2022 Quals - spanote
 
-這題利用了 bfcache 這個東西：https://web.dev/i18n/en/bfcache/
+這題利用了 bfcache 這個東西：http://web.dev/articles/bfcache
 
 假設有個 API 長這樣：
 

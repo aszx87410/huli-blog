@@ -81,7 +81,7 @@ API 也是這樣，只是變成程式跟程式之間的串接。例如說今天�
 
 API 的串接也是一樣，一定要有文件你才知道怎麼串，不然根本串不起來，因為你連要傳什麼參數都不知道。
 
-我們可以先來看看[Twitch API 文件](https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api/)是怎麼寫的。
+我們可以先來看看 Twitch API 文件是怎麼寫的。
 
 裡面說明了你必須要有一個`Client ID`，然後 API Root 的 URL 是 `https://api.twitch.tv/kraken` 等等，這些都是與 API 相關的基本資訊。如果你在左側欄隨便點一個 API，會看到個別 API 的詳細資訊：
 

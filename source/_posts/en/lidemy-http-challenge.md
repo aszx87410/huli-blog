@@ -8,7 +8,7 @@ categories:
 
 ## Introduction
 
-Recently, I created a small game called [Lidemy HTTP Challenge](https://lidemy-http-challenge.herokuapp.com/start) to help my students become more familiar with HTTP and API integration. The game requires players to obtain the correct token according to the instructions of each level. There are a total of fifteen levels, with the first ten being basic and the last five being advanced.
+Recently, I created a small game called Lidemy HTTP Challenge to help my students become more familiar with HTTP and API integration. The game requires players to obtain the correct token according to the instructions of each level. There are a total of fifteen levels, with the first ten being basic and the last five being advanced.
 
 After some testing by friends and some adjustments and improvements, I let my students test it and found that the response was good. So I officially released this game to the [front-end community](https://www.facebook.com/groups/f2e.tw/permalink/2153812321322788/) so that everyone could participate.
 
@@ -66,8 +66,6 @@ After having the story, I also wanted to hide some Easter eggs in it. Rather tha
 I remember that I spent about two days on the initial version. One day for designing levels and another day for writing code. The part of designing levels took longer because the implementation of the code was quite simple.
 
 Next, let's take a look at the content of each level of the first ten levels!
-
-Again, if you haven't completed it yet, I strongly recommend not to view it! Quickly go and play: [Lidemy HTTP Challenge](https://lidemy-http-challenge.herokuapp.com/start).
 
 ## Level 1
 

@@ -103,7 +103,7 @@ The challenge here is the length limit, you can only insert HTML with no more th
 
 The shortest payload on TinyXSS is `<svg/onload=eval(name)>` which is 23 in length, but it doesn't work because of this line: `window.name = 'XSS(eXtreme Short Scripting) Game'`, it prevents the payload from `window.name`.
 
-How about `<script/src=//Ǌ.₨></script>`? I saw so many people were trying this way, but it won't work even if there is no length limitation, because [a `<script>` tag inserted with innerHTML should not execute.](https://developer.mozilla.org/zh-TW/docs/Web/API/Element/innerHTML#security_considerations)
+How about `<script/src=//Ǌ.₨></script>`? I saw so many people were trying this way, but it won't work even if there is no length limitation, because a `<script>` tag inserted with innerHTML should not execute.
 
 All other payloads exceed 24 characters, including what I have mentioned previously: `<svg/onload=eval("'"+URL)>`
 

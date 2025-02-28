@@ -431,7 +431,7 @@ Full writeup: https://blog.huli.tw/2022/08/01/en/uiuctf-2022-writeup/#precisioni
 
 ### SECCON CTF 2022 Quals - spanote
 
-This question uses bfcache: https://web.dev/i18n/en/bfcache/
+This question uses bfcache: http://web.dev/articles/bfcache
 
 Suppose there is an API that looks like this:
 

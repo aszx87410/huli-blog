@@ -104,11 +104,9 @@ In short, through this attack method, we can extend the known string and generat
 
 As for the detailed principles and attack methods, I will leave a few reference articles here, and I may come back to fill this gap in the future:
 
-1. [Everything you need to know about hash length extension attacks](https://blog.skullsecurity.org/2012/everything-you-need-to-know-about-hash-length-extension-attacks)
 2. [Length Extension Attack (LEA)](https://maojui.me/Crypto/LEA/)
 3. [Hash Length Extension Attacks](https://www.whitehatsec.com/blog/hash-length-extension-attacks/)
 4. [Understanding the length extension attack](https://crypto.stackexchange.com/questions/3978/understanding-the-length-extension-attack)
-5. [Merkle–Damgård structure and length extension attack](http://www.flydean.com/md-length-extension/)
 6. [Hash Length Extension Attacks](https://xz.aliyun.com/t/2563)
 7. [Length extension attack](https://ucgjhe.github.io/post/length_extension_attack/)
 

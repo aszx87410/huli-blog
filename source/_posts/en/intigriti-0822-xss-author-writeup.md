@@ -330,7 +330,7 @@ if (strlen($name) >= 20) {
 
 Given that the CSP is strict and the length is very limited, XSS is most likely impossible. It's fine, because XSS is not the only way to steal something,  we can use CSS injection!
 
-This is a good article to learn what CSS injection is and various way to exploit: [CSS Injection Primitives](https://x-c3ll.github.io/posts/CSS-Injection-Primitives/).
+This is a good article to learn what CSS injection is and various way to exploit: [CSS Injection Primitives](https://web.archive.org/web/20240324012538/https://x-c3ll.github.io/posts/CSS-Injection-Primitives/).
 
 Usually, the blog post about stealing CSRF token is for `<input>`, but we have `<input type=hidden>` here, so it won't work. if there is other sibling element, we can use sibling selector like this: `input[value^=a] div` to steal the token, but it's also not working here because `<input>` is wrapped by a `<div>`.
 

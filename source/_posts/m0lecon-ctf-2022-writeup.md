@@ -103,11 +103,10 @@ def generate_cookie(user):
 
 至於詳細的原理跟攻擊方式，先留幾篇參考文章，未來有機會再回來補這個坑：
 
-1. [Everything you need to know about hash length extension attacks](https://blog.skullsecurity.org/2012/everything-you-need-to-know-about-hash-length-extension-attacks)
+
 2. [長度擴充攻擊 | Length Extension Attack (LEA)](https://maojui.me/Crypto/LEA/)
 3. [Hash Length Extension Attacks](https://www.whitehatsec.com/blog/hash-length-extension-attacks/)
 4. [Understanding the length extension attack](https://crypto.stackexchange.com/questions/3978/understanding-the-length-extension-attack)
-5. [密码学系列之:Merkle–Damgård结构和长度延展攻击](http://www.flydean.com/md-length-extension/)
 6. [哈希长度拓展攻击(Hash Length Extension Attacks)](https://xz.aliyun.com/t/2563)
 7. [Length extension attack](https://ucgjhe.github.io/post/length_extension_attack/)
 

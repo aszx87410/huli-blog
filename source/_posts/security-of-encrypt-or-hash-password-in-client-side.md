@@ -188,7 +188,7 @@ photos: /img/security-of-encrypt-or-hash-password-in-client-side/cover.png
 
 #### Facebook
 
-API 網址：https://zh-tw.facebook.com/login
+API 網址：`https://zh-tw.facebook.com/login`
 
 請求內容：
 
@@ -201,23 +201,23 @@ encpass=#PWD_BROWSER:5:1673256089:AbJQAJUvZZNvh2dZbeDqdu9dp7HWwyHOl3+0sCGjiHMMjv
 
 #### Amazon
 
-API 網址：https://www.amazon.com/ap/signin
+API 網址：`https://www.amazon.com/ap/signin`
 請求內容：`email=test@test.com&password=1234`
 
 #### Apple
 
-API 網址：https://idmsa.apple.com/appleauth/auth/signin
+API 網址：`https://idmsa.apple.com/appleauth/auth/signin`
 請求內容：`{"accountName":"test@test.com","password":"1234"}`
 
 #### Netflix
 
-API 網址：https://www.netflix.com/tw/login
+API 網址：`https://www.netflix.com/tw/login`
 請求內容：`userLoginId=test@test.com&password=1234`
 
 
 #### Google
 
-API 網址：https://accounts.google.com/v3/signin/_/AccountsSignInUi/data/batchexecute
+API 網址：`https://accounts.google.com/v3/signin/_/AccountsSignInUi/data/batchexecute`
 
 請求內容：
 ```
@@ -230,17 +230,17 @@ f.req=[[["14hajb","[1,1,null,[1,null,null,null,[\"1234\",null,true]]]]
 
 #### GitHub
 
-API 網址：https://github.com/session
+API 網址：`https://github.com/session`
 請求內容：`login=test@test.com&password=1234`
 
 #### Microsoft
 
-API 網址：https://login.live.com/ppsecure/post.srf
+API 網址：`https://login.live.com/ppsecure/post.srf`
 請求內容：`login=test@test.com&passwd=1234`
 
 #### IBM cloud
 
-API 網址：https://cloud.ibm.com/login/doLogin
+API 網址：`https://cloud.ibm.com/login/doLogin`
 請求內容：`{"username":"test@test.com","password":"1234"}`
 
 看來有實作的是少數，那資安廠商呢？資安廠商自己有做嗎？
@@ -249,17 +249,17 @@ API 網址：https://cloud.ibm.com/login/doLogin
 
 #### Kaspersky
 
-API 網址：https://eu.uis.kaspersky.com/v3/logon/proceed
+API 網址：`https://eu.uis.kaspersky.com/v3/logon/proceed`
 請求內容：`{"login":"test@test.com","password":"12345678"}`
 
 #### 趨勢
 
-API 網址：https://sso1.trendmicro.com/api/usersigninauth 
+API 網址：`https://sso1.trendmicro.com/api/usersigninauth`
 請求內容：`{"email":"test@test.com","password":"12345678"}`
 
 #### Tenable
 
-API 網址：https://cloud.tenable.com/session
+API 網址：`https://cloud.tenable.com/session`
 請求內容：`{"username":"test","password":"1234"}`
 
 #### Proton 
@@ -268,7 +268,7 @@ API 網址：https://cloud.tenable.com/session
 
 在登入的時候會先把 username 送過去，拿到一些看起來是 key 的東西。
 
-API 網址：https://account.proton.me/api/auth/info
+API 網址：`https://account.proton.me/api/auth/info`
 
 ```
 {"Username":"test@test.com"}
@@ -299,7 +299,7 @@ API 網址：https://account.proton.me/api/auth/info
 }
 ```
 
-補充：經討論串有人提醒後發現這是一個叫做 SRP（Secure Remote Password）的協議，Proton 有提供一個 [ProtonMail Security Features and Infrastructure](https://proton.me/static/9f5e7256429a2f674c943c5825257b82/protonmail_authentication_excerpt.pdf)，裡面有記錄他們的安全措施，就有講到這個機制。
+補充：經討論串有人提醒後發現這是一個叫做 SRP（Secure Remote Password）的協議，Proton 有提供一個 [ProtonMail Security Features and Infrastructure](https://proton.me/support/infrastructure-and-threat-model)，裡面有記錄他們的安全措施，就有講到這個機制。
 
 看起來滿複雜要花不少時間研究，先放著，有興趣的可以參考：[SRP—更健全的登入及資料傳輸保護協議](https://blog.amis.com/srp-1f28676aa525)
 
@@ -311,7 +311,7 @@ API 網址：https://account.proton.me/api/auth/info
 
 #### Binance
 
-API 網址：https://accounts.binance.com/bapi/accounts/v2/public/authcenter/login
+API 網址：`https://accounts.binance.com/bapi/accounts/v2/public/authcenter/login`
 
 請求內容：
 
@@ -326,7 +326,7 @@ API 網址：https://accounts.binance.com/bapi/accounts/v2/public/authcenter/log
 
 #### Coinbase
 
-API 網址：https://login.coinbase.com/api/v1/authenticate-credentials
+API 網址：`https://login.coinbase.com/api/v1/authenticate-credentials`
 
 請求內容：
 
@@ -336,7 +336,7 @@ API 網址：https://login.coinbase.com/api/v1/authenticate-credentials
 
 #### kraken
 
-API 網址：https://www.kraken.com/api/internal/account/settings/tfa
+API 網址：`https://www.kraken.com/api/internal/account/settings/tfa`
 
 請求內容：
 
@@ -346,7 +346,7 @@ API 網址：https://www.kraken.com/api/internal/account/settings/tfa
 
 #### 玉山銀行
 
-API 網址：https://ebank.esunbank.com.tw/fco/fco08001/FCO08001_Home.faces
+API 網址：`https://ebank.esunbank.com.tw/fco/fco08001/FCO08001_Home.faces`
 
 請求內容：
 
@@ -359,7 +359,7 @@ loginform:pxsswd=8,lIRnuUxw/yStOt9QIYG2U3Gn2XkG03x4Ey/UU6JGtsbUxfRXoAv9CjE3EWerD
 
 #### 國泰世華
 
-API 網址：https://www.cathaybk.com.tw/MyBank/Quicklinks/Home/NormalSignin
+API 網址：`https://www.cathaybk.com.tw/MyBank/Quicklinks/Home/NormalSignin`
 
 請求內容：
 
@@ -371,7 +371,7 @@ Password=8cf5e1977f149ed0362629007a7f91d0efc7b12cb1895ba701c528a12b38d12f8148ca0
 
 #### 中國信託
 
-API 網址：https://www.ctbcbank.com/IB/api/adapters/IB_Adapter/resource/preLogin
+API 網址：`https://www.ctbcbank.com/IB/api/adapters/IB_Adapter/resource/preLogin`
 
 請求內容：
 
@@ -387,7 +387,7 @@ API 網址：https://www.ctbcbank.com/IB/api/adapters/IB_Adapter/resource/preLog
 
 #### 美國銀行
 
-API 網址：https://m.globalcard.bankofamerica.com/pkmslogin.form
+API 網址：`https://m.globalcard.bankofamerica.com/pkmslogin.form`
 
 請求內容：
 
@@ -398,7 +398,7 @@ password=12345678
 
 #### 新加坡星展銀行
 
-API 網址：https://internet-banking.dbs.com.sg/IB/Welcome
+API 網址：`https://internet-banking.dbs.com.sg/IB/Welcome`
 
 請求內容：
 

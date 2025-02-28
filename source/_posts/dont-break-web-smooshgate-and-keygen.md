@@ -50,7 +50,7 @@ console.log(arr.flatten()) // [1, 2, 3, 4, 5, 6, 7]
 
 詳細的使用方法可以參考 [MDN](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)，就只是多了一個參數 depth 可以讓你指定展開的深度。
 
-而 [flatMap](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap) 就是先 map 之後再 flat，熟悉 RxJS 的朋友們應該會感到滿親切的（在 RxJS 裡面又稱作 mergeMap，而且 mergeMap 比較常用，有興趣的朋友也可以參考這篇：[concatAll and concatMap rather than flatten and flatMap](https://github.com/tc39/proposal-flatMap/issues/60)）。
+而 flatMap 就是先 map 之後再 flat，熟悉 RxJS 的朋友們應該會感到滿親切的（在 RxJS 裡面又稱作 mergeMap，而且 mergeMap 比較常用，有興趣的朋友也可以參考這篇：[concatAll and concatMap rather than flatten and flatMap](https://github.com/tc39/proposal-flatMap/issues/60)）。
 
 好，這個提案看似很不錯，但到底會有什麼問題呢？
 
@@ -173,8 +173,6 @@ for (const value of elements) {
 
 ## Don’t break the Web
 
-這個網站：[Space Jam](https://www.spacejam.com/archive/spacejam/movie/jam.htm) 過了 22 年，依舊可以順利執行，就是因為在制定網頁相關新標準時都會注意到「Don’t break the Web」這個大原則。
-
 仔細想想，好像會發現 Web 的領域沒有什麼 breaking change，你以前可以用的 JS 語法現在還是可以用，只是多了一些新的東西，而不是把舊的東西改掉或者是拿掉。
 
 因為一旦出現 breaking change，就可能會有網站遭殃，像是出現 bug 甚至是整個壞掉。其實有很多網站好幾年都沒有在維護了，但我們也不應該讓它就這樣壞掉。如果今天制定新標準時有了 breaking change，最後吃虧的還是使用者，使用者只會知道網站壞了，卻不知道是為什麼壞掉。
@@ -197,7 +195,7 @@ for (const value of elements) {
 
 有聽過`<keygen>`這個標籤的請舉手一下？舉手的人麻煩大家幫他們鼓鼓掌，你很厲害，封你為冷門 HTML 標籤之王。
 
-我就算看了 [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/keygen) 上面的範例，也沒有很清楚這個標籤在幹嘛。只知道這是一個可以用在表單裡的標籤，人如其名，是用來產生與憑證相關的 key 用的。
+我就算看了 MDN 上面的範例，也沒有很清楚這個標籤在幹嘛。只知道這是一個可以用在表單裡的標籤，人如其名，是用來產生與憑證相關的 key 用的。
 
 從 MDN 給的資料 [Non-conforming features](https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features) 裡面，我們可以進一步找到其他也被淘汰的標籤，例如說：
 
@@ -455,7 +453,7 @@ var elements = [
 ];
 ```
 
-像是 applet、bgsound、blink 等等這些元素，就應該回傳 [HTMLUnknownElement](https://developer.mozilla.org/zh-TW/docs/Web/API/HTMLUnknownElement)。
+像是 applet、bgsound、blink 等等這些元素，就應該回傳 HTMLUnknownElement。
 
 ## 總結
 

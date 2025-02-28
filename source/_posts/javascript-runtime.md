@@ -36,7 +36,7 @@ console.log(atob('aGVsbG8=')) // hello
 
 雖然說在 JavaScript 裡面無論是 `atob` 還是 `btoa`，接收的參數都是字串，沒有什麼 binary，因此上面的解釋看起來有點怪，但如果你把眼光放寬，不要侷限在 JavaScript 的話，就會變得比較合理。
 
-舉例來說，base64 可以把任何二進位（binary）的資料轉成字串，這是它最有價值的地方。例如說你可能有用過 [data URI](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Basics_of_HTTP/Data_URIs)，其中一個用法就是把圖片用 base64 編碼成字串。
+舉例來說，base64 可以把任何二進位（binary）的資料轉成字串，這是它最有價值的地方。例如說你可能有用過 data URI，其中一個用法就是把圖片用 base64 編碼成字串。
 
 因此，`btoa` 代表著 binary to ASCII，也就是把任何東西用 base64 來編碼，輸出會是一個 base64 編碼過的字串，`atob` 則相反，ASCII to binary，就是把 base64	編碼過的字串還原成原始的形式。
 

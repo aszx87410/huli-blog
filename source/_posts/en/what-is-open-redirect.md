@@ -225,7 +225,7 @@ https://www.facebook.com/v11.0/dialog/oauth?
   &state={"{st=state123abc,ds=123456789}"}
 ```
 
-After the user clicks on the URL, they will be redirected to Facebook. After clicking on the authorization, they will be redirected to https://example.com/login, where they can obtain the code or token from the URL. Then, they can use this code or token with the client ID and client secret to obtain an auth token and use this auth token to represent the user to obtain data from Facebook.
+After the user clicks on the URL, they will be redirected to Facebook. After clicking on the authorization, they will be redirected to `https://example.com/login`, where they can obtain the code or token from the URL. Then, they can use this code or token with the client ID and client secret to obtain an auth token and use this auth token to represent the user to obtain data from Facebook.
 
 If the protection of `redirect_uri` is not done well, attackers can replace it with other values, such as `redirect_uri=https://huli.tw`. After the user clicks on the authorization, the verification code will be sent to my website instead of the expected website.
 

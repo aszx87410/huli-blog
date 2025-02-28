@@ -11,7 +11,7 @@ categories:
 Previously, I wrote [an article](http://huli.logdown.com/posts/294037-javascript-redux-basic-tutorial) to briefly summarize my experience in learning Redux. I still recommend the official documentation because it is super clear.
 
 However, when I was reading the official documentation before, I didn't fully understand the middleware part and got confused towards the end. This time, I re-read the official documentation on middleware and asynchronous operations, took notes while reading, and finally understood the implementation principle of middleware. As usual, I will share my experience.
-[Official documentation (Chinese version, but this article has not been translated yet)](http://camsong.github.io/redux-in-chinese/docs/advanced/Middleware.html)
+
 
 The great thing about the official documentation is that it not only teaches you how to use it, but also starts from scratch, so you know why middleware is in its current form.
 <!-- more -->
@@ -362,5 +362,3 @@ middlewares.reverse();
 
 In short, I hope this article can help some beginners who are confused like me. I still recommend everyone to read the official documentation. If there are any mistakes in my writing, please leave a comment or send me an email. Thank you.
 
-Reference:
-http://camsong.github.io/redux-in-chinese/docs/advanced/Middleware.html

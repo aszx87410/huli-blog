@@ -299,7 +299,7 @@ iframe 上有一個 csp 的屬性，可以指定 iframe 所載入的 document �
 
 你會發現新開啟的 `iframe.html` 這個頁面沒辦法執行 `alert(1)`，因為它繼承了 sandbox，而 sandbox 並沒有加上 `allow-modals` 這個屬性。
 
-再舉個例子，我們可以在網路上隨便找一個用 JS 來 render 頁面內容的網頁，像這個計算機：https://ahfarmer.github.io/calculator/
+再舉個例子，我們可以在網路上隨便找一個用 JS 來 render 頁面內容的網頁，像這個計算機：`https://ahfarmer.github.io/calculator/`
 
 直接打開是沒問題的，但如果我們用一個 sandbox iframe 打開的話：
 

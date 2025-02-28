@@ -832,9 +832,7 @@ while(1){}
 
 ### GPUSHOP2 (7 solves)
 
-這題是從去年改的，去年的解法可以參考這邊：https://github.com/ComdeyOverFlow/Google_CTF_2021/blob/main/gpushop.md
-
-我沒有很仔細看，但應該就是把某一段 path 做 URL encode 導致 proxy 沒配對到路徑之類的。
+這題是從去年改的，我沒有很仔細看，但應該就是把某一段 path 做 URL encode 導致 proxy 沒配對到路徑之類的。
 
 今年的版本把去年的問題修掉了，無論如何都先加一個 `X-Wallet: EMPTY` 的 header，所以去年的解法就沒辦法使用。
 

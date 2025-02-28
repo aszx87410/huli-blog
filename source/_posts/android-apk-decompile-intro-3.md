@@ -83,7 +83,7 @@ App 的內容很簡單，就是按下按鈕以後會發 request，只要有監�
 
 什麼是 certificate pinning 呢？如果網頁有用 https，就代表伺服器有一個 https 的憑證，而 certificate pinning 就代表 app 裡有指定某個 domain 對應到的憑證應該要是什麼，如果憑證不符，就代表有人在中間搞事，所以拒絕連線。
 
-以熱門的 library OkHttp 為例，[文件](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-certificate-pinner/)上就有寫說應該怎麼實作這個功能：
+以熱門的 library OkHttp 為例，文件上就有寫說應該怎麼實作這個功能：
 
 ``` java
 String hostname = "publicobject.com";

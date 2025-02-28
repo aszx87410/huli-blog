@@ -175,7 +175,7 @@ We are close to the end but need to address the last issue. The content of the e
 
 The idea is simple, what if we can set `innerHTML` to `document.body` instead of `<main>`? Then our payload won't be override by mithril.js
 
-There is a property called [ownerDocument](https://developer.mozilla.org/zh-TW/docs/Web/API/Node/ownerDocument), we can access `document` via this.
+There is a property called ownerDocument, we can access `document` via this.
 
 So, we can set innerHTML on body and perform XSS this way:
 

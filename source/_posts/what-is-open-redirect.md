@@ -224,7 +224,7 @@ https://www.facebook.com/v11.0/dialog/oauth?
   &state={"{st=state123abc,ds=123456789}"}
 ```
 
-使用者點擊網址後會跳到 Facebook，按下授權就會被導到 https://example.com/login 並且可以在網址中拿到 code 或是 token，接著就可以用這個搭配 client id 跟 client secret，拿到 auth token，並且用這個 auth token 代表使用者去跟 Facebook 拿取資料。
+使用者點擊網址後會跳到 Facebook，按下授權就會被導到 `https://example.com/login` 並且可以在網址中拿到 code 或是 token，接著就可以用這個搭配 client id 跟 client secret，拿到 auth token，並且用這個 auth token 代表使用者去跟 Facebook 拿取資料。
 
 如果 redirect_uri 的保護沒有做好，攻擊者就可以把它換成其他值，例如說：`redirect_uri=https://huli.tw`，這樣使用者點擊授權以後，就會把驗證用的 code 傳到我的網站，而不是預期中的網站。
 

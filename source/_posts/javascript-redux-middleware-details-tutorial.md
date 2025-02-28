@@ -13,7 +13,7 @@ categories:
 但是之前在看官方文件的時候，middleware的地方沒有完全看懂，看到後面就霧煞煞了
 這次重看了一遍官方文件講middleware跟非同步操作的地方，邊看邊做筆記，總算是把middleware的實作原理弄懂了
 依照慣例分享一下心得
-[官方文件（中譯版，但是還沒翻譯到這篇）](http://camsong.github.io/redux-in-chinese/docs/advanced/Middleware.html)
+
 
 官方文件很棒的點就是這篇不只教你怎麼用，還從頭講起，讓你知道為什麼middleware會是現在這樣的形式。
 <!-- more -->
@@ -373,8 +373,5 @@ middlewares.reverse();
 總之，希望這篇文章能幫助到一些跟我一樣迷惑的初學者
 最後還是要推薦大家去看官方文件
 如果有哪邊寫錯，還麻煩留言或是寄信跟我說，感謝大家
-
-ref:
-http://camsong.github.io/redux-in-chinese/docs/advanced/Middleware.html
 
 

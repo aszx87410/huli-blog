@@ -293,7 +293,6 @@ B 網站的話，我們假設前九次網站都沒有更新，一直到第十次
 # 參考資料
 1. [彻底弄懂 Http 缓存机制 - 基于缓存策略三要素分解法](https://mp.weixin.qq.com/s/qOMO0LIdA47j3RjhbCWUEQ)
 2. [浅谈浏览器http的缓存机制](http://www.cnblogs.com/vajoy/p/5341664.html)
-3. [使用 HTTP 缓存：Etag, Last-Modified 与 Cache-Control](http://harttle.com/2017/04/04/using-http-cache.html)
 4. [【Web缓存机制系列】1 – Web缓存的作用与类型](http://www.alloyteam.com/2012/03/web-cache-1-web-cache-overview/)
 5. [HTTP缓存控制小结](http://imweb.io/topic/5795dcb6fb312541492eda8c)
 6. [MDN - Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)

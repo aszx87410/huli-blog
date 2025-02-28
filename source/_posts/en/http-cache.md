@@ -293,7 +293,6 @@ Finally, I hope this article can help beginners better understand the HTTP cachi
 # Reference materials
 1. [Thoroughly understand the Http caching mechanism-based on the decomposition method of the three elements of caching strategy](https://mp.weixin.qq.com/s/qOMO0LIdA47j3RjhbCWUEQ)
 2. [A brief discussion on the browser's http caching mechanism](http://www.cnblogs.com/vajoy/p/5341664.html)
-3. [Using HTTP cache: Etag, Last-Modified and Cache-Control](http://harttle.com/2017/04/04/using-http-cache.html)
 4. [【Web caching mechanism series】1-Overview of Web caching](http://www.alloyteam.com/2012/03/web-cache-1-web-cache-overview/)
 5. [HTTP caching control summary](http://imweb.io/topic/5795dcb6fb312541492eda8c)
 6. [MDN - Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)

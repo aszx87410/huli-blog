@@ -79,7 +79,7 @@ Above, it is written which function you should call and what parameters you shou
 
 API integration is the same. You must have documentation to know how to integrate, otherwise you cannot integrate at all because you don't even know what parameters to pass.
 
-Let's take a look at how the [Twitch API documentation](https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api/) is written.
+Let's take a look at how the Twitch API documentation is written.
 
 It explains that you must have a `Client ID`, and the API Root URL is `https://api.twitch.tv/kraken`, etc. These are basic information related to the API. If you click on any API in the left column, you will see detailed information about each API:
 

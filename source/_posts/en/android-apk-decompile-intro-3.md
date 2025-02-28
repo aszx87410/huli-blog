@@ -83,7 +83,7 @@ If the proxy still cannot listen after the above steps, it means that the app ma
 
 What is certificate pinning? If a webpage uses https, it means that the server has an https certificate, and certificate pinning means that the app specifies what certificate should correspond to a certain domain. If the certificate does not match, it means that someone is messing with it in the middle, so the connection is rejected.
 
-Taking the popular library OkHttp as an example, the [document](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-certificate-pinner/) writes how to implement this feature:
+Taking the popular library OkHttp as an example, the document writes how to implement this feature:
 
 ``` java
 String hostname = "publicobject.com";

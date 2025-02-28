@@ -25,7 +25,7 @@ Let's go!
 開頭有講過了，我會再重新回來研究參數傳遞這個問題完全是個美麗的錯誤，我本來要寫的主題是深拷貝跟淺拷貝。
 
 在找資料的時候，我查到了這篇文：[[Javascript] 關於 JS 中的淺拷貝和深拷貝
-](http://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/)，我看了看之後發現如果我要來講深拷貝，我就必須先講解為什麼我們需要深拷貝，就要講到 Object 跟其他 Primitive types 的不同之處。
+](https://web.archive.org/web/20200220061943/http://larry850806.github.io/2016/09/20/shallow-vs-deep-copy//)，我看了看之後發現如果我要來講深拷貝，我就必須先講解為什麼我們需要深拷貝，就要講到 Object 跟其他 Primitive types 的不同之處。
 
 想到這邊，我就想到了一個老問題：JavaScript 的 Object 到底是 pass by value 還是 pass by referece？
 
@@ -430,7 +430,7 @@ call by value 會把傳進去的值複製（無論那個值是數字也好，記
 
 # 參考資料
 1. [[Javascript] 關於 JS 中的淺拷貝和深拷貝
-](http://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/)
+](https://web.archive.org/web/20200220061943/http://larry850806.github.io/2016/09/20/shallow-vs-deep-copy//)
 2. [[筆記] 談談JavaScript中by reference和by value的重要觀念](https://pjchender.blogspot.com/2016/03/javascriptby-referenceby-value.html)
 3. [重新認識 JavaScript: Day 05 JavaScript 是「傳值」或「傳址」？](https://ithelp.ithome.com.tw/articles/10191057)
 4. [Re: [問題] 請問傳參考到底是什麼?](https://www.ptt.cc/bbs/C_and_CPP/M.1245595402.A.2A1.html)
@@ -438,8 +438,6 @@ call by value 會把傳進去的值複製（無論那個值是數字也好，記
 6. [簡單介紹JavaScript參數傳遞](https://www.slideshare.net/YiTaiLin/java-script-63031051)
 7. [JavaScript 是传值调用还是传引用调用？](https://github.com/nodejh/nodejh.github.io/issues/32)
 8. [Values vs References semantics #160](https://github.com/getify/You-Dont-Know-JS/issues/160)
-9. [You Don't Know JS: Types & Grammar Chapter 2: Values
-](https://github.com/getify/You-Dont-Know-JS/blob/master/types%20%26%20grammar/ch2.md#value-vs-reference)
 10. [Parameter passing in Java - by reference or by value?](http://www.yoda.arachsys.com/java/passing.html)
 11. [Is Java “pass-by-reference” or “pass-by-value”?](https://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value)
 12. [傳值呼叫](https://openhome.cc/Gossip/Java/PassByValue.html)

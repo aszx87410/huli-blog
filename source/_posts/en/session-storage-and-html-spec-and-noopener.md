@@ -199,7 +199,7 @@ Next, you can see the Web Storage interface:
 
 It is worth noting that although the common usage is `storage.setItem` or `storage.getItem`, you can also use `storage[key] = value` and `storage[key]` directly. To delete, simply use `delete storage[key]`.
 
-If you cannot write to storage, a `QuotaExceededError` will be thrown. Chrome's documentation on [chrome.storage](https://developer.chrome.com/apps/storage) provides some related numbers.
+If you cannot write to storage, a `QuotaExceededError` will be thrown.
 
 There is also a very common phrase:
 
