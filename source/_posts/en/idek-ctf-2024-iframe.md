@@ -241,7 +241,6 @@ What if there is no bfcache? Logically, the webpage should reload, so the expect
 <iframe sandbox id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
 ```
 
-
 This means that a sandboxed iframe loads test1.
 
 However, if you actually press the back button, you'll find that the result is neither the initial sandbox + test1 nor the previous no sandbox + test2, but rather a combination of both: sandbox + test2.
@@ -277,6 +276,29 @@ In summary, remember that when you go back:
 
 1. The sandbox attribute always follows the latest page.
 2. The src will be the last loaded webpage.
+
+2025-10-10 updates:
+
+Chrome made a change in September 2025: [Enabling bfcache for Cache-Control: no-store](https://developer.chrome.com/docs/web-platform/bfcache-ccns). Chrome will enable bfcache even when HTTP caching is disabled, which causes the above test to fail.
+
+However, as the article explains, you can easily disable bfcache by opening a WebSocket connection, for example:
+
+``` html
+<body>
+  <iframe id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
+  <button onclick="loadTest2()">load test2</button>
+  <button onclick="location = 'a.html'">top level navigation</button>
+</body>
+<script>
+  // to disable bfcache
+  const ws = new WebSocket('ws://example.com');
+  console.log('run')
+  function loadTest2() {
+    f.setAttribute('sandbox', '')
+    f.src = 'data:text/html,test2:<script>document.writeln(Math.random())<\/script>'
+  }
+</script>
+```
 
 ### 3. Inheritance of CSP
 

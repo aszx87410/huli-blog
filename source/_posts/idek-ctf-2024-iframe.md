@@ -277,6 +277,29 @@ function openNoOpener(url, name) {
 1. sandbox 屬性永遠跟著最新的頁面
 2. src 會是上一次最後載入的網頁
 
+2025-10-10 更新：
+
+Chrome 在 2025 年 9 月做了一個變更：[Enabling bfcache for Cache-Control: no-store](https://developer.chrome.com/docs/web-platform/bfcache-ccns)，就算禁用 HTTP 快取也依然開啟 bfcache，導致上面的測試會失敗。
+
+但只要依照文章內所說的，隨便建立一個 websocket 連線讓 bfcache 失效即可：
+
+``` html
+<body>
+  <iframe id=f src="data:text/html,test1:<script>document.writeln(Math.random())</script>"></iframe>
+  <button onclick="loadTest2()">load test2</button>
+  <button onclick="location = 'a.html'">top level navigation</button>
+</body>
+<script>
+  // to disable bfcache
+  const ws = new WebSocket('ws://example.com');
+  console.log('run')
+  function loadTest2() {
+    f.setAttribute('sandbox', '')
+    f.src = 'data:text/html,test2:<script>document.writeln(Math.random())<\/script>'
+  }
+</script>
+```
+
 ### 3. CSP 的繼承
 
 如果是用 iframe src 的話，由於就是嵌入了另一個獨立的網頁，因此兩個網頁之間的 CSP 沒有任何關聯，不會互相影響。但如果是用 srcdoc 的話，就有繼承關係了。
