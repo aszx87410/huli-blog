@@ -19,7 +19,7 @@ photos: /img/security-of-encrypt-or-hash-password-in-client-side/cover.png
 
 先寫結論在前面給懶得看完的人：
 
-1. 前端加密或是 hash 密碼，唯一的目的就是「保護使用者的原始密碼不外流」，儘管 HTTPS 是安全的，但明文密碼依舊傳到了你的 server，誰知道你的 server log 會不會記下來，然後外洩被拿去別的服務撞庫。
+1. 前端 hash 密碼，唯一的目的就是「保護使用者的原始密碼不外流」，儘管 HTTPS 是安全的，但明文密碼依舊傳到了你的 server，誰知道你的 server log 會不會記下來，然後外洩被拿去別的服務撞庫。
 2. 如果要做的話，成本低的做法是前端搭配 server 傳來的 salt 先在使用者端把密碼 hash 一次，傳到 server 後，server 再加一次 salt 後 hash，所以前後端都要 salt + hash，防止彩虹表，也能讓 server 根本不知道 user 的原始密碼。
 3. 若是想要更安全，「讓 server 不知道使用者原始密碼也能做驗證」這件事已經有更完整的方案了，如 [Secure Remote Password (SRP) Protocol](https://proton.me/blog/encrypted-email-authentication) 或是 [OPAQUE](https://blog.cloudflare.com/opaque-oblivious-passwords/)
 
