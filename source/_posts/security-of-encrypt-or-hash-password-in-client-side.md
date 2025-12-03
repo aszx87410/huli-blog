@@ -15,6 +15,14 @@ photos: /img/security-of-encrypt-or-hash-password-in-client-side/cover.png
 
 但這一兩年接觸資安以後，我的想法有了改變，我認為前端在傳輸前把密碼加密，是有其意義的，而接下來我會詳細說明我的理由。
 
+2025/12/04 更新：
+
+先寫結論在前面給懶得看完的人：
+
+1. 前端加密或是 hash 密碼，唯一的目的就是「保護使用者的原始密碼不外流」，儘管 HTTPS 是安全的，但明文密碼依舊傳到了你的 server，誰知道你的 server log 會不會記下來，然後外洩被拿去別的服務撞庫。
+2. 如果要做的話，成本低的做法是前端搭配 server 傳來的 salt 先在使用者端把密碼 hash 一次，傳到 server 後，server 再加一次 salt 後 hash，所以前後端都要 salt + hash，防止彩虹表，也能讓 server 根本不知道 user 的原始密碼。
+3. 若是想要更安全，「讓 server 不知道使用者原始密碼也能做驗證」這件事已經有更完整的方案了，如 [Secure Remote Password (SRP) Protocol](https://proton.me/blog/encrypted-email-authentication) 或是 [OPAQUE](https://blog.cloudflare.com/opaque-oblivious-passwords/)
+
 <!-- more -->
 
 ## 定義問題
@@ -71,6 +79,8 @@ photos: /img/security-of-encrypt-or-hash-password-in-client-side/cover.png
 在這樣的前提底下，沒加密的情形就能直接被獲取密碼，而有加密的情形攻擊者只能獲取到加密過的密文而非明文。但需要注意的是既然是叫中間人攻擊，那攻擊者除了監聽你的 request 以外，也能傳送偽造的 response 給你，把前端用來加密密碼的部分換掉。
 
 因此無論密碼是否加密，攻擊者都可以拿到明文，只是如果有加密的話，攻擊者取得密碼的成本較高（需要先找到在哪邊加密的，然後把那段改掉）。
+
+（話說 HTTPS 要被中間人攻擊的前提也很難滿足就是了，一樣要使用者主動信任惡意憑證，或是 server 端的憑證被入侵）
 
 ### 攻擊者可以在網路層監聽 request 並使用漏洞取得明文
 
@@ -423,7 +433,7 @@ ENCRYPTED_PIN_BLOCK=A8C48B7572A1A53C5A66E9B43365027C7FBF14BF461F480A46781E49648A
 
 寫到這邊，可以來下結論了。
 
-第一個結論是：「在 client 端傳送密碼前先把密碼加密或是 hash，確實能夠增加安全性」
+第一個結論是：「在 client 端傳送密碼前先把密碼 hash，確實能夠增加安全性」
 
 理由是做了以後，能夠達成以下事項：
 
@@ -431,7 +441,7 @@ ENCRYPTED_PIN_BLOCK=A8C48B7572A1A53C5A66E9B43365027C7FBF14BF461F480A46781E49648A
 2. 在 Server 端，沒有任何人知道使用者的明文密碼
 3. 明文密碼不會因為人為失誤被記錄到 log 中
 
-以上都是沒有在 client 加密或是 hash 時做不到的。
+以上都是沒有在 client hash 時做不到的。
 
 而第二個結論是：「確實有些大公司有做這個機制，但是非大多數，不過在銀行業似乎是主流」
 
@@ -481,7 +491,7 @@ ENCRYPTED_PIN_BLOCK=A8C48B7572A1A53C5A66E9B43365027C7FBF14BF461F480A46781E49648A
 1. 無論如何，一定要先用 HTTPS
 2. 可以的話，能用 Passkeys 當然是最好，少掉傳統密碼的一些問題
 3. 如果你想要用很安全的方式驗證密碼，並且確保在 Server 端不會處理到明文密碼，請參考 [SRP（Secure Remote Password）](https://www.cryptologie.net/article/503/user-authentication-with-passwords-whats-srp/)協定，或是留言裡面讀者 yoyo930021 提到的 [OPAQUE](https://blog.cloudflare.com/opaque-oblivious-passwords/)
-4. 若是上述都沒有資源做的話，那在前端先把密碼做加密或是 hash 後再傳送，確實能夠增加一點安全性，但同時還是會帶來額外成本
+4. 若是上述都沒有資源做的話，那在前端先把密碼 hash 後再傳送，確實能夠增加一點安全性，但同時還是會帶來額外成本
 5. 如果你是銀行或需要較高的安全性，再來考慮要不要做這個，否則極大多數的狀況下，你不需要這個機制就夠安全了，資源投入在其他地方的效益會更大
 
 若是對這個結論有不同意見，或是有在文章中發現哪些邏輯錯誤或技術錯誤，歡迎留言指正與討論，感恩。
