@@ -233,8 +233,8 @@ window.secret = 12345
 假設現在有一段程式碼（C 語言）長這樣子：
 
 ``` c
-uint8_t arr1[16] = {1, 2, 3}; 
-uint8_t arr2[256]; 
+uint8_t array1[16] = {1, 2, 3}; 
+uint8_t array2[256]; 
 unsigned int array1_size = 16;
 
 void run(size_t x) {
@@ -247,7 +247,7 @@ size_t x = 1;
 run(x);
 ```
 
-我宣告了兩個陣列，型態是 uint8_t，所以每個陣列的元素大小都會是 1 個 byte（8 bit）。而 arr1 的長度是 16，arr2 的長度是 256。
+我宣告了兩個陣列，型態是 uint8_t，所以每個陣列的元素大小都會是 1 個 byte（8 bit）。而 array1 的長度是 16，array2 的長度是 256。
 
 接下來我有一個 function 叫做 run，會吃一個數字 x，然後判斷 x 是不是比 array1_size 小，是的話我就先把 `array1[x]` 的值取出來，然後作為索引去存取 `array2`，再把拿到的值給 y。
 
@@ -282,8 +282,8 @@ uint8_t y = array2[array1[1]];
 結合上述知識之後，我們再回來看之前那段程式碼：
 
 ``` c
-uint8_t arr1[16] = {1, 2, 3}; 
-uint8_t arr2[256]; 
+uint8_t array1[16] = {1, 2, 3}; 
+uint8_t array2[256]; 
 unsigned int array1_size = 16;
 
 void run(size_t x) {
@@ -507,7 +507,7 @@ COEP（Cross-Origin-Embedder-Policy）這個 header 有兩個值：
 
 第一個是預設值，就是沒有任何限制，第二個則是跟我們前面提到的 CORP(Cross-Origin-Resource-Policy) 有關，如果用了這個 require-corp 的話，就代表告訴瀏覽器說：「頁面上所有我載入的資源，都必須有 CORP 這個 header 的存在（或是 CORS），而且是合法的」
 
-現在假設我們有個網站 `a.example.com`，我們想讓它變成 cross-rogin isolated state，因此幫他加上一個 header：`Cross-Origin-Embedder-Policy: require-corp`，然後網頁裡面引入一個資源：
+現在假設我們有個網站 `a.example.com`，我們想讓它變成 cross-origin isolated state，因此幫他加上一個 header：`Cross-Origin-Embedder-Policy: require-corp`，然後網頁裡面引入一個資源：
 
 ``` html
 <img src="http://b.example.com/logo.jpg">
