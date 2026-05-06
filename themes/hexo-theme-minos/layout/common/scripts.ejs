@@ -1,0 +1,10 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+
+<% if (has_config('plugins')) { %>
+    <% for (let plugin in get_config('plugins')) { %>
+    <%- partial('plugins/' + plugin, {head: false}) %>
+    <% } %>
+<% } %>
+
+<%- js('js/script.js?v=4') %>

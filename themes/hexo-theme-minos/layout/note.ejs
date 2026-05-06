@@ -1,0 +1,27 @@
+<section class="section notes-page">
+    <div class="container">
+        <% const permalink = note_permalink(page); %>
+        <% const noteHref = url_for(page.path).replace('index.html', ''); %>
+        <article class="note-card note-detail">
+            <header class="note-card-header">
+                <a class="note-date" href="<%- noteHref %>">
+                    <time datetime="<%= date_xml(page.date) %>"><%= format_date_full(page.date) %></time>
+                </a>
+                <h1 class="note-title title is-3"><%= page.title %></h1>
+            </header>
+            <div class="note-content content">
+                <%- page.content %>
+            </div>
+            <footer class="note-actions">
+                <button class="note-share-button" type="button" data-share-title="<%= page.title %>" data-share-url="<%- permalink %>">分享</button>
+                <a href="<%- url_for('/notes/') %>">所有隨意聊</a>
+            </footer>
+        </article>
+        <% if (get_config('comments') && has_config('comment.type')) { %>
+        <section class="note-comments comments">
+            <h2 class="title is-4"><%= __('article.comments') %></h2>
+            <%- partial('comment/' + get_config('comment.type')) %>
+        </section>
+        <% } %>
+    </div>
+</section>

@@ -1,0 +1,98 @@
+<% function is_same_link(a, b) {
+    function santize(url) {
+        let paths = url.replace(/(^\w+:|^)\/\//, '').split('#')[0].split('/');
+        if (paths.length > 0 && paths[paths.length - 1].trim() === 'index.html') {
+            paths = paths.slice(0, paths.length - 1)
+        }
+        return paths.join('/');
+    }
+
+    return santize(url_for(a)) == santize(url_for(b));
+} %>
+<% const isNotesPage = is_notes_page() %>
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="<%- url_for('/' + (!is_default_language(page_language()) ? page_language() : '')) %>">
+                <% if (has_config('logo') && get_config('logo')) { %>
+                    <% if (has_config('logo.text') && get_config('logo.text')) { %>
+                    <%= get_config('logo.text') %>
+                    <% } else { %>
+                    <img src="<%- url_for(get_config('logo')) %>" alt="" height="28">
+                    <% } %>
+                <% } else { %>
+                <img src="<%- url_for('images/logo.png') %>" alt="" height="28">
+                <% } %>
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <% if (has_config('menu')) { %>
+        <div class="navbar-menu navbar-start">
+            <% for (let i in get_config('menu')) { let menu = get_config('menu')[i]; %>
+            <a class="navbar-item <% if (typeof(page.path) !== 'undefined' && is_same_link(menu, page.path)) { %>is-active<% } %>"
+               href="<%- url_for(menu) %>"><%= i %></a>
+            <% } %>
+        </div>
+        <% } %>
+        <div class="navbar-menu navbar-end">
+            <% if (has_config('search')) { %>
+            <a class="navbar-item search" title="<%= __('nav.search') %>" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            <% } %>
+            <% if (!isNotesPage && has_config('toc') && get_config('toc') === true && typeof(page.content) !== 'undefined') { %>
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="<%= __('nav.toc') %>">
+                    <%= __('nav.toc') %>
+                </a>
+                <div class="navbar-dropdown">
+                    <% let lastHeading = null; %>
+                    <% for (let heading of toc_list(page.content)) { %>
+                    <% if (lastHeading !== null && heading[0].split('.')[0] !== lastHeading) { %>
+                    <hr class="navbar-divider">
+                    <% } %>
+                    <% lastHeading = heading[0].split('.')[0]; %>
+                    <a class="navbar-item" href="#<%= heading[1] %>"><%= heading[0] %>&nbsp;&nbsp;<%- heading[3] === 1 ? '<b>' : '' %><%= heading[2] %><%- heading[3] === 1 ? '</b>' : '' %></a>
+                    <% } %>
+                </div>
+            </div>
+            <% } %>
+            <% if (has_config('navbar_links')) {
+                for (let name in get_config('navbar_links')) {
+                    let link = get_config('navbar_links')[name]; %>
+            <a class="navbar-item" target="_blank" title="<%= name %>" href="<%= typeof(link) === 'string' ? link : link.url%>">
+                <% if (typeof(link) === 'string') { %>
+                <%= name %>
+                <% } else { %>
+                <i class="<%= link.icon %>"></i>
+                <% } %>
+            </a>
+               <% } %>
+            <% } %>
+            <a class="navbar-item btn-dark-mode" title="dark-mode" href="#">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="15" height="15" viewBox="0 0 256 256" xml:space="preserve">
+                    <defs>
+                    </defs>
+                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+                        <path d="M 87.823 60.7 c -0.463 -0.423 -1.142 -0.506 -1.695 -0.214 c -15.834 8.398 -35.266 2.812 -44.232 -12.718 c -8.966 -15.53 -4.09 -35.149 11.101 -44.665 c 0.531 -0.332 0.796 -0.963 0.661 -1.574 c -0.134 -0.612 -0.638 -1.074 -1.259 -1.153 c -9.843 -1.265 -19.59 0.692 -28.193 5.66 C 13.8 12.041 6.356 21.743 3.246 33.35 S 1.732 57.08 7.741 67.487 c 6.008 10.407 15.709 17.851 27.316 20.961 C 38.933 89.486 42.866 90 46.774 90 c 7.795 0 15.489 -2.044 22.42 -6.046 c 8.601 -4.966 15.171 -12.43 18.997 -21.586 C 88.433 61.79 88.285 61.123 87.823 60.7 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #ffa716; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                    </g>
+                    </svg>
+                </div>
+            </a>
+            <% if (!isNotesPage) { %>
+            <% if (page_language() === 'en') { %>
+               <a class="navbar-item" href="<%= url_for(i18n_path('zh-tw')) %>">中文</a>
+            <% } else { %>
+                <a class="navbar-item" href="<%= url_for(i18n_path('en')) %>">English</a>
+            <% } %>
+            <% } %>
+            
+
+        </div>
+    </div>
+</nav>

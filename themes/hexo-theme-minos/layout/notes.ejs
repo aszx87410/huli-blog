@@ -1,0 +1,75 @@
+<section class="section notes-page">
+    <div class="container">
+        <%
+            const currentPage = page.currentPage || 1;
+            const totalPages = page.totalPages || 1;
+            const totalNotes = page.totalNotes || (page.notes ? page.notes.length : 0);
+            const pageHref = function (pageNumber) {
+                return pageNumber === 1
+                    ? url_for('/notes/')
+                    : url_for('/notes/page/' + pageNumber + '/');
+            };
+        %>
+        <header class="notes-header">
+            <h1 class="title is-3">隨意聊</h1>
+            <p>有別於其他的長文，這裡都是比較隨意寫的短文。原本是發在<a href="https://www.facebook.com/huli.blog" target="_blank">臉書粉專</a>，但都藏在臉書裡面有點可惜，索性搬一份到部落格來，對不用臉書的人也更友善。</p>
+            <div class="notes-meta">
+                <span>共 <%= totalNotes %> 篇</span>
+                <% if (totalPages > 1) { %>
+                    <span>第 <%= currentPage %> / <%= totalPages %> 頁</span>
+                <% } %>
+                <a class="notes-rss-link" href="<%- url_for('/notes/atom.xml') %>">RSS 訂閱</a>
+            </div>
+        </header>
+        <div class="notes-feed">
+        <% if (page.notes && page.notes.length) { %>
+            <% for (let note of page.notes) { %>
+            <% const permalink = note_permalink(note); %>
+            <% const noteHref = url_for(note.path).replace('index.html', ''); %>
+            <% const noteId = note.source.slice('notes/'.length, -'.md'.length); %>
+            <article class="note-card" id="<%= noteId %>">
+                <header class="note-card-header">
+                    <a class="note-date" href="<%- noteHref %>">
+                        <time datetime="<%= date_xml(note.date) %>"><%= format_date_full(note.date) %></time>
+                    </a>
+                    <h2 class="note-title">
+                        <a href="<%- noteHref %>"><%= note.title %></a>
+                    </h2>
+                </header>
+                <div class="note-content content">
+                    <%- note.content %>
+                </div>
+                <footer class="note-actions">
+                    <button class="note-share-button" type="button" data-share-title="<%= note.title %>" data-share-url="<%- permalink %>">分享</button>
+                </footer>
+            </article>
+            <% } %>
+        <% } else { %>
+            <p class="notes-empty">還沒有隨意聊。</p>
+        <% } %>
+        </div>
+        <% if (totalPages > 1) { %>
+        <nav class="notes-pagination" aria-label="隨意聊分頁">
+            <% if (currentPage > 1) { %>
+                <a class="notes-page-link" href="<%- pageHref(currentPage - 1) %>">上一頁</a>
+            <% } else { %>
+                <span class="notes-page-link is-disabled">上一頁</span>
+            <% } %>
+            <div class="notes-page-numbers">
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <% if (i === currentPage) { %>
+                        <span class="notes-page-number is-current"><%= i %></span>
+                    <% } else { %>
+                        <a class="notes-page-number" href="<%- pageHref(i) %>"><%= i %></a>
+                    <% } %>
+                <% } %>
+            </div>
+            <% if (currentPage < totalPages) { %>
+                <a class="notes-page-link" href="<%- pageHref(currentPage + 1) %>">下一頁</a>
+            <% } else { %>
+                <span class="notes-page-link is-disabled">下一頁</span>
+            <% } %>
+        </nav>
+        <% } %>
+    </div>
+</section>

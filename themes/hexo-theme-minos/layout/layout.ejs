@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top" lang="<%= page_language(page) %>">
+<head>
+    <%- partial('common/head') %>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem('dark-mode')) {
+            if (localStorage.getItem('dark-mode') === 'true') {
+                document.body.classList.add('dark-mode')
+            }
+        } else {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark-mode')
+            }
+        }
+    </script>
+    <%- partial('common/navbar', { page }) %>
+    <%- body %>
+    <%- partial('common/footer') %>
+    <%- partial('common/scripts') %>
+
+    <% if (has_config('search.type')) { %>
+    <%- partial('search/' + get_config('search.type')) %>
+    <% } %>
+</body>
+</html>

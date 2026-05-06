@@ -1,0 +1,91 @@
+<meta charset="utf-8">
+<title><%= page_title() %></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<% const pageLanguage = page_language(page) %>
+<% const isNotesPage = is_notes_page() %>
+<% const languages = display_languages();
+if (languages.length > 1 && !isNotesPage) {
+    const currentHref = url_for(page.path || '');
+%>
+<link href="<%= (config.url + currentHref).replace('index.html','') %>" rel="alternate" hreflang="<%= rfc5646(pageLanguage) %>" />
+
+<%
+    const defaultHref = url_for(i18n_path("zh-tw"));
+%>
+<link href="<%= (config.url + defaultHref).replace('index.html','') %>" rel="alternate" hreflang="x-default" />
+
+<%
+    languages.forEach((language) => {
+        if (language !== 'default' && pageLanguage !== language) { 
+            const href = url_for(i18n_path(language));
+%>
+<link href="<%= (config.url + href).replace('index.html','') %>" rel="alternate" hreflang="<%= rfc5646(language) %>" />
+    <% }
+    });
+}  %>
+
+<% if (!page.title) { %>
+    <% if (pageLanguage === 'zh-tw') { %>
+    <meta name="description" content="<%- 'Huli 的技術部落格，寫關於前端、JavaScript、資安以及各種技術議題。A tech blog about front-end and security' %>">
+    <% } else { %>
+    <meta name="description" content="<%- 'A tech blog about Front-end, JavaScript, and security' %>">   
+    <% } %>
+<% } %>
+
+<% const canonicalHref = has_config('canonical') ? get_config('canonical') : (page.path ? (config.url + url_for(page.path)).replace('index.html','') : '') %>
+<% if (has_config('canonical')) { %>
+<link rel="canonical" href="<%- canonicalHref %>">
+<% } else { %>
+	    <% if(page.path) { %>
+	<link rel="canonical" href="<%= canonicalHref %>">
+	    <% } %>
+<% } %>
+
+<% if (has_config('keywords')) { %>
+<meta name="keywords" content="<%= get_config('keywords') %>">
+<% } %>
+
+<% if (has_config('open_graph')) { %>
+    <%- open_graph({
+        twitter_card: 'summary_large_image',
+        twitter_id: get_config('open_graph.twitter_id', ''),
+        twitter_site: get_config('open_graph.twitter_site', ''),
+	        google_plus: get_config('open_graph.google_plus', ''),
+	        fb_admins: get_config('open_graph.fb_admins', ''),
+	        fb_app_id: get_config('open_graph.fb_app_id', ''),
+	        url: canonicalHref
+	    }) %>
+<% } %>
+
+<% if (!isNotesPage && has_config('rss')) { %>
+<link rel="alternative" href="<%- get_config('rss') %>" title="<%= get_config('title') %>" type="application/atom+xml">
+<% } %>
+<% if (isNotesPage) { %>
+<link rel="alternate" href="<%- url_for('/notes/atom.xml') %>" title="Huli 隨意聊" type="application/atom+xml">
+<% } %>
+
+<% if (has_config('favicon')) { %>
+<link rel="icon" href="<%- get_config('favicon') %>">
+<% } %>
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+
+<%- css('css/bulma.css?v=2') %>
+
+<% if (!(has_config('plugins.gallery') && get_config('plugins.gallery') === false)) { %>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<% } %>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/<%= get_config('article.highlight', 'prism-tomorrow') %>.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+<%- css('css/style.css?v=7') %>
+
+<% /* NOTE: disable fontawesome
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>*/ %>
+
+<% if (has_config('plugins')) { %>
+    <% for (let plugin in get_config('plugins')) { %>
+    <%- partial('plugins/' + plugin, {head: true}) %>
+    <% } %>
+<% } %>

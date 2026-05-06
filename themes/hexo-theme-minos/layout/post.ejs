@@ -1,0 +1,14 @@
+<section class="section">
+    <div class="container">
+      <% if(page_language() === 'zh-tw') { %>
+      <div data-nosnippet class="self-notice">
+        如果有什麼想回饋的（如對文章或部落格的感想），除了留言以外也能填表單跟我說：<a href="https://forms.gle/XuWyRC5qtSd2ANta8" target="_blank">表單連結</a>。
+      </div>
+      <% } else { %>
+      <div data-nosnippet class="self-notice">
+        If you have any thoughts on my blog or articles and you want to let me know, you can either post a comment below(public) or tell me via this <a href="https://forms.gle/SjJZ4cnNs6NnjXQG8" target="_blank">feedback form</a>
+      </div>
+      <% } %>
+    <%- partial('common/article', { post: page, index: false }) %>
+    </div>
+</section>
