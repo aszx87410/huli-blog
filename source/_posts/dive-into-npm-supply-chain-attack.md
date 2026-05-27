@@ -398,20 +398,6 @@ allow-remote=none
 
 有需要的話可以自己再調整，例如說需要用到 git 就 `allow-git=root` 之類的。
 
-不過呢，雖然 pnpm 預設的防護都有做，但有一個小細節需要注意。
-
-假設你今天拿到了一個新的專案，裡面有 lockfile，紀錄某個套件的 integrity，但你安裝這套件的時候，pnpm 發現 npm 回傳的 integrity 跟你的 lockfile 不同，這時 pnpm 會覺得是 lockfile 壞掉了，並自動修正：
-
-> [ERR_PNPM_TARBALL_INTEGRITY] The lockfile is broken! Resolution step will be performed to fix it.
-
-結論就是套件會被重新下載（儘管 integrity 不同），然後 lockfile 中的 integrity 會被更新。
-
-換句話說，若是 npm registry 被駭了，同個版本的東西被換掉，hash 變不一樣，那 pnpm 最後還是會相信 registry 的那一份，而不是本地的 lockfile。
-
-如果你想要相信本地的 lockfile，要加個 `--frozen-lockfile`，就不會下載也不會改你的 lockfile。
-
-npm 的話倒是沒這問題，如果 hash 跟 lockfile 不同，會直接報錯。
-
 ## 總結
 
 在一般使用電腦時，大家都會知道不要隨便下載與安裝來路不明的軟體，但與此同時，有些人卻又隨意裝著 VScode 的擴充套件、GitHub 上的開源項目或是開發時會用到的套件，忽略了這些也都有可能出問題。
@@ -436,7 +422,7 @@ allow-git=none
 allow-remote=none
 ```
 
-用 pnpm 就是更新到最新版本，然後要安裝套件時加個 `--frozen-lockfile`。
+用 pnpm 就是更新到最新版本，就能享有預設的保護。
 
 若是想要更安全，可以用之前提過的 [sfw](https://socket.dev/features/firewall)，多加一層防護。
 

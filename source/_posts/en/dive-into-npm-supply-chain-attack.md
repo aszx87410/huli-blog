@@ -391,21 +391,7 @@ allow-git=none
 allow-remote=none
 ```  
 
-If needed, you can adjust it yourself, for example, if you need to use git, you can set `allow-git=root` and so on.  
-
-However, even though pnpm has default protections in place, there is a small detail to note.  
-
-Suppose you receive a new project that contains a lockfile recording the integrity of a certain package. When you install this package, pnpm finds that the integrity returned by npm is different from your lockfile. At this point, pnpm will assume that the lockfile is broken and will automatically correct it:  
-
-> [ERR_PNPM_TARBALL_INTEGRITY] The lockfile is broken! Resolution step will be performed to fix it.  
-
-The conclusion is that the package will be re-downloaded (even though the integrity is different), and the integrity in the lockfile will be updated.  
-
-In other words, if the npm registry is hacked and the same version of something is replaced, resulting in a different hash, pnpm will ultimately trust the version from the registry rather than the local lockfile.  
-
-If you want to trust the local lockfile, you need to add `--frozen-lockfile`, which will prevent downloading and modifying your lockfile.  
-
-On the other hand, npm does not have this issue; if the hash is different from the lockfile, it will report an error directly.  
+If needed, you can adjust it yourself, for example, if you need to use git, you can set `allow-git=root` and so on.   
 
 ## Summary  
 
@@ -424,7 +410,7 @@ allow-git=none
 allow-remote=none
 ```  
 
-If using pnpm, update to the latest version, and when installing packages, add `--frozen-lockfile`.  
+If using pnpm, just update to the latest version and that's all. 
 
 If you want to be even safer, you can use the previously mentioned [sfw](https://socket.dev/features/firewall) to add an extra layer of protection.  
 
