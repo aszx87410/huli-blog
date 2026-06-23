@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DNS cache expiry demo</title>
+  <link rel="stylesheet" href="./dns-demo.css">
+  <style>
+    .guess-demo .dns-stage {
+      --cycle: 6.4s;
+    }
+
+    .guess-demo .dns-line {
+      top: 50%;
+      width: 54%;
+    }
+
+    .guess-wall {
+      position: absolute;
+      left: 72%;
+      top: 50%;
+      z-index: 4;
+      width: 8px;
+      height: 118px;
+      border: 2px solid var(--line-strong);
+      border-radius: 999px;
+      background: var(--panel);
+      transform: translate(-50%, -50%);
+    }
+
+    .guess-wall::before,
+    .guess-wall::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 2px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--bad);
+      transform-origin: center;
+    }
+
+    .guess-wall::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .guess-wall::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    .guess-packet {
+      position: absolute;
+      left: var(--from-x);
+      top: var(--from-y);
+      z-index: 5;
+      min-width: 48px;
+      padding: 6px 9px;
+      border: 2px solid var(--bad);
+      border-radius: 7px;
+      background: var(--bad-bg);
+      color: var(--ink);
+      font-size: calc(var(--dns-demo-font) * 0.82);
+      font-weight: 780;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      animation: guess-packet var(--cycle) linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .guess-packet.is-hit {
+      min-width: 56px;
+      border-color: var(--answer);
+      background: var(--answer-bg);
+      animation-name: guess-packet-hit;
+    }
+
+    .guess-counter {
+      position: absolute;
+      left: 50%;
+      top: 86%;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--panel) 90%, var(--canvas));
+      color: var(--muted);
+      font-size: calc(var(--dns-demo-font) * 0.78);
+      font-weight: 760;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+    }
+
+    @keyframes guess-packet {
+      0% {
+        left: var(--from-x);
+        top: var(--from-y);
+        opacity: 0;
+      }
+      4%,
+      15% {
+        opacity: 1;
+      }
+      18% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 1;
+      }
+      22%,
+      100% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 0;
+      }
+    }
+
+    @keyframes guess-packet-hit {
+      0% {
+        left: var(--from-x);
+        top: var(--from-y);
+        opacity: 0;
+      }
+      4%,
+      15% {
+        opacity: 1;
+      }
+      18% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 1;
+      }
+      24%,
+      100% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .guess-demo .dns-line {
+        width: 48%;
+      }
+
+      .guess-wall {
+        left: 70%;
+      }
+
+      .guess-packet {
+        min-width: 42px;
+        padding: 4px 6px;
+        font-size: calc(var(--dns-demo-font) * 0.72);
+      }
+
+      .guess-counter {
+        top: 88%;
+        padding: 6px 8px;
+        font-size: calc(var(--dns-demo-font) * 0.7);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="dns-demo guess-demo" style="--stage-h: 280px; --stage-h-mobile: 320px;">
+    <section class="dns-stage" aria-live="polite">
+      <div class="dns-line" style="--x: 24%; --y: 50%; --w: 54%;"></div>
+
+      <div class="dns-node" style="--x: 82%; --y: 50%; --node-w: 116px;">
+        <svg class="dns-icon dns-icon-cloud" viewBox="0 0 120 78" aria-hidden="true" focusable="false">
+          <path d="M30 58 H91 C104 58 113 50 113 39 C113 28 104 20 92 20 C87 10 76 6 65 9 C56 3 42 6 35 17 C21 18 10 29 10 43 C10 52 18 58 30 58 Z"></path>
+        </svg>
+        <p class="dns-node-label" data-i18n="resolver"></p>
+      </div>
+
+      <div class="dns-node" style="--x: 16%; --y: 50%; --node-w: 110px;">
+        <svg class="dns-icon dns-icon-line" viewBox="0 0 64 54" aria-hidden="true" focusable="false">
+          <path d="M32 6 55 47H9z"></path>
+          <path d="M32 21v11"></path>
+          <circle cx="32" cy="39" r="1.5"></circle>
+        </svg>
+        <p class="dns-node-label" data-i18n="attacker"></p>
+      </div>
+
+      <div class="guess-wall" aria-hidden="true"></div>
+
+      <div class="guess-packet" style="--from-x: 23%; --from-y: 30%; --to-x: 70%; --to-y: 30%; --delay: 0s;">17</div>
+      <div class="guess-packet" style="--from-x: 23%; --from-y: 35%; --to-x: 70%; --to-y: 35%; --delay: 0.52s;">83</div>
+      <div class="guess-packet" style="--from-x: 23%; --from-y: 40%; --to-x: 70%; --to-y: 40%; --delay: 1.04s;">24</div>
+      <div class="guess-packet" style="--from-x: 23%; --from-y: 45%; --to-x: 70%; --to-y: 45%; --delay: 1.56s;">91</div>
+      <div class="guess-packet" style="--from-x: 23%; --from-y: 50%; --to-x: 70%; --to-y: 50%; --delay: 2.08s;">7</div>
+      <div class="guess-packet" style="--from-x: 23%; --from-y: 55%; --to-x: 70%; --to-y: 55%; --delay: 2.6s;">38</div>
+      <div class="guess-packet" style="--from-x: 23%; --from-y: 60%; --to-x: 70%; --to-y: 60%; --delay: 3.12s;">62</div>
+      <div class="guess-packet" style="--from-x: 23%; --from-y: 65%; --to-x: 70%; --to-y: 65%; --delay: 3.64s;">99</div>
+      <div class="guess-packet" style="--from-x: 23%; --from-y: 70%; --to-x: 70%; --to-y: 70%; --delay: 4.16s;">45</div>
+      <div class="guess-packet is-hit" style="--from-x: 23%; --from-y: 50%; --to-x: 78%; --to-y: 37%; --delay: 4.68s;">56</div>
+
+      <div class="guess-counter">
+        <span data-i18n="guessSummary"></span>
+      </div>
+    </section>
+  </main>
+
+  <script src="./dns-demo.js"></script>
+  <script>
+    DnsDemo.start({
+      steps: 1,
+      autoplay: false,
+      copy: {
+        zh: {
+          resolver: "DNS resolver",
+          attacker: "攻擊者",
+          guessSummary: "猜幾萬次才有一個成功"
+        },
+        en: {
+          resolver: "DNS resolver",
+          attacker: "Attacker",
+          guessSummary: "Tens of thousands of guesses for one success"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

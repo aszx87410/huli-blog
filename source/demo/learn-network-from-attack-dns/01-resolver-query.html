@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DNS resolver demo</title>
+  <link rel="stylesheet" href="./dns-demo.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --canvas: #fbf8f1;
+      --panel: #fffdfa;
+      --ink: #2a3139;
+      --muted: #6f7680;
+      --line: #d9d0c3;
+      --line-strong: #3b4652;
+      --query: #b36a18;
+      --query-bg: #fff6e6;
+      --answer: #167765;
+      --answer-bg: #eef9f5;
+      --control: #f1ebe0;
+      --control-hover: #e7dfd1;
+      --focus: #7357e8;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --canvas: #101316;
+      --panel: #171a1f;
+      --ink: #f1eee7;
+      --muted: #a9adb4;
+      --line: #3b424b;
+      --line-strong: #d8dde4;
+      --query: #f0b15b;
+      --query-bg: #2a2115;
+      --answer: #75d4c3;
+      --answer-bg: #142521;
+      --control: #24282e;
+      --control-hover: #303640;
+      --focus: #c2b7ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .demo {
+      width: min(100%, 680px);
+      margin: 0 auto;
+      padding: 6px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .stage {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .track {
+      position: absolute;
+      left: 28%;
+      right: 28%;
+      z-index: 1;
+      height: 1px;
+      background-image: linear-gradient(90deg, var(--line) 58%, transparent 0);
+      background-size: 14px 1px;
+      background-repeat: repeat-x;
+    }
+
+    .track-query {
+      top: 82px;
+    }
+
+    .track-answer {
+      top: 124px;
+    }
+
+    .node {
+      position: absolute;
+      z-index: 5;
+      top: 99px;
+      width: 118px;
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      transform: translateY(-50%);
+      color: var(--line-strong);
+    }
+
+    .node-computer {
+      left: max(14px, 7%);
+    }
+
+    .node-resolver {
+      right: max(14px, 7%);
+    }
+
+    .computer {
+      position: relative;
+      width: 56px;
+      height: 44px;
+    }
+
+    .computer-screen {
+      position: absolute;
+      inset: 0 4px 12px;
+      border: 2px solid currentColor;
+      border-radius: 6px;
+      background: var(--panel);
+    }
+
+    .computer-screen::before,
+    .computer-screen::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      opacity: 0.44;
+    }
+
+    .computer-screen::before {
+      top: 10px;
+    }
+
+    .computer-screen::after {
+      top: 18px;
+      right: 20px;
+    }
+
+    .computer-stand {
+      position: absolute;
+      left: 25px;
+      bottom: 4px;
+      width: 6px;
+      height: 10px;
+      border-left: 2px solid currentColor;
+      border-right: 2px solid currentColor;
+    }
+
+    .computer-base {
+      position: absolute;
+      left: 15px;
+      right: 15px;
+      bottom: 2px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    .cloud {
+      width: 70px;
+      height: 46px;
+      overflow: visible;
+    }
+
+    .cloud path {
+      fill: var(--panel);
+      stroke: currentColor;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .label {
+      margin: 0;
+      color: var(--ink);
+      font-size: calc(var(--dns-demo-font) * 0.78);
+      font-weight: 760;
+      line-height: 1.2;
+      text-align: center;
+      letter-spacing: 0;
+    }
+
+    .packet {
+      position: absolute;
+      z-index: 3;
+      left: 50%;
+      top: 82px;
+      max-width: min(190px, 46vw);
+      padding: 5px 9px;
+      border: 2px solid var(--query);
+      border-radius: 7px;
+      background: var(--query-bg);
+      color: var(--ink);
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.06);
+      font-size: calc(var(--dns-demo-font) * 0.78);
+      font-weight: 760;
+      line-height: 1.25;
+      text-align: center;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .packet[data-kind="answer"] {
+      border-color: var(--answer);
+      background: var(--answer-bg);
+    }
+
+    .packet[hidden] {
+      display: none;
+    }
+
+    .packet-query {
+      top: 82px;
+      animation: query-flight 1.2s cubic-bezier(.42, 0, .2, 1) forwards;
+    }
+
+    .packet-answer {
+      top: 124px;
+      animation: answer-flight 1.2s cubic-bezier(.42, 0, .2, 1) forwards;
+    }
+
+    .packet-parked {
+      left: 58%;
+      top: 82px;
+      animation: none;
+    }
+
+    .lookup {
+      position: absolute;
+      z-index: 6;
+      right: max(48px, 12%);
+      top: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--panel) 92%, var(--canvas));
+      color: var(--ink);
+      transform: translateX(50%);
+    }
+
+    .lookup[hidden] {
+      display: none;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--line);
+      border-top-color: var(--focus);
+      border-radius: 50%;
+      animation: spin 0.85s linear infinite;
+    }
+
+    .lookup-text {
+      color: var(--muted);
+      font-size: calc(var(--dns-demo-font) * 0.68);
+      font-weight: 760;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .controls {
+      height: 34px;
+      display: grid;
+      grid-template-columns: 34px 1fr 34px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .button {
+      width: 34px;
+      height: 34px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: var(--control);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: var(--control-hover);
+    }
+
+    .button:focus-visible,
+    .dot:focus-visible {
+      outline: 1px solid var(--focus);
+      outline-offset: 1px;
+    }
+
+    .button:disabled {
+      cursor: default;
+      opacity: 0.42;
+    }
+
+    .button svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .progress {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 34px;
+      height: 6px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: var(--line);
+      cursor: pointer;
+    }
+
+    .dot.is-active {
+      background: var(--focus);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @keyframes query-flight {
+      0% {
+        left: 38%;
+        opacity: 0;
+      }
+      100% {
+        left: 58%;
+        opacity: 1;
+      }
+    }
+
+    @keyframes answer-flight {
+      0% {
+        left: 58%;
+        opacity: 0;
+      }
+      100% {
+        left: 38%;
+        opacity: 1;
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .demo {
+        padding: 6px;
+      }
+
+      .stage {
+        height: 220px;
+      }
+
+      .track {
+        left: 31%;
+        right: 31%;
+      }
+
+      .track-query {
+        top: 90px;
+      }
+
+      .track-answer {
+        top: 136px;
+      }
+
+      .node {
+        top: 113px;
+        width: 96px;
+      }
+
+      .node-computer {
+        left: 8px;
+      }
+
+      .node-resolver {
+        right: 8px;
+      }
+
+      .label {
+        font-size: calc(var(--dns-demo-font) * 0.72);
+      }
+
+      .computer {
+        width: 50px;
+        height: 40px;
+      }
+
+      .cloud {
+        width: 62px;
+        height: 42px;
+      }
+
+      .packet {
+        max-width: min(160px, 44vw);
+        padding: 4px 7px;
+        font-size: calc(var(--dns-demo-font) * 0.7);
+      }
+
+      .packet-query,
+      .packet-parked {
+        top: 90px;
+      }
+
+      .packet-answer {
+        top: 136px;
+      }
+
+      .packet-parked {
+        left: 52%;
+      }
+
+      .lookup {
+        top: 18px;
+        right: 50px;
+      }
+
+      .dot {
+        width: 28px;
+      }
+
+      @keyframes query-flight {
+        0% {
+          left: 45%;
+          opacity: 0;
+        }
+        100% {
+          left: 52%;
+          opacity: 1;
+        }
+      }
+
+      @keyframes answer-flight {
+        0% {
+          left: 52%;
+          opacity: 0;
+        }
+        100% {
+          left: 45%;
+          opacity: 1;
+        }
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="demo">
+    <section class="stage" aria-live="polite">
+      <div class="track track-query" aria-hidden="true"></div>
+      <div class="track track-answer" aria-hidden="true"></div>
+
+      <div class="node node-computer">
+        <div class="computer" aria-hidden="true">
+          <div class="computer-screen"></div>
+          <div class="computer-stand"></div>
+          <div class="computer-base"></div>
+        </div>
+        <p class="label" data-i18n="computer"></p>
+      </div>
+
+      <div class="node node-resolver">
+        <svg class="cloud" viewBox="0 0 120 78" aria-hidden="true" focusable="false">
+          <path d="M30 58 H91 C104 58 113 50 113 39 C113 28 104 20 92 20 C87 10 76 6 65 9 C56 3 42 6 35 17 C21 18 10 29 10 43 C10 52 18 58 30 58 Z"></path>
+        </svg>
+        <p class="label" data-i18n="resolver"></p>
+      </div>
+
+      <div class="packet" data-packet hidden></div>
+
+      <div class="lookup" data-lookup hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <div class="lookup-text" data-i18n="lookupText"></div>
+      </div>
+    </section>
+
+    <nav class="controls" aria-label="Demo controls">
+      <button class="button" type="button" data-prev>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 5 8 12l7 7"></path>
+        </svg>
+        <span class="sr-only" data-i18n="prev"></span>
+      </button>
+
+      <div class="progress" data-dots></div>
+
+      <button class="button" type="button" data-next>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m9 5 7 7-7 7"></path>
+        </svg>
+        <span class="sr-only" data-i18n="next"></span>
+      </button>
+    </nav>
+  </main>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+
+      function normalizeLang(value) {
+        return /^en\b/i.test(value || "") ? "en" : "zh";
+      }
+
+      function readTheme() {
+        var explicit = params.get("theme") || params.get("mode") || params.get("dark");
+        if (explicit) {
+          return /^(1|true|yes|dark)$/i.test(explicit) ? "dark" : "light";
+        }
+
+        return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+
+      var lang = normalizeLang(params.get("lang") || params.get("language") || "");
+      var theme = readTheme();
+      document.documentElement.lang = lang === "en" ? "en" : "zh-TW";
+      document.documentElement.dataset.theme = theme;
+
+      var copy = {
+        zh: {
+          computer: "你的電腦",
+          resolver: "DNS resolver",
+          lookupText: "查詢中",
+          prev: "上一步",
+          next: "下一步",
+          queryText: "blog.huli.tw 在哪？",
+          answerText: "在 104.21.51.169"
+        },
+        en: {
+          computer: "Your computer",
+          resolver: "DNS resolver",
+          lookupText: "Looking up",
+          prev: "Previous",
+          next: "Next",
+          queryText: "Where is blog.huli.tw?",
+          answerText: "At 104.21.51.169"
+        }
+      }[lang];
+
+      var steps = ["query", "loading", "answer"];
+      var state = { index: 0 };
+      var timer = 0;
+      var autoplayParam = params.get("autoplay");
+      var autoplay = !/^(0|false|no|off)$/i.test(autoplayParam || "");
+      var autoplayDelay = Number(params.get("delay")) || 0;
+      var packetDelay = 1200;
+      var loadingDelay = 1000;
+
+      var els = {
+        packet: document.querySelector("[data-packet]"),
+        lookup: document.querySelector("[data-lookup]"),
+        prev: document.querySelector("[data-prev]"),
+        next: document.querySelector("[data-next]"),
+        dots: document.querySelector("[data-dots]")
+      };
+
+      document.querySelectorAll("[data-i18n]").forEach(function (node) {
+        node.textContent = copy[node.dataset.i18n];
+      });
+
+      steps.forEach(function (_, index) {
+        var dot = document.createElement("button");
+        dot.className = "dot";
+        dot.type = "button";
+        dot.setAttribute("aria-label", copy.next + " " + (index + 1));
+        dot.addEventListener("click", function () {
+          goTo(index);
+        });
+        els.dots.appendChild(dot);
+      });
+
+      function setPacket(kind, text, className) {
+        els.packet.hidden = false;
+        els.packet.dataset.kind = kind;
+        els.packet.className = "packet " + className;
+        els.packet.textContent = text;
+      }
+
+      function render() {
+        var step = steps[state.index];
+        els.lookup.hidden = step !== "loading";
+
+        if (step === "query") {
+          setPacket("query", copy.queryText, "packet-query");
+        }
+
+        if (step === "loading") {
+          setPacket("query", copy.queryText, "packet-parked");
+        }
+
+        if (step === "answer") {
+          setPacket("answer", copy.answerText, "packet-answer");
+        }
+
+        els.prev.disabled = state.index === 0;
+
+        Array.prototype.forEach.call(els.dots.children, function (dot, index) {
+          dot.classList.toggle("is-active", index === state.index);
+        });
+      }
+
+      function scheduleAutoplay() {
+        window.clearTimeout(timer);
+        if (!autoplay || document.hidden) return;
+
+        timer = window.setTimeout(function () {
+          state.index = (state.index + 1) % steps.length;
+          render();
+          scheduleAutoplay();
+        }, autoplayDelay || (steps[state.index] === "loading" ? loadingDelay : packetDelay));
+      }
+
+      function goTo(index) {
+        state.index = (index + steps.length) % steps.length;
+        render();
+        scheduleAutoplay();
+      }
+
+      els.prev.addEventListener("click", function () {
+        goTo(Math.max(0, state.index - 1));
+      });
+
+      els.next.addEventListener("click", function () {
+        goTo(state.index + 1);
+      });
+
+      document.addEventListener("visibilitychange", scheduleAutoplay);
+
+      render();
+      scheduleAutoplay();
+    }());
+  </script>
+</body>
+</html>

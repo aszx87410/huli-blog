@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kaminsky DNS attack demo</title>
+  <link rel="stylesheet" href="./dns-demo.css">
+  <style>
+    .kaminsky-demo .dns-stage {
+      --cycle: 6.8s;
+    }
+
+    .kaminsky-demo .dns-line {
+      top: 42%;
+      width: 54%;
+    }
+
+    .kaminsky-card {
+      position: absolute;
+      left: var(--from-x);
+      top: var(--from-y);
+      z-index: 6;
+      min-width: 94px;
+      padding: 7px 10px;
+      border: 2px solid var(--bad);
+      border-radius: 7px;
+      background: var(--bad-bg);
+      color: var(--ink);
+      font-size: calc(var(--dns-demo-font) * 0.76);
+      font-weight: 780;
+      line-height: 1.18;
+      text-align: center;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      animation-duration: var(--cycle);
+      animation-iteration-count: infinite;
+      animation-timing-function: cubic-bezier(.42, 0, .2, 1);
+    }
+
+    .kaminsky-card small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: calc(var(--dns-demo-font) * 0.64);
+      font-weight: 760;
+      line-height: 1.15;
+    }
+
+    .kaminsky-card.is-hit {
+      min-width: 144px;
+      border-color: var(--answer);
+      background: var(--answer-bg);
+    }
+
+    .kaminsky-card.packet-40 {
+      animation-name: kaminsky-card-40;
+    }
+
+    .kaminsky-card.packet-41 {
+      animation-name: kaminsky-card-41;
+    }
+
+    .kaminsky-card.packet-42 {
+      animation-name: kaminsky-card-42;
+    }
+
+    .kaminsky-result {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      z-index: 7;
+      padding: 4px 8px;
+      border: 2px solid var(--bad);
+      border-radius: 999px;
+      background: var(--bad-bg);
+      color: var(--ink);
+      font-size: calc(var(--dns-demo-font) * 0.72);
+      font-weight: 780;
+      line-height: 1;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+    }
+
+    .kaminsky-result.is-hit {
+      border-color: var(--answer);
+      background: var(--answer-bg);
+    }
+
+    .kaminsky-result.result-40 {
+      animation: kaminsky-result-40 var(--cycle) linear infinite;
+    }
+
+    .kaminsky-result.result-41 {
+      animation: kaminsky-result-41 var(--cycle) linear infinite;
+    }
+
+    .kaminsky-result.result-42 {
+      animation: kaminsky-result-42 var(--cycle) linear infinite;
+    }
+
+    .resolver-cache {
+      position: absolute;
+      left: 78%;
+      top: 75%;
+      z-index: 5;
+      width: 250px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--panel) 92%, var(--canvas));
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.04);
+      transform: translate(-50%, -50%);
+    }
+
+    .resolver-cache-title {
+      margin: 0;
+      padding: 7px 10px 6px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: calc(var(--dns-demo-font) * 0.72);
+      font-weight: 800;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .resolver-cache-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+    }
+
+    .resolver-cache-cell {
+      min-height: 32px;
+      display: grid;
+      align-items: center;
+      padding: 7px 9px;
+      color: var(--ink);
+      font-size: calc(var(--dns-demo-font) * 0.7);
+      font-weight: 760;
+      line-height: 1.15;
+      text-align: center;
+    }
+
+    .resolver-cache-cell + .resolver-cache-cell {
+      border-left: 1px solid var(--line);
+    }
+
+    .resolver-cache-head {
+      background: color-mix(in srgb, var(--control) 60%, transparent);
+      color: var(--muted);
+    }
+
+    .resolver-cache-value {
+      position: relative;
+      min-height: 34px;
+    }
+
+    .resolver-cache-old,
+    .resolver-cache-new {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 0 5px;
+    }
+
+    .resolver-cache-old {
+      color: var(--muted);
+      animation: cache-old var(--cycle) linear infinite;
+    }
+
+    .resolver-cache-new {
+      color: var(--answer);
+      opacity: 0;
+      animation: cache-new var(--cycle) linear infinite;
+    }
+
+    @keyframes kaminsky-card-40 {
+      0% {
+        left: var(--from-x);
+        top: var(--from-y);
+        opacity: 0;
+      }
+      6%,
+      14% {
+        opacity: 1;
+      }
+      18% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 1;
+      }
+      22%,
+      100% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 0;
+      }
+    }
+
+    @keyframes kaminsky-card-41 {
+      0%,
+      31% {
+        left: var(--from-x);
+        top: var(--from-y);
+        opacity: 0;
+      }
+      35%,
+      45% {
+        opacity: 1;
+      }
+      49% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 1;
+      }
+      53%,
+      100% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 0;
+      }
+    }
+
+    @keyframes kaminsky-card-42 {
+      0%,
+      62% {
+        left: var(--from-x);
+        top: var(--from-y);
+        opacity: 0;
+      }
+      66%,
+      76% {
+        opacity: 1;
+      }
+      80% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 1;
+      }
+      84%,
+      100% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 0;
+      }
+    }
+
+    @keyframes kaminsky-result-40 {
+      0%,
+      19% {
+        opacity: 0;
+      }
+      23%,
+      29% {
+        opacity: 1;
+      }
+      33%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes kaminsky-result-41 {
+      0%,
+      50% {
+        opacity: 0;
+      }
+      54%,
+      60% {
+        opacity: 1;
+      }
+      64%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes kaminsky-result-42 {
+      0%,
+      81% {
+        opacity: 0;
+      }
+      85%,
+      96% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes cache-old {
+      0%,
+      82% {
+        opacity: 1;
+      }
+      86%,
+      97% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes cache-new {
+      0%,
+      82% {
+        opacity: 0;
+      }
+      86%,
+      97% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .kaminsky-demo .dns-line {
+        top: 35%;
+        width: 48%;
+      }
+
+      .kaminsky-card {
+        min-width: 82px;
+        padding: 5px 7px;
+        font-size: calc(var(--dns-demo-font) * 0.68);
+      }
+
+      .kaminsky-card.is-hit {
+        min-width: 126px;
+      }
+
+      .kaminsky-card small {
+        font-size: calc(var(--dns-demo-font) * 0.58);
+      }
+
+      .resolver-cache {
+        left: 50%;
+        top: 78%;
+        width: min(286px, calc(100% - 24px));
+      }
+
+      .resolver-cache-cell {
+        padding: 7px 6px;
+        font-size: calc(var(--dns-demo-font) * 0.64);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="dns-demo kaminsky-demo" style="--stage-h: 330px; --stage-h-mobile: 395px;">
+    <section class="dns-stage" aria-live="polite">
+      <div class="dns-line" style="--x: 24%; --y: 42%; --w: 54%;"></div>
+
+      <div class="dns-node" style="--x: 82%; --y: 42%; --node-w: 116px;">
+        <svg class="dns-icon dns-icon-cloud" viewBox="0 0 120 78" aria-hidden="true" focusable="false">
+          <path d="M30 58 H91 C104 58 113 50 113 39 C113 28 104 20 92 20 C87 10 76 6 65 9 C56 3 42 6 35 17 C21 18 10 29 10 43 C10 52 18 58 30 58 Z"></path>
+        </svg>
+        <p class="dns-node-label" data-i18n="resolver"></p>
+      </div>
+
+      <div class="dns-node" style="--x: 16%; --y: 42%; --node-w: 110px;">
+        <svg class="dns-icon dns-icon-line" viewBox="0 0 64 54" aria-hidden="true" focusable="false">
+          <path d="M32 6 55 47H9z"></path>
+          <path d="M32 21v11"></path>
+          <circle cx="32" cy="39" r="1.5"></circle>
+        </svg>
+        <p class="dns-node-label" data-i18n="attacker"></p>
+      </div>
+
+      <div class="kaminsky-card packet-40" style="--from-x: 24%; --from-y: 30%; --to-x: 62%; --to-y: 30%;">
+        <span data-i18n="guess40"></span>
+        <small data-i18n="fakeReply"></small>
+      </div>
+      <div class="kaminsky-card packet-41" style="--from-x: 24%; --from-y: 42%; --to-x: 62%; --to-y: 42%;">
+        <span data-i18n="guess41"></span>
+        <small data-i18n="fakeReply"></small>
+      </div>
+      <div class="kaminsky-card is-hit packet-42" style="--from-x: 24%; --from-y: 54%; --to-x: 62%; --to-y: 54%;">
+        <span data-i18n="guess42"></span>
+        <small data-i18n="referral"></small>
+      </div>
+
+      <div class="kaminsky-result result-40" style="--x: 63%; --y: 25%;" data-i18n="miss40"></div>
+      <div class="kaminsky-result result-41" style="--x: 63%; --y: 37%;" data-i18n="miss41"></div>
+      <div class="kaminsky-result is-hit result-42" style="--x: 63%; --y: 56%;" data-i18n="hit42"></div>
+
+      <div class="resolver-cache" aria-live="polite">
+        <p class="resolver-cache-title" data-i18n="cacheTitle"></p>
+        <div class="resolver-cache-grid">
+          <div class="resolver-cache-cell resolver-cache-head" data-i18n="domainHead"></div>
+          <div class="resolver-cache-cell resolver-cache-head" data-i18n="nsHead"></div>
+          <div class="resolver-cache-cell">huli.tw</div>
+          <div class="resolver-cache-cell resolver-cache-value">
+            <span class="resolver-cache-old" data-i18n="unknown"></span>
+            <span class="resolver-cache-new" data-i18n="attackerNs"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./dns-demo.js"></script>
+  <script>
+    DnsDemo.start({
+      steps: 1,
+      autoplay: false,
+      copy: {
+        zh: {
+          resolver: "DNS resolver",
+          attacker: "攻擊者",
+          guess40: "40.huli.tw",
+          guess41: "41.huli.tw",
+          guess42: "42.huli.tw",
+          fakeReply: "偽造回覆",
+          referral: "huli.tw 由我管",
+          miss40: "40 沒猜中",
+          miss41: "41 沒猜中",
+          hit42: "42 猜中",
+          cacheTitle: "resolver 記錄的權威 DNS",
+          domainHead: "網域",
+          nsHead: "權威 DNS",
+          unknown: "尚未更新",
+          attackerNs: "攻擊者 NS"
+        },
+        en: {
+          resolver: "DNS resolver",
+          attacker: "Attacker",
+          guess40: "40.huli.tw",
+          guess41: "41.huli.tw",
+          guess42: "42.huli.tw",
+          fakeReply: "Forged reply",
+          referral: "I handle huli.tw",
+          miss40: "40 missed",
+          miss41: "41 missed",
+          hit42: "42 hit",
+          cacheTitle: "Authoritative DNS stored by resolver",
+          domainHead: "Domain",
+          nsHead: "Authoritative DNS",
+          unknown: "Not updated",
+          attackerNs: "Attacker NS"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

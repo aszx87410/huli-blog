@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DNS recursive resolution demo</title>
+  <link rel="stylesheet" href="./dns-demo.css">
+  <style>
+    .recursive-demo {
+      --duration: 1.2s;
+    }
+
+    .recursive-demo .dns-flight {
+      font-size: 0rem;
+      transform: translate(-50%, calc(-50% + var(--flight-y, 0px)));
+      animation: recursive-flight var(--duration) cubic-bezier(.42, 0, .2, 1) forwards;
+    }
+
+    .recursive-demo .dns-flight::before {
+      font-size: calc(var(--dns-demo-font) * 0.66);
+    }
+
+    @keyframes recursive-flight {
+      0% {
+        left: var(--from-x);
+        top: var(--from-y);
+        opacity: 0;
+      }
+      12% {
+        opacity: 1;
+      }
+      100% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="dns-demo recursive-demo" style="--stage-h: 340px; --stage-h-mobile: 390px;">
+    <section class="dns-stage" aria-live="polite">
+      <div class="dns-line" style="--x: 18%; --y: 50%; --w: 18%;"></div>
+      <div class="dns-line" style="--x: 42%; --y: 43%; --w: 34%; --r: -28deg;"></div>
+      <div class="dns-line" style="--x: 42%; --y: 50%; --w: 27%;"></div>
+      <div class="dns-line" style="--x: 42%; --y: 60%; --w: 34%; --r: 31deg;"></div>
+
+      <div class="dns-node" style="--x: 12%; --y: 50%; --node-w: 96px;" data-active-steps="0,7">
+        <div class="dns-icon dns-icon-computer" aria-hidden="true">
+          <div class="screen"></div><div class="stand"></div><div class="base"></div>
+        </div>
+        <p class="dns-node-label" data-i18n="computer"></p>
+      </div>
+
+      <div class="dns-node" style="--x: 38%; --y: 50%; --node-w: 112px;" data-active-steps="0-7">
+        <svg class="dns-icon dns-icon-cloud" viewBox="0 0 120 78" aria-hidden="true" focusable="false">
+          <path d="M30 58 H91 C104 58 113 50 113 39 C113 28 104 20 92 20 C87 10 76 6 65 9 C56 3 42 6 35 17 C21 18 10 29 10 43 C10 52 18 58 30 58 Z"></path>
+        </svg>
+        <p class="dns-node-label" data-i18n="resolver"></p>
+      </div>
+
+      <div class="dns-node" style="--x: 78%; --y: 24%; --node-w: 112px;" data-active-steps="1,2">
+        <div class="dns-icon dns-icon-server" aria-hidden="true"><span></span><span></span></div>
+        <p class="dns-node-label" data-i18n="root"></p>
+      </div>
+
+      <div class="dns-node" style="--x: 78%; --y: 50%; --node-w: 112px;" data-active-steps="3,4">
+        <div class="dns-icon dns-icon-server" aria-hidden="true"><span></span><span></span></div>
+        <p class="dns-node-label" data-i18n="tld"></p>
+      </div>
+
+      <div class="dns-node" style="--x: 78%; --y: 80%; --node-w: 138px;" data-active-steps="5,6">
+        <div class="dns-icon dns-icon-server" aria-hidden="true"><span></span><span></span></div>
+        <p class="dns-node-label" data-i18n="authoritative"></p>
+      </div>
+
+      <div class="dns-flight" data-short="Q" data-short-i18n="qBlog" data-step-show="0" style="--flight-y: -52px; --from-x: 23%; --from-y: 50%; --to-x: 33%; --to-y: 50%;" data-i18n="qBlog"></div>
+      <div class="dns-flight" data-short=".tw" data-short-i18n="qTw" data-step-show="1" style="--flight-y: -22px; --from-x: 44%; --from-y: 43%; --to-x: 60%; --to-y: 27%;" data-i18n="qTw"></div>
+      <div class="dns-flight answer" data-short="TLD" data-step-show="2" style="--flight-y: 25px; --from-x: 66%; --from-y: 27%; --to-x: 52%; --to-y: 31%;" data-i18n="askTld"></div>
+      <div class="dns-flight" data-short="huli" data-short-i18n="qHuli" data-step-show="3" style="--flight-y: -30px; --from-x: 52%; --from-y: 50%; --to-x: 58%; --to-y: 50%;" data-i18n="qHuli"></div>
+      <div class="dns-flight answer" data-short="Authoritative" data-step-show="4" style="--flight-y: 15px; --from-x: 65%; --from-y: 50%; --to-x: 50%; --to-y: 50%;" data-i18n="askAuthoritative"></div>
+      <div class="dns-flight" data-short="Q" data-short-i18n="qBlogFinal" data-step-show="5" style="--flight-y: 2px; --from-x: 56%; --from-y: 60%; --to-x: 62%; --to-y: 69%;" data-i18n="qBlogFinal"></div>
+      <div class="dns-flight answer" data-short="172.67.183.1" data-step-show="6" style="--flight-y: 54px; --from-x: 52%; --from-y: 72%; --to-x: 48%; --to-y: 60%;" data-i18n="ipAnswer"></div>
+      <div class="dns-flight answer" data-short="172.67.183.1" data-step-show="7" style="--flight-y: 42px; --from-x: 34%; --from-y: 50%; --to-x: 22%; --to-y: 50%;" data-i18n="ipAnswer"></div>
+    </section>
+
+    <nav class="dns-controls" aria-label="Demo controls">
+      <button class="dns-button" type="button" data-prev>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"></path></svg>
+        <span class="sr-only" data-i18n="prev"></span>
+      </button>
+      <div class="dns-progress" data-dots></div>
+      <button class="dns-button" type="button" data-next>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"></path></svg>
+        <span class="sr-only" data-i18n="next"></span>
+      </button>
+    </nav>
+  </main>
+
+  <script src="./dns-demo.js"></script>
+  <script>
+    DnsDemo.start({
+      steps: 8,
+      autoplayDelay: 1200,
+      copy: {
+        zh: {
+          step: "步驟",
+          prev: "上一步",
+          next: "下一步",
+          computer: "你的電腦",
+          resolver: "DNS resolver",
+          root: "Root name server",
+          tld: "TLD name server",
+          authoritative: "Authoritative name server",
+          qBlog: "blog.huli.tw 在哪裡？",
+          qTw: ".tw 是誰管？",
+          qHuli: "huli.tw 是誰管？",
+          qBlogFinal: "blog.huli.tw 是哪？",
+          askTld: "TLD name server",
+          askAuthoritative: "authoritative name server",
+          ipAnswer: "104.21.51.169"
+        },
+        en: {
+          step: "Step",
+          prev: "Previous",
+          next: "Next",
+          computer: "Your computer",
+          resolver: "DNS resolver",
+          root: "Root name server",
+          tld: "TLD name server",
+          authoritative: "Authoritative name server",
+          qBlog: "Where is blog.huli.tw?",
+          qTw: "Who handles .tw?",
+          qHuli: "Who handles huli.tw?",
+          qBlogFinal: "Where is blog.huli.tw?",
+          askTld: "TLD name server",
+          askAuthoritative: "authoritative name server",
+          ipAnswer: "104.21.51.169"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

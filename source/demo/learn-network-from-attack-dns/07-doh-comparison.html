@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DNS over HTTPS demo</title>
+  <link rel="stylesheet" href="./dns-demo.css">
+  <style>
+    .doh-demo .dns-stage {
+      --move-duration: 1.2s;
+    }
+
+    .doh-demo .dns-line {
+      width: var(--w);
+    }
+
+    .doh-card {
+      position: absolute;
+      left: var(--from-x);
+      top: var(--from-y);
+      z-index: 6;
+      min-width: 142px;
+      padding: 7px 10px;
+      border: 2px solid var(--query);
+      border-radius: 7px;
+      background: var(--query-bg);
+      color: var(--ink);
+      font-size: calc(var(--dns-demo-font) * 0.78);
+      font-weight: 780;
+      line-height: 1.2;
+      text-align: center;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+      animation: doh-card-move var(--move-duration) cubic-bezier(.42, 0, .2, 1) forwards;
+    }
+
+    .doh-card.answer {
+      border-color: var(--answer);
+      background: var(--answer-bg);
+    }
+
+    .doh-mail-flight {
+      position: absolute;
+      left: var(--from-x);
+      top: var(--from-y);
+      z-index: 6;
+      width: 48px;
+      height: 32px;
+      border: 2px solid var(--note);
+      border-radius: 6px;
+      color: var(--note);
+      background:
+        linear-gradient(35deg, transparent 48%, var(--note) 49%, var(--note) 51%, transparent 52%),
+        linear-gradient(-35deg, transparent 48%, var(--note) 49%, var(--note) 51%, transparent 52%),
+        var(--note-bg);
+      transform: translate(-50%, -50%);
+      animation: doh-card-move var(--move-duration) cubic-bezier(.42, 0, .2, 1) forwards;
+    }
+
+    .doh-mail-flight::before,
+    .doh-mail-flight::after {
+      content: "";
+      position: absolute;
+      left: auto;
+      transform: none;
+    }
+
+    .doh-mail-flight::before {
+      top: -6px;
+      right: 3px;
+      width: 10px;
+      height: 9px;
+      border: 2px solid currentColor;
+      border-bottom: 0;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .doh-mail-flight::after {
+      top: 2px;
+      right: -1px;
+      width: 16px;
+      height: 12px;
+      border: 2px solid currentColor;
+      border-radius: 4px;
+      background:
+        radial-gradient(circle at 50% 58%, currentColor 0 2px, transparent 2.3px),
+        var(--panel);
+    }
+
+    .doh-mail-flight.answer {
+      color: var(--answer);
+      border-color: var(--answer);
+      background:
+        linear-gradient(35deg, transparent 48%, var(--answer) 49%, var(--answer) 51%, transparent 52%),
+        linear-gradient(-35deg, transparent 48%, var(--answer) 49%, var(--answer) 51%, transparent 52%),
+        var(--answer-bg);
+    }
+
+    .doh-open-letter {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      z-index: 7;
+      width: 164px;
+      min-height: 54px;
+      display: grid;
+      place-items: center;
+      padding: 14px 10px 9px;
+      border: 2px solid var(--note);
+      border-radius: 7px;
+      background: var(--note-bg);
+      color: var(--ink);
+      font-size: calc(var(--dns-demo-font) * 0.76);
+      font-weight: 780;
+      line-height: 1.2;
+      text-align: center;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      animation: doh-open-letter 0.34s ease forwards;
+      animation-delay: 1s;
+    }
+
+    .doh-open-letter::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: 9px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.22;
+    }
+
+    .doh-open-letter.answer {
+      border-color: var(--answer);
+      background: var(--answer-bg);
+    }
+
+    @keyframes doh-card-move {
+      0% {
+        left: var(--from-x);
+        top: var(--from-y);
+        opacity: 0;
+      }
+      12% {
+        opacity: 1;
+      }
+      100% {
+        left: var(--to-x);
+        top: var(--to-y);
+        opacity: 1;
+      }
+    }
+
+    @keyframes doh-open-letter {
+      from {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% + 6px));
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .doh-demo .dns-line {
+        width: var(--w);
+      }
+
+      .doh-card {
+        min-width: 122px;
+        padding: 6px 8px;
+        font-size: calc(var(--dns-demo-font) * 0.68);
+      }
+
+      .doh-mail-flight {
+        width: 42px;
+        height: 28px;
+      }
+
+      .doh-open-letter {
+        width: 136px;
+        min-height: 50px;
+        padding: 13px 8px 8px;
+        font-size: calc(var(--dns-demo-font) * 0.66);
+      }
+
+      .doh-demo .doh-computer {
+        left: 17%;
+      }
+
+      .doh-demo .doh-resolver {
+        left: 81%;
+      }
+
+      .doh-demo .doh-isp {
+        left: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="dns-demo doh-demo" style="--stage-h: 300px; --stage-h-mobile: 360px;">
+    <section class="dns-stage" aria-live="polite">
+      <div class="dns-lane-label" style="--x: 50%; --y: 16%;" data-i18n="plainLane"></div>
+      <div class="dns-lane-label" style="--x: 50%; --y: 62%;" data-i18n="dohLane"></div>
+
+      <div class="dns-line" style="--x: 20%; --y: 30%; --w: 24%;"></div>
+      <div class="dns-line" style="--x: 56%; --y: 30%; --w: 20%;"></div>
+      <div class="dns-line" style="--x: 20%; --y: 44%; --w: 24%;"></div>
+      <div class="dns-line" style="--x: 56%; --y: 44%; --w: 20%;"></div>
+      <div class="dns-line" style="--x: 20%; --y: 75%; --w: 24%;"></div>
+      <div class="dns-line" style="--x: 56%; --y: 75%; --w: 20%;"></div>
+      <div class="dns-line" style="--x: 20%; --y: 83%; --w: 24%;"></div>
+      <div class="dns-line" style="--x: 56%; --y: 83%; --w: 20%;"></div>
+
+      <div class="dns-node doh-computer" style="--x: 13%; --y: 50%; --node-w: 98px;" data-active-steps="0-3">
+        <div class="dns-icon dns-icon-computer" aria-hidden="true">
+          <div class="screen"></div><div class="stand"></div><div class="base"></div>
+        </div>
+        <p class="dns-node-label" data-i18n="computer"></p>
+      </div>
+
+      <div class="dns-node doh-isp" style="--x: 50%; --y: 48%; --node-w: 94px;" data-active-steps="0-3">
+        <svg class="dns-icon dns-icon-line" viewBox="0 0 64 54" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="27" r="19"></circle>
+          <path d="M14 27h36"></path>
+          <path d="M32 8c7 8 7 30 0 38"></path>
+          <path d="M32 8c-7 8-7 30 0 38"></path>
+        </svg>
+        <p class="dns-node-label">ISP</p>
+      </div>
+
+      <div class="dns-node doh-resolver" style="--x: 84%; --y: 50%; --node-w: 116px;" data-active-steps="0-3">
+        <svg class="dns-icon dns-icon-cloud" viewBox="0 0 120 78" aria-hidden="true" focusable="false">
+          <path d="M30 58 H91 C104 58 113 50 113 39 C113 28 104 20 92 20 C87 10 76 6 65 9 C56 3 42 6 35 17 C21 18 10 29 10 43 C10 52 18 58 30 58 Z"></path>
+        </svg>
+        <p class="dns-node-label" data-i18n="resolver"></p>
+      </div>
+
+      <div class="doh-card" data-step-show="0" style="--from-x: 22%; --from-y: 30%; --to-x: 76%; --to-y: 30%;" data-i18n="query"></div>
+      <div class="doh-card answer" data-step-show="1" style="--from-x: 76%; --from-y: 44%; --to-x: 34%; --to-y: 44%;" data-i18n="answer"></div>
+
+      <div class="doh-mail-flight" data-step-show="2" style="--from-x: 22%; --from-y: 75%; --to-x: 74%; --to-y: 75%;"></div>
+      <div class="doh-open-letter" data-step-show="2" style="--x: 74%; --y: 75%;" data-i18n="query"></div>
+
+      <div class="doh-mail-flight answer" data-step-show="3" style="--from-x: 74%; --from-y: 83%; --to-x: 32%; --to-y: 83%;"></div>
+      <div class="doh-open-letter answer" data-step-show="3" style="--x: 32%; --y: 83%;" data-i18n="answer"></div>
+    </section>
+
+    <nav class="dns-controls" aria-label="Demo controls">
+      <button class="dns-button" type="button" data-prev>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"></path></svg>
+        <span class="sr-only" data-i18n="prev"></span>
+      </button>
+      <div class="dns-progress" data-dots></div>
+      <button class="dns-button" type="button" data-next>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"></path></svg>
+        <span class="sr-only" data-i18n="next"></span>
+      </button>
+    </nav>
+  </main>
+
+  <script src="./dns-demo.js"></script>
+  <script>
+    DnsDemo.start({
+      steps: 4,
+      autoplayDelay: 1700,
+      copy: {
+        zh: {
+          step: "步驟",
+          prev: "上一步",
+          next: "下一步",
+          computer: "你的電腦",
+          resolver: "DNS resolver",
+          plainLane: "一般 DNS",
+          dohLane: "DNS over HTTPS",
+          query: "blog.huli.tw 在哪",
+          answer: "172.67.183.1"
+        },
+        en: {
+          step: "Step",
+          prev: "Previous",
+          next: "Next",
+          computer: "Your computer",
+          resolver: "DNS resolver",
+          plainLane: "Plain DNS",
+          dohLane: "DNS over HTTPS",
+          query: "Where is blog.huli.tw?",
+          answer: "172.67.183.1"
+        }
+      }
+    });
+  </script>
+</body>
+</html>
